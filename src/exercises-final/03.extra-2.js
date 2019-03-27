@@ -5,57 +5,37 @@ import React from 'react'
 import {Switch} from '../switch'
 
 const ToggleContext = React.createContext()
-
-function ToggleConsumer(props) {
-  return (
-    <ToggleContext.Consumer {...props}>
-      {context => {
-        if (!context) {
-          throw new Error(
-            `Toggle compound components cannot be rendered outside the Toggle component`,
-          )
-        }
-        return props.children(context)
-      }}
-    </ToggleContext.Consumer>
-  )
-}
-
-class Toggle extends React.Component {
-  static On = ({children}) => (
-    <ToggleConsumer>
-      {({on}) => (on ? children : null)}
-    </ToggleConsumer>
-  )
-  static Off = ({children}) => (
-    <ToggleConsumer>
-      {({on}) => (on ? null : children)}
-    </ToggleConsumer>
-  )
-  static Button = props => (
-    <ToggleConsumer>
-      {({on, toggle}) => (
-        <Switch on={on} onClick={toggle} {...props} />
-      )}
-    </ToggleConsumer>
-  )
-  // The reason we had to move `toggle` above `state` is because
-  // in our `state` initialization we're _using_ `this.toggle`. So
-  // if `this.toggle` is not defined before state is initialized, then
-  // `state.toggle` will be undefined.
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  state = {on: false, toggle: this.toggle}
-  render() {
-    return (
-      <ToggleContext.Provider value={this.state}>
-        {this.props.children}
-      </ToggleContext.Provider>
+function useToggle() {
+  const context = React.useContext(ToggleContext)
+  if (!context) {
+    throw new Error(
+      `Toggle compound components cannot be rendered outside the Toggle component`,
     )
   }
+  return context
+}
+
+function Toggle({onToggle, ...rest}) {
+  const [on, setOn] = React.useState(false)
+  const toggle = React.useCallback(() => {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
+  }, [on])
+  const value = React.useMemo(() => ({on, toggle}), [on, toggle])
+  return <ToggleContext.Provider value={value} {...rest} />
+}
+Toggle.On = ({children}) => {
+  const {on} = useToggle()
+  return on ? children : null
+}
+Toggle.Off = ({children}) => {
+  const {on} = useToggle()
+  return on ? null : children
+}
+Toggle.Button = ({...props}) => {
+  const {on, toggle} = useToggle()
+  return <Switch on={on} onClick={toggle} {...props} />
 }
 
 function Usage({

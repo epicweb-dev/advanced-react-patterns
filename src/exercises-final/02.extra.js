@@ -14,43 +14,37 @@ function componentHasChild(child) {
   return false
 }
 
-class Toggle extends React.Component {
-  static On = ({on, children}) => (on ? children : null)
-  static Off = ({on, children}) => (on ? null : children)
-  static Button = ({on, toggle, ...props}) => (
-    <Switch on={on} onClick={toggle} {...props} />
-  )
-  state = {on: false}
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  render() {
-    return React.Children.map(this.props.children, child => {
-      if (componentHasChild(child)) {
-        return React.cloneElement(child, {
-          on: this.state.on,
-          toggle: this.toggle,
-        })
-      }
-      return child
-    })
+function Toggle({onToggle, children}) {
+  const [on, setOn] = React.useState(false)
+  function toggle() {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
   }
+  return React.Children.map(children, child => {
+    return componentHasChild(child)
+      ? React.cloneElement(child, {on, toggle})
+      : child
+  })
 }
+Toggle.On = ({on, children}) => (on ? children : null)
+Toggle.Off = ({on, children}) => (on ? null : children)
+Toggle.Button = ({on, toggle, ...props}) => (
+  <Switch on={on} onClick={toggle} {...props} />
+)
 
-const Hi = () => <h4>Hi</h4>
 function Usage({
   onToggle = (...args) => console.log('onToggle', ...args),
 }) {
   return (
-    <Toggle onToggle={onToggle}>
-      <Toggle.On>The button is on</Toggle.On>
-      <Toggle.Off>The button is off</Toggle.Off>
-      <Toggle.Button />
-      <span>Hello</span>
-      <Hi />
-    </Toggle>
+    <div>
+      <Toggle onToggle={onToggle}>
+        <Toggle.On>The button is on</Toggle.On>
+        <Toggle.Off>The button is off</Toggle.Off>
+        <span>Hello</span>
+        <Toggle.Button />
+      </Toggle>
+    </div>
   )
 }
 Usage.title = 'Compound Components'

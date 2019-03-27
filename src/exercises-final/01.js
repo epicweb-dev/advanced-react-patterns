@@ -1,19 +1,14 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-class Toggle extends React.Component {
-  state = {on: false}
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => {
-        this.props.onToggle(this.state.on)
-      },
-    )
-  render() {
-    const {on} = this.state
-    return <Switch on={on} onClick={this.toggle} />
+function Toggle({onToggle}) {
+  const [on, setOn] = React.useState(false)
+  function toggle() {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
   }
+  return <Switch on={on} onClick={toggle} />
 }
 
 function Usage({
