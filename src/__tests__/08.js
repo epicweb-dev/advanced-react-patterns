@@ -4,29 +4,21 @@ import Usage from '../exercises-final/08'
 // import Usage from '../exercises/08'
 
 test('renders a toggle component', () => {
-  const handleToggle = jest.fn()
-  const {toggleButton, toggle} = renderToggle(
-    <Usage onToggle={handleToggle} />,
-  )
+  const {toggleButton, toggle} = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(handleToggle).toHaveBeenCalledTimes(1)
-  expect(handleToggle).toHaveBeenCalledWith(true)
+  expect(console.log.mock.calls).toEqual([['onToggle', true]])
 })
 
 test('can click too much', () => {
-  const handleToggle = jest.fn()
-  const handleReset = jest.fn()
   const {
     toggleButton,
     toggle,
     getByTestId,
     queryByTestId,
     getByText,
-  } = renderToggle(
-    <Usage onToggle={handleToggle} onReset={handleReset} />,
-  )
+  } = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   toggle() // 1
   expect(toggleButton).toBeOn()
@@ -43,19 +35,19 @@ test('can click too much', () => {
   expect(toggleButton).toBeOff()
 
   expect(getByTestId('notice')).not.toBeNull()
-  expect(handleToggle).toHaveBeenCalledTimes(6)
-  expect(handleToggle.mock.calls).toEqual([
-    [true], // 1
-    [false], // 2
-    [true], // 3
-    [false], // 4
-    [false], // 5
-    [false], // 6
+  expect(console.log.mock.calls).toEqual([
+    ['onToggle', true], // 1
+    ['onToggle', false], // 2
+    ['onToggle', true], // 3
+    ['onToggle', false], // 4
+    ['onToggle', false], // 5
+    ['onToggle', false], // 6
   ])
 
+  console.log.mockClear()
+
   fireEvent.click(getByText('Reset'))
-  expect(handleReset).toHaveBeenCalledTimes(1)
-  expect(handleReset).toHaveBeenCalledWith(false)
+  expect(console.log.mock.calls).toEqual([['onReset', false]])
   expect(queryByTestId('notice')).toBeNull()
 
   expect(toggleButton).toBeOff()

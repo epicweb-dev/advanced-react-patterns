@@ -5,27 +5,31 @@ import {Switch} from '../switch'
 
 function Toggle({onToggle, children}) {
   const [on, setOn] = React.useState(false)
+
   function toggle() {
     const newOn = !on
     setOn(newOn)
     onToggle(newOn)
   }
+
   return React.Children.map(children, child =>
     React.cloneElement(child, {on, toggle}),
   )
 }
-Toggle.On = ({on, children}) => (on ? children : null)
-Toggle.Off = ({on, children}) => (on ? null : children)
-Toggle.Button = ({on, toggle, ...props}) => (
-  <Switch on={on} onClick={toggle} {...props} />
-)
+Toggle.On = function On({on, children}) {
+  return on ? children : null
+}
+Toggle.Off = function Off({on, children}) {
+  return on ? null : children
+}
+Toggle.Button = function Button({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
+}
 
-function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
-}) {
+function Usage() {
   return (
     <div>
-      <Toggle onToggle={onToggle}>
+      <Toggle onToggle={(...args) => console.log('onToggle', ...args)}>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
         <Toggle.Button />
@@ -35,4 +39,4 @@ function Usage({
 }
 Usage.title = 'Compound Components'
 
-export {Toggle, Usage as default}
+export default Usage

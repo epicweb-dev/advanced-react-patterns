@@ -4,17 +4,13 @@ import Usage from '../exercises-final/11'
 // import Usage from '../exercises/11'
 
 test('renders a toggle component', () => {
-  const handleToggle = jest.fn()
-  const {toggleButton, toggle, container} = renderToggle(
-    <Usage onToggle={handleToggle} />,
-  )
+  const {toggleButton, toggle, container} = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   expect(container).toHaveTextContent('The button is off')
   toggle()
   expect(toggleButton).toBeOn()
   expect(container).toHaveTextContent('The button is on')
-  expect(handleToggle).toHaveBeenCalledTimes(1)
-  expect(handleToggle).toHaveBeenCalledWith(true)
+  expect(console.log.mock.calls).toEqual([['onToggle', true]])
 })
 
 //////// Elaboration & Feedback /////////

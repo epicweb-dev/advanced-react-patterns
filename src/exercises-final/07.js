@@ -5,62 +5,56 @@ import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) =>
   fns.forEach(fn => fn && fn(...args))
+const noop = () => {}
 
-class Toggle extends React.Component {
-  static defaultProps = {
-    initialOn: false,
-    onReset: () => {},
+function useToggle({
+  onToggle = noop,
+  onReset = noop,
+  initialOn = false,
+} = {}) {
+  const [on, setOn] = React.useState(initialOn)
+
+  function toggle() {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
   }
-  initialState = {on: this.props.initialOn}
-  state = this.initialState
-  reset = () =>
-    this.setState(this.initialState, () =>
-      this.props.onReset(this.state.on),
-    )
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  getTogglerProps = ({onClick, ...props} = {}) => ({
-    onClick: callAll(onClick, this.toggle),
-    'aria-pressed': this.state.on,
-    ...props,
-  })
-  getStateAndHelpers() {
+
+  function reset() {
+    setOn(initialOn)
+    onReset(initialOn)
+  }
+
+  function getTogglerProps({onClick, ...props} = {}) {
     return {
-      on: this.state.on,
-      toggle: this.toggle,
-      reset: this.reset,
-      getTogglerProps: this.getTogglerProps,
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
     }
   }
-  render() {
-    return this.props.children(this.getStateAndHelpers())
+
+  return {
+    on,
+    reset,
+    toggle,
+    getTogglerProps,
   }
 }
 
-function Usage({
-  initialOn = false,
-  onToggle = (...args) => console.log('onToggle', ...args),
-  onReset = (...args) => console.log('onReset', ...args),
-}) {
+function Usage() {
+  const {on, getTogglerProps, reset} = useToggle({
+    onToggle: (...args) => console.log('onToggle', ...args),
+    onReset: (...args) => console.log('onReset', ...args),
+    initialOn: false,
+  })
   return (
-    <Toggle
-      initialOn={initialOn}
-      onToggle={onToggle}
-      onReset={onReset}
-    >
-      {({getTogglerProps, on, reset}) => (
-        <div>
-          <Switch {...getTogglerProps({on})} />
-          <hr />
-          <button onClick={() => reset()}>Reset</button>
-        </div>
-      )}
-    </Toggle>
+    <div>
+      <Switch {...getTogglerProps({on})} />
+      <hr />
+      <button onClick={reset}>Reset</button>
+    </div>
   )
 }
 Usage.title = 'State Initializers'
 
-export {Toggle, Usage as default}
+export default Usage

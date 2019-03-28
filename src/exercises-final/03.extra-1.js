@@ -17,36 +17,31 @@ function useToggle() {
 
 function Toggle({onToggle, ...rest}) {
   const [on, setOn] = React.useState(false)
+
   function toggle() {
     const newOn = !on
     setOn(newOn)
     onToggle(newOn)
   }
-  return (
-    <ToggleContext.Provider
-      value={{on: on, toggle: toggle}}
-      {...rest}
-    />
-  )
+
+  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
 }
-Toggle.On = ({children}) => {
+Toggle.On = function On({children}) {
   const {on} = useToggle()
   return on ? children : null
 }
-Toggle.Off = ({children}) => {
+Toggle.Off = function Off({children}) {
   const {on} = useToggle()
   return on ? null : children
 }
-Toggle.Button = ({...props}) => {
+Toggle.Button = function Button({...props}) {
   const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
-function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
-}) {
+function Usage() {
   return (
-    <Toggle onToggle={onToggle}>
+    <Toggle onToggle={(...args) => console.log('onToggle', ...args)}>
       <Toggle.On>The button is on</Toggle.On>
       <Toggle.Off>The button is off</Toggle.Off>
       <div>
@@ -57,4 +52,4 @@ function Usage({
 }
 Usage.title = 'Flexible Compound Components'
 
-export {Toggle, Usage as default}
+export default Usage

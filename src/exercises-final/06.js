@@ -3,57 +3,53 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) =>
-  fns.forEach(fn => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
+const noop = () => {}
 
-class Toggle extends React.Component {
-  state = {on: false}
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  getTogglerProps = ({onClick, ...props} = {}) => ({
-    'aria-pressed': this.state.on,
-    onClick: callAll(onClick, this.toggle),
-    ...props,
-  })
-  getStateAndHelpers() {
+function useToggle({onToggle = noop} = {}) {
+  const [on, setOn] = React.useState(false)
+
+  function toggle() {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
+  }
+
+  function getTogglerProps({onClick, ...props} = {}) {
     return {
-      on: this.state.on,
-      toggle: this.toggle,
-      getTogglerProps: this.getTogglerProps,
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
     }
   }
-  render() {
-    return this.props.children(this.getStateAndHelpers())
+
+  return {
+    on,
+    toggle,
+    getTogglerProps,
   }
 }
 
-function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
-  onButtonClick = () => console.log('onButtonClick'),
-}) {
+function Usage() {
+  const {on, getTogglerProps} = useToggle({
+    onToggle: (...args) => console.log('onToggle', ...args),
+  })
   return (
-    <Toggle onToggle={onToggle}>
-      {({on, getTogglerProps}) => (
-        <div>
-          <Switch {...getTogglerProps({on})} />
-          <hr />
-          <button
-            {...getTogglerProps({
-              'aria-label': 'custom-button',
-              onClick: onButtonClick,
-              id: 'custom-button-id',
-            })}
-          >
-            {on ? 'on' : 'off'}
-          </button>
-        </div>
-      )}
-    </Toggle>
+    <div>
+      <Switch {...getTogglerProps({on})} />
+      <hr />
+      <button
+        {...getTogglerProps({
+          'aria-label': 'custom-button',
+          onClick: () => console.log('onButtonClick'),
+          id: 'custom-button-id',
+        })}
+      >
+        {on ? 'on' : 'off'}
+      </button>
+    </div>
   )
 }
 Usage.title = 'Prop Getters'
 
-export {Toggle, Usage as default}
+export default Usage
