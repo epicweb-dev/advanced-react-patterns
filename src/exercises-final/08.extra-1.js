@@ -1,4 +1,5 @@
 // state reducer
+// default reducer
 
 import React from 'react'
 import {Switch} from '../switch'

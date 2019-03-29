@@ -1,147 +1,105 @@
-// state reducer with types
+// state reducer
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) =>
-  fns.forEach(fn => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
+const noop = () => {}
 
-class Toggle extends React.Component {
-  static defaultProps = {
-    initialOn: false,
-    onReset: () => {},
-    stateReducer: (state, changes) => changes,
+function toggleReducer(state, {type, initialState}) {
+  switch (type) {
+    case useToggle.types.toggle: {
+      return {on: !state.on}
+    }
+    case useToggle.types.reset: {
+      return initialState
+    }
+    default:
+      throw new Error(`Unsupported type: ${type}`)
   }
-  // 💰 any time I use a string as an identifier for a type,
-  // I prefer to give it a variable name. That way folks who
-  // want to reference the type can do so using variable which
-  // will help mitigate the problems of indirection.
-  static stateChangeTypes = {
-    reset: '__toggle_reset__',
-    toggle: '__toggle_toggle__',
-  }
-  initialState = {on: this.props.initialOn}
-  state = this.initialState
-  internalSetState(changes, callback) {
-    this.setState(state => {
-      // handle function setState call
-      const changesObject =
-        typeof changes === 'function' ? changes(state) : changes
+}
 
-      // apply state reducer
-      const reducedChanges =
-        this.props.stateReducer(state, changesObject) || {}
+function useToggle({
+  onToggle = noop,
+  onReset = noop,
+  initialOn = false,
+  reducer = toggleReducer,
+} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  const [{on}, dispatch] = React.useReducer(reducer, initialState)
 
-      // remove the type so it's not set into state
-      const {type: ignoredType, ...onlyChanges} = reducedChanges
-
-      // return null if there are no changes to be made
-      return Object.keys(onlyChanges).length ? onlyChanges : null
-    }, callback)
+  function toggle() {
+    const newOn = !on
+    dispatch({type: useToggle.types.toggle})
+    onToggle(newOn)
   }
 
-  reset = () =>
-    this.internalSetState(
-      {...this.initialState, type: Toggle.stateChangeTypes.reset},
-      () => this.props.onReset(this.state.on),
-    )
-  toggle = ({type = Toggle.stateChangeTypes.toggle} = {}) =>
-    this.internalSetState(
-      ({on}) => ({type, on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  getTogglerProps = ({onClick, ...props} = {}) => ({
-    onClick: callAll(onClick, () => this.toggle()),
-    'aria-pressed': this.state.on,
-    ...props,
-  })
-  getStateAndHelpers() {
+  function reset() {
+    dispatch({type: useToggle.types.reset, initialState})
+    onReset(initialOn)
+  }
+
+  function getTogglerProps({onClick, ...props} = {}) {
     return {
-      on: this.state.on,
-      toggle: this.toggle,
-      reset: this.reset,
-      getTogglerProps: this.getTogglerProps,
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
     }
   }
-  render() {
-    return this.props.children(this.getStateAndHelpers())
+
+  return {
+    on,
+    reset,
+    toggle,
+    getTogglerProps,
   }
 }
-
-class Usage extends React.Component {
-  static defaultProps = {
-    onToggle: (...args) => console.log('onToggle', ...args),
-    onReset: (...args) => console.log('onReset', ...args),
-  }
-  initialState = {timesClicked: 0}
-  state = this.initialState
-  handleToggle = (...args) => {
-    this.setState(({timesClicked}) => ({
-      timesClicked: timesClicked + 1,
-    }))
-    this.props.onToggle(...args)
-  }
-  handleReset = (...args) => {
-    this.setState(this.initialState)
-    this.props.onReset(...args)
-  }
-  toggleStateReducer = (state, changes) => {
-    if (changes.type === 'forced') {
-      return changes
-    }
-    if (this.state.timesClicked >= 4) {
-      return {...changes, on: false}
-    }
-    return changes
-  }
-  render() {
-    const {timesClicked} = this.state
-    return (
-      <Toggle
-        stateReducer={this.toggleStateReducer}
-        onToggle={this.handleToggle}
-        onReset={this.handleReset}
-        ref={this.props.toggleRef}
-      >
-        {({on, toggle, reset, getTogglerProps}) => (
-          <div>
-            <Switch
-              {...getTogglerProps({
-                on: on,
-              })}
-            />
-            {timesClicked > 4 ? (
-              <div data-testid="notice">
-                Whoa, you clicked too much!
-                <br />
-                <button onClick={() => toggle({type: 'forced'})}>
-                  Force Toggle
-                </button>
-                <br />
-              </div>
-            ) : timesClicked > 0 ? (
-              <div data-testid="click-count">
-                Click count: {timesClicked}
-              </div>
-            ) : null}
-            <button onClick={reset}>Reset</button>
-          </div>
-        )}
-      </Toggle>
-    )
-  }
+useToggle.reducer = toggleReducer
+useToggle.types = {
+  toggle: 'toggle',
+  reset: 'reset',
 }
-Usage.title = 'State Reducers (with change types)'
 
-export {Toggle, Usage as default}
-
-/* eslint
-"no-unused-vars": [
-  "warn",
-  {
-    "argsIgnorePattern": "^_.+|^ignore.+",
-    "varsIgnorePattern": "^_.+|^ignore.+",
-    "args": "after-used"
+function Usage() {
+  const [timesClicked, setTimesClicked] = React.useState(0)
+  function toggleStateReducer(state, action) {
+    if (action.type === useToggle.types.toggle && timesClicked >= 4) {
+      return {on: false}
+    }
+    return useToggle.reducer(state, action)
   }
-]
- */
+
+  const {on, getTogglerProps, reset} = useToggle({
+    reducer: toggleStateReducer,
+    onToggle: (...args) => {
+      setTimesClicked(clicks => clicks + 1)
+      console.log('onToggle', ...args)
+    },
+    onReset: (...args) => {
+      setTimesClicked(0)
+      console.log('onReset', ...args)
+    },
+  })
+
+  return (
+    <div>
+      <Switch
+        {...getTogglerProps({
+          on: on,
+        })}
+      />
+      {timesClicked > 4 ? (
+        <div data-testid="notice">
+          Whoa, you clicked too much!
+          <br />
+        </div>
+      ) : timesClicked > 0 ? (
+        <div data-testid="click-count">Click count: {timesClicked}</div>
+      ) : null}
+      <button onClick={reset}>Reset</button>
+    </div>
+  )
+}
+Usage.title = 'State Reducers with types'
+
+export default Usage
