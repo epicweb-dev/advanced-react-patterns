@@ -40,8 +40,8 @@ test('can click too much', () => {
     ['onToggle', false], // 2
     ['onToggle', true], // 3
     ['onToggle', false], // 4
-    ['onToggle', false], // 5
-    ['onToggle', false], // 6
+    ['onToggle', true], // 5
+    ['onToggle', true], // 6
   ])
 
   console.log.mockClear()

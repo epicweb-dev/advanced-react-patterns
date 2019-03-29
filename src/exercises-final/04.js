@@ -2,7 +2,8 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-function useToggle({onToggle} = {}) {
+const noop = () => {}
+function useToggle({onToggle = noop} = {}) {
   const [on, setOn] = React.useState(false)
   function toggle() {
     const newOn = !on

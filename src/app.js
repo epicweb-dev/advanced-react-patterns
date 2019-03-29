@@ -5,7 +5,7 @@ const files = [
   '01',
   '02',
   '03',
-  // '04',
+  '04',
   '05',
   '06',
   '07',
@@ -77,9 +77,7 @@ function ExerciseContainer({exerciseId}) {
         gridTemplateRows: '30px 1fr 30px',
       }}
     >
-      <h1 style={{gridColumn: 'span 2', textAlign: 'center'}}>
-        {Final.title}
-      </h1>
+      <h1 style={{gridColumn: 'span 2', textAlign: 'center'}}>{Final.title}</h1>
       <ComponentContainer
         label={<Link to={`/${exerciseId}/exercise`}>Exercise</Link>}
       >
@@ -250,9 +248,7 @@ const IsolatedExercise = ({moduleName}) => (
   <Isolated loader={() => import(`./exercises/${moduleName}`)} />
 )
 const IsolatedFinal = ({moduleName}) => (
-  <Isolated
-    loader={() => import(`./exercises-final/${moduleName}`)}
-  />
+  <Isolated loader={() => import(`./exercises-final/${moduleName}`)} />
 )
 
 const FakeApp = () => <div>{`Welcome to our fake app ;-)`}</div>
