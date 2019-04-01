@@ -45,7 +45,7 @@ class Toggle extends React.Component {
 // component is intended to be used and is used in the tests.
 // You can make all the tests pass by updating the Toggle component.
 function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
+  onToggle = (...args) => console.info('onToggle', ...args),
 }) {
   return (
     <Toggle onToggle={onToggle}>

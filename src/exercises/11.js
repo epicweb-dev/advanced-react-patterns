@@ -53,7 +53,7 @@ const Layer4 = () => (
 )
 
 function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
+  onToggle = (...args) => console.info('onToggle', ...args),
 }) {
   return (
     <Toggle onToggle={onToggle}>
@@ -77,7 +77,7 @@ const Layer3 = ({on, toggle}) => <Layer4 on={on} toggle={toggle} />
 const Layer4 = ({on, toggle}) => <Switch on={on} onClick={toggle} />
 
 function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
+  onToggle = (...args) => console.info('onToggle', ...args),
 }) {
   return (
     <Toggle onToggle={onToggle}>

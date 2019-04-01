@@ -16,7 +16,7 @@ function Toggle({onToggle}) {
 }
 
 function Usage() {
-  return <Toggle onToggle={(...args) => console.log('onToggle', ...args)} />
+  return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
 }
 Usage.title = 'Build Toggle'
 

@@ -69,7 +69,7 @@ const Layer3 = () => <Layer4 />
 const Layer4 = () => <Toggle.Button />
 
 function Usage({
-  onToggle = (...args) => console.log('onToggle', ...args),
+  onToggle = (...args) => console.info('onToggle', ...args),
 }) {
   return (
     <Toggle onToggle={onToggle}>

@@ -10,7 +10,7 @@ test('renders a toggle component', () => {
   toggle()
   expect(toggleButton).toBeOn()
   expect(container).toHaveTextContent('The button is on')
-  expect(console.log.mock.calls).toEqual([['onToggle', true]])
+  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })
 
 //////// Elaboration & Feedback /////////

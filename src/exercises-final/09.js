@@ -73,11 +73,11 @@ function Usage() {
     reducer: toggleStateReducer,
     onToggle: (...args) => {
       setTimesClicked(clicks => clicks + 1)
-      console.log('onToggle', ...args)
+      console.info('onToggle', ...args)
     },
     onReset: (...args) => {
       setTimesClicked(0)
-      console.log('onReset', ...args)
+      console.info('onReset', ...args)
     },
   })
 

@@ -8,7 +8,7 @@ test('renders a toggle component', () => {
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.log.mock.calls).toEqual([['onToggle', true]])
+  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })
 
 test('can click too much', () => {
@@ -35,7 +35,7 @@ test('can click too much', () => {
   expect(toggleButton).toBeOff()
 
   expect(getByTestId('notice')).not.toBeNull()
-  expect(console.log.mock.calls).toEqual([
+  expect(console.info.mock.calls).toEqual([
     ['onToggle', true], // 1
     ['onToggle', false], // 2
     ['onToggle', true], // 3
@@ -44,10 +44,10 @@ test('can click too much', () => {
     ['onToggle', true], // 6
   ])
 
-  console.log.mockClear()
+  console.info.mockClear()
 
   fireEvent.click(getByText('Reset'))
-  expect(console.log.mock.calls).toEqual([['onReset', false]])
+  expect(console.info.mock.calls).toEqual([['onReset', false]])
   expect(queryByTestId('notice')).toBeNull()
 
   expect(toggleButton).toBeOff()

@@ -8,7 +8,7 @@ test('renders a toggle component', () => {
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.log.mock.calls).toMatchInlineSnapshot(`
+  expect(console.info.mock.calls).toMatchInlineSnapshot(`
 Array [
   Array [
     "onToggle",
@@ -23,7 +23,7 @@ test('can reset the state of the toggle', () => {
   toggle()
   fireEvent.click(getByText('Reset'))
   expect(toggleButton).toBeOff()
-  expect(console.log.mock.calls).toMatchInlineSnapshot(`
+  expect(console.info.mock.calls).toMatchInlineSnapshot(`
 Array [
   Array [
     "onToggle",

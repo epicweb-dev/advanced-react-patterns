@@ -22,7 +22,7 @@ function useToggle({onToggle = noop} = {}) {
 
 function Usage() {
   const {on, togglerProps} = useToggle({
-    onToggle: (...args) => console.log('onToggle', ...args),
+    onToggle: (...args) => console.info('onToggle', ...args),
   })
   return (
     <div>

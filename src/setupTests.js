@@ -2,14 +2,14 @@ import 'jest-dom/extend-expect'
 import 'react-testing-library/cleanup-after-each'
 
 beforeAll(() => {
-  jest.spyOn(console, 'log')
-  console.log.mockImplementation(() => {})
+  jest.spyOn(console, 'info')
+  console.info.mockImplementation(() => {})
 })
 
 afterAll(() => {
-  console.log.mockRestore()
+  console.info.mockRestore()
 })
 
 beforeEach(() => {
-  console.log.mockClear()
+  console.info.mockClear()
 })

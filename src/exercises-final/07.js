@@ -43,8 +43,8 @@ function useToggle({
 
 function Usage() {
   const {on, getTogglerProps, reset} = useToggle({
-    onToggle: (...args) => console.log('onToggle', ...args),
-    onReset: (...args) => console.log('onReset', ...args),
+    onToggle: (...args) => console.info('onToggle', ...args),
+    onReset: (...args) => console.info('onReset', ...args),
     initialOn: false,
   })
   return (

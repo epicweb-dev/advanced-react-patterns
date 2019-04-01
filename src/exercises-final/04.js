@@ -15,7 +15,7 @@ function useToggle({onToggle = noop} = {}) {
 
 function Usage() {
   const [on, toggle] = useToggle({
-    onToggle: (...args) => console.log('onToggle', ...args),
+    onToggle: (...args) => console.info('onToggle', ...args),
   })
   return <Switch on={on} onClick={toggle} />
 }

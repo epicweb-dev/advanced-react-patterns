@@ -32,7 +32,7 @@ function useToggle({onToggle = noop} = {}) {
 
 function Usage() {
   const {on, getTogglerProps} = useToggle({
-    onToggle: (...args) => console.log('onToggle', ...args),
+    onToggle: (...args) => console.info('onToggle', ...args),
   })
   return (
     <div>
@@ -41,7 +41,7 @@ function Usage() {
       <button
         {...getTogglerProps({
           'aria-label': 'custom-button',
-          onClick: () => console.log('onButtonClick'),
+          onClick: () => console.info('onButtonClick'),
           id: 'custom-button-id',
         })}
       >
