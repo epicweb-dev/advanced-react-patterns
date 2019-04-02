@@ -1,7 +1,5 @@
 // control props
-
 import React from 'react'
-import _ from 'lodash'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
@@ -15,63 +13,29 @@ function toggleReducer(state, {type, initialState}) {
     case useToggle.types.reset: {
       return initialState
     }
-    case useToggle.types.toggleOn: {
-      return {on: true}
-    }
-    case useToggle.types.toggleOff: {
-      return {on: false}
-    }
     default:
       throw new Error(`Unsupported type: ${type}`)
   }
 }
 
-function useControlledReducer(reducer, initialState, lazyInitializer, options) {
-  if (typeof lazyInitializer === 'object') {
-    options = lazyInitializer
-    lazyInitializer = undefined
-  }
-  const controlledState = _.omitBy(options.controlledState, _.isUndefined)
-  const [internalState, dispatch] = React.useReducer(
-    (state, action) => {
-      const changes = reducer({...state, ...controlledState}, action)
-      const controlledChanges = {...changes, ...controlledState}
-      return _.isEqual(state, controlledChanges) ? state : controlledChanges
-    },
-    initialState,
-    lazyInitializer,
-  )
-  return [
-    {...internalState, ...controlledState},
-    action => {
-      dispatch(action)
-      options.onChange(
-        reducer({...internalState, ...controlledState}, action),
-        action,
-      )
-    },
-  ]
-}
-
 function useToggle({
+  onChange = noop,
   initialOn = false,
   reducer = toggleReducer,
-  onChange = noop,
-  state: controlledState = {},
+  on: controlledOn,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [{on}, dispatch] = useControlledReducer(reducer, initialState, {
-    controlledState,
-    onChange,
-  })
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const on = controlledOn === undefined ? state.on : controlledOn
 
-  function toggle() {
-    dispatch({type: useToggle.types.toggle})
+  function dispatchWithOnChange(action) {
+    dispatch(action)
+    onChange(reducer({...state, on}, action), action)
   }
 
-  function reset() {
-    dispatch({type: useToggle.types.reset, initialState})
-  }
+  const toggle = () => dispatchWithOnChange({type: useToggle.types.toggle})
+  const reset = () =>
+    dispatchWithOnChange({type: useToggle.types.reset, initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {
@@ -95,7 +59,7 @@ useToggle.types = {
 }
 
 function Toggle({on: controlledOn, onChange}) {
-  const {on, getTogglerProps} = useToggle({state: {on: controlledOn}, onChange})
+  const {on, getTogglerProps} = useToggle({on: controlledOn, onChange})
   const props = getTogglerProps({on})
   return <Switch {...props} />
 }
