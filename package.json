@@ -8,6 +8,7 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "hoist-non-react-statics": "^3.3.0",
+    "lodash": "^4.17.11",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-testing-library": "^6.0.3",

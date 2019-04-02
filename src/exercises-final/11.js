@@ -3,46 +3,47 @@ import React, {Fragment} from 'react'
 import {Switch} from '../switch'
 
 const ToggleContext = React.createContext()
-
-class Toggle extends React.Component {
-  static Consumer = ToggleContext.Consumer
-  state = {on: false}
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  render() {
-    return (
-      <ToggleContext.Provider
-        value={{on: this.state.on, toggle: this.toggle}}
-        {...this.props}
-      />
+function useToggle() {
+  const context = React.useContext(ToggleContext)
+  if (!context) {
+    throw new Error(
+      `Toggle compound components cannot be rendered outside the Toggle component`,
     )
   }
+  return context
+}
+
+function Toggle({onToggle, ...rest}) {
+  const [on, setOn] = React.useState(false)
+
+  const toggle = React.useCallback(() => {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
+  }, [onToggle, on])
+
+  const value = React.useMemo(() => ({on, toggle}), [on, toggle])
+
+  return <ToggleContext.Provider value={value} {...rest} />
 }
 
 const Layer1 = () => <Layer2 />
-const Layer2 = () => (
-  <Toggle.Consumer>
-    {({on}) => (
-      <Fragment>
-        {on ? 'The button is on' : 'The button is off'}
-        <Layer3 />
-      </Fragment>
-    )}
-  </Toggle.Consumer>
-)
+const Layer2 = () => {
+  const {on} = useToggle()
+  return (
+    <Fragment>
+      {on ? 'The button is on' : 'The button is off'}
+      <Layer3 />
+    </Fragment>
+  )
+}
 const Layer3 = () => <Layer4 />
-const Layer4 = () => (
-  <Toggle.Consumer>
-    {({on, toggle}) => <Switch on={on} onClick={toggle} />}
-  </Toggle.Consumer>
-)
+const Layer4 = () => {
+  const {on, toggle} = useToggle()
+  return <Switch on={on} onClick={toggle} />
+}
 
-function Usage({
-  onToggle = (...args) => console.info('onToggle', ...args),
-}) {
+function Usage({onToggle = (...args) => console.info('onToggle', ...args)}) {
   return (
     <Toggle onToggle={onToggle}>
       <Layer1 />

@@ -1,7 +1,7 @@
 import React from 'react'
 import chalk from 'chalk'
 import {renderToggle, render} from '../../test/utils'
-import Usage, {withToggle} from '../exercises-final/12'
+import Usage, {Toggle, withToggle} from '../exercises-final/12'
 // import Usage, {withToggle} from '../exercises/12'
 
 test('renders a toggle component', () => {
@@ -23,7 +23,11 @@ test('forwards refs properly React.forwardRef', () => {
   }
   const Wrapper = withToggle(MyComp)
   const myRef = React.createRef()
-  render(<Wrapper ref={myRef} />)
+  render(
+    <Toggle>
+      <Wrapper ref={myRef} />
+    </Toggle>,
+  )
   try {
     expect(myRef.current.instanceProp).toBe(true)
   } catch (error) {
@@ -60,7 +64,11 @@ test('handles static properties', () => {
   )
   const Wrapper = withToggle(MyComp)
   try {
-    render(<Wrapper />)
+    render(
+      <Toggle>
+        <Wrapper />
+      </Toggle>,
+    )
   } catch (error) {
     const helpfulMessage = chalk.red(
       `🚨  Make sure you're using hoistNonReactStatics on the component that's being returned  🚨`,

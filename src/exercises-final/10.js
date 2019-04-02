@@ -1,6 +1,7 @@
 // control props
 
 import React from 'react'
+import _ from 'lodash'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
@@ -25,44 +26,51 @@ function toggleReducer(state, {type, initialState}) {
   }
 }
 
-function useControlledReducer(
-  reducer,
-  initialState,
-  {externalState, onChange},
-) {
-  const [internalState, dispatch] = React.useReducer(reducer, initialState)
-  if (externalState) {
-    return [
-      externalState,
-      action => onChange(reducer(externalState, action), action),
-    ]
+function useControlledReducer(reducer, initialState, lazyInitializer, options) {
+  if (typeof lazyInitializer === 'object') {
+    options = lazyInitializer
+    lazyInitializer = undefined
   }
-  return [internalState, dispatch]
+  const controlledState = _.omitBy(options.controlledState, _.isUndefined)
+  const [internalState, dispatch] = React.useReducer(
+    (state, action) => {
+      const changes = reducer({...state, ...controlledState}, action)
+      const controlledChanges = {...changes, ...controlledState}
+      return _.isEqual(state, controlledChanges) ? state : controlledChanges
+    },
+    initialState,
+    lazyInitializer,
+  )
+  return [
+    {...internalState, ...controlledState},
+    action => {
+      dispatch(action)
+      options.onChange(
+        reducer({...internalState, ...controlledState}, action),
+        action,
+      )
+    },
+  ]
 }
 
 function useToggle({
-  onToggle = noop,
-  onReset = noop,
   initialOn = false,
   reducer = toggleReducer,
-  onChange,
-  state: externalState,
+  onChange = noop,
+  state: controlledState = {},
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
   const [{on}, dispatch] = useControlledReducer(reducer, initialState, {
-    externalState,
+    controlledState,
     onChange,
   })
 
   function toggle() {
-    const newOn = !on
     dispatch({type: useToggle.types.toggle})
-    onToggle(newOn)
   }
 
   function reset() {
     dispatch({type: useToggle.types.reset, initialState})
-    onReset(initialOn)
   }
 
   function getTogglerProps({onClick, ...props} = {}) {
@@ -86,18 +94,10 @@ useToggle.types = {
   reset: 'reset',
 }
 
-function Toggle({on: externalOn, onChange}) {
-  let state
-  if (externalOn !== undefined) {
-    state = {on: externalOn}
-  }
-  const {on, getTogglerProps} = useToggle({state, onChange})
+function Toggle({on: controlledOn, onChange}) {
+  const {on, getTogglerProps} = useToggle({state: {on: controlledOn}, onChange})
   const props = getTogglerProps({on})
-  return (
-    <div>
-      <Switch {...props} />
-    </div>
-  )
+  return <Switch {...props} />
 }
 
 function Usage() {
@@ -128,10 +128,19 @@ function Usage() {
           Whoa, you clicked too much!
           <br />
         </div>
-      ) : timesClicked > 0 ? (
+      ) : (
         <div data-testid="click-count">Click count: {timesClicked}</div>
-      ) : null}
+      )}
       <button onClick={handleResetClick}>Reset</button>
+      <hr />
+      <div>
+        <div>Uncontrolled Toggle:</div>
+        <Toggle
+          onChange={(...args) =>
+            console.info('Uncontrolled Toggle onChange', ...args)
+          }
+        />
+      </div>
     </div>
   )
 }
