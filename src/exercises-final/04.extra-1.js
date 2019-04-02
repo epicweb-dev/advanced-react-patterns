@@ -1,16 +1,28 @@
-// build a basic toggle component
+// custom hooks
+// with useReducer
 
 import React from 'react'
 import {Switch} from '../switch'
 
 const noop = () => {}
 
-function useToggle({onToggle = noop}) {
-  const [on, setOn] = React.useState(false)
+function toggleReducer(state, {type}) {
+  switch (type) {
+    case 'toggle': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unsupported type: ${type}`)
+    }
+  }
+}
+
+function useToggle({onToggle = noop} = {}) {
+  const [{on}, dispatch] = React.useReducer(toggleReducer, {on: false})
 
   function toggle() {
     const newOn = !on
-    setOn(newOn)
+    dispatch({type: 'toggle'})
     onToggle(newOn)
   }
 

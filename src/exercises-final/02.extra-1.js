@@ -3,7 +3,7 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-function componentHasChild(child) {
+function isCompoundComponent(child) {
   for (const property in Toggle) {
     if (Toggle.hasOwnProperty(property)) {
       if (child.type === Toggle[property]) {
@@ -24,16 +24,23 @@ function Toggle({onToggle, children}) {
   }
 
   return React.Children.map(children, child => {
-    return componentHasChild(child)
+    return isCompoundComponent(child)
       ? React.cloneElement(child, {on, toggle})
       : child
   })
 }
-Toggle.On = ({on, children}) => (on ? children : null)
-Toggle.Off = ({on, children}) => (on ? null : children)
-Toggle.Button = ({on, toggle, ...props}) => (
-  <Switch on={on} onClick={toggle} {...props} />
-)
+
+Toggle.On = function On({on, children}) {
+  return on ? children : null
+}
+
+Toggle.Off = function Off({on, children}) {
+  return on ? null : children
+}
+
+Toggle.Button = function Button({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
+}
 
 function Usage() {
   return (

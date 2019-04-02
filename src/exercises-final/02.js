@@ -16,12 +16,15 @@ function Toggle({onToggle, children}) {
     React.cloneElement(child, {on, toggle}),
   )
 }
+
 Toggle.On = function On({on, children}) {
   return on ? children : null
 }
+
 Toggle.Off = function Off({on, children}) {
   return on ? null : children
 }
+
 Toggle.Button = function Button({on, toggle, ...props}) {
   return <Switch on={on} onClick={toggle} {...props} />
 }

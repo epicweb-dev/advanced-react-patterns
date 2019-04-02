@@ -14,8 +14,9 @@ function toggleReducer(state, {type, initialState}) {
     case useToggle.types.reset: {
       return initialState
     }
-    default:
+    default: {
       throw new Error(`Unsupported type: ${type}`)
+    }
   }
 }
 

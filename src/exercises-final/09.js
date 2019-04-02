@@ -13,8 +13,9 @@ function toggleReducer(state, {type, initialState}) {
     case useToggle.types.reset: {
       return initialState
     }
-    default:
+    default: {
       throw new Error(`Unsupported type: ${type}`)
+    }
   }
 }
 
@@ -111,4 +112,5 @@ function Usage() {
 Usage.title = 'Control Props'
 
 export default Usage
+// we're adding the Toggle export for tests
 export {Toggle}

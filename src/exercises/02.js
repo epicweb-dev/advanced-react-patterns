@@ -1,60 +1,83 @@
 // Compound Components
-
 import React from 'react'
 import {Switch} from '../switch'
 
-class Toggle extends React.Component {
-  // you can create function components as static properties!
-  // for example:
-  // static Candy = (props) => <div>CANDY! {props.children}</div>
-  // Then that could be used like: <Toggle.Candy />
-  // This is handy because it makes the relationship between the
-  // parent Toggle component and the child Candy component more explicit
-  // 🐨 You'll need to create three such components here: On, Off, and Button
-  //    The button will be responsible for rendering the <Switch /> (with the right props)
-  // 💰 Combined with changes you'll make in the `render` method, these should
-  //    be able to accept `on`, `toggle`, and `children` as props.
-  //    Note that they will _not_ have access to Toggle instance properties
-  //    like `this.state.on` or `this.toggle`.
-  state = {on: false}
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  render() {
-    // we're trying to let people render the components they want within the Toggle component.
-    // But the On, Off, and Button components will need access to the internal `on` state as
-    // well as the internal `toggle` function for them to work properly. So here we can
-    // take all this.props.children and make a copy of them that has those props.
-    //
-    // To do this, you can use:
-    // 1. React.Children.map: https://reactjs.org/docs/react-api.html#reactchildrenmap
-    // 2. React.cloneElement: https://reactjs.org/docs/react-api.html#cloneelement
-    //
-    // 🐨 you'll want to completely replace the code below with the above logic.
-    const {on} = this.state
-    return <Switch on={on} onClick={this.toggle} />
+// Compound components are components that work together to form a complete UI.
+// The classic example of this is <select> and <option> in HTML:
+//
+// <select>
+//   <option value="1">Option 1</option>
+//   <option value="2">Option 2</option>
+// </select>
+//
+// the <select> is the element responsible for managing the state of the UI, and
+// the <option> elements are essentially more configuration for how the select
+// should operate (specifically, which options are available and their values).
+//
+// In this example, people want to use the Toggle the same way they can use a
+// select. We have a Toggle component that manages the state, and we want to
+// render different parts of the UI however we want. We want control over the
+// presentation of the UI.
+
+// 🦉 The fundamental challenge you face with an API like this is the state
+// shared between the components is implicit, meaning that the developer using
+// your component cannot actually see or interact with the state (`on`) or the
+// mechanisms for updating that state (`toggle`) that are being shared between
+// the components.
+// So in this exercise, we'll solve that problem by providing the compound
+// components with the props they need implicitely using React.cloneElement.
+
+// Since we're no longer responsible for rendering the switch ourselves,
+// we'll need to accept a `children` prop and render that instead.
+// 🐨 add `children` to the props destructuring here
+function Toggle({onToggle}) {
+  const [on, setOn] = React.useState(false)
+
+  function toggle() {
+    const newOn = !on
+    setOn(newOn)
+    onToggle(newOn)
   }
+
+  // 🐨 replace this with a call to React.Children.map and map each child to
+  // a clone of that child with the props they need using React.cloneElement
+  // 📜 https://reactjs.org/docs/react-api.html#reactchildren
+  // 📜 https://reactjs.org/docs/react-api.html#cloneelement
+  return <Switch on={on} onClick={toggle} />
 }
+
+// 🐨 add a property on Toggle for On, Off, and Button:
+
+// Accepts `on` and `children` props and returns `children` if `on` is true
+Toggle.On = () => null
+
+// Accepts `on` and `children` props and returns `children` if `on` is false
+Toggle.Off = () => null
+
+// Accepts `on` and `toggle` props and returns the <Switch /> with those props.
+Toggle.Button = () => null
 
 // 💯 Support rendering non-Toggle components within Toggle without incurring warnings in the console.
 // for example, try to render a <span>Hello</span> inside <Toggle />
 
-// Don't make changes to the Usage component. It's here to show you how your
-// component is intended to be used and is used in the tests.
-// You can make all the tests pass by updating the Toggle component.
-function Usage({
-  onToggle = (...args) => console.info('onToggle', ...args),
-}) {
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//                 Don't make changes below here.                 //
+// But do look at it to see how your code is intended to be used. //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+
+function Usage() {
   return (
-    <Toggle onToggle={onToggle}>
-      <Toggle.On>The button is on</Toggle.On>
-      <Toggle.Off>The button is off</Toggle.Off>
-      <Toggle.Button />
-    </Toggle>
+    <div>
+      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+        <Toggle.On>The button is on</Toggle.On>
+        <Toggle.Off>The button is off</Toggle.Off>
+        <Toggle.Button />
+      </Toggle>
+    </div>
   )
 }
 Usage.title = 'Compound Components'
 
-export {Toggle, Usage as default}
+export default Usage

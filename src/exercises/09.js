@@ -1,145 +1,123 @@
-// state reducer with types
-
+// control props
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) =>
-  fns.forEach(fn => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
+const noop = () => {}
 
-class Toggle extends React.Component {
-  static defaultProps = {
-    initialOn: false,
-    onReset: () => {},
-    stateReducer: (state, changes) => changes,
+function toggleReducer(state, {type, initialState}) {
+  switch (type) {
+    case useToggle.types.toggle: {
+      return {on: !state.on}
+    }
+    case useToggle.types.reset: {
+      return initialState
+    }
+    default: {
+      throw new Error(`Unsupported type: ${type}`)
+    }
   }
-  initialState = {on: this.props.initialOn}
-  state = this.initialState
-  internalSetState(changes, callback) {
-    this.setState(state => {
-      // handle function setState call
-      const changesObject =
-        typeof changes === 'function' ? changes(state) : changes
-      // apply state reducer
-      const reducedChanges =
-        this.props.stateReducer(state, changesObject) || {}
-      // 🐨  in addition to what we've done, let's pluck off the `type`
-      // property and return an object only if the state changes
-      // 💰 to remove the `type`, you can destructure the changes:
-      // `{type, ...c}`
-      return Object.keys(reducedChanges).length
-        ? reducedChanges
-        : null
-    }, callback)
+}
+
+function useToggle({
+  onChange = noop,
+  initialOn = false,
+  reducer = toggleReducer,
+  on: controlledOn,
+} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const on = controlledOn === undefined ? state.on : controlledOn
+
+  function dispatchWithOnChange(action) {
+    dispatch(action)
+    onChange(reducer({...state, on}, action), action)
   }
-  reset = () =>
-    // 🐨 add a `type` string property to this call
-    this.internalSetState(this.initialState, () =>
-      this.props.onReset(this.state.on),
-    )
-  // 🐨 accept a `type` property here and give it a default value
-  toggle = () =>
-    this.internalSetState(
-      // pass the `type` string to this object
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  getTogglerProps = ({onClick, ...props} = {}) => ({
-    // 🐨 change `this.toggle` to `() => this.toggle()`
-    // to avoid passing the click event to this.toggle.
-    onClick: callAll(onClick, this.toggle),
-    'aria-pressed': this.state.on,
-    ...props,
-  })
-  getStateAndHelpers() {
+
+  const toggle = () => dispatchWithOnChange({type: useToggle.types.toggle})
+  const reset = () =>
+    dispatchWithOnChange({type: useToggle.types.reset, initialState})
+
+  function getTogglerProps({onClick, ...props} = {}) {
     return {
-      on: this.state.on,
-      toggle: this.toggle,
-      reset: this.reset,
-      getTogglerProps: this.getTogglerProps,
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
     }
   }
-  render() {
-    return this.props.children(this.getStateAndHelpers())
+
+  return {
+    on,
+    reset,
+    toggle,
+    getTogglerProps,
   }
 }
-
-// Don't make changes to the Usage component. It's here to show you how your
-// component is intended to be used and is used in the tests.
-// You can make all the tests pass by updating the Toggle component.
-class Usage extends React.Component {
-  static defaultProps = {
-    onToggle: (...args) => console.info('onToggle', ...args),
-    onReset: (...args) => console.info('onReset', ...args),
-  }
-  initialState = {timesClicked: 0}
-  state = this.initialState
-  handleToggle = (...args) => {
-    this.setState(({timesClicked}) => ({
-      timesClicked: timesClicked + 1,
-    }))
-    this.props.onToggle(...args)
-  }
-  handleReset = (...args) => {
-    this.setState(this.initialState)
-    this.props.onReset(...args)
-  }
-  toggleStateReducer = (state, changes) => {
-    if (changes.type === 'forced') {
-      return changes
-    }
-    if (this.state.timesClicked >= 4) {
-      return {...changes, on: false}
-    }
-    return changes
-  }
-  render() {
-    const {timesClicked} = this.state
-    return (
-      <Toggle
-        stateReducer={this.toggleStateReducer}
-        onToggle={this.handleToggle}
-        onReset={this.handleReset}
-        ref={this.props.toggleRef}
-      >
-        {({on, toggle, reset, getTogglerProps}) => (
-          <div>
-            <Switch
-              {...getTogglerProps({
-                on: on,
-              })}
-            />
-            {timesClicked > 4 ? (
-              <div data-testid="notice">
-                Whoa, you clicked too much!
-                <br />
-                <button onClick={() => toggle({type: 'forced'})}>
-                  Force Toggle
-                </button>
-                <br />
-              </div>
-            ) : timesClicked > 0 ? (
-              <div data-testid="click-count">
-                Click count: {timesClicked}
-              </div>
-            ) : null}
-            <button onClick={reset}>Reset</button>
-          </div>
-        )}
-      </Toggle>
-    )
-  }
+useToggle.reducer = toggleReducer
+useToggle.types = {
+  toggle: 'toggle',
+  reset: 'reset',
 }
-Usage.title = 'State Reducers (with change types)'
 
-export {Toggle, Usage as default}
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//                 Don't make changes below here.                 //
+// But do look at it to see how your code is intended to be used. //
+//                                                                //
+////////////////////////////////////////////////////////////////////
 
-/* eslint
-"no-unused-vars": [
-  "warn",
-  {
-    "argsIgnorePattern": "^_.+|^ignore.+",
-    "varsIgnorePattern": "^_.+|^ignore.+",
-    "args": "after-used"
+function Toggle({on: controlledOn, onChange}) {
+  const {on, getTogglerProps} = useToggle({on: controlledOn, onChange})
+  const props = getTogglerProps({on})
+  return <Switch {...props} />
+}
+
+function Usage() {
+  const [bothOn, setBothOn] = React.useState(false)
+  const [timesClicked, setTimesClicked] = React.useState(0)
+
+  function handleToggleChange(state, action) {
+    if (action.type === useToggle.types.toggle && timesClicked >= 4) {
+      return
+    }
+    setBothOn(state.on)
+    setTimesClicked(c => c + 1)
   }
-]
- */
+
+  function handleResetClick(params) {
+    setBothOn(false)
+    setTimesClicked(0)
+  }
+
+  return (
+    <div>
+      <div>
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+      </div>
+      {timesClicked > 4 ? (
+        <div data-testid="notice">
+          Whoa, you clicked too much!
+          <br />
+        </div>
+      ) : (
+        <div data-testid="click-count">Click count: {timesClicked}</div>
+      )}
+      <button onClick={handleResetClick}>Reset</button>
+      <hr />
+      <div>
+        <div>Uncontrolled Toggle:</div>
+        <Toggle
+          onChange={(...args) =>
+            console.info('Uncontrolled Toggle onChange', ...args)
+          }
+        />
+      </div>
+    </div>
+  )
+}
+Usage.title = 'Control Props'
+
+export default Usage
+// we're adding the Toggle export for tests
+export {Toggle}

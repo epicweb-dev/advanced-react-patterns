@@ -3,70 +3,75 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) =>
-  fns.forEach(fn => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
+const noop = () => {}
 
-class Toggle extends React.Component {
-  // 🐨 We're going to need some static defaultProps here to allow
-  // people to pass a `initialOn` prop.
-  //
-  // 🐨 Rather than initializing state to have on as false,
-  // set on to this.props.initialOn
-  state = {on: false}
-
-  // 🐨 now let's add a reset method here that resets the state
-  // to the initial state. Then add a callback that calls
-  // this.props.onReset with the `on` state.
-  toggle = () =>
-    this.setState(
-      ({on}) => ({on: !on}),
-      () => this.props.onToggle(this.state.on),
-    )
-  getTogglerProps = ({onClick, ...props} = {}) => {
-    return {
-      'aria-pressed': this.state.on,
-      onClick: callAll(onClick, this.toggle),
-      ...props,
+function toggleReducer(state, {type, initialState}) {
+  switch (type) {
+    case 'toggle': {
+      return {on: !state.on}
     }
-  }
-  getStateAndHelpers() {
-    return {
-      on: this.state.on,
-      toggle: this.toggle,
-      // 🐨 now let's include the reset method here
-      // so folks can use that in their implementation.
-      getTogglerProps: this.getTogglerProps,
+    case 'reset': {
+      return initialState
     }
-  }
-  render() {
-    return this.props.children(this.getStateAndHelpers())
+    default: {
+      throw new Error(`Unsupported type: ${type}`)
+    }
   }
 }
 
-// Don't make changes to the Usage component. It's here to show you how your
-// component is intended to be used and is used in the tests.
-// You can make all the tests pass by updating the Toggle component.
-function Usage({
-  initialOn = false,
-  onToggle = (...args) => console.info('onToggle', ...args),
-  onReset = (...args) => console.info('onReset', ...args),
-}) {
+function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  const [{on}, dispatch] = React.useReducer(toggleReducer, initialState)
+
+  function toggle() {
+    const newOn = !on
+    dispatch({type: 'toggle'})
+    onToggle(newOn)
+  }
+
+  function reset() {
+    dispatch({type: 'reset', initialState})
+    onReset(initialOn)
+  }
+
+  function getTogglerProps({onClick, ...props} = {}) {
+    return {
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
+    }
+  }
+
+  return {
+    on,
+    reset,
+    toggle,
+    getTogglerProps,
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//                 Don't make changes below here.                 //
+// But do look at it to see how your code is intended to be used. //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+
+function Usage() {
+  const {on, getTogglerProps, reset} = useToggle({
+    onToggle: (...args) => console.info('onToggle', ...args),
+    onReset: (...args) => console.info('onReset', ...args),
+    initialOn: false,
+  })
   return (
-    <Toggle
-      initialOn={initialOn}
-      onToggle={onToggle}
-      onReset={onReset}
-    >
-      {({getTogglerProps, on, reset}) => (
-        <div>
-          <Switch {...getTogglerProps({on})} />
-          <hr />
-          <button onClick={() => reset()}>Reset</button>
-        </div>
-      )}
-    </Toggle>
+    <div>
+      <Switch {...getTogglerProps({on})} />
+      <hr />
+      <button onClick={reset}>Reset</button>
+    </div>
   )
 }
 Usage.title = 'State Initializers'
 
-export {Toggle, Usage as default}
+export default Usage

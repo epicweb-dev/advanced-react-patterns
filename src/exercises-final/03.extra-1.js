@@ -26,14 +26,17 @@ function Toggle({onToggle, ...rest}) {
 
   return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
 }
+
 Toggle.On = function On({children}) {
   const {on} = useToggle()
   return on ? children : null
 }
+
 Toggle.Off = function Off({children}) {
   const {on} = useToggle()
   return on ? null : children
 }
+
 Toggle.Button = function Button({...props}) {
   const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
