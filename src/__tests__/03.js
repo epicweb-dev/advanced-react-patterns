@@ -8,14 +8,7 @@ test('renders a toggle component', () => {
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toMatchInlineSnapshot(`
-Array [
-  Array [
-    "onToggle",
-    true,
-  ],
-]
-`)
+  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })
 
 //////// Elaboration & Feedback /////////

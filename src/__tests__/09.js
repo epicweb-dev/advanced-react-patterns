@@ -1,75 +1,26 @@
 import React from 'react'
-import {renderToggle, fireEvent} from '../../test/utils'
-import Usage from '../exercises-final/08'
-// import Usage from '../exercises/08'
+import {fireEvent, renderToggle} from '../../test/utils'
+import Usage, {Toggle} from '../exercises-final/09'
+// import Usage, {Toggle} from '../exercises/09'
 
-test('renders a toggle component', () => {
-  const {toggleButton, toggle} = renderToggle(<Usage />)
-  expect(toggleButton).toBeOff()
-  toggle()
-  expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([['onToggle', true]])
+test('toggling either toggle toggles both', () => {
+  const {getAllByTestId} = renderToggle(<Usage />)
+  const buttons = getAllByTestId('toggle-input')
+  const [toggleButton1, toggleButton2] = buttons
+  fireEvent.click(toggleButton1)
+  expect(toggleButton1).toBeOn()
+  expect(toggleButton2).toBeOn()
+
+  fireEvent.click(toggleButton2)
+  expect(toggleButton1).toBeOff()
+  expect(toggleButton2).toBeOff()
 })
 
-test('can click too much', () => {
-  const {
-    toggleButton,
-    toggle,
-    getByTestId,
-    queryByTestId,
-    getByText,
-  } = renderToggle(<Usage />)
-  expect(toggleButton).toBeOff()
-  toggle() // 1
-  expect(toggleButton).toBeOn()
-  toggle() // 2
-  expect(toggleButton).toBeOff()
-  expect(getByTestId('click-count')).toHaveTextContent('2')
-  toggle() // 3
-  expect(toggleButton).toBeOn()
-  toggle() // 4
-  expect(toggleButton).toBeOff()
-  toggle() // 5: Whoa, too many
-  expect(toggleButton).toBeOff()
-  toggle() // 6
-  expect(toggleButton).toBeOff()
-
-  expect(getByTestId('notice')).not.toBeNull()
-  expect(console.info.mock.calls).toEqual([
-    ['onToggle', true], // 1
-    ['onToggle', false], // 2
-    ['onToggle', true], // 3
-    ['onToggle', false], // 4
-    ['onToggle', true], // 5
-    ['onToggle', true], // 6
-  ])
-
-  console.info.mockClear()
-
-  fireEvent.click(getByText('Reset'))
-  expect(console.info.mock.calls).toEqual([['onReset', false]])
-  expect(queryByTestId('notice')).toBeNull()
-
+test('toggle can still be uncontrolled', () => {
+  const {toggleButton, toggle} = renderToggle(<Toggle />)
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-
-  expect(getByTestId('click-count')).toHaveTextContent('1')
-
-  // TODO: make this test that the state reducer doesn't return the type property maybe?
-  // normally I wouldn't test like this
-  // I just want to make sure that you aren't including the `type`
-  // in your state by mistake!
-  // try {
-  //   expect(toggleInstance.state).toEqual({on: true})
-  // } catch (error) {
-  //   if (toggleInstance.state.type) {
-  //     console.info(
-  //       `You are including type in the state and it shouldn't be included. Make sure your internalSetState method removes the type before returning the new state. Also make sure that the only place you call setState is within your internalSetState method.`,
-  //     )
-  //   }
-  //   throw error
-  // }
 })
 
 //////// Elaboration & Feedback /////////
@@ -79,7 +30,7 @@ test('can click too much', () => {
 // 3. Change submitted from `false` to `true`
 // 4. And you're all done!
 /*
-http://ws.kcd.im/?ws=react%20patterns&e=09&em=
+http://ws.kcd.im/?ws=react%20patterns&e=09-primer&em=
 */
 test.skip('I submitted my elaboration and feedback', () => {
   const submitted = false // change this when you've submitted!

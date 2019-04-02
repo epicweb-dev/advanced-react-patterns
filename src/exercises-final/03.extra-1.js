@@ -41,13 +41,15 @@ Toggle.Button = function Button({...props}) {
 
 function Usage() {
   return (
-    <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
-      <Toggle.On>The button is on</Toggle.On>
-      <Toggle.Off>The button is off</Toggle.Off>
-      <div>
-        <Toggle.Button />
-      </div>
-    </Toggle>
+    <div>
+      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+        <Toggle.On>The button is on</Toggle.On>
+        <Toggle.Off>The button is off</Toggle.Off>
+        <div>
+          <Toggle.Button />
+        </div>
+      </Toggle>
+    </div>
   )
 }
 Usage.title = 'Flexible Compound Components'

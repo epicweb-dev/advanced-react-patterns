@@ -1,5 +1,4 @@
-// state reducer
-
+// control props
 import React from 'react'
 import {Switch} from '../switch'
 
@@ -20,24 +19,23 @@ function toggleReducer(state, {type, initialState}) {
 }
 
 function useToggle({
-  onToggle = noop,
-  onReset = noop,
+  onChange = noop,
   initialOn = false,
   reducer = toggleReducer,
+  on: controlledOn,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [{on}, dispatch] = React.useReducer(reducer, initialState)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const on = controlledOn === undefined ? state.on : controlledOn
 
-  function toggle() {
-    const newOn = !on
-    dispatch({type: useToggle.types.toggle})
-    onToggle(newOn)
+  function dispatchWithOnChange(action) {
+    dispatch(action)
+    onChange(reducer({...state, on}, action), action)
   }
 
-  function reset() {
-    dispatch({type: useToggle.types.reset, initialState})
-    onReset(initialOn)
-  }
+  const toggle = () => dispatchWithOnChange({type: useToggle.types.toggle})
+  const reset = () =>
+    dispatchWithOnChange({type: useToggle.types.reset, initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {
@@ -60,46 +58,57 @@ useToggle.types = {
   reset: 'reset',
 }
 
+function Toggle({on: controlledOn, onChange}) {
+  const {on, getTogglerProps} = useToggle({on: controlledOn, onChange})
+  const props = getTogglerProps({on})
+  return <Switch {...props} />
+}
+
 function Usage() {
+  const [bothOn, setBothOn] = React.useState(false)
   const [timesClicked, setTimesClicked] = React.useState(0)
-  function toggleStateReducer(state, action) {
+
+  function handleToggleChange(state, action) {
     if (action.type === useToggle.types.toggle && timesClicked >= 4) {
-      return {on: false}
+      return
     }
-    return useToggle.reducer(state, action)
+    setBothOn(state.on)
+    setTimesClicked(c => c + 1)
   }
 
-  const {on, getTogglerProps, reset} = useToggle({
-    reducer: toggleStateReducer,
-    onToggle: (...args) => {
-      setTimesClicked(clicks => clicks + 1)
-      console.info('onToggle', ...args)
-    },
-    onReset: (...args) => {
-      setTimesClicked(0)
-      console.info('onReset', ...args)
-    },
-  })
+  function handleResetClick(params) {
+    setBothOn(false)
+    setTimesClicked(0)
+  }
 
   return (
     <div>
-      <Switch
-        {...getTogglerProps({
-          on: on,
-        })}
-      />
+      <div>
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+      </div>
       {timesClicked > 4 ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />
         </div>
-      ) : timesClicked > 0 ? (
+      ) : (
         <div data-testid="click-count">Click count: {timesClicked}</div>
-      ) : null}
-      <button onClick={reset}>Reset</button>
+      )}
+      <button onClick={handleResetClick}>Reset</button>
+      <hr />
+      <div>
+        <div>Uncontrolled Toggle:</div>
+        <Toggle
+          onChange={(...args) =>
+            console.info('Uncontrolled Toggle onChange', ...args)
+          }
+        />
+      </div>
     </div>
   )
 }
-Usage.title = 'State Reducers with types'
+Usage.title = 'Control Props'
 
 export default Usage
+export {Toggle}

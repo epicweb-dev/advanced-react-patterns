@@ -8,14 +8,7 @@ test('renders a toggle component', () => {
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toMatchInlineSnapshot(`
-Array [
-  Array [
-    "onToggle",
-    true,
-  ],
-]
-`)
+  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })
 
 test('can also toggle with the custom button', () => {
@@ -23,14 +16,7 @@ test('can also toggle with the custom button', () => {
   expect(toggleButton).toBeOff()
   fireEvent.click(getByLabelText('custom-button'))
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toMatchInlineSnapshot(`
-Array [
-  Array [
-    "onToggle",
-    true,
-  ],
-]
-`)
+  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })
 
 //////// Elaboration & Feedback /////////

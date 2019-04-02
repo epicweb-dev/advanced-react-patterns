@@ -1,20 +1,7 @@
 import React from 'react'
 import {Router, Link} from '@reach/router'
 
-const files = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07',
-  '08',
-  '09',
-  '10',
-  '11',
-  '12',
-]
+const files = ['01', '02', '03', '04', '05', '06', '07', '08', '09']
 
 const pages = files.reduce((p, filename, index, fullArray) => {
   const final = require(`./exercises-final/${filename}`)
@@ -202,8 +189,8 @@ function Isolated({loader}) {
 
 function Home() {
   return (
-    <div>
-      <h1 style={{textAlign: 'center'}}>Learn React</h1>
+    <div style={{maxWidth: 800, margin: '50px auto 0px auto'}}>
+      <h1 style={{textAlign: 'center'}}>Advanced React Patterns</h1>
       <div>
         {filesAndTitles.map(({title, filename}) => {
           return (

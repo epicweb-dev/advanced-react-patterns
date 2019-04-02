@@ -3,25 +3,34 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) =>
-  fns.forEach(fn => fn && fn(...args))
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const noop = () => {}
 
-function useToggle({
-  onToggle = noop,
-  onReset = noop,
-  initialOn = false,
-} = {}) {
-  const [on, setOn] = React.useState(initialOn)
+function toggleReducer(state, {type, initialState}) {
+  switch (type) {
+    case 'toggle': {
+      return {on: !state.on}
+    }
+    case 'reset': {
+      return initialState
+    }
+    default:
+      throw new Error(`Unsupported type: ${type}`)
+  }
+}
+
+function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  const [{on}, dispatch] = React.useReducer(toggleReducer, initialState)
 
   function toggle() {
     const newOn = !on
-    setOn(newOn)
+    dispatch({type: 'toggle'})
     onToggle(newOn)
   }
 
   function reset() {
-    setOn(initialOn)
+    dispatch({type: 'reset', initialState})
     onReset(initialOn)
   }
 
