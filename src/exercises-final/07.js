@@ -32,7 +32,7 @@ function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
 
   function reset() {
     dispatch({type: 'reset', initialState})
-    onReset(initialOn)
+    onReset(initialState.on)
   }
 
   function getTogglerProps({onClick, ...props} = {}) {
