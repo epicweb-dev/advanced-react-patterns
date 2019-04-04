@@ -1,7 +1,7 @@
 // state reducer
-// default reducer
 
 import React from 'react'
+import warning from 'fbjs/lib/warning'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
@@ -9,16 +9,42 @@ const noop = () => {}
 
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
-    case 'toggle': {
+    case useToggle.types.toggle: {
       return {on: !state.on}
     }
-    case 'reset': {
+    case useToggle.types.reset: {
       return initialState
     }
     default: {
       throw new Error(`Unsupported type: ${type}`)
     }
   }
+}
+
+function useReducerWithValidation(reducer, initialState, initializer = v => v) {
+  const initialStateKeys = React.useState(
+    () => Object.keys(initializer(initialState)),
+    [],
+  )[0]
+
+  function validationReducer(state, action) {
+    const newState = reducer(state, action)
+    const extraKeys = Object.keys(newState).filter(
+      key => !initialStateKeys.includes(key),
+    )
+    warning(
+      !extraKeys.length,
+      `Warning! The following keys were unexpectedly added to the reducer's state: ${extraKeys.join(
+        ', ',
+      )}`,
+    )
+    return newState
+  }
+  return React.useReducer(
+    process.env.NODE_ENV === 'production' ? reducer : validationReducer,
+    initialState,
+    initializer,
+  )
 }
 
 function useToggle({
@@ -28,16 +54,16 @@ function useToggle({
   reducer = toggleReducer,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [{on}, dispatch] = React.useReducer(reducer, initialState)
+  const [{on}, dispatch] = useReducerWithValidation(reducer, initialState)
 
   function toggle() {
     const newOn = !on
-    dispatch({type: 'toggle'})
+    dispatch({type: useToggle.types.toggle})
     onToggle(newOn)
   }
 
   function reset() {
-    dispatch({type: 'reset', initialState})
+    dispatch({type: useToggle.types.reset, initialState})
     onReset(initialOn)
   }
 
@@ -57,13 +83,17 @@ function useToggle({
   }
 }
 useToggle.reducer = toggleReducer
+useToggle.types = {
+  toggle: 'toggle',
+  reset: 'reset',
+}
 
 function Usage() {
   const [timesClicked, setTimesClicked] = React.useState(0)
 
   function toggleStateReducer(state, action) {
-    if (action.type === 'toggle' && timesClicked >= 4) {
-      return {on: state.on}
+    if (action.type === useToggle.types.toggle && timesClicked >= 4) {
+      return {on: state.on, foo: 'bar'}
     }
     return useToggle.reducer(state, action)
   }
@@ -99,6 +129,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'State Reducers'
+Usage.title = 'State Reducers with types'
 
 export default Usage

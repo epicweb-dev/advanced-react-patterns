@@ -18,6 +18,7 @@ test('can click too much', () => {
     getByTestId,
     queryByTestId,
     getByText,
+    queryByText,
   } = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   toggle() // 1
@@ -27,12 +28,14 @@ test('can click too much', () => {
   expect(getByTestId('click-count')).toHaveTextContent('2')
   toggle() // 3
   expect(toggleButton).toBeOn()
+  expect(queryByText(/whoa/i)).not.toBeInTheDocument()
   toggle() // 4
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).toBeOn()
+  expect(getByText(/whoa/i)).toBeInTheDocument()
   toggle() // 5: Whoa, too many
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).toBeOn()
   toggle() // 6
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).toBeOn()
 
   expect(getByTestId('notice')).not.toBeNull()
   expect(console.info.mock.calls).toEqual([
@@ -40,8 +43,8 @@ test('can click too much', () => {
     ['onToggle', false], // 2
     ['onToggle', true], // 3
     ['onToggle', false], // 4
-    ['onToggle', true], // 5
-    ['onToggle', true], // 6
+    ['onToggle', false], // 5
+    ['onToggle', false], // 6
   ])
 
   console.info.mockClear()

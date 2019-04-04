@@ -37,7 +37,7 @@ function useToggle({
 
   function reset() {
     dispatch({type: 'reset', initialState})
-    onReset(initialOn)
+    onReset(initialState.on)
   }
 
   function getTogglerProps({onClick, ...props} = {}) {
@@ -58,14 +58,22 @@ function useToggle({
 
 function Usage() {
   const [timesClicked, setTimesClicked] = React.useState(0)
+
   function toggleStateReducer(state, action) {
-    if (action.type === 'reset') {
-      return {on: false}
+    switch (action.type) {
+      case 'toggle': {
+        if (timesClicked >= 4) {
+          return {on: state.on}
+        }
+        return {on: !state.on}
+      }
+      case 'reset': {
+        return {on: false}
+      }
+      default: {
+        throw new Error(`Unsupported type: ${action.type}`)
+      }
     }
-    if (timesClicked >= 4) {
-      return {on: false}
-    }
-    return {on: !state.on}
   }
 
   const {on, getTogglerProps, reset} = useToggle({
@@ -87,7 +95,7 @@ function Usage() {
           on: on,
         })}
       />
-      {timesClicked > 4 ? (
+      {timesClicked >= 4 ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />

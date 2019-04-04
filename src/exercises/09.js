@@ -95,7 +95,7 @@ function Usage() {
         <Toggle on={bothOn} onChange={handleToggleChange} />
         <Toggle on={bothOn} onChange={handleToggleChange} />
       </div>
-      {timesClicked > 4 ? (
+      {timesClicked >= 4 ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />

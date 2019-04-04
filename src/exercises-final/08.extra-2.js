@@ -63,9 +63,10 @@ useToggle.types = {
 
 function Usage() {
   const [timesClicked, setTimesClicked] = React.useState(0)
+
   function toggleStateReducer(state, action) {
     if (action.type === useToggle.types.toggle && timesClicked >= 4) {
-      return {on: false}
+      return {on: state.on}
     }
     return useToggle.reducer(state, action)
   }
@@ -89,7 +90,7 @@ function Usage() {
           on: on,
         })}
       />
-      {timesClicked > 4 ? (
+      {timesClicked >= 4 ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />
