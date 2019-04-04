@@ -27,7 +27,8 @@ function useToggle({
   reducer = toggleReducer,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [{on}, dispatch] = React.useReducer(reducer, initialState)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const {on} = state
 
   function toggle() {
     const newOn = !on

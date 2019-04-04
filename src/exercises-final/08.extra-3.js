@@ -54,7 +54,8 @@ function useToggle({
   reducer = toggleReducer,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [{on}, dispatch] = useReducerWithValidation(reducer, initialState)
+  const [state, dispatch] = useReducerWithValidation(reducer, initialState)
+  const {on} = state
 
   function toggle() {
     const newOn = !on

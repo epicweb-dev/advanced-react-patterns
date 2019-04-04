@@ -16,7 +16,8 @@ function toggleReducer(state, {type}) {
 }
 
 function useToggle({onToggle = noop} = {}) {
-  const [{on}, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
 
   function toggle() {
     const newOn = !on

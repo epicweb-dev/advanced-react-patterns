@@ -46,7 +46,8 @@ function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
   // 🐨 instead of passing `toggleReducer` here, pass the `reducer` that's
   // provided as an option
   // ... and that's it! Don't forget to check the 💯 extra credit below!
-  const [{on}, dispatch] = React.useReducer(toggleReducer, initialState)
+  const [state, dispatch] = React.useReducer(toggleReducer, initialState)
+  const {on} = state
 
   function toggle() {
     const newOn = !on

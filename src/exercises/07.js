@@ -24,7 +24,8 @@ function toggleReducer(state, {type}) {
 function useToggle({onToggle = noop} = {}) {
   // 🐨 create an initialState object with an on property that's set to the
   // value of `initialOn` and pass that to useReducer as the initial value
-  const [{on}, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
 
   function toggle() {
     const newOn = !on
