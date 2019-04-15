@@ -41,6 +41,7 @@ function Toggle({onToggle}) {
 
   // 🐨 replace this with a call to React.Children.map and map each child to
   // a clone of that child with the props they need using React.cloneElement
+  // 💰 React.Children.map(children, child => {/* return child clone here */})
   // 📜 https://reactjs.org/docs/react-api.html#reactchildren
   // 📜 https://reactjs.org/docs/react-api.html#cloneelement
   return <Switch on={on} onClick={toggle} />

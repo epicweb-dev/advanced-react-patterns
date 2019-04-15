@@ -16,10 +16,9 @@ test('can also toggle with the custom button', () => {
   expect(toggleButton).toBeOff()
   fireEvent.click(getByLabelText('custom-button'))
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([
-    ['onButtonClick'],
-    ['onToggle', true],
-  ])
+  expect(console.info).toHaveBeenCalledTimes(2)
+  expect(console.info).toHaveBeenCalledWith('onButtonClick')
+  expect(console.info).toHaveBeenCalledWith('onToggle', true)
 })
 
 test('passes custom props to the custom-button', () => {
@@ -30,10 +29,9 @@ test('passes custom props to the custom-button', () => {
   fireEvent.click(customButton)
 
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([
-    ['onButtonClick'],
-    ['onToggle', true],
-  ])
+  expect(console.info).toHaveBeenCalledTimes(2)
+  expect(console.info).toHaveBeenCalledWith('onButtonClick')
+  expect(console.info).toHaveBeenCalledWith('onToggle', true)
 })
 
 //////// Elaboration & Feedback /////////
