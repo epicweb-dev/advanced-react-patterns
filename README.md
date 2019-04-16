@@ -154,8 +154,6 @@ at kent@doddsfamily.us
 [license]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
-[donate]: http://kcd.im/donate
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
 [github-watch-badge]: https://img.shields.io/github/watchers/kentcdodds/advanced-react-patterns.svg?style=social
