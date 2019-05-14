@@ -1,43 +1,60 @@
-// custom hooks
-// with useReducer
+// Flexible Compound Components with context (extra credit 1)
+// This adds validation to the consumer
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const noop = () => {}
-
-function toggleReducer(state, {type}) {
-  switch (type) {
-    case 'toggle': {
-      return {on: !state.on}
-    }
-    default: {
-      throw new Error(`Unsupported type: ${type}`)
-    }
+const ToggleContext = React.createContext()
+function useToggle() {
+  const context = React.useContext(ToggleContext)
+  if (!context) {
+    throw new Error(
+      `Toggle compound components cannot be rendered outside the Toggle component`,
+    )
   }
+  return context
 }
 
-function useToggle({onToggle = noop} = {}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-  const {on} = state
+function Toggle({onToggle, ...rest}) {
+  const [on, setOn] = React.useState(false)
 
   function toggle() {
     const newOn = !on
-    dispatch({type: 'toggle'})
+    setOn(newOn)
     onToggle(newOn)
   }
 
-  return [on, toggle]
+  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
 }
 
-function Toggle({onToggle}) {
-  const [on, toggle] = useToggle({onToggle})
-  return <Switch on={on} onClick={toggle} />
+Toggle.On = function On({children}) {
+  const {on} = useToggle()
+  return on ? children : null
+}
+
+Toggle.Off = function Off({children}) {
+  const {on} = useToggle()
+  return on ? null : children
+}
+
+Toggle.Button = function Button({...props}) {
+  const {on, toggle} = useToggle()
+  return <Switch on={on} onClick={toggle} {...props} />
 }
 
 function Usage() {
-  return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
+  return (
+    <div>
+      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+        <Toggle.On>The button is on</Toggle.On>
+        <Toggle.Off>The button is off</Toggle.Off>
+        <div>
+          <Toggle.Button />
+        </div>
+      </Toggle>
+    </div>
+  )
 }
-Usage.title = 'Custom hooks'
+Usage.title = 'Flexible Compound Components'
 
 export default Usage
