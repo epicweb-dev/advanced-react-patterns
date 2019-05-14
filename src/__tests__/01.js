@@ -18,7 +18,7 @@ test('renders a toggle component', () => {
 // 3. Change submitted from `false` to `true`
 // 4. And you're all done!
 /*
-http://ws.kcd.im/?ws=react%20hooks%20patterns&e=01&em=
+http://ws.kcd.im/?ws=react%20hooks%20patterns&e=01&em=q%40q.nl
 */
 test.skip('I submitted my elaboration and feedback', () => {
   const submitted = false // change this when you've submitted!
