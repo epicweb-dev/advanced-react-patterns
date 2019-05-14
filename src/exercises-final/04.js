@@ -1,14 +1,11 @@
-// Flexible Compound Components with context
+// build a basic toggle component
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const ToggleContext = React.createContext()
-function useToggle() {
-  return React.useContext(ToggleContext)
-}
+const noop = () => {}
 
-function Toggle({onToggle, ...rest}) {
+function useToggle({onToggle = noop}) {
   const [on, setOn] = React.useState(false)
 
   function toggle() {
@@ -17,37 +14,17 @@ function Toggle({onToggle, ...rest}) {
     onToggle(newOn)
   }
 
-  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
+  return [on, toggle]
 }
 
-Toggle.On = function On({children}) {
-  const {on} = useToggle()
-  return on ? children : null
-}
-
-Toggle.Off = function Off({children}) {
-  const {on} = useToggle()
-  return on ? null : children
-}
-
-Toggle.Button = function Button({...props}) {
-  const {on, toggle} = useToggle()
-  return <Switch on={on} onClick={toggle} {...props} />
+function Toggle({onToggle}) {
+  const [on, toggle] = useToggle({onToggle})
+  return <Switch on={on} onClick={toggle} />
 }
 
 function Usage() {
-  return (
-    <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
-        <Toggle.On>The button is on</Toggle.On>
-        <Toggle.Off>The button is off</Toggle.Off>
-        <div>
-          <Toggle.Button />
-        </div>
-      </Toggle>
-    </div>
-  )
+  return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
 }
-Usage.title = 'Flexible Compound Components'
+Usage.title = 'Custom hooks'
 
 export default Usage

@@ -7,12 +7,14 @@ import mockApi from '../mockApi';
 const noop = () => {}
 
 function useToggle({onToggle = noop}) {
-  const [on, setOn] = React.useState(false)
+  const [on, setOn] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     mockApi()
       .then((data) => {
-        setOn(data)
+        setOn(data);
+        setLoading(false);
       });
   }, []);
 
@@ -22,12 +24,15 @@ function useToggle({onToggle = noop}) {
     onToggle(newOn)
   }
 
-  return [on, toggle]
+  return {
+    loading,
+    toggle: [on, toggle],
+  };
 }
 
 function Toggle({onToggle}) {
-  const [on, toggle] = useToggle({onToggle})
-  return <Switch on={on} onClick={toggle} />
+  const { loading, toggle: [on, setOn] } = useToggle(onToggle);
+  return !loading && <Switch on={on} onClick={setOn} />
 }
 
 function Usage() {

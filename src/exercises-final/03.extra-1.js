@@ -1,20 +1,21 @@
-// Compound Components
+// Flexible Compound Components with context (extra credit 1)
+// This adds validation to the consumer
 
 import React from 'react'
 import {Switch} from '../switch'
 
-function isCompoundComponent(child) {
-  for (const property in Toggle) {
-    if (Toggle.hasOwnProperty(property)) {
-      if (child.type === Toggle[property]) {
-        return true
-      }
-    }
+const ToggleContext = React.createContext()
+function useToggle() {
+  const context = React.useContext(ToggleContext)
+  if (!context) {
+    throw new Error(
+      `Toggle compound components cannot be rendered outside the Toggle component`,
+    )
   }
-  return false
+  return context
 }
 
-function Toggle({onToggle, children}) {
+function Toggle({onToggle, ...rest}) {
   const [on, setOn] = React.useState(false)
 
   function toggle() {
@@ -23,22 +24,21 @@ function Toggle({onToggle, children}) {
     onToggle(newOn)
   }
 
-  return React.Children.map(children, child => {
-    return isCompoundComponent(child)
-      ? React.cloneElement(child, {on, toggle})
-      : child
-  })
+  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
 }
 
-Toggle.On = function On({on, children}) {
+Toggle.On = function On({children}) {
+  const {on} = useToggle()
   return on ? children : null
 }
 
-Toggle.Off = function Off({on, children}) {
+Toggle.Off = function Off({children}) {
+  const {on} = useToggle()
   return on ? null : children
 }
 
-Toggle.Button = function Button({on, toggle, ...props}) {
+Toggle.Button = function Button({...props}) {
+  const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
@@ -48,12 +48,13 @@ function Usage() {
       <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
-        <span>Hello</span>
-        <Toggle.Button />
+        <div>
+          <Toggle.Button />
+        </div>
       </Toggle>
     </div>
   )
 }
-Usage.title = 'Compound Components'
+Usage.title = 'Flexible Compound Components'
 
 export default Usage

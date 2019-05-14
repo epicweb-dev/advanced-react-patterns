@@ -1,36 +1,53 @@
-// Compound Components
+// Flexible Compound Components with context
+
 import React from 'react'
 import {Switch} from '../switch'
 
-// Compound components are components that work together to form a complete UI.
-// The classic example of this is <select> and <option> in HTML:
+// Right now our component can only clone and pass props to immediate children.
+// So we need some way for our compound components to implicitly accept the on
+// state and toggle method regardless of where they're rendered within the
+// Toggle component's "posterity" :)
 //
-// <select>
-//   <option value="1">Option 1</option>
-//   <option value="2">Option 2</option>
-// </select>
+// The way we do this is through context. React.createContext is the API we
+// want. Here's a simple example of that API:
 //
-// the <select> is the element responsible for managing the state of the UI, and
-// the <option> elements are essentially more configuration for how the select
-// should operate (specifically, which options are available and their values).
+// const defaultValue = 'light'
+// const ThemeContext = React.createContext(defaultValue)
+//   Note: The `defaultValue` can be an object, function, or anything.
+//   It's simply what React will use if the useContext(ThemeContext) is used
+//   outside a ThemeContext.Provider
+//   In our situation, it wouldn't make sense to useContext(ThemeContext)
+//   outside a Provider, so you don't have to specify a defaultValue. One of the
+//   extra credit items shows how to throw a helpful error message if someone
+//   attempts to render a Consumer without a Provider.
 //
-// In this example, people want to use the Toggle the same way they can use a
-// select. We have a Toggle component that manages the state, and we want to
-// render different parts of the UI however we want. We want control over the
-// presentation of the UI.
+// ...
+// <ThemeContext.Provider value={{on, toggle}}>
+//   {children}
+// </ThemeContext.Provider>
+// ...
+//
+// ...
+// const contextValue = React.useContext(ThemeContext)
+// return <div>The current theme is: {contextValue}</div>
+// ...
 
-// 🦉 The fundamental challenge you face with an API like this is the state
-// shared between the components is implicit, meaning that the developer using
-// your component cannot actually see or interact with the state (`on`) or the
-// mechanisms for updating that state (`toggle`) that are being shared between
-// the components.
-// So in this exercise, we'll solve that problem by providing the compound
-// components with the props they need implicitely using React.cloneElement.
+// 🐨 create your ToggleContext context here
+// 📜 https://reactjs.org/docs/context.html#reactcreatecontext
 
-// Since we're no longer responsible for rendering the switch ourselves,
-// we'll need to accept a `children` prop and render that instead.
-// 🐨 add `children` to the props destructuring here
-function Toggle({onToggle}) {
+// 🐨 remove this, you wont need it anymore! 💣
+function componentHasChild(child) {
+  for (const property in Toggle) {
+    if (Toggle.hasOwnProperty(property)) {
+      if (child.type === Toggle[property]) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function Toggle({onToggle, children}) {
   const [on, setOn] = React.useState(false)
 
   function toggle() {
@@ -39,26 +56,38 @@ function Toggle({onToggle}) {
     onToggle(newOn)
   }
 
-  // 🐨 replace this with a call to React.Children.map and map each child to
-  // a clone of that child with the props they need using React.cloneElement
-  // 📜 https://reactjs.org/docs/react-api.html#reactchildren
-  // 📜 https://reactjs.org/docs/react-api.html#cloneelement
-  return <Switch on={on} onClick={toggle} />
+  // 🐨 remove all this 💣 and instead return <ToggleContext.Provider> where
+  // the value is an object that has `on` and `toggle` on it.
+  return React.Children.map(children, child => {
+    return componentHasChild(child)
+      ? React.cloneElement(child, {on, toggle})
+      : child
+  })
 }
 
-// 🐨 add a property on Toggle for On, Off, and Button:
+// 🐨 we'll still get the children from props (as it's passed to us by the
+// developers using our component), but we'll get `on` implicitely from
+// ToggleContext now
+// 💰 `const context = useContext(ToggleContext)`
+// 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
+Toggle.On = function On({on, children}) {
+  return on ? children : null
+}
 
-// Accepts `on` and `children` props and returns `children` if `on` is true
-Toggle.On = () => null
+// 🐨 do the same thing to this that you did to the On component
+Toggle.Off = function Off({on, children}) {
+  return on ? null : children
+}
 
-// Accepts `on` and `children` props and returns `children` if `on` is false
-Toggle.Off = () => null
+// 🐨 get `on` and `toggle` from the ToggleContext with `useContext`
+Toggle.Button = function Button({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
+}
 
-// Accepts `on` and `toggle` props and returns the <Switch /> with those props.
-Toggle.Button = () => null
-
-// 💯 Support rendering non-Toggle components within Toggle without incurring warnings in the console.
-// for example, try to render a <span>Hello</span> inside <Toggle />
+// 💯 Comment out the Usage function below, and use this one instead:
+// const Usage = () => <Toggle.Button />
+// Why doesn't that work? Can you figure out a way to give the developer a
+// better error message?
 
 ////////////////////////////////////////////////////////////////////
 //                                                                //
@@ -73,11 +102,13 @@ function Usage() {
       <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
-        <Toggle.Button />
+        <div>
+          <Toggle.Button />
+        </div>
       </Toggle>
     </div>
   )
 }
-Usage.title = 'Compound Components'
+Usage.title = 'Flexible Compound Components'
 
 export default Usage
