@@ -29,7 +29,7 @@ test('can reset the state of the toggle', () => {
 // 3. Change submitted from `false` to `true`
 // 4. And you're all done!
 /*
-http://ws.kcd.im/?ws=react%20hooks%20patterns&e=07&em=q%40q.nl
+http://ws.kcd.im/?ws=react%20hooks%20patterns&e=07&em=
 */
 test.skip('I submitted my elaboration and feedback', () => {
   const submitted = false // change this when you've submitted!
