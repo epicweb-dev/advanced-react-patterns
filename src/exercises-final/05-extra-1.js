@@ -16,7 +16,7 @@ function useToggle({onToggle = noop}) {
         setOn(data);
         setLoading(false);
       });
-  }, [loading]);
+  }, []);
 
   function toggle() {
     const newOn = !on

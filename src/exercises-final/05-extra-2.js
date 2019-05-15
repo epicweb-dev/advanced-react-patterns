@@ -21,7 +21,7 @@ function useToggle({onToggle = noop}) {
         setError(error);
         setLoading(false);
       });
-  }, [loading, error]);
+  }, []);
 
   function toggle() {
     const newOn = !on
