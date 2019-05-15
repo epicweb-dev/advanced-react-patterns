@@ -1,13 +1,19 @@
-// prop getters
-
+// prop collections
 import React from 'react'
 import {Switch} from '../switch'
 
-// Uh oh! Someone wants to use our togglerProps object, but they need to apply
-// their own `onClick` handler.
+// In typical UI components, you need to take accessibility into account. For
+// a button functioning as a toggle, it should have the `aria-pressed` attribute
+// set to `true` or `false` if it's toggled on or off.
+// In addition to remembering that, people need to remember to also add the
+// `onClick` handler.
+//
+// In our simple example, this isn't too much for folks to remember, but in more
+// complex components, the list of props that need to be applied to elements
+// can be extensive, so it can be a good idea to take the common use cases for
+// our hook and/or components and make objects of props that people can simply
+// spread across the UI they render.
 
-// 💰 You're gonna need this (I'll explain what it does later):
-// const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const noop = () => {}
 
 function toggleReducer(state, {type}) {
@@ -31,25 +37,11 @@ function useToggle({onToggle = noop} = {}) {
     onToggle(newOn)
   }
 
-  function getTogglerProps() {
-    // 🐨 this function should return an object with the same properties as the
-    // togglerProps object, except it should also accept a "props" object and
-    // merge the two together.
-    // 🦉 The trick here is you need to merge the onClick you're passed with
-    // the one we need applied.
-    // 💰 onClick: callAll(props.onClick, toggle)
-  }
-
-  return {
-    on,
-    toggle,
-    // 🐨 you can get rid of togglerProps. We'll just use the prop getter.
-    togglerProps: {
-      'aria-pressed': on,
-      onClick: toggle,
-    },
-    getTogglerProps,
-  }
+  // 🐨 instead of returning an array here, let's return an object that has
+  // the following properties: `on`, `toggle`, and `togglerProps`.
+  // 🐨 togglerProps should be an object that has `aria-pressed` and `onClick` properties:
+  // 💰 {'aria-pressed': on, onClick: toggle}
+  return [on, toggle]
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -60,25 +52,19 @@ function useToggle({onToggle = noop} = {}) {
 ////////////////////////////////////////////////////////////////////
 
 function Usage() {
-  const {on, getTogglerProps} = useToggle({
+  const {on, togglerProps} = useToggle({
     onToggle: (...args) => console.info('onToggle', ...args),
   })
   return (
     <div>
-      <Switch {...getTogglerProps({on})} />
+      <Switch on={on} {...togglerProps} />
       <hr />
-      <button
-        {...getTogglerProps({
-          'aria-label': 'custom-button',
-          onClick: () => console.info('onButtonClick'),
-          id: 'custom-button-id',
-        })}
-      >
+      <button aria-label="custom-button" {...togglerProps}>
         {on ? 'on' : 'off'}
       </button>
     </div>
   )
 }
-Usage.title = 'Prop Getters'
+Usage.title = 'Prop Collections'
 
 export default Usage

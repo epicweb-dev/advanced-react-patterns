@@ -1,9 +1,7 @@
-// prop getters
-
+// prop collections
 import React from 'react'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const noop = () => {}
 
 function toggleReducer(state, {type}) {
@@ -27,41 +25,30 @@ function useToggle({onToggle = noop} = {}) {
     onToggle(newOn)
   }
 
-  function getTogglerProps({onClick, ...props} = {}) {
-    return {
-      'aria-pressed': on,
-      onClick: callAll(onClick, toggle),
-      ...props,
-    }
-  }
-
   return {
     on,
     toggle,
-    getTogglerProps,
+    togglerProps: {
+      'aria-pressed': on,
+      onClick: toggle,
+    },
   }
 }
 
 function Usage() {
-  const {on, getTogglerProps} = useToggle({
+  const {on, togglerProps} = useToggle({
     onToggle: (...args) => console.info('onToggle', ...args),
   })
   return (
     <div>
-      <Switch {...getTogglerProps({on})} />
+      <Switch on={on} {...togglerProps} />
       <hr />
-      <button
-        {...getTogglerProps({
-          'aria-label': 'custom-button',
-          onClick: () => console.info('onButtonClick'),
-          id: 'custom-button-id',
-        })}
-      >
+      <button aria-label="custom-button" {...togglerProps}>
         {on ? 'on' : 'off'}
       </button>
     </div>
   )
 }
-Usage.title = 'Prop Getters'
+Usage.title = 'Prop Collections'
 
 export default Usage
