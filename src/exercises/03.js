@@ -1,4 +1,4 @@
-// Flexible Compound Components with context
+// Flexible Compound Components
 
 import React from 'react'
 import {Switch} from '../switch'
@@ -88,6 +88,12 @@ Toggle.Button = function Button({on, toggle, ...props}) {
 // const Usage = () => <Toggle.Button />
 // Why doesn't that work? Can you figure out a way to give the developer a
 // better error message?
+
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=advanced%20react%20patterns&e=03%20Flexible%20Compound%20Components&em=
+*/
 
 ////////////////////////////////////////////////////////////////////
 //                                                                //

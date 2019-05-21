@@ -9,11 +9,9 @@ const extensions = {
       return {
         message: () =>
           [
-            `${matcherHint(
-              '.not.toBeOn',
-              'received',
-              '',
-            )} ${chalk.dim('// it is not checked')}`,
+            `${matcherHint('.not.toBeOn', 'received', '')} ${chalk.dim(
+              '// it is not checked',
+            )}`,
             `Expected the given element to not to be checked.`,
             '',
             `Because of this, ${chalk.bold(
@@ -48,11 +46,9 @@ const extensions = {
       return {
         message: () =>
           [
-            `${matcherHint(
-              '.not.toBeOff',
-              'received',
-              '',
-            )} ${chalk.dim('// it is checked')}`,
+            `${matcherHint('.not.toBeOff', 'received', '')} ${chalk.dim(
+              '// it is checked',
+            )}`,
             `Expected the given element to not be checked.`,
             '',
             `Because of this, ${chalk.bold(

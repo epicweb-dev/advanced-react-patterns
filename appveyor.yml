@@ -1,6 +1,6 @@
 environment:
   matrix:
-    - node_version: "8"
+    - node_version: 'stable'
 
 branches:
   only:
@@ -10,7 +10,6 @@ install:
   - ps: Install-Product node $env:node_version
 
 test_script:
-  - node ./scripts/make-appveyor-work.js
   - npm run setup
 
 cache:

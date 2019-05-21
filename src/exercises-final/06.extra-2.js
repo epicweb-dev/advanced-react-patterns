@@ -1,11 +1,10 @@
 // state reducer
+// 💯 state reducer action types
 
 import React from 'react'
-import warning from 'fbjs/lib/warning'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
-const noop = () => {}
 
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
@@ -21,51 +20,17 @@ function toggleReducer(state, {type, initialState}) {
   }
 }
 
-function useReducerWithValidation(reducer, initialState, initializer = v => v) {
-  const initialStateKeys = React.useState(
-    () => Object.keys(initializer(initialState)),
-    [],
-  )[0]
-
-  function validationReducer(state, action) {
-    const newState = reducer(state, action)
-    const extraKeys = Object.keys(newState).filter(
-      key => !initialStateKeys.includes(key),
-    )
-    warning(
-      !extraKeys.length,
-      `Warning! The following keys were unexpectedly added to the reducer's state: ${extraKeys.join(
-        ', ',
-      )}`,
-    )
-    return newState
-  }
-  return React.useReducer(
-    process.env.NODE_ENV === 'production' ? reducer : validationReducer,
-    initialState,
-    initializer,
-  )
-}
-
-function useToggle({
-  onToggle = noop,
-  onReset = noop,
-  initialOn = false,
-  reducer = toggleReducer,
-} = {}) {
+function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  const [state, dispatch] = useReducerWithValidation(reducer, initialState)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
   const {on} = state
 
   function toggle() {
-    const newOn = !on
-    dispatch({type: useToggle.types.toggle})
-    onToggle(newOn)
+    dispatch({type: 'toggle'})
   }
 
   function reset() {
-    dispatch({type: useToggle.types.reset, initialState})
-    onReset(initialOn)
+    dispatch({type: 'reset', initialState})
   }
 
   function getTogglerProps({onClick, ...props} = {}) {
@@ -76,11 +41,19 @@ function useToggle({
     }
   }
 
+  function getResetterProps({onClick, ...props} = {}) {
+    return {
+      onClick: callAll(onClick, reset),
+      ...props,
+    }
+  }
+
   return {
     on,
     reset,
     toggle,
     getTogglerProps,
+    getResetterProps,
   }
 }
 useToggle.reducer = toggleReducer
@@ -91,34 +64,29 @@ useToggle.types = {
 
 function Usage() {
   const [timesClicked, setTimesClicked] = React.useState(0)
+  const clickedTooMuch = timesClicked >= 4
 
   function toggleStateReducer(state, action) {
     if (action.type === useToggle.types.toggle && timesClicked >= 4) {
-      return {on: state.on, foo: 'bar'}
+      return {on: state.on}
     }
     return useToggle.reducer(state, action)
   }
 
-  const {on, getTogglerProps, reset} = useToggle({
+  const {on, getTogglerProps, getResetterProps} = useToggle({
     reducer: toggleStateReducer,
-    onToggle: (...args) => {
-      setTimesClicked(clicks => clicks + 1)
-      console.info('onToggle', ...args)
-    },
-    onReset: (...args) => {
-      setTimesClicked(0)
-      console.info('onReset', ...args)
-    },
   })
 
   return (
     <div>
       <Switch
         {...getTogglerProps({
+          disabled: clickedTooMuch,
           on: on,
+          onClick: () => setTimesClicked(count => count + 1),
         })}
       />
-      {timesClicked >= 4 ? (
+      {clickedTooMuch ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />
@@ -126,10 +94,12 @@ function Usage() {
       ) : timesClicked > 0 ? (
         <div data-testid="click-count">Click count: {timesClicked}</div>
       ) : null}
-      <button onClick={reset}>Reset</button>
+      <button {...getResetterProps({onClick: () => setTimesClicked(0)})}>
+        Reset
+      </button>
     </div>
   )
 }
-Usage.title = 'State Reducers with types'
+Usage.title = 'State Reducers'
 
 export default Usage

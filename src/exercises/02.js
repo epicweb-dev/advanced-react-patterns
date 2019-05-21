@@ -2,31 +2,6 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-// Compound components are components that work together to form a complete UI.
-// The classic example of this is <select> and <option> in HTML:
-//
-// <select>
-//   <option value="1">Option 1</option>
-//   <option value="2">Option 2</option>
-// </select>
-//
-// the <select> is the element responsible for managing the state of the UI, and
-// the <option> elements are essentially more configuration for how the select
-// should operate (specifically, which options are available and their values).
-//
-// In this example, people want to use the Toggle the same way they can use a
-// select. We have a Toggle component that manages the state, and we want to
-// render different parts of the UI however we want. We want control over the
-// presentation of the UI.
-
-// 🦉 The fundamental challenge you face with an API like this is the state
-// shared between the components is implicit, meaning that the developer using
-// your component cannot actually see or interact with the state (`on`) or the
-// mechanisms for updating that state (`toggle`) that are being shared between
-// the components.
-// So in this exercise, we'll solve that problem by providing the compound
-// components with the props they need implicitely using React.cloneElement.
-
 // Since we're no longer responsible for rendering the switch ourselves,
 // we'll need to accept a `children` prop and render that instead.
 // 🐨 add `children` to the props destructuring here
@@ -58,8 +33,11 @@ Toggle.Off = () => null
 // Accepts `on` and `toggle` props and returns the <Switch /> with those props.
 Toggle.Button = () => null
 
-// 💯 Support rendering non-Toggle components within Toggle without incurring warnings in the console.
-// for example, try to render a <span>Hello</span> inside <Toggle />
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=advanced%20react%20patterns&e=02%20Compound%20Components&em=
+*/
 
 ////////////////////////////////////////////////////////////////////
 //                                                                //

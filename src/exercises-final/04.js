@@ -1,29 +1,37 @@
-// build a basic toggle component
+// Custom hooks
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const noop = () => {}
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
+  }
+}
 
-function useToggle({onToggle = noop}) {
-  const [on, setOn] = React.useState(false)
+function useToggle() {
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
 
   function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
+    dispatch({type: 'TOGGLE'})
   }
 
   return [on, toggle]
 }
 
-function Toggle({onToggle}) {
-  const [on, toggle] = useToggle({onToggle})
+function Toggle() {
+  const [on, toggle] = useToggle()
   return <Switch on={on} onClick={toggle} />
 }
 
 function Usage() {
-  return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
+  return <Toggle />
 }
 Usage.title = 'Custom hooks'
 

@@ -1,28 +1,25 @@
 // prop collections
+
 import React from 'react'
 import {Switch} from '../switch'
 
-const noop = () => {}
-
-function toggleReducer(state, {type}) {
-  switch (type) {
-    case 'toggle': {
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
       return {on: !state.on}
     }
     default: {
-      throw new Error(`Unsupported type: ${type}`)
+      throw new Error(`Unhandled action type: ${action.type}`)
     }
   }
 }
 
-function useToggle({onToggle = noop} = {}) {
+function useToggle() {
   const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
   const {on} = state
 
   function toggle() {
-    const newOn = !on
-    dispatch({type: 'toggle'})
-    onToggle(newOn)
+    dispatch({type: 'TOGGLE'})
   }
 
   return {
@@ -36,9 +33,7 @@ function useToggle({onToggle = noop} = {}) {
 }
 
 function Usage() {
-  const {on, togglerProps} = useToggle({
-    onToggle: (...args) => console.info('onToggle', ...args),
-  })
+  const {on, togglerProps} = useToggle()
   return (
     <div>
       <Switch on={on} {...togglerProps} />

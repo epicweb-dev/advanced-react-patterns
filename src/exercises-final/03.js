@@ -4,20 +4,33 @@ import React from 'react'
 import {Switch} from '../switch'
 
 const ToggleContext = React.createContext()
-function useToggle() {
-  return React.useContext(ToggleContext)
+
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
+  }
 }
 
-function Toggle({onToggle, ...rest}) {
-  const [on, setOn] = React.useState(false)
-
+function Toggle({children}) {
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
   function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
+    dispatch({type: 'TOGGLE'})
   }
 
-  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
+  return (
+    <ToggleContext.Provider value={{...state, toggle}}>
+      {children}
+    </ToggleContext.Provider>
+  )
+}
+
+function useToggle() {
+  return React.useContext(ToggleContext)
 }
 
 Toggle.On = function On({children}) {
@@ -38,7 +51,7 @@ Toggle.Button = function Button({...props}) {
 function Usage() {
   return (
     <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+      <Toggle>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
         <div>

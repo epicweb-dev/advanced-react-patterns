@@ -4,7 +4,7 @@ const inquirer = require('inquirer')
 const replace = require('replace-in-file')
 const isCI = require('is-ci')
 const spawn = require('cross-spawn')
-const { EOL } = require('os')
+const {EOL} = require('os')
 
 if (isCI) {
   console.log(`Not running autofill feedback as we're on CI`)

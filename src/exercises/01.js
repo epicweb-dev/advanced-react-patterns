@@ -1,4 +1,4 @@
-// build a basic toggle component
+// Primer: Build Toggle
 
 import React from 'react'
 // 🐨 uncomment this import to get the switch component.
@@ -17,6 +17,12 @@ function Toggle({onToggle}) {
   return 'todo'
 }
 
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=advanced%20react%20patterns&e=01%20Build%20Toggle&em=
+*/
+
 ////////////////////////////////////////////////////////////////////
 //                                                                //
 //                 Don't make changes below here.                 //
@@ -27,6 +33,6 @@ function Toggle({onToggle}) {
 function Usage() {
   return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
 }
-Usage.title = 'Build Toggle'
+Usage.title = 'Primer: Build Toggle'
 
 export default Usage

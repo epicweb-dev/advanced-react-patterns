@@ -1,51 +1,65 @@
-// Flexible Compound Components with context (extra credit 1)
-// This adds validation to the consumer
+// Flexible Compound Components with context
+// 💯 Avoid unnecessary re-renders
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const ToggleContext = React.createContext()
-function useToggle() {
-  const context = React.useContext(ToggleContext)
-  if (!context) {
-    throw new Error(
-      `Toggle compound components cannot be rendered outside the Toggle component`,
-    )
+const ToggleStateContext = React.createContext()
+const ToggleDispatchContext = React.createContext()
+
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
   }
-  return context
 }
 
-function Toggle({onToggle, ...rest}) {
-  const [on, setOn] = React.useState(false)
+function Toggle({children}) {
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
 
-  function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
-  }
+  return (
+    <ToggleStateContext.Provider value={state}>
+      <ToggleDispatchContext.Provider value={dispatch}>
+        {children}
+      </ToggleDispatchContext.Provider>
+    </ToggleStateContext.Provider>
+  )
+}
 
-  return <ToggleContext.Provider value={{on: on, toggle: toggle}} {...rest} />
+function useToggleState() {
+  return React.useContext(ToggleStateContext)
+}
+
+function useToggleDispatch() {
+  return React.useContext(ToggleDispatchContext)
 }
 
 Toggle.On = function On({children}) {
-  const {on} = useToggle()
+  const {on} = useToggleState()
   return on ? children : null
 }
 
 Toggle.Off = function Off({children}) {
-  const {on} = useToggle()
+  const {on} = useToggleState()
   return on ? null : children
 }
 
 Toggle.Button = function Button({...props}) {
-  const {on, toggle} = useToggle()
-  return <Switch on={on} onClick={toggle} {...props} />
+  const {on} = useToggleState()
+  const dispatch = useToggleDispatch()
+  return (
+    <Switch on={on} onClick={() => dispatch({type: 'TOGGLE'})} {...props} />
+  )
 }
 
 function Usage() {
   return (
     <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+      <Toggle>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
         <div>

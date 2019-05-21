@@ -21,8 +21,8 @@ by Mauricio Allende (https://mallendeo.com/)
 .toggle-input:focus + .toggle-btn::after,
 .toggle-btn:active::after {
   box-sizing: initial;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1),
-    0 4px 0 rgba(0, 0, 0, 0.08), inset 0px 0px 0px 3px #9c9c9c;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08),
+    inset 0px 0px 0px 3px #9c9c9c;
 }
 .toggle-btn::after {
   left: 0;
@@ -35,8 +35,7 @@ by Mauricio Allende (https://mallendeo.com/)
   background: #fbfbfb;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     padding 0.3s ease, margin 0.3s ease;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1),
-    0 4px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
 }
 .toggle-btn.toggle-btn-on::after {
   left: 50%;
@@ -52,6 +51,10 @@ by Mauricio Allende (https://mallendeo.com/)
 }
 .toggle-btn:active::after {
   padding-right: 1.6em;
+}
+.toggle-btn[disabled] {
+  opacity: 0.7;
+  cursor: auto;
 }
 .toggle-input {
   /* visually hidden but still accessible */

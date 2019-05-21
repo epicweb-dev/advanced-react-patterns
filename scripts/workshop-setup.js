@@ -1706,18 +1706,29 @@ function getNodeValidator(desired) {
     return null;
   }
 }
-// CONCATENATED MODULE: ./src/verify-system/exec-validator.js
-const {
-  execSync
-} = __webpack_require__(/*! child_process */ "child_process");
+// EXTERNAL MODULE: external "child_process"
+var external_child_process_ = __webpack_require__("child_process");
+var external_child_process_default = /*#__PURE__*/__webpack_require__.n(external_child_process_);
 
-const exec_validator_semver = __webpack_require__(/*! semver */ "./node_modules/semver/semver.js");
+// CONCATENATED MODULE: ./src/verify-system/exec-validator.js
+
+
 
 /* harmony default export */ var exec_validator = (execValidator);
 
 function execValidator(desired, command, message) {
-  const actual = execSync(command).toString().trim();
-  return exec_validator_semver.satisfies(actual, desired) ? null : message(actual, desired);
+  let actual = '0.0.0';
+
+  try {
+    actual = Object(external_child_process_["execSync"])(command).toString().trim();
+  } catch (error) {
+    return one_line`
+      There was an error running the command \`${command}\`:
+      ${error.message}
+    `;
+  }
+
+  return semver_default.a.satisfies(actual, desired) ? null : message(actual, desired);
 }
 // CONCATENATED MODULE: ./src/verify-system/npm.js
 
@@ -1806,10 +1817,6 @@ var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__("fs");
 var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_);
-
-// EXTERNAL MODULE: external "child_process"
-var external_child_process_ = __webpack_require__("child_process");
-var external_child_process_default = /*#__PURE__*/__webpack_require__.n(external_child_process_);
 
 // CONCATENATED MODULE: ./src/install-deps/index.js
 

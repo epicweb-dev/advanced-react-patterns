@@ -1,32 +1,32 @@
 // Compound Components
+// 💯 Support non-toggle children
 
 import React from 'react'
 import {Switch} from '../switch'
 
-function isCompoundComponent(child) {
-  for (const property in Toggle) {
-    if (Toggle.hasOwnProperty(property)) {
-      if (child.type === Toggle[property]) {
-        return true
-      }
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
     }
   }
-  return false
 }
 
 function Toggle({onToggle, children}) {
-  const [on, setOn] = React.useState(false)
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
 
   function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
+    dispatch({type: 'TOGGLE'})
   }
 
   return React.Children.map(children, child => {
-    return isCompoundComponent(child)
-      ? React.cloneElement(child, {on, toggle})
-      : child
+    return typeof child === 'string'
+      ? child
+      : React.cloneElement(child, {on, toggle})
   })
 }
 
@@ -45,7 +45,7 @@ Toggle.Button = function Button({on, toggle, ...props}) {
 function Usage() {
   return (
     <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+      <Toggle>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
         <span>Hello</span>

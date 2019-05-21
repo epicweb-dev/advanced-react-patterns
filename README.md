@@ -2,29 +2,66 @@
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com)! This is a
 workshop repo to teach you about using React Component Patterns to make your
-react components and hooks more useful and reusable without sacrificing simplicity.
+react components and hooks more useful and reusable without sacrificing
+simplicity.
 
 [![Build Status][build-badge]][build]
 [![AppVeyor Build Status][win-build-badge]][win-build]
 [![Code Coverage][coverage-badge]][coverage]
 [![GPL 3.0 License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
-[![PRs Welcome][prs-badge]][prs]
-[![Code of Conduct][coc-badge]][coc]
+[![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
+
+## Pre-Workshop Instructions/Requirements
+
+In order for us to maximize our efforts during the workshop, please do the
+following:
+
+- [ ] Setup the project (follow the setup instructions below) (~5 minutes)
+- [ ] Install and setup [Zoom](https://zoom.us) on the computer you will be
+      using (~5 minutes)
+- [ ] Watch [The Beginner's Guide to React](https://kcd.im/beginner-react)
+      (available free on Egghead.io), or have the equivalent experience (77
+      minutes)
+- [ ] Watch my talk
+      [Why React Hooks](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
+      (35 minutes)
+- [ ] Go through my
+      [Learn React Hooks Workshop](https://kentcdodds.com/workshops/hooks), or
+      have the equivalent basic experience of using hooks. You should be
+      experienced with `useState`, `useEffect`, and `useRef`.
+- [ ] Go through my
+      [Advanced React Hooks Workshop](https://kentcdodds.com/workshops/advanced-react-hooks),
+      or have the equivalent experience. You should be experienced with
+      `useContext` and `useReducer` (experience with `useMemo` and `useCallback`
+      is a bonus).
+
+The more prepared you are for the workshop, the better it will go for you.
+
+## Workshop Outline
+
+Here are the patterns we'll be covering:
+
+- Context Controller
+- Compound Components
+- State Reducers
+- Controlled Props
+- Prop Collections
+- Prop Getters
 
 ## System Requirements
 
-- [git][git] v2.14.1 or greater
-- [NodeJS][node] v8.9.4 or greater
-- [npm][npm] v5.6.0 or greater
+- [git][git] v2 or greater
+- [NodeJS][node] v8 or greater
+- [yarn][yarn] v1 or greater (or [npm][npm] v6 or greater)
 
 All of these must be available in your `PATH`. To verify things are set up
 properly, you can run this:
 
-```
+```shell
 git --version
 node --version
-npm --version
+yarn --version # or npm --version
 ```
 
 If you have trouble with any of these, learn more about the PATH environment
@@ -33,9 +70,13 @@ variable and how to fix it here for [windows][win-path] or
 
 ## Setup
 
-You may be able to work through the entire workshop in the browser. Go to
+You should be able to work through the entire workshop in the browser. This is
+actually the recommended approach as it requires absolutely no setup whatsoever.
+Go to
 [this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
 and you should be good to go.
+
+[![Edit advanced-react-patterns](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
 
 If you'd rather be able to work through the workshop on your own computer, then
 follow the following instructions.
@@ -85,9 +126,9 @@ exercise version in the import, and make the tests pass**
 
 ## Helpful Emoji 🐨 💰 💯 🦉 📜
 
-Each exercise has comments in it to help you get through the exercise.
-**Kody the Koala Bear**, **Marty the Money Bag**, **Hannah the Hundred**,
-**Olivia the Owl**, and **Dominic the Document** are here to help you.
+Each exercise has comments in it to help you get through the exercise. **Kody
+the Koala Bear**, **Marty the Money Bag**, **Hannah the Hundred**, **Olivia the
+Owl**, and **Dominic the Document** are here to help you.
 
 - **Kody** 🐨 will tell you when there's something specific you should do
 - **Marty** 💰 will give you specific tips (and sometimes code) along the way
@@ -118,15 +159,16 @@ npm run test:coverage
 ```
 
 If any of those scripts fail, please try to work out what went wrong by the
-error message you get. If you still can't work it out, feel free to
-[open an issue][issue] with _all_ the output from that script. I will try to
-help if I can.
+error message you get. If you still can't work it out, feel free to [open an
+issue][issue] with _all_ the output from that script. I will try to help if I
+can.
 
 </details>
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
@@ -136,7 +178,9 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+This project follows the
+[all-contributors](https://github.com/kentcdodds/all-contributors)
+specification. Contributions of any kind welcome!
 
 ## License
 
@@ -148,27 +192,41 @@ at kent@doddsfamily.us
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
-[build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
+[yarn]: https://yarnpkg.com/
+[build-badge]:
+  https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
 [build]: https://travis-ci.org/kentcdodds/advanced-react-patterns
-[license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[license-badge]:
+  https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
+[license]:
+  https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
+[prs-badge]:
+  https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
-[github-watch-badge]: https://img.shields.io/github/watchers/kentcdodds/advanced-react-patterns.svg?style=social
+[coc-badge]:
+  https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]:
+  https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
+[github-watch-badge]:
+  https://img.shields.io/github/watchers/kentcdodds/advanced-react-patterns.svg?style=social
 [github-watch]: https://github.com/kentcdodds/advanced-react-patterns/watchers
-[github-star-badge]: https://img.shields.io/github/stars/kentcdodds/advanced-react-patterns.svg?style=social
+[github-star-badge]:
+  https://img.shields.io/github/stars/kentcdodds/advanced-react-patterns.svg?style=social
 [github-star]: https://github.com/kentcdodds/advanced-react-patterns/stargazers
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20advanced-react-patterns%20by%20@kentcdodds%20https://github.com/kentcdodds/advanced-react-patterns%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/kentcdodds/advanced-react-patterns.svg?style=social
+[twitter]:
+  https://twitter.com/intent/tweet?text=Check%20out%20advanced-react-patterns%20by%20@kentcdodds%20https://github.com/kentcdodds/advanced-react-patterns%20%F0%9F%91%8D
+[twitter-badge]:
+  https://img.shields.io/twitter/url/https/github.com/kentcdodds/advanced-react-patterns.svg?style=social
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
-[win-path]: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
+[win-path]:
+  https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
 [mac-path]: http://stackoverflow.com/a/24322978/971592
 [issue]: https://github.com/kentcdodds/advanced-react-patterns/issues/new
-[win-build-badge]: https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
+[win-build-badge]:
+  https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
 [win-build]: https://ci.appveyor.com/project/kentcdodds/advanced-react-patterns
-[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-patterns.svg?style=flat-square
+[coverage-badge]:
+  https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-patterns.svg?style=flat-square
 [coverage]: https://codecov.io/github/kentcdodds/advanced-react-patterns
 [watchman]: https://facebook.github.io/watchman/docs/install.html

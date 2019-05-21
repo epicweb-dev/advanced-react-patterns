@@ -3,13 +3,23 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-function Toggle({onToggle, children}) {
-  const [on, setOn] = React.useState(false)
+function toggleReducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE': {
+      return {on: !state.on}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
+  }
+}
+
+function Toggle({children}) {
+  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
 
   function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
+    dispatch({type: 'TOGGLE'})
   }
 
   return React.Children.map(children, child =>
@@ -32,7 +42,7 @@ Toggle.Button = function Button({on, toggle, ...props}) {
 function Usage() {
   return (
     <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
+      <Toggle>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
         <Toggle.Button />
