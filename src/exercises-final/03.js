@@ -1,9 +1,7 @@
-// Flexible Compound Components with context
+// Compound Components
 
 import React from 'react'
 import {Switch} from '../switch'
-
-const ToggleContext = React.createContext()
 
 function toggleReducer(state, action) {
   switch (action.type) {
@@ -18,33 +16,26 @@ function toggleReducer(state, action) {
 
 function Toggle({children}) {
   const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+  const {on} = state
+
   function toggle() {
     dispatch({type: 'TOGGLE'})
   }
 
-  return (
-    <ToggleContext.Provider value={{...state, toggle}}>
-      {children}
-    </ToggleContext.Provider>
+  return React.Children.map(children, child =>
+    React.cloneElement(child, {on, toggle}),
   )
 }
 
-function useToggle() {
-  return React.useContext(ToggleContext)
-}
-
-Toggle.On = function On({children}) {
-  const {on} = useToggle()
+Toggle.On = function On({on, children}) {
   return on ? children : null
 }
 
-Toggle.Off = function Off({children}) {
-  const {on} = useToggle()
+Toggle.Off = function Off({on, children}) {
   return on ? null : children
 }
 
-Toggle.Button = function Button({...props}) {
-  const {on, toggle} = useToggle()
+Toggle.Button = function Button({on, toggle, ...props}) {
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
@@ -54,13 +45,11 @@ function Usage() {
       <Toggle>
         <Toggle.On>The button is on</Toggle.On>
         <Toggle.Off>The button is off</Toggle.Off>
-        <div>
-          <Toggle.Button />
-        </div>
+        <Toggle.Button />
       </Toggle>
     </div>
   )
 }
-Usage.title = 'Flexible Compound Components'
+Usage.title = 'Compound Components'
 
 export default Usage

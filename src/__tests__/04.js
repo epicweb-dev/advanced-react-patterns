@@ -1,5 +1,5 @@
 import React from 'react'
-import {renderToggle, render} from '../../test/utils'
+import {renderToggle} from '../../test/utils'
 import Usage from '../exercises-final/04'
 // import Usage from '../exercises/04'
 
@@ -9,29 +9,4 @@ test('renders a toggle component', () => {
   toggle()
   expect(toggleButton).toBeOn()
   expect(console.info.mock.calls).toEqual([['onToggle', true]])
-})
-
-// this test is using some serious witchcraft 🧙‍♀️
-// don't write tests like this please.
-// I'm just making sure that you're using a custom hook called useToggle
-// but your apps should not have tests like this.
-// That's an implementation detail... Read more: https://kcd.im/imp-deets
-test('using a custom hook called useToggle', () => {
-  const createElement = React.createElement
-  let toggleFn
-  React.createElement = (...args) => {
-    if (args[0] && args[0].name === 'Toggle') {
-      toggleFn = args[0]
-    }
-    return createElement(...args)
-  }
-  render(<Usage />)
-  React.createElement = createElement
-  try {
-    expect(toggleFn.toString()).toContain('useToggle')
-  } catch (error) {
-    throw new Error(
-      '🚨  The Toggle component that is rendered must call a hook called "useToggle" to get the "on" state and "toggle" functions',
-    )
-  }
 })

@@ -11,8 +11,38 @@ const UserDispatchContext = React.createContext()
 
 function userReducer(state, action) {
   switch (action.type) {
-    case 'update': {
-      return {user: action.updatedUser}
+    case 'start update': {
+      return {
+        ...state,
+        user: {...state.user, ...action.updates},
+        status: 'pending',
+        storedUser: state.user,
+      }
+    }
+    case 'finish update': {
+      return {
+        ...state,
+        user: action.updatedUser,
+        status: 'resolved',
+        storedUser: null,
+        error: null,
+      }
+    }
+    case 'fail update': {
+      return {
+        ...state,
+        status: 'rejected',
+        error: action.error,
+        user: state.storedUser,
+        storedUser: null,
+      }
+    }
+    case 'reset': {
+      return {
+        ...state,
+        status: null,
+        error: null,
+      }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -22,7 +52,12 @@ function userReducer(state, action) {
 
 function UserProvider({children}) {
   const {user} = useAuth()
-  const [state, dispatch] = React.useReducer(userReducer, {user})
+  const [state, dispatch] = React.useReducer(userReducer, {
+    status: null,
+    error: null,
+    storedUser: user,
+    user,
+  })
   return (
     <UserStateContext.Provider value={state}>
       <UserDispatchContext.Provider value={dispatch}>
@@ -51,9 +86,15 @@ function useUserDispatch(params) {
 // got this idea from Dan and I love it:
 // https://twitter.com/dan_abramov/status/1125773153584676864
 function updateUser(dispatch, user, updates) {
-  return userClient.updateUser(user, updates).then(updatedUser => {
-    dispatch({type: 'update', updatedUser})
-  })
+  dispatch({type: 'start update', updates})
+  return userClient.updateUser(user, updates).then(
+    updatedUser => {
+      dispatch({type: 'finish update', updatedUser})
+    },
+    error => {
+      dispatch({type: 'fail update', error})
+    },
+  )
 }
 
 // export {UserProvider, useUserDispatch, useUserState, updateUser}
@@ -61,14 +102,9 @@ function updateUser(dispatch, user, updates) {
 // src/screens/user-profile.js
 // import {UserProvider, useUserState, updateUser} from './context/user-context'
 function UserSettings() {
-  const {user} = useUserState()
+  const {user, status, error} = useUserState()
   const userDispatch = useUserDispatch()
 
-  const [state, dispatch] = React.useReducer((s, a) => ({...s, ...a}), {
-    status: null,
-    error: null,
-  })
-  const {error, status} = state
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
 
@@ -82,16 +118,7 @@ function UserSettings() {
 
   function handleSubmit(event) {
     event.preventDefault()
-
-    dispatch({status: 'pending'})
-    updateUser(userDispatch, user, formState).then(
-      () => {
-        dispatch({status: 'resolved'})
-      },
-      error => {
-        dispatch({status: 'rejected', error})
-      },
-    )
+    updateUser(userDispatch, user, formState)
   }
 
   return (
@@ -136,7 +163,10 @@ function UserSettings() {
       <div>
         <button
           type="button"
-          onClick={() => setFormState(user)}
+          onClick={() => {
+            setFormState(user)
+            userDispatch({type: 'reset'})
+          }}
           disabled={!isChanged}
         >
           Reset

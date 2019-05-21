@@ -1,9 +1,11 @@
 // Flexible Compound Components with context
+// 💯 Avoid unnecessary re-renders
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const ToggleContext = React.createContext()
+const ToggleStateContext = React.createContext()
+const ToggleDispatchContext = React.createContext()
 
 function toggleReducer(state, action) {
   switch (action.type) {
@@ -18,34 +20,40 @@ function toggleReducer(state, action) {
 
 function Toggle({children}) {
   const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-  function toggle() {
-    dispatch({type: 'TOGGLE'})
-  }
 
   return (
-    <ToggleContext.Provider value={{...state, toggle}}>
-      {children}
-    </ToggleContext.Provider>
+    <ToggleStateContext.Provider value={state}>
+      <ToggleDispatchContext.Provider value={dispatch}>
+        {children}
+      </ToggleDispatchContext.Provider>
+    </ToggleStateContext.Provider>
   )
 }
 
-function useToggle() {
-  return React.useContext(ToggleContext)
+function useToggleState() {
+  return React.useContext(ToggleStateContext)
+}
+
+function useToggleDispatch() {
+  return React.useContext(ToggleDispatchContext)
 }
 
 Toggle.On = function On({children}) {
-  const {on} = useToggle()
+  const {on} = useToggleState()
   return on ? children : null
 }
 
 Toggle.Off = function Off({children}) {
-  const {on} = useToggle()
+  const {on} = useToggleState()
   return on ? null : children
 }
 
 Toggle.Button = function Button({...props}) {
-  const {on, toggle} = useToggle()
-  return <Switch on={on} onClick={toggle} {...props} />
+  const {on} = useToggleState()
+  const dispatch = useToggleDispatch()
+  return (
+    <Switch on={on} onClick={() => dispatch({type: 'TOGGLE'})} {...props} />
+  )
 }
 
 function Usage() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {renderToggle, fireEvent} from '../../test/utils'
-import Usage from '../exercises-final/06'
-// import Usage from '../exercises/06'
+import Usage from '../exercises-final/06.extra-1'
+// import Usage from '../exercises/06.extra-1'
 
 test('renders a toggle component', () => {
   const {toggleButton, toggle} = renderToggle(<Usage />)
