@@ -1,14 +1,15 @@
 import React from 'react'
 import {renderToggle, fireEvent} from '../../test/utils'
-import Usage from '../exercises-final/06'
-// import Usage from '../exercises/06'
+import Usage from '../exercises-final/05'
+// import Usage from '../exercises/05'
 
 test('renders a toggle component', () => {
   const {toggleButton, toggle} = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([['onToggle', true]])
+  toggle()
+  expect(toggleButton).toBeOff()
 })
 
 test('can also toggle with the custom button', () => {
@@ -16,5 +17,4 @@ test('can also toggle with the custom button', () => {
   expect(toggleButton).toBeOff()
   fireEvent.click(getByLabelText('custom-button'))
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([['onToggle', true]])
 })

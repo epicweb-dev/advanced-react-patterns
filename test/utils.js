@@ -52,10 +52,10 @@ function renderToggle(ui) {
   const utils = render(<Root ref={rootRef}>{ui}</Root>)
   const switchInstance = findSwitchInstances(rootInstance)[0]
   validateSwitchInstance(switchInstance)
-  const toggleButton = utils.getByTestId('toggle-input')
+  const toggleButton = utils.getAllByTestId('toggle-input')[0]
 
   return {
-    toggle: () => fireEvent.click(utils.getByTestId('toggle-input')),
+    toggle: () => fireEvent.click(utils.getAllByTestId('toggle-input')[0]),
     toggleButton,
     rootInstance,
     ...utils,

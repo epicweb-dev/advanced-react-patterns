@@ -1,3 +1,6 @@
+// React Context
+// 💯 moving async logic to the helper
+
 import React from 'react'
 import dequal from 'dequal'
 
@@ -167,7 +170,7 @@ function UserSettings() {
             setFormState(user)
             userDispatch({type: 'reset'})
           }}
-          disabled={!isChanged}
+          disabled={!isChanged || isPending}
         >
           Reset
         </button>

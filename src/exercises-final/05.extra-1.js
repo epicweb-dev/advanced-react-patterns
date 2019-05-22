@@ -22,7 +22,7 @@ function useToggle() {
   const {on} = state
 
   function toggle() {
-    dispatch({type: 'TOGGLE'})
+    dispatch({type: 'toggle'})
   }
 
   function getTogglerProps({onClick, ...props} = {}) {

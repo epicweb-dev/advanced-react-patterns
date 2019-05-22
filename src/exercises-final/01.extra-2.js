@@ -1,4 +1,5 @@
-// React Context
+// Context
+// 💯 avoiding unmount issues
 
 import React from 'react'
 import dequal from 'dequal'
@@ -12,9 +13,40 @@ const UserStateContext = React.createContext()
 const UserDispatchContext = React.createContext()
 
 function userReducer(state, action) {
+  console.log(state, action)
   switch (action.type) {
-    case 'update': {
-      return {user: action.updatedUser}
+    case 'start update': {
+      return {
+        ...state,
+        user: {...state.user, ...action.updates},
+        status: 'pending',
+        storedUser: state.user,
+      }
+    }
+    case 'finish update': {
+      return {
+        ...state,
+        user: action.updatedUser,
+        status: 'resolved',
+        storedUser: null,
+        error: null,
+      }
+    }
+    case 'fail update': {
+      return {
+        ...state,
+        status: 'rejected',
+        error: action.error,
+        user: state.storedUser,
+        storedUser: null,
+      }
+    }
+    case 'reset': {
+      return {
+        ...state,
+        status: null,
+        error: null,
+      }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -24,10 +56,23 @@ function userReducer(state, action) {
 
 function UserProvider({children}) {
   const {user} = useAuth()
-  const [state, dispatch] = React.useReducer(userReducer, {user})
+  const [state, dispatch] = React.useReducer(userReducer, {
+    status: null,
+    error: null,
+    storedUser: user,
+    user,
+  })
+
+  const canDispatch = React.useRef(true)
+  React.useLayoutEffect(() => () => (canDispatch.current = false))
+  const safeDispatch = React.useCallback(
+    (...args) => canDispatch.current && dispatch(...args),
+    [],
+  )
+
   return (
     <UserStateContext.Provider value={state}>
-      <UserDispatchContext.Provider value={dispatch}>
+      <UserDispatchContext.Provider value={safeDispatch}>
         {children}
       </UserDispatchContext.Provider>
     </UserStateContext.Provider>
@@ -53,9 +98,15 @@ function useUserDispatch(params) {
 // got this idea from Dan and I love it:
 // https://twitter.com/dan_abramov/status/1125773153584676864
 function updateUser(dispatch, user, updates) {
-  return userClient.updateUser(user, updates).then(updatedUser => {
-    dispatch({type: 'update', updatedUser})
-  })
+  dispatch({type: 'start update', updates})
+  return userClient.updateUser(user, updates).then(
+    updatedUser => {
+      dispatch({type: 'finish update', updatedUser})
+    },
+    error => {
+      dispatch({type: 'fail update', error})
+    },
+  )
 }
 
 // export {UserProvider, useUserDispatch, useUserState, updateUser}
@@ -63,14 +114,9 @@ function updateUser(dispatch, user, updates) {
 // src/screens/user-profile.js
 // import {UserProvider, useUserState, updateUser} from './context/user-context'
 function UserSettings() {
-  const {user} = useUserState()
+  const {user, status, error} = useUserState()
   const userDispatch = useUserDispatch()
 
-  const [state, dispatch] = React.useReducer((s, a) => ({...s, ...a}), {
-    status: null,
-    error: null,
-  })
-  const {error, status} = state
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
 
@@ -84,16 +130,7 @@ function UserSettings() {
 
   function handleSubmit(event) {
     event.preventDefault()
-
-    dispatch({status: 'pending'})
-    updateUser(userDispatch, user, formState).then(
-      () => {
-        dispatch({status: 'resolved'})
-      },
-      error => {
-        dispatch({status: 'rejected', error})
-      },
-    )
+    updateUser(userDispatch, user, formState)
   }
 
   return (
@@ -138,8 +175,11 @@ function UserSettings() {
       <div>
         <button
           type="button"
-          onClick={() => setFormState(user)}
-          disabled={!isChanged || isPending}
+          onClick={() => {
+            setFormState(user)
+            userDispatch({type: 'reset'})
+          }}
+          disabled={!isChanged}
         >
           Reset
         </button>
@@ -167,12 +207,11 @@ function UserSettings() {
 
 function UserDataDisplay() {
   const {user} = useUserState()
-  return (
-    <pre data-testid="user-data-display">{JSON.stringify(user, null, 2)}</pre>
-  )
+  return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
 function Usage() {
+  const [showUserScreen, setShowUserScreen] = React.useState(true)
   return (
     <div
       style={{
@@ -183,10 +222,20 @@ function Usage() {
         padding: 10,
       }}
     >
-      <UserProvider>
-        <UserSettings />
-        <UserDataDisplay />
-      </UserProvider>
+      <label>
+        <input
+          type="checkbox"
+          checked={showUserScreen}
+          onChange={e => setShowUserScreen(e.target.checked)}
+        />{' '}
+        show user screen
+      </label>
+      {showUserScreen ? (
+        <UserProvider>
+          <UserSettings />
+          <UserDataDisplay />
+        </UserProvider>
+      ) : null}
     </div>
   )
 }

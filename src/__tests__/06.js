@@ -1,14 +1,15 @@
 import React from 'react'
 import {renderToggle, fireEvent} from '../../test/utils'
-import Usage from '../exercises-final/07'
-// import Usage from '../exercises/07'
+import Usage from '../exercises-final/06'
+// import Usage from '../exercises/06'
 
 test('renders a toggle component', () => {
   const {toggleButton, toggle} = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
   toggle()
   expect(toggleButton).toBeOn()
-  expect(console.info.mock.calls).toEqual([['onToggle', true]])
+  toggle()
+  expect(toggleButton).toBeOff()
 })
 
 test('can click too much', () => {
@@ -38,19 +39,8 @@ test('can click too much', () => {
   expect(toggleButton).toBeOn()
 
   expect(getByTestId('notice')).not.toBeNull()
-  expect(console.info.mock.calls).toEqual([
-    ['onToggle', true], // 1
-    ['onToggle', false], // 2
-    ['onToggle', true], // 3
-    ['onToggle', false], // 4
-    ['onToggle', false], // 5
-    ['onToggle', false], // 6
-  ])
-
-  console.info.mockClear()
 
   fireEvent.click(getByText('Reset'))
-  expect(console.info.mock.calls).toEqual([['onReset', false]])
   expect(queryByTestId('notice')).toBeNull()
 
   expect(toggleButton).toBeOff()
