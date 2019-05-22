@@ -6,7 +6,7 @@ import {Switch} from '../switch'
 
 function toggleReducer(state, action) {
   switch (action.type) {
-    case 'TOGGLE': {
+    case 'toggle': {
       return {on: !state.on}
     }
     default: {
@@ -20,7 +20,7 @@ function Toggle({onToggle, children}) {
   const {on} = state
 
   function toggle() {
-    dispatch({type: 'TOGGLE'})
+    dispatch({type: 'toggle'})
   }
 
   return React.Children.map(children, child => {

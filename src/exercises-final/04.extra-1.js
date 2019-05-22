@@ -9,7 +9,7 @@ const ToggleDispatchContext = React.createContext()
 
 function toggleReducer(state, action) {
   switch (action.type) {
-    case 'TOGGLE': {
+    case 'toggle': {
       return {on: !state.on}
     }
     default: {
@@ -52,7 +52,7 @@ Toggle.Button = function Button({...props}) {
   const {on} = useToggleState()
   const dispatch = useToggleDispatch()
   return (
-    <Switch on={on} onClick={() => dispatch({type: 'TOGGLE'})} {...props} />
+    <Switch on={on} onClick={() => dispatch({type: 'toggle'})} {...props} />
   )
 }
 

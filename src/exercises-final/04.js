@@ -7,7 +7,7 @@ const ToggleContext = React.createContext()
 
 function toggleReducer(state, action) {
   switch (action.type) {
-    case 'TOGGLE': {
+    case 'toggle': {
       return {on: !state.on}
     }
     default: {
@@ -19,7 +19,7 @@ function toggleReducer(state, action) {
 function Toggle({children}) {
   const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
   function toggle() {
-    dispatch({type: 'TOGGLE'})
+    dispatch({type: 'toggle'})
   }
 
   return (
