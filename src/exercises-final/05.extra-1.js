@@ -1,4 +1,4 @@
-// prop collections
+// Prop Collections and Getters
 // 💯 prop getters
 
 import React from 'react'
@@ -58,6 +58,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Prop Getters'
+Usage.title = 'Prop Collections and Getters'
 
 export default Usage

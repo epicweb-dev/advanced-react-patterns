@@ -1,4 +1,5 @@
-// control props
+// Control Props
+
 import React from 'react'
 import {Switch} from '../switch'
 

@@ -1,4 +1,4 @@
-// Prop Collections and Getters
+// Primer: Build Toggle
 
 import React from 'react'
 import {Switch} from '../switch'
@@ -14,7 +14,7 @@ function toggleReducer(state, action) {
   }
 }
 
-function useToggle() {
+function Toggle({children}) {
   const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
   const {on} = state
 
@@ -22,28 +22,12 @@ function useToggle() {
     dispatch({type: 'toggle'})
   }
 
-  return {
-    on,
-    toggle,
-    togglerProps: {
-      'aria-pressed': on,
-      onClick: toggle,
-    },
-  }
+  return <Switch on={on} onClick={toggle} />
 }
 
 function Usage() {
-  const {on, togglerProps} = useToggle()
-  return (
-    <div>
-      <Switch on={on} {...togglerProps} />
-      <hr />
-      <button aria-label="custom-button" {...togglerProps}>
-        {on ? 'on' : 'off'}
-      </button>
-    </div>
-  )
+  return <Toggle />
 }
-Usage.title = 'Prop Collections and Getters'
+Usage.title = 'Primer: Build Toggle'
 
 export default Usage

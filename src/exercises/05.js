@@ -1,4 +1,5 @@
-// prop collections
+// Prop Collections and Getters
+
 import React from 'react'
 import {Switch} from '../switch'
 
@@ -65,6 +66,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Prop Collections'
+Usage.title = 'Prop Collections and Getters'
 
 export default Usage

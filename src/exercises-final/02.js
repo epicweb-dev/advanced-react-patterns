@@ -3,23 +3,11 @@
 import React from 'react'
 import {Switch} from '../switch'
 
-function toggleReducer(state, action) {
-  switch (action.type) {
-    case 'toggle': {
-      return {on: !state.on}
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
-  }
-}
-
 function Toggle({children}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-  const {on} = state
+  const [on, setOn] = React.useState(false)
 
   function toggle() {
-    dispatch({type: 'toggle'})
+    setOn(!on)
   }
 
   return <Switch on={on} onClick={toggle} />

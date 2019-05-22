@@ -1,4 +1,4 @@
-// state reducer
+// State Reducer
 
 import React from 'react'
 import {Switch} from '../switch'
@@ -159,6 +159,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'State Reducers'
+Usage.title = 'State Reducer'
 
 export default Usage

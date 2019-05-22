@@ -1,20 +1,16 @@
 // Primer: Build Toggle
 
 import React from 'react'
-// 🐨 uncomment this import to get the switch component.
-// It takes an `onClick` and an `on` prop
-// import {Switch} from '../switch'
+import {Switch} from '../switch'
 
-function Toggle({onToggle}) {
-  // 🐨 this toggle component is going to need to have state for `on`
+function Toggle({children}) {
+  const [on, setOn] = React.useState(false)
 
-  // 🐨 make a `toggle` function here which will:
-  // 1. toggle the `on` state
-  // 2. call `onToggle` with the new `on` state.
-  // 💰 `const newOn = !on`
+  function toggle() {
+    setOn(!on)
+  }
 
-  // 🐨 render the Switch here and pass `on` and `onClick`
-  return 'todo'
+  return <Switch on={on} onClick={toggle} />
 }
 
 /*
@@ -31,7 +27,7 @@ http://ws.kcd.im/?ws=advanced%20react%20patterns&e=01%20Build%20Toggle&em=
 ////////////////////////////////////////////////////////////////////
 
 function Usage() {
-  return <Toggle onToggle={(...args) => console.info('onToggle', ...args)} />
+  return <Toggle />
 }
 Usage.title = 'Primer: Build Toggle'
 
