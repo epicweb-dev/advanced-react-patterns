@@ -18,3 +18,14 @@ test('can also toggle with the custom button', () => {
   fireEvent.click(getByLabelText('custom-button'))
   expect(toggleButton).toBeOn()
 })
+
+// 💯 remove the `.skip` if you're working on the extra credit
+test.skip('passes custom props to the custom-button', () => {
+  const {getByLabelText, toggleButton} = renderToggle(<Usage />)
+  const customButton = getByLabelText('custom-button')
+  expect(customButton.getAttribute('id')).toBe('custom-button-id')
+
+  fireEvent.click(customButton)
+
+  expect(toggleButton).toBeOn()
+})

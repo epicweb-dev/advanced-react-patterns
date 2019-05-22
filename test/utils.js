@@ -19,7 +19,7 @@ function validateSwitchInstance(switchInstance) {
   if (!switchInstance) {
     throw new Error(
       chalk.red(
-        `Unable to find the Switch component. Make sure you're rendering that!`,
+        `🚨  Unable to find the Switch component. Make sure you're rendering that!`,
       ),
     )
   }
@@ -31,7 +31,7 @@ function validateSwitchInstance(switchInstance) {
     })
   } catch (error) {
     const helpfulMessage = chalk.red(
-      '🚨  The Switch component is not being passed the right props. 🚨',
+      '🚨  The Switch component is not being passed the right props.',
     )
     error.message = `${helpfulMessage}\n\n${error.message}`
     throw error
