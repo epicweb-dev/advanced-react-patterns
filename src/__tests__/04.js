@@ -1,19 +1,31 @@
 import React from 'react'
-import {renderToggle} from '../../test/utils'
+import {renderToggle, fireEvent} from '../../test/utils'
 import Usage from '../exercises-final/04'
 // import Usage from '../exercises/04'
 
 test('renders a toggle component', () => {
-  const {toggleButton, toggle, container} = renderToggle(<Usage />)
+  const {toggleButton, toggle} = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
-  expect(container.textContent).toMatch('The button is off')
-  expect(container.textContent).not.toMatch('The button is on')
   toggle()
   expect(toggleButton).toBeOn()
-  expect(container.textContent).toMatch('The button is on')
-  expect(container.textContent).not.toMatch('The button is off')
   toggle()
   expect(toggleButton).toBeOff()
-  expect(container.textContent).toMatch('The button is off')
-  expect(container.textContent).not.toMatch('The button is on')
+})
+
+test('can also toggle with the custom button', () => {
+  const {toggleButton, getByLabelText} = renderToggle(<Usage />)
+  expect(toggleButton).toBeOff()
+  fireEvent.click(getByLabelText('custom-button'))
+  expect(toggleButton).toBeOn()
+})
+
+// 💯 remove the `.skip` if you're working on the extra credit
+test.skip('passes custom props to the custom-button', () => {
+  const {getByLabelText, toggleButton} = renderToggle(<Usage />)
+  const customButton = getByLabelText('custom-button')
+  expect(customButton.getAttribute('id')).toBe('custom-button-id')
+
+  fireEvent.click(customButton)
+
+  expect(toggleButton).toBeOn()
 })

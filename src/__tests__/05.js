@@ -12,20 +12,40 @@ test('renders a toggle component', () => {
   expect(toggleButton).toBeOff()
 })
 
-test('can also toggle with the custom button', () => {
-  const {toggleButton, getByLabelText} = renderToggle(<Usage />)
+test('can click too much', () => {
+  const {
+    toggleButton,
+    toggle,
+    getByTestId,
+    queryByTestId,
+    getByText,
+    queryByText,
+  } = renderToggle(<Usage />)
   expect(toggleButton).toBeOff()
-  fireEvent.click(getByLabelText('custom-button'))
+  toggle() // 1
   expect(toggleButton).toBeOn()
-})
-
-// 💯 remove the `.skip` if you're working on the extra credit
-test.skip('passes custom props to the custom-button', () => {
-  const {getByLabelText, toggleButton} = renderToggle(<Usage />)
-  const customButton = getByLabelText('custom-button')
-  expect(customButton.getAttribute('id')).toBe('custom-button-id')
-
-  fireEvent.click(customButton)
-
+  toggle() // 2
+  expect(toggleButton).toBeOff()
+  expect(getByTestId('click-count')).toHaveTextContent('2')
+  toggle() // 3
   expect(toggleButton).toBeOn()
+  expect(queryByText(/whoa/i)).not.toBeInTheDocument()
+  toggle() // 4
+  expect(toggleButton).toBeOn()
+  expect(getByText(/whoa/i)).toBeInTheDocument()
+  toggle() // 5: Whoa, too many
+  expect(toggleButton).toBeOn()
+  toggle() // 6
+  expect(toggleButton).toBeOn()
+
+  expect(getByTestId('notice')).not.toBeNull()
+
+  fireEvent.click(getByText('Reset'))
+  expect(queryByTestId('notice')).toBeNull()
+
+  expect(toggleButton).toBeOff()
+  toggle()
+  expect(toggleButton).toBeOn()
+
+  expect(getByTestId('click-count')).toHaveTextContent('1')
 })

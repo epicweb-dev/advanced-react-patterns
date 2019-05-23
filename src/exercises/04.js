@@ -1,98 +1,22 @@
-// Flexible Compound Components
+// Prop Collections and Getters
 
 import React from 'react'
 import {Switch} from '../switch'
 
-// Right now our component can only clone and pass props to immediate children.
-// So we need some way for our compound components to implicitly accept the on
-// state and toggle method regardless of where they're rendered within the
-// Toggle component's "posterity" :)
-//
-// The way we do this is through context. React.createContext is the API we
-// want. Here's a simple example of that API:
-//
-// const defaultValue = 'light'
-// const ThemeContext = React.createContext(defaultValue)
-//   Note: The `defaultValue` can be an object, function, or anything.
-//   It's simply what React will use if the useContext(ThemeContext) is used
-//   outside a ThemeContext.Provider
-//   In our situation, it wouldn't make sense to useContext(ThemeContext)
-//   outside a Provider, so you don't have to specify a defaultValue. One of the
-//   extra credit items shows how to throw a helpful error message if someone
-//   attempts to render a Consumer without a Provider.
-//
-// ...
-// <ThemeContext.Provider value={{on, toggle}}>
-//   {children}
-// </ThemeContext.Provider>
-// ...
-//
-// ...
-// const contextValue = React.useContext(ThemeContext)
-// return <div>The current theme is: {contextValue}</div>
-// ...
-
-// 🐨 create your ToggleContext context here
-// 📜 https://reactjs.org/docs/context.html#reactcreatecontext
-
-// 🐨 remove this, you wont need it anymore! 💣
-function componentHasChild(child) {
-  for (const property in Toggle) {
-    if (Toggle.hasOwnProperty(property)) {
-      if (child.type === Toggle[property]) {
-        return true
-      }
-    }
-  }
-  return false
-}
-
-function Toggle({onToggle, children}) {
+function useToggle() {
   const [on, setOn] = React.useState(false)
+  const toggle = () => setOn(!on)
 
-  function toggle() {
-    const newOn = !on
-    setOn(newOn)
-    onToggle(newOn)
-  }
-
-  // 🐨 remove all this 💣 and instead return <ToggleContext.Provider> where
-  // the value is an object that has `on` and `toggle` on it.
-  return React.Children.map(children, child => {
-    return componentHasChild(child)
-      ? React.cloneElement(child, {on, toggle})
-      : child
-  })
+  // 🐨 Add a property called `togglerProps`. It should be an object that has
+  // `aria-pressed` and `onClick` properties.
+  // 💰 {'aria-pressed': on, onClick: toggle}
+  return {on, toggle}
 }
-
-// 🐨 we'll still get the children from props (as it's passed to us by the
-// developers using our component), but we'll get `on` implicitely from
-// ToggleContext now
-// 💰 `const context = useContext(ToggleContext)`
-// 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
-Toggle.On = function On({on, children}) {
-  return on ? children : null
-}
-
-// 🐨 do the same thing to this that you did to the On component
-Toggle.Off = function Off({on, children}) {
-  return on ? null : children
-}
-
-// 🐨 get `on` and `toggle` from the ToggleContext with `useContext`
-Toggle.Button = function Button({on, toggle, ...props}) {
-  return <Switch on={on} onClick={toggle} {...props} />
-}
-
-// 💯 Comment out the Usage function below, and use this one instead:
-// const Usage = () => <Toggle.Button />
-// Why doesn't that work? Can you figure out a way to give the developer a
-// better error message?
 
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20patterns&e=03%20Flexible%20Compound%20Components&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Patterns&e=Prop%20Collections%20and%20Getters&em=
 */
 
 ////////////////////////////////////////////////////////////////////
@@ -103,18 +27,17 @@ http://ws.kcd.im/?ws=advanced%20react%20patterns&e=03%20Flexible%20Compound%20Co
 ////////////////////////////////////////////////////////////////////
 
 function Usage() {
+  const {on, togglerProps} = useToggle()
   return (
     <div>
-      <Toggle onToggle={(...args) => console.info('onToggle', ...args)}>
-        <Toggle.On>The button is on</Toggle.On>
-        <Toggle.Off>The button is off</Toggle.Off>
-        <div>
-          <Toggle.Button />
-        </div>
-      </Toggle>
+      <Switch on={on} {...togglerProps} />
+      <hr />
+      <button aria-label="custom-button" {...togglerProps}>
+        {on ? 'on' : 'off'}
+      </button>
     </div>
   )
 }
-Usage.title = 'Flexible Compound Components'
+Usage.title = 'Prop Collections and Getters'
 
 export default Usage

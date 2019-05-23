@@ -1,44 +1,42 @@
-// Compound Components
-// 💯 Support non-toggle children
+// Flexible Compound Components with context
+// 💯 custom hook validation
 
 import React from 'react'
 import {Switch} from '../switch'
 
-function toggleReducer(state, action) {
-  switch (action.type) {
-    case 'toggle': {
-      return {on: !state.on}
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
-  }
+const ToggleContext = React.createContext()
+
+function Toggle({children}) {
+  const [on, setOn] = React.useState(false)
+  const toggle = () => setOn(!on)
+
+  return (
+    <ToggleContext.Provider value={{on, toggle}}>
+      {children}
+    </ToggleContext.Provider>
+  )
 }
 
-function Toggle({onToggle, children}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-  const {on} = state
-
-  function toggle() {
-    dispatch({type: 'toggle'})
+function useToggle() {
+  const context = React.useContext(ToggleContext)
+  if (context === undefined) {
+    throw new Error('useToggle must be used within a <Toggle />')
   }
-
-  return React.Children.map(children, child => {
-    return typeof child === 'string'
-      ? child
-      : React.cloneElement(child, {on, toggle})
-  })
+  return context
 }
 
-Toggle.On = function On({on, children}) {
+function ToggleOn({children}) {
+  const {on} = useToggle()
   return on ? children : null
 }
 
-Toggle.Off = function Off({on, children}) {
+function ToggleOff({children}) {
+  const {on} = useToggle()
   return on ? null : children
 }
 
-Toggle.Button = function Button({on, toggle, ...props}) {
+function ToggleButton({...props}) {
+  const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
@@ -46,14 +44,15 @@ function Usage() {
   return (
     <div>
       <Toggle>
-        <Toggle.On>The button is on</Toggle.On>
-        <Toggle.Off>The button is off</Toggle.Off>
-        <span>Hello</span>
-        <Toggle.Button />
+        <ToggleOn>The button is on</ToggleOn>
+        <ToggleOff>The button is off</ToggleOff>
+        <div>
+          <ToggleButton />
+        </div>
       </Toggle>
     </div>
   )
 }
-Usage.title = 'Compound Components'
+Usage.title = 'Flexible Compound Components'
 
 export default Usage

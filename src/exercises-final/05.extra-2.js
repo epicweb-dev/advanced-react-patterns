@@ -25,14 +25,8 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   const {on} = state
 
-  function toggle() {
-    dispatch({type: 'toggle'})
-  }
-
-  function reset() {
-    dispatch({type: 'reset', initialState})
-  }
-
+  const toggle = () => dispatch({type: 'toggle'})
+  const reset = () => dispatch({type: 'reset', initialState})
   function getTogglerProps({onClick, ...props} = {}) {
     return {
       'aria-pressed': on,

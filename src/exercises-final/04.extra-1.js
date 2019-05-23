@@ -1,74 +1,48 @@
-// Flexible Compound Components with context
-// 💯 Avoid unnecessary re-renders
+// Prop Collections and Getters
+// 💯 prop getters
 
 import React from 'react'
 import {Switch} from '../switch'
 
-const ToggleStateContext = React.createContext()
-const ToggleDispatchContext = React.createContext()
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 
-function toggleReducer(state, action) {
-  switch (action.type) {
-    case 'toggle': {
-      return {on: !state.on}
+function useToggle() {
+  const [on, setOn] = React.useState(false)
+  const toggle = () => setOn(!on)
+
+  function getTogglerProps({onClick, ...props} = {}) {
+    return {
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
     }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
+  }
+
+  return {
+    on,
+    toggle,
+    getTogglerProps,
   }
 }
 
-function Toggle({children}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-
-  return (
-    <ToggleStateContext.Provider value={state}>
-      <ToggleDispatchContext.Provider value={dispatch}>
-        {children}
-      </ToggleDispatchContext.Provider>
-    </ToggleStateContext.Provider>
-  )
-}
-
-function useToggleState() {
-  return React.useContext(ToggleStateContext)
-}
-
-function useToggleDispatch() {
-  return React.useContext(ToggleDispatchContext)
-}
-
-Toggle.On = function On({children}) {
-  const {on} = useToggleState()
-  return on ? children : null
-}
-
-Toggle.Off = function Off({children}) {
-  const {on} = useToggleState()
-  return on ? null : children
-}
-
-Toggle.Button = function Button({...props}) {
-  const {on} = useToggleState()
-  const dispatch = useToggleDispatch()
-  return (
-    <Switch on={on} onClick={() => dispatch({type: 'toggle'})} {...props} />
-  )
-}
-
 function Usage() {
+  const {on, getTogglerProps} = useToggle()
   return (
     <div>
-      <Toggle>
-        <Toggle.On>The button is on</Toggle.On>
-        <Toggle.Off>The button is off</Toggle.Off>
-        <div>
-          <Toggle.Button />
-        </div>
-      </Toggle>
+      <Switch {...getTogglerProps({on})} />
+      <hr />
+      <button
+        {...getTogglerProps({
+          'aria-label': 'custom-button',
+          onClick: () => console.info('onButtonClick'),
+          id: 'custom-button-id',
+        })}
+      >
+        {on ? 'on' : 'off'}
+      </button>
     </div>
   )
 }
-Usage.title = 'Flexible Compound Components'
+Usage.title = 'Prop Collections and Getters'
 
 export default Usage

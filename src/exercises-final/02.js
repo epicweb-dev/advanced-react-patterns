@@ -1,21 +1,39 @@
-// Primer: Build Toggle
+// Compound Components
 
 import React from 'react'
 import {Switch} from '../switch'
 
 function Toggle({children}) {
   const [on, setOn] = React.useState(false)
+  const toggle = () => setOn(!on)
+  return React.Children.map(children, child =>
+    React.cloneElement(child, {on, toggle}),
+  )
+}
 
-  function toggle() {
-    setOn(!on)
-  }
+function ToggleOn({on, children}) {
+  return on ? children : null
+}
 
-  return <Switch on={on} onClick={toggle} />
+function ToggleOff({on, children}) {
+  return on ? null : children
+}
+
+function ToggleButton({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
 }
 
 function Usage() {
-  return <Toggle />
+  return (
+    <div>
+      <Toggle>
+        <ToggleOn>The button is on</ToggleOn>
+        <ToggleOff>The button is off</ToggleOff>
+        <ToggleButton />
+      </Toggle>
+    </div>
+  )
 }
-Usage.title = 'Primer: Build Toggle'
+Usage.title = 'Compound Components'
 
 export default Usage

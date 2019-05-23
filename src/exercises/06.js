@@ -1,37 +1,16 @@
-// State Reducer
+// Control Props
 
 import React from 'react'
 import {Switch} from '../switch'
 
-// 🦉 Sometimes, just being made aware of the changes that occur internally
-// isn't enough and what you really want is the ability to completely control
-// how state updates are being made.
-//
-// In this example, we want to prevent the toggle from updating the toggle state
-// after it's been clicked 4 times in a row before resetting.
-//
-// We could definitely add an option to our component and add that logic in our
-// reducer, but there's a neverending list of logical customizations that people
-// could want out of our custom hook and we don't want to have to code for every
-// one of those cases.
-//
-// So instead we're going to apply a computer science pattern called
-// "Inversion of Control" where we effectively say: "Here you go! You have
-// complete control over how this thing works. It's now your responsibility."
-//
-// As an asside, before React Hooks were a thing, this was pretty tricky to
-// implement and resulted in pretty weird code, but with useReducer, this is WAY
-// better. I ❤️ hooks. 😍
-
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
-const noop = () => {}
 
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
-    case 'toggle': {
+    case useToggle.types.toggle: {
       return {on: !state.on}
     }
-    case 'reset': {
+    case useToggle.types.reset: {
       return initialState
     }
     default: {
@@ -40,25 +19,51 @@ function toggleReducer(state, {type, initialState}) {
   }
 }
 
-// 🐨 add a new option called `reducer` that defaults to `toggleReducer`
-function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
+function useToggle({
+  initialOn = false,
+  reducer = toggleReducer,
+  // instead of an individual on* change handler for ever element of state
+  // of our component, we'll have a more generic `onChange` option which will
+  // be called any time any of our elements of state changes.
+  // 🐨 add an `onChange` prop.
+  // 💰 you can default onChange to `() => {}` (this is a noop function).
+  // 🐨 add an `on` option here
+  // 💰 you can alias it to `controlledOn` to avoid "variable shadowing."
+} = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
-  // 🐨 instead of passing `toggleReducer` here, pass the `reducer` that's
-  // provided as an option
-  // ... and that's it! Don't forget to check the 💯 extra credit below!
-  const [state, dispatch] = React.useReducer(toggleReducer, initialState)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  // 🐨 determined whether on is controlled and assign that to `onIsControlled`
+  // 💰 `controlledOn !== undefined`
+
+  // 🐨 Replace the next line with assigning `on` to `controlledOn` if
+  // `onIsControlled`, otherwise, it should be `state.on`.
   const {on} = state
 
-  function toggle() {
-    const newOn = !on
-    dispatch({type: 'toggle'})
-    onToggle(newOn)
-  }
+  // We want to call `onChange` any time we need to make a state change, but we
+  // only want to call `dispatch` if `!onIsControlled` (otherwise we could get
+  // unnecessary renders).
+  // 🐨 To simplify things a bit, let's make a `dispatchWithOnChange` function
+  // right here. This will:
+  // 1. accept an action
+  // 2. if onIsControlled, then call `onChange` with our "suggested changes" and the action.
+  // 3. otherwise call dispatch with that action
 
-  function reset() {
-    dispatch({type: 'reset', initialState})
-    onReset(initialState.on)
-  }
+  // 🦉 "Suggested changes" refers to: the changes we would make if we were
+  // managing the state ourselves. This is similar to how a controlled <input />
+  // `onChange` callback works. When your handler is called, you get an event
+  // which has information about the value input that _would_ be set to if that
+  // state were managed internally.
+  // So how do we determine our suggested changes? What code do we have to
+  // calculate the changes based on the `action` we have here? That's right!
+  // The reducer! So if we pass it the current state and the action, then it
+  // should return these "suggested changes!"
+  //
+  // 💰 Sorry if Olivia the Owl is cryptic. Here's what you need to do for that onChange call:
+  // `onChange(reducer({...state, on}, action), action)`
+
+  // make these call `dispatchWithOnChange` instead
+  const toggle = () => dispatch({type: 'toggle'})
+  const reset = () => dispatch({type: 'reset', initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {
@@ -75,29 +80,39 @@ function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
     getTogglerProps,
   }
 }
+useToggle.reducer = toggleReducer
+useToggle.types = {
+  toggle: 'toggle',
+  reset: 'reset',
+}
 
-// 💯 Our `toggleReducer` is pretty simple, so it's not a huge pain for people
-// to implement their own. However, in a more realistic scenario, people may
-// struggle with having to basically re-implement our entire reducer which could
-// be pretty complex.
-// So see if you can provide a nice way for people to be able to use the
-// `toggleReducer` themselves if they so choose. Feel free to test this out by
-// changing the Usage example below (even though I say don't make changes) to
-// use the default reducer instead of having to re-implement what to do when
-// the action type is 'reset'
+// 💯 This is fairly easy when you only have one element of state in your
+// component (the `on` state in our case), but in a more complex component,
+// you may have several elements of state you want the developer to be able to
+// control. Once you have two, things get complicated quickly, and three or more
+// is basically a nightmare.
+// See if you can make a more generic abstraction to handle any number of
+// elements of state in your component. Start by changing the Toggle component
+// to call `useToggle` like this:
+// `const {on, getTogglerProps} = useToggle({state: {on: controlledOn}, onChange})`
+// Then make that work. To test it out, you could try adding another element
+// of state to your toggle reducer.
+//
+// 💰 Hey, I get it, this one's really hard, let me give you a tip. In the final
+// solution for this one, I replace `React.useReducer` with a custom hook:
+// const [state, dispatch] = useControlledReducer(reducer, initialState, {
+//   controlledState,
+//   onChange,
+// })
+// That custom hook is responsible for managing EVERYTHING. The rest of the
+// `useToggle` function looks just as if you weren't doing control props at all.
+// Good luck!
 
-// 💯 Requiring people to know what action types are available and code them
-// is just asking for bug-inducing typos. See if you can figure out a good way
-// to help people avoid typos in those strings by perhaps putting all possible
-// action types on an object somewhere and referencing them instead of hard
-// coding them.
-
-// 💯 Here's a fun one... Something that would be bad news is if folks start
-// using our reducer to store state in our reducer that the toggle shouldn't
-// be managing itself. So try this: In the usage below, update it to return
-// an extra property (for example: `return {on: state.on, foo: 'bar'}`). Then
-// write the code to log a warning if they do that. In my finished example,
-// I create a generic custom hook called `useReducerWithValidation`.
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=Advanced%20React%20Patterns&e=Control%20Props&em=
+*/
 
 ////////////////////////////////////////////////////////////////////
 //                                                                //
@@ -106,59 +121,58 @@ function useToggle({onToggle = noop, onReset = noop, initialOn = false} = {}) {
 //                                                                //
 ////////////////////////////////////////////////////////////////////
 
+function Toggle({on: controlledOn, onChange}) {
+  const {on, getTogglerProps} = useToggle({on: controlledOn, onChange})
+  const props = getTogglerProps({on})
+  return <Switch {...props} />
+}
+
 function Usage() {
+  const [bothOn, setBothOn] = React.useState(false)
   const [timesClicked, setTimesClicked] = React.useState(0)
 
-  function toggleStateReducer(state, action) {
-    // 💯 I, Hannah Hundred, give you permission to edit this function for
-    // the extra credit outlined above. 😘
-    switch (action.type) {
-      case 'toggle': {
-        if (timesClicked >= 4) {
-          return {on: state.on}
-        }
-        return {on: !state.on}
-      }
-      case 'reset': {
-        return {on: false}
-      }
-      default: {
-        throw new Error(`Unsupported type: ${action.type}`)
-      }
+  function handleToggleChange(state, action) {
+    if (action.type === useToggle.types.toggle && timesClicked > 4) {
+      return
     }
+    setBothOn(state.on)
+    setTimesClicked(c => c + 1)
   }
 
-  const {on, getTogglerProps, reset} = useToggle({
-    reducer: toggleStateReducer,
-    onToggle: (...args) => {
-      setTimesClicked(clicks => clicks + 1)
-      console.info('onToggle', ...args)
-    },
-    onReset: (...args) => {
-      setTimesClicked(0)
-      console.info('onReset', ...args)
-    },
-  })
+  function handleResetClick(params) {
+    setBothOn(false)
+    setTimesClicked(0)
+  }
 
   return (
     <div>
-      <Switch
-        {...getTogglerProps({
-          on: on,
-        })}
-      />
-      {timesClicked >= 4 ? (
+      <div>
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+        <Toggle on={bothOn} onChange={handleToggleChange} />
+      </div>
+      {timesClicked > 4 ? (
         <div data-testid="notice">
           Whoa, you clicked too much!
           <br />
         </div>
-      ) : timesClicked > 0 ? (
+      ) : (
         <div data-testid="click-count">Click count: {timesClicked}</div>
-      ) : null}
-      <button onClick={reset}>Reset</button>
+      )}
+      <button onClick={handleResetClick}>Reset</button>
+      <hr />
+      <div>
+        <div>Uncontrolled Toggle:</div>
+        <Toggle
+          onChange={(...args) =>
+            console.info('Uncontrolled Toggle onChange', ...args)
+          }
+        />
+      </div>
     </div>
   )
 }
-Usage.title = 'State Reducer'
+Usage.title = 'Control Props'
 
 export default Usage
+// we're adding the Toggle export for tests
+export {Toggle}

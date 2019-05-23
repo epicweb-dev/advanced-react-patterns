@@ -1,26 +1,17 @@
-// Prop Collections and Getters
+// State Reducer
 
 import React from 'react'
 import {Switch} from '../switch'
 
-// In typical UI components, you need to take accessibility into account. For
-// a button functioning as a toggle, it should have the `aria-pressed` attribute
-// set to `true` or `false` if it's toggled on or off.
-// In addition to remembering that, people need to remember to also add the
-// `onClick` handler.
-//
-// In our simple example, this isn't too much for folks to remember, but in more
-// complex components, the list of props that need to be applied to elements
-// can be extensive, so it can be a good idea to take the common use cases for
-// our hook and/or components and make objects of props that people can simply
-// spread across the UI they render.
+const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 
-const noop = () => {}
-
-function toggleReducer(state, {type}) {
+function toggleReducer(state, {type, initialState}) {
   switch (type) {
     case 'toggle': {
       return {on: !state.on}
+    }
+    case 'reset': {
+      return initialState
     }
     default: {
       throw new Error(`Unsupported type: ${type}`)
@@ -28,22 +19,39 @@ function toggleReducer(state, {type}) {
   }
 }
 
-function useToggle({onToggle = noop} = {}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+// 🐨 add a new option called `reducer` that defaults to `toggleReducer`
+function useToggle({initialOn = false} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  // 🐨 instead of passing `toggleReducer` here, pass the `reducer` that's
+  // provided as an option
+  // ... and that's it! Don't forget to check the 💯 extra credit!
+  const [state, dispatch] = React.useReducer(toggleReducer, initialState)
   const {on} = state
 
-  function toggle() {
-    const newOn = !on
-    dispatch({type: 'toggle'})
-    onToggle(newOn)
+  const toggle = () => dispatch({type: 'toggle'})
+  const reset = () => dispatch({type: 'reset', initialState})
+
+  function getTogglerProps({onClick, ...props} = {}) {
+    return {
+      'aria-pressed': on,
+      onClick: callAll(onClick, toggle),
+      ...props,
+    }
   }
 
-  // 🐨 instead of returning an array here, let's return an object that has
-  // the following properties: `on`, `toggle`, and `togglerProps`.
-  // 🐨 togglerProps should be an object that has `aria-pressed` and `onClick` properties:
-  // 💰 {'aria-pressed': on, onClick: toggle}
-  return [on, toggle]
+  return {
+    on,
+    reset,
+    toggle,
+    getTogglerProps,
+  }
 }
+
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=Advanced%20React%20Patterns&e=State%20Reducers&em=
+*/
 
 ////////////////////////////////////////////////////////////////////
 //                                                                //
@@ -53,19 +61,53 @@ function useToggle({onToggle = noop} = {}) {
 ////////////////////////////////////////////////////////////////////
 
 function Usage() {
-  const {on, togglerProps} = useToggle({
-    onToggle: (...args) => console.info('onToggle', ...args),
+  const [timesClicked, setTimesClicked] = React.useState(0)
+  const clickedTooMuch = timesClicked >= 4
+
+  function toggleStateReducer(state, action) {
+    switch (action.type) {
+      case 'toggle': {
+        if (clickedTooMuch) {
+          return {on: state.on}
+        }
+        return {on: !state.on}
+      }
+      case 'reset': {
+        return {on: false}
+      }
+      default: {
+        throw new Error(`Unsupported type: ${action.type}`)
+      }
+    }
+  }
+
+  const {on, getTogglerProps, getResetterProps} = useToggle({
+    reducer: toggleStateReducer,
   })
+
   return (
     <div>
-      <Switch on={on} {...togglerProps} />
-      <hr />
-      <button aria-label="custom-button" {...togglerProps}>
-        {on ? 'on' : 'off'}
+      <Switch
+        {...getTogglerProps({
+          disabled: clickedTooMuch,
+          on: on,
+          onClick: () => setTimesClicked(count => count + 1),
+        })}
+      />
+      {clickedTooMuch ? (
+        <div data-testid="notice">
+          Whoa, you clicked too much!
+          <br />
+        </div>
+      ) : timesClicked > 0 ? (
+        <div data-testid="click-count">Click count: {timesClicked}</div>
+      ) : null}
+      <button {...getResetterProps({onClick: () => setTimesClicked(0)})}>
+        Reset
       </button>
     </div>
   )
 }
-Usage.title = 'Prop Collections and Getters'
+Usage.title = 'State Reducers'
 
 export default Usage

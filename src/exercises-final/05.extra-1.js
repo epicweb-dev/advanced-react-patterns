@@ -1,15 +1,18 @@
-// Prop Collections and Getters
-// 💯 prop getters
+// state reducer
+// 💯 default state reducer
 
 import React from 'react'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 
-function toggleReducer(state, {type}) {
+function toggleReducer(state, {type, initialState}) {
   switch (type) {
     case 'toggle': {
       return {on: !state.on}
+    }
+    case 'reset': {
+      return initialState
     }
     default: {
       throw new Error(`Unsupported type: ${type}`)
@@ -17,14 +20,13 @@ function toggleReducer(state, {type}) {
   }
 }
 
-function useToggle() {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
+function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
+  const {current: initialState} = React.useRef({on: initialOn})
+  const [state, dispatch] = React.useReducer(reducer, initialState)
   const {on} = state
 
-  function toggle() {
-    dispatch({type: 'toggle'})
-  }
-
+  const toggle = () => dispatch({type: 'toggle'})
+  const reset = () => dispatch({type: 'reset', initialState})
   function getTogglerProps({onClick, ...props} = {}) {
     return {
       'aria-pressed': on,
@@ -33,31 +35,61 @@ function useToggle() {
     }
   }
 
+  function getResetterProps({onClick, ...props} = {}) {
+    return {
+      onClick: callAll(onClick, reset),
+      ...props,
+    }
+  }
+
   return {
     on,
+    reset,
     toggle,
     getTogglerProps,
+    getResetterProps,
   }
 }
+useToggle.reducer = toggleReducer
 
 function Usage() {
-  const {on, getTogglerProps} = useToggle()
+  const [timesClicked, setTimesClicked] = React.useState(0)
+  const clickedTooMuch = timesClicked >= 4
+
+  function toggleStateReducer(state, action) {
+    if (action.type === 'toggle' && timesClicked >= 4) {
+      return {on: state.on}
+    }
+    return useToggle.reducer(state, action)
+  }
+
+  const {on, getTogglerProps, getResetterProps} = useToggle({
+    reducer: toggleStateReducer,
+  })
+
   return (
     <div>
-      <Switch {...getTogglerProps({on})} />
-      <hr />
-      <button
+      <Switch
         {...getTogglerProps({
-          'aria-label': 'custom-button',
-          onClick: () => console.info('onButtonClick'),
-          id: 'custom-button-id',
+          disabled: clickedTooMuch,
+          on: on,
+          onClick: () => setTimesClicked(count => count + 1),
         })}
-      >
-        {on ? 'on' : 'off'}
+      />
+      {clickedTooMuch ? (
+        <div data-testid="notice">
+          Whoa, you clicked too much!
+          <br />
+        </div>
+      ) : timesClicked > 0 ? (
+        <div data-testid="click-count">Click count: {timesClicked}</div>
+      ) : null}
+      <button {...getResetterProps({onClick: () => setTimesClicked(0)})}>
+        Reset
       </button>
     </div>
   )
 }
-Usage.title = 'Prop Collections and Getters'
+Usage.title = 'State Reducers'
 
 export default Usage

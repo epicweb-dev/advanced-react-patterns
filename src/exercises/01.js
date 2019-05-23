@@ -166,7 +166,7 @@ function UserDataDisplay() {
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20patterns&e=Context&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Patterns&e=Context&em=
 */
 
 ////////////////////////////////////////////////////////////////////

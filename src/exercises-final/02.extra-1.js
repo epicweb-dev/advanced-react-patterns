@@ -1,34 +1,43 @@
-// Primer: Build Toggle
-// 💯 with useReducer
+// Compound Components
+// 💯 Support non-toggle children
 
 import React from 'react'
 import {Switch} from '../switch'
 
-function toggleReducer(state, action) {
-  switch (action.type) {
-    case 'toggle': {
-      return {on: !state.on}
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
-  }
+function Toggle({children}) {
+  const [on, setOn] = React.useState(false)
+  const toggle = () => setOn(!on)
+  return React.Children.map(children, child => {
+    return typeof child === 'string'
+      ? child
+      : React.cloneElement(child, {on, toggle})
+  })
 }
 
-function Toggle({children}) {
-  const [state, dispatch] = React.useReducer(toggleReducer, {on: false})
-  const {on} = state
+function ToggleOn({on, children}) {
+  return on ? children : null
+}
 
-  function toggle() {
-    dispatch({type: 'toggle'})
-  }
+function ToggleOff({on, children}) {
+  return on ? null : children
+}
 
-  return <Switch on={on} onClick={toggle} />
+function ToggleButton({on, toggle, ...props}) {
+  return <Switch on={on} onClick={toggle} {...props} />
 }
 
 function Usage() {
-  return <Toggle />
+  return (
+    <div>
+      <Toggle>
+        <ToggleOn>The button is on</ToggleOn>
+        <ToggleOff>The button is off</ToggleOff>
+        <span>Hello</span>
+        <ToggleButton />
+      </Toggle>
+    </div>
+  )
 }
-Usage.title = 'Primer: Build Toggle'
+Usage.title = 'Compound Components'
 
 export default Usage
