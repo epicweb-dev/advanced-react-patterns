@@ -52,10 +52,9 @@ function useUserDispatch(params) {
 
 // got this idea from Dan and I love it:
 // https://twitter.com/dan_abramov/status/1125773153584676864
-function updateUser(dispatch, user, updates) {
-  return userClient.updateUser(user, updates).then(updatedUser => {
-    dispatch({type: 'update', updatedUser})
-  })
+async function updateUser(dispatch, user, updates) {
+  const updatedUser = await userClient.updateUser(user, updates)
+  dispatch({type: 'update', updatedUser})
 }
 
 // export {UserProvider, useUserDispatch, useUserState, updateUser}
