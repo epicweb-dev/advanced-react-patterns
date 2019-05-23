@@ -13,7 +13,6 @@ const UserStateContext = React.createContext()
 const UserDispatchContext = React.createContext()
 
 function userReducer(state, action) {
-  console.log(state, action)
   switch (action.type) {
     case 'start update': {
       return {

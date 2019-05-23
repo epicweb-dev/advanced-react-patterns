@@ -3,7 +3,7 @@
 import React from 'react'
 import dequal from 'dequal'
 
-// ./context/user-context
+// ./context/user-context.js
 
 import * as userClient from '../user-client'
 import {useAuth} from '../auth-context'
@@ -61,16 +61,18 @@ function updateUser(dispatch, user, updates) {
 // export {UserProvider, useUserDispatch, useUserState, updateUser}
 
 // src/screens/user-profile.js
+
 // import {UserProvider, useUserState, updateUser} from './context/user-context'
+
 function UserSettings() {
   const {user} = useUserState()
   const userDispatch = useUserDispatch()
 
-  const [state, dispatch] = React.useReducer((s, a) => ({...s, ...a}), {
-    status: null,
-    error: null,
-  })
-  const {error, status} = state
+  const [asyncState, asyncDispatch] = React.useReducer(
+    (s, a) => ({...s, ...a}),
+    {status: null, error: null},
+  )
+  const {error, status} = asyncState
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
 
@@ -85,13 +87,13 @@ function UserSettings() {
   function handleSubmit(event) {
     event.preventDefault()
 
-    dispatch({status: 'pending'})
+    asyncDispatch({status: 'pending'})
     updateUser(userDispatch, user, formState).then(
       () => {
-        dispatch({status: 'resolved'})
+        asyncDispatch({status: 'resolved'})
       },
       error => {
-        dispatch({status: 'rejected', error})
+        asyncDispatch({status: 'rejected', error})
       },
     )
   }
@@ -138,7 +140,10 @@ function UserSettings() {
       <div>
         <button
           type="button"
-          onClick={() => setFormState(user)}
+          onClick={() => {
+            setFormState(user)
+            asyncDispatch({status: null, error: null})
+          }}
           disabled={!isChanged || isPending}
         >
           Reset
