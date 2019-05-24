@@ -5,7 +5,7 @@ import {
   waitForElementToBeRemoved,
 } from 'react-testing-library'
 import * as userClient from '../user-client'
-import {mockUser} from '../auth-context'
+import {AuthProvider} from '../auth-context'
 import Usage from '../exercises-final/01'
 // import Usage from '../exercises/01'
 
@@ -13,18 +13,14 @@ jest.mock('../user-client', () => {
   return {updateUser: jest.fn(() => Promise.resolve())}
 })
 
-jest.mock('../auth-context', () => {
-  const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
-  return {
-    mockUser,
-    useAuth() {
-      return {user: mockUser}
-    },
-  }
-})
+const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
 
 function renderUsage() {
-  const utils = render(<Usage />)
+  const utils = render(
+    <AuthProvider user={{user: mockUser}}>
+      <Usage />
+    </AuthProvider>,
+  )
 
   const userDisplayPre = utils.container.querySelector('pre')
   return {
