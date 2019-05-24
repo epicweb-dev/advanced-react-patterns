@@ -103,7 +103,7 @@ function Usage() {
     setTimesClicked(c => c + 1)
   }
 
-  function handleResetClick(params) {
+  function handleResetClick() {
     setBothOn(false)
     setTimesClicked(0)
   }
