@@ -7,7 +7,7 @@ const sleep = (t = Math.random() * 200 + 300) =>
 const fakeResponses = [
   {
     test: (endpoint, config) =>
-      endpoint.includes('/user/') && config.method === 'PUT',
+      endpoint.startsWith('/user/') && config.method === 'PUT',
     async handler(url, config) {
       await sleep(1000)
       const newUser = JSON.parse(config.body)
@@ -34,6 +34,11 @@ const fakeResponses = [
   },
 ]
 
+const colors = {
+  ok: '#0f9d58',
+  error: '#ef5350',
+}
+
 window.fetch = async (...args) => {
   const {handler} = fakeResponses.find(({test}) => {
     try {
@@ -46,7 +51,12 @@ window.fetch = async (...args) => {
   const groupTitle = `%c ${args[1].method} -> ${args[0]}`
   try {
     const response = await handler(...args)
-    console.groupCollapsed(groupTitle, 'color: #0f9d58')
+    if (response.ok) {
+    }
+    console.groupCollapsed(
+      groupTitle,
+      `color: ${response.ok ? colors.ok : colors.error}`,
+    )
     console.info('REQUEST:', {url: args[0], ...args[1]})
     console.info('RESPONSE:', {
       ...response,
@@ -62,7 +72,7 @@ window.fetch = async (...args) => {
         message: error.message,
       }
     }
-    console.groupCollapsed(groupTitle, 'color: #ef5350')
+    console.groupCollapsed(groupTitle, `color: ${colors.error}`)
     console.info('REQUEST:', {url: args[0], ...args[1]})
     console.info('REJECTION:', rejection)
     console.groupEnd()
