@@ -1,5 +1,5 @@
 {
-  "projectName": "advanced-component-patterns-v2",
+  "projectName": "advanced-react-patterns",
   "projectOwner": "kentcdodds",
   "repoType": "github",
   "files": [
@@ -85,6 +85,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "CompuIves",
+      "name": "Ives van Hoorne",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/587016?v=4",
+      "profile": "https://twitter.com/CompuIves",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
-  ]
+  ],
+  "repoHost": "https://github.com",
+  "contributorsPerLine": 7
 }
