@@ -16,7 +16,7 @@
     "@reach/router": "^1.2.1",
     "dequal": "^1.0.0",
     "history": "^4.9.0",
-    "jest-dom": "^3.2.2",
+    "jest-dom": "^3.4.0",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
