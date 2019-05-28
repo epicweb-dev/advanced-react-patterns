@@ -12,17 +12,17 @@ import Usage from '../exercises-final/01'
 const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
 
 const mockFetchResponse = response =>
-  window.fetch.mockResolvedValueOnce({
+  window.fetch.mockImplementationOnce(async () => ({
     ok: true,
     status: 200,
     json: async () => response,
-  })
+  }))
 const mockFetchRejection = rejection =>
-  window.fetch.mockResolvedValueOnce({
+  window.fetch.mockImplementationOnce(async () => ({
     ok: false,
     status: 500,
     json: async () => rejection,
-  })
+  }))
 
 function renderUsage() {
   const utils = render(
@@ -78,17 +78,15 @@ test('happy path works', async () => {
   expect(submitButton).toHaveAttribute('disabled')
   expect(resetButton).toHaveAttribute('disabled')
   // submitting the form calls window.fetch
-  expect(window.fetch.mock.calls).toMatchInlineSnapshot(`
-    Array [
-      Array [
-        "/user/jakiechan",
-        Object {
-          "body": "{\\"username\\":\\"jakiechan\\",\\"tagline\\":\\"test tagline\\",\\"bio\\":\\"test bio\\"}",
-          "method": "PUT",
-        },
-      ],
-    ]
-  `)
+  expect(window.fetch).toHaveBeenCalledTimes(1)
+  expect(window.fetch).toHaveBeenCalledWith(
+    '/user/jakiechan',
+    expect.objectContaining({
+      method: 'PUT',
+    }),
+  )
+  const body = window.fetch.mock.calls[0][1].body
+  expect(JSON.parse(body)).toEqual({...mockUser, ...testData})
   window.fetch.mockClear()
 
   // once the submit button changes from ... then we know the request is over
