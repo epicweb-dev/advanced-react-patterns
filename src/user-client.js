@@ -1,10 +1,14 @@
+// this is just a fake user client, in reality it'd probably be using
+// window.fetch to actually interact with the user.
+
+const sleep = t => new Promise(resolve => setTimeout(resolve, t))
+
 async function updateUser(user, updates) {
-  const response = await window.fetch(`/user/${user.username}`, {
-    method: 'PUT',
-    body: JSON.stringify({...user, ...updates}),
-  })
-  const json = await response.json()
-  return response.ok ? json.user : Promise.reject(json)
+  await sleep(1000) // simulate a real-world wait period
+  if (`${updates.tagline} ${updates.bio}`.includes('fail')) {
+    return Promise.reject({message: 'Something went wrong'})
+  }
+  return {...user, ...updates}
 }
 
 export {updateUser}

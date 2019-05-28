@@ -1,8 +1,5 @@
 import 'jest-dom/extend-expect'
 import 'react-testing-library/cleanup-after-each'
-// have to hack fetch for tests due to some unfortunate issues with codesandbox
-// hopefully these issues are temporary and we can remove this in the future.
-import './hacks/fetch'
 
 beforeAll(() => {
   jest.spyOn(console, 'info')

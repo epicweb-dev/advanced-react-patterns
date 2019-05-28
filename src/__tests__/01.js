@@ -4,25 +4,17 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
 } from 'react-testing-library'
+import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
 import Usage from '../exercises-final/01'
 // import Usage from '../exercises/01'
 // NOTE: if you do the extra credit, make sure to enable the last test.
 
-const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
+jest.mock('../user-client', () => {
+  return {updateUser: jest.fn(() => Promise.resolve())}
+})
 
-const mockFetchResponse = response =>
-  window.fetch.mockImplementationOnce(async () => ({
-    ok: true,
-    status: 200,
-    json: async () => response,
-  }))
-const mockFetchRejection = rejection =>
-  window.fetch.mockImplementationOnce(async () => ({
-    ok: false,
-    status: 500,
-    json: async () => rejection,
-  }))
+const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
 
 function renderUsage() {
   const utils = render(
@@ -69,7 +61,9 @@ test('happy path works', async () => {
   expect(resetButton).not.toHaveAttribute('disabled')
 
   const updatedUser = {...mockUser, ...testData}
-  mockFetchResponse({user: updatedUser})
+  userClient.updateUser.mockImplementationOnce(() =>
+    Promise.resolve(updatedUser),
+  )
 
   fireEvent.click(submitButton)
 
@@ -77,17 +71,10 @@ test('happy path works', async () => {
   expect(submitButton).toHaveTextContent(/\.\.\./i)
   expect(submitButton).toHaveAttribute('disabled')
   expect(resetButton).toHaveAttribute('disabled')
-  // submitting the form calls window.fetch
-  expect(window.fetch).toHaveBeenCalledTimes(1)
-  expect(window.fetch).toHaveBeenCalledWith(
-    '/user/jakiechan',
-    expect.objectContaining({
-      method: 'PUT',
-    }),
-  )
-  const body = window.fetch.mock.calls[0][1].body
-  expect(JSON.parse(body)).toEqual({...mockUser, ...testData})
-  window.fetch.mockClear()
+  // submitting the form invokes userClient.updateUser
+  expect(userClient.updateUser).toHaveBeenCalledTimes(1)
+  expect(userClient.updateUser).toHaveBeenCalledWith(mockUser, testData)
+  userClient.updateUser.mockClear()
 
   // once the submit button changes from ... then we know the request is over
   await waitForLoading()
@@ -127,7 +114,9 @@ test('failure works', async () => {
   const testData = {...mockUser, bio: 'test bio'}
   fireEvent.change(bioInput, {target: {value: testData.bio}})
   const testErrorMessage = 'test error message'
-  mockFetchRejection({message: testErrorMessage})
+  userClient.updateUser.mockImplementationOnce(() =>
+    Promise.reject({message: testErrorMessage}),
+  )
 
   const updatedUser = {...mockUser, ...testData}
 
@@ -139,9 +128,11 @@ test('failure works', async () => {
   getByText(testErrorMessage)
   expect(getDisplayData()).toEqual(mockUser)
 
-  window.fetch.mockClear()
+  userClient.updateUser.mockClear()
 
-  mockFetchResponse({user: updatedUser})
+  userClient.updateUser.mockImplementationOnce(() =>
+    Promise.resolve(updatedUser),
+  )
   fireEvent.click(submitButton)
 
   await waitForLoading()
@@ -172,7 +163,9 @@ test.skip('optimisitc updates works with failures', async () => {
   const testData = {...mockUser, bio: 'test bio'}
   fireEvent.change(bioInput, {target: {value: testData.bio}})
   const testErrorMessage = 'test error message'
-  mockFetchRejection({message: testErrorMessage})
+  userClient.updateUser.mockImplementationOnce(() =>
+    Promise.reject({message: testErrorMessage}),
+  )
   fireEvent.click(submitButton)
 
   const updatedUser = {...mockUser, ...testData}
@@ -185,9 +178,11 @@ test.skip('optimisitc updates works with failures', async () => {
   getByText(testErrorMessage)
   expect(getDisplayData()).toEqual(mockUser)
 
-  window.fetch.mockClear()
+  userClient.updateUser.mockClear()
 
-  mockFetchResponse({user: updatedUser})
+  userClient.updateUser.mockImplementationOnce(() =>
+    Promise.resolve(updatedUser),
+  )
   fireEvent.click(submitButton)
 
   await waitForLoading()
