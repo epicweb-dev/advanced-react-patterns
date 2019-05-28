@@ -93,8 +93,10 @@ async function updateUser(dispatch, user, updates) {
   try {
     const updatedUser = await userClient.updateUser(user, updates)
     dispatch({type: 'finish update', updatedUser})
+    return updatedUser
   } catch (error) {
     dispatch({type: 'fail update', error})
+    return Promise.reject(error)
   }
 }
 
@@ -119,7 +121,9 @@ function UserSettings() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    updateUser(userDispatch, user, formState)
+    updateUser(userDispatch, user, formState).catch(() => {
+      /* ignore the error */
+    })
   }
 
   return (

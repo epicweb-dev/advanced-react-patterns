@@ -50,7 +50,7 @@ async function updateUser(dispatch, user, updates) {
 
 function UserSettings() {
   // 🐨 get the user object and userDispatch function from context
-  const user = {}
+  const user = {tagline: '', bio: ''}
   const userDispatch = () => {}
 
   const [asyncState, asyncDispatch] = React.useReducer(
