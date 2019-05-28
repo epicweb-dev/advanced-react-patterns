@@ -4,6 +4,7 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
 } from 'react-testing-library'
+import '../fetch-mock'
 import {AuthProvider} from '../auth-context'
 import Usage from '../exercises-final/01'
 // import Usage from '../exercises/01'
