@@ -35,39 +35,3 @@ const fakeResponses = [
     handler: (...args) => originalFetch(...args),
   },
 ]
-
-window.fetch = async (...args) => {
-  const {handler} = fakeResponses.find(({test}) => {
-    try {
-      return test(...args)
-    } catch (error) {
-      // ignore the error and hope everything's ok...
-      return false
-    }
-  })
-  const groupTitle = `%c ${args[1].method} -> ${args[0]}`
-  try {
-    const response = await handler(...args)
-    console.groupCollapsed(groupTitle, 'color: #0f9d58')
-    console.info('REQUEST:', {url: args[0], ...args[1]})
-    console.info('RESPONSE:', {
-      ...response,
-      ...(response.json ? {json: await response.json()} : {}),
-    })
-    console.groupEnd()
-    return response
-  } catch (error) {
-    let rejection = error
-    if (error instanceof Error) {
-      rejection = {
-        status: 500,
-        message: error.message,
-      }
-    }
-    console.groupCollapsed(groupTitle, 'color: #ef5350')
-    console.info('REQUEST:', {url: args[0], ...args[1]})
-    console.info('REJECTION:', rejection)
-    console.groupEnd()
-    return Promise.reject(rejection)
-  }
-}
