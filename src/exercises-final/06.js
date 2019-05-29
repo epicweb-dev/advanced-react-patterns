@@ -39,8 +39,9 @@ function useToggle({
     }
   }
 
-  const toggle = () => dispatchWithOnChange({type: 'toggle'})
-  const reset = () => dispatchWithOnChange({type: 'reset', initialState})
+  const toggle = () => dispatchWithOnChange({type: useToggle.types.toggle})
+  const reset = () =>
+    dispatchWithOnChange({type: useToggle.types.reset, initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {

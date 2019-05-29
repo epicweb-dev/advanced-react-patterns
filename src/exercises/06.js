@@ -62,8 +62,8 @@ function useToggle({
   // `onChange(reducer({...state, on}, action), action)`
 
   // make these call `dispatchWithOnChange` instead
-  const toggle = () => dispatch({type: 'toggle'})
-  const reset = () => dispatch({type: 'reset', initialState})
+  const toggle = () => dispatch({type: useToggle.types.toggle})
+  const reset = () => dispatch({type: useToggle.types.reset, initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {
