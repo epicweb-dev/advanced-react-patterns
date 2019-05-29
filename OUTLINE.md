@@ -1,4 +1,4 @@
-# Advanced React Patterns (with hooks)
+# Advanced React Patterns
 
 > Some sweeeeeeeet patterns 🍭
 
@@ -19,10 +19,6 @@
 - 🎙 kcd.im/3-mins
 - ❓ kcd.im/ama
 
-## Please Stand! ️️🏋
-
-> If you're physically able 💛 ♿️
-
 # What this workshop is
 
 - Lots of exercises
@@ -38,3 +34,40 @@
 
 - `npm run start`
 - `npm run test`
+
+## Asking Questions
+
+Please do ask! Interrupt me. If you have an unrelated question, please ask on
+[my AMA](https://kcd.im/ama).
+
+## Zoom
+
+- Help us make this more human by keeping your video on if possible
+- Keep microphone muted unless speaking
+- Breakout rooms
+
+## Exercises
+
+- `src/exercises/0x.md`: Background, Exercise Instructions, Extra Credit
+- `src/exercises/0x.js`: Exercise with Emoji helpers
+- `src/__tests__/0x.js`: Tests
+- `src/exercises-final/0x.js`: Final version
+
+## Emoji
+
+- **Kody the Koala Bear** 🐨 "Do this"
+- **Marty the Money Bag** 💰 "Here's a hint"
+- **Hannah the Hundred** 💯 "Extra Credit"
+- **Olivia the Owl** 🦉 "Pro-tip"
+- **Dominic the Document** 📜 "Docs links"
+- **Berry the Bomb** 💣 "Remove this code"
+- **Alfred the Alert** 🚨 "Extra helpful in test errors"
+
+# Topics
+
+- Context
+- Compound Components
+- Flexible Compound Components
+- Prop Collections and Getters
+- State Reducers
+- Control Props
