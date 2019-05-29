@@ -30,6 +30,20 @@
 
 # Logistics
 
+## Schedule
+
+- 😴 Logistics
+- 🏋 Context
+- 😴 10 Minutes
+- 🏋 Compound Components
+- 🏋 Flexible Compound Components
+- 😴 30 Minutes
+- 🏋 Prop Collections and Getters
+- 😴 10 Minutes
+- 🏋 State Reducers
+- 😴 10 Minutes
+- 🏋 Control Props
+
 ## Scripts
 
 - `npm run start`
@@ -62,12 +76,3 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 - **Dominic the Document** 📜 "Docs links"
 - **Berry the Bomb** 💣 "Remove this code"
 - **Alfred the Alert** 🚨 "Extra helpful in test errors"
-
-# Topics
-
-- Context
-- Compound Components
-- Flexible Compound Components
-- Prop Collections and Getters
-- State Reducers
-- Control Props
