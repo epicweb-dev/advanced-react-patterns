@@ -86,28 +86,6 @@ useToggle.types = {
   reset: 'reset',
 }
 
-// 💯 This is fairly easy when you only have one element of state in your
-// component (the `on` state in our case), but in a more complex component,
-// you may have several elements of state you want the developer to be able to
-// control. Once you have two, things get complicated quickly, and three or more
-// is basically a nightmare.
-// See if you can make a more generic abstraction to handle any number of
-// elements of state in your component. Start by changing the Toggle component
-// to call `useToggle` like this:
-// `const {on, getTogglerProps} = useToggle({state: {on: controlledOn}, onChange})`
-// Then make that work. To test it out, you could try adding another element
-// of state to your toggle reducer.
-//
-// 💰 Hey, I get it, this one's really hard, let me give you a tip. In the final
-// solution for this one, I replace `React.useReducer` with a custom hook:
-// const [state, dispatch] = useControlledReducer(reducer, initialState, {
-//   controlledState,
-//   onChange,
-// })
-// That custom hook is responsible for managing EVERYTHING. The rest of the
-// `useToggle` function looks just as if you weren't doing control props at all.
-// Good luck!
-
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
