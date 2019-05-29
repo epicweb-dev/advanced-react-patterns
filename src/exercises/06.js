@@ -22,9 +22,6 @@ function toggleReducer(state, {type, initialState}) {
 function useToggle({
   initialOn = false,
   reducer = toggleReducer,
-  // instead of an individual on* change handler for ever element of state
-  // of our component, we'll have a more generic `onChange` option which will
-  // be called any time any of our elements of state changes.
   // 🐨 add an `onChange` prop.
   // 💰 you can default onChange to `() => {}` (this is a noop function).
   // 🐨 add an `on` option here
