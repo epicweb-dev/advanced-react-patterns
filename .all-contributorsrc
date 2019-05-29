@@ -95,6 +95,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "lgandecki",
+      "name": "Łukasz Gandecki",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4002543?v=4",
+      "profile": "http://team.thebrain.pro",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
