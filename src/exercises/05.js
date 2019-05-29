@@ -39,11 +39,19 @@ function useToggle({initialOn = false} = {}) {
     }
   }
 
+  function getResetterProps({onClick, ...props} = {}) {
+    return {
+      onClick: callAll(onClick, reset),
+      ...props,
+    }
+  }
+
   return {
     on,
     reset,
     toggle,
     getTogglerProps,
+    getResetterProps,
   }
 }
 
