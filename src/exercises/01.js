@@ -30,7 +30,7 @@ function UserProvider({children}) {
 // which retrieves the context value via React.useContext, then people can use
 // your custom hook. If you want to try that, then go ahead and put it here.
 
-// This is a utility function which accepts the reduer's dispatch function
+// This is a utility function which accepts the reducer's dispatch function
 // as well as the user and any updates. It's responsible for interacting with
 // the userClient and the dispatch.
 async function updateUser(dispatch, user, updates) {
