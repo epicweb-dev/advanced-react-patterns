@@ -16,8 +16,8 @@ function UserProvider({children}) {
   // state for this context provider
   // 💰 const {user} = useAuth()
 
-  // 🐨 useReducer here with a userReducer and initialize it with the user you
-  // got from useAuth
+  // 🐨 useReducer here with a reducer you write and initialize it with the user
+  // you got from useAuth
   // 💰 the reducer should handle an action type called `update` which will be
   // dispatched in the `updateUser` helper below
 
