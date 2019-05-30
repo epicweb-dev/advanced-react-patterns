@@ -113,6 +113,16 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "Ruffeng",
+      "name": "Ruffeng",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18511772?v=4",
+      "profile": "https://github.com/Ruffeng",
+      "contributions": [
+        "content",
+        "code"
+      ]
     }
   ],
   "repoHost": "https://github.com",
