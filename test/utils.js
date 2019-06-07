@@ -1,4 +1,4 @@
-import {render, fireEvent, wait} from 'react-testing-library'
+import {render, fireEvent, wait} from '@testing-library/react'
 import chalk from 'chalk'
 import React from 'react'
 import {

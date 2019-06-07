@@ -3,7 +3,7 @@ import {
   render,
   fireEvent,
   waitForElementToBeRemoved,
-} from 'react-testing-library'
+} from '@testing-library/react'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
 import Usage from '../exercises-final/01'
