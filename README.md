@@ -1,3 +1,9 @@
+<p align="center">
+<a href="https://codefund.io/properties/500/visit-sponsor">
+<img src="https://codefund.io/properties/500/sponsor" />
+</a>
+</p>
+
 # Advanced React Patterns
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com)! This is a
