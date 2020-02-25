@@ -6,9 +6,6 @@ import {
   isCompositeComponentWithType,
 } from 'react-dom/test-utils'
 import {Switch} from '../src/switch'
-import {extensions} from './extensions'
-
-expect.extend(extensions)
 
 const findSwitchInstances = rootInstance =>
   findAllInRenderedTree(rootInstance, c =>

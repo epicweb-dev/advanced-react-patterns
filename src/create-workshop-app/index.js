@@ -1,6 +1,8 @@
+import './hack-fetch'
 import 'normalize.css/normalize.css'
 import './workshop-app-styles.css'
 
+import preval from 'preval.macro'
 import React from 'react'
 import {
   BrowserRouter as Router,
@@ -10,22 +12,31 @@ import {
   useParams,
 } from 'react-router-dom'
 import {createBrowserHistory} from 'history'
+import {hijackEffects} from 'stop-runaway-react-effects'
 
 function createWorkshopApp({
   getExerciseImport,
   getFinalImport,
   getExampleImport,
-  exerciseInfo,
-  pkg: {title: projectTitle},
+  fakeFetchResponses = [],
+  stopRunawayEffects = true,
 }) {
+  window.fetch.fakeResponses = fakeFetchResponses
+  if (process.env.NODE_ENV !== 'production' && stopRunawayEffects) {
+    hijackEffects()
+  }
+
+  const exerciseInfo = preval`module.exports = require('./load-exercises')`
+  const projectTitle = preval`module.exports = require('./get-project-title')`
+
   if (!projectTitle) {
     throw new Error('The package.json must have a title!')
   }
 
   for (const id in exerciseInfo) {
     const info = exerciseInfo[id]
-    info.exercise.Component = getExerciseImport(id)
-    info.final.Component = getFinalImport(id)
+    info.exercise.Component = React.lazy(getExerciseImport(id))
+    info.final.Component = React.lazy(getFinalImport(id))
   }
 
   const history = createBrowserHistory()
@@ -289,16 +300,15 @@ function createWorkshopApp({
       }
       if (isFinal) {
         return (lazyComps.final[moduleName] =
-          lazyComps.final[moduleName] ||
-          React.lazy(() => import(`./exercises-final/${moduleName}.js`)))
+          lazyComps.final[moduleName] || React.lazy(getFinalImport(moduleName)))
       } else if (isExercise) {
         return (lazyComps.exercise[moduleName] =
           lazyComps.exercise[moduleName] ||
-          React.lazy(() => import(`./exercises/${moduleName}.js`)))
-      } else if (isExample) {
+          React.lazy(getExerciseImport(moduleName)))
+      } else if (getExampleImport && isExample) {
         return (lazyComps.examples[moduleName] =
           lazyComps.examples[moduleName] ||
-          React.lazy(() => import(`./examples/${moduleName}.js`)))
+          React.lazy(getExampleImport(moduleName)))
       }
     }, [isExample, isExercise, isFinal, moduleName])
     return moduleName ? IsolatedComponent : null

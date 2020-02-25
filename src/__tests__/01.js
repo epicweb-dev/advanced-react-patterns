@@ -38,6 +38,7 @@ function renderUsage() {
 }
 
 test('happy path works', async () => {
+  // expect('fail', 'This should be pass').toBe('pass')
   const {
     submitButton,
     resetButton,
