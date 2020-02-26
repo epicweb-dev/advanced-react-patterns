@@ -1,5 +1,4 @@
 import {render, fireEvent, wait} from '@testing-library/react'
-import chalk from 'chalk'
 import React from 'react'
 import {
   findAllInRenderedTree,
@@ -13,26 +12,18 @@ const findSwitchInstances = rootInstance =>
   )
 
 function validateSwitchInstance(switchInstance) {
-  if (!switchInstance) {
-    throw new Error(
-      chalk.red(
-        `🚨  Unable to find the Switch component. Make sure you're rendering that!`,
-      ),
-    )
-  }
-  try {
-    expect(switchInstance.props).toMatchObject({
-      on: expect.any(Boolean),
-      onClick: expect.any(Function),
-      // it can also have aria-pressed...
-    })
-  } catch (error) {
-    const helpfulMessage = chalk.red(
-      '🚨  The Switch component is not being passed the right props.',
-    )
-    error.message = `${helpfulMessage}\n\n${error.message}`
-    throw error
-  }
+  expect(
+    switchInstance,
+    `Unable to find the Switch component. Make sure you're rendering that!`,
+  ).toBeDefined()
+  expect(
+    switchInstance.props,
+    'The Switch component is not being passed the right props.',
+  ).toMatchObject({
+    on: expect.any(Boolean),
+    onClick: expect.any(Function),
+    // it can also have aria-pressed...
+  })
 }
 
 // this only exists so we can search for an instance of the Switch

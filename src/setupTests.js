@@ -1,4 +1,4 @@
-import './create-workshop-app/setup-tests'
+import '@kentcdodds/react-workshop-app/setup-tests'
 
 import {extensions} from '../test/extensions'
 
