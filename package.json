@@ -17,27 +17,16 @@
     "@testing-library/react": "^9.4.1",
     "chalk": "^3.0.0",
     "dequal": "^1.0.0",
-    "glob": "^7.1.6",
-    "history": "^4.10.1",
-    "jest-expect-message": "^1.0.2",
     "lodash": "^4.17.15",
-    "normalize.css": "^8.0.1",
     "preval.macro": "^4.0.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "stop-runaway-react-effects": "^1.2.1"
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "devDependencies": {
-    "cross-spawn": "^7.0.1",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
-    "inquirer": "^7.0.4",
-    "is-ci": "^2.0.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.19.1",
-    "react-scripts": "^3.4.0",
-    "replace-in-file": "^5.0.2"
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
