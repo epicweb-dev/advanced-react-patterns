@@ -1,9 +1,3 @@
-<p align="center">
-<a href="https://codefund.io/properties/500/visit-sponsor">
-<img src="https://codefund.io/properties/500/sponsor" />
-</a>
-</p>
-
 # Advanced React Patterns
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com)! This is a
@@ -11,22 +5,26 @@ workshop repo to teach you about using React Component Patterns to make your
 react components and hooks more useful and reusable without sacrificing
 simplicity.
 
+<!-- prettier-ignore-start -->
 [![Build Status][build-badge]][build]
 [![AppVeyor Build Status][win-build-badge]][win-build]
 [![Code Coverage][coverage-badge]][coverage]
 [![GPL 3.0 License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
-[![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
+[![PRs Welcome][prs-badge]][prs]
+[![Code of Conduct][coc-badge]][coc]
+<!-- prettier-ignore-end -->
 
 ## Pre-Workshop Instructions/Requirements
 
-In order for us to maximize our efforts during the workshop, please do the
-following:
+In order for us to maximize our efforts during the workshop, please complete the
+following things to prepare (the TV emoji 📺 indicates steps that are only
+necessary if the workshop is remote via Zoom):
 
 - [ ] Setup the project (follow the setup instructions below) (~5 minutes)
-- [ ] Install and setup [Zoom](https://zoom.us) on the computer you will be
+- [ ] 📺 Install and setup [Zoom](https://zoom.us) on the computer you will be
       using (~5 minutes)
-- [ ] Watch
+- [ ] 📺 Watch
       [Use Zoom for KCD Workshops](https://egghead.io/lessons/egghead-use-zoom-for-kcd-workshops)
       (~8 minutes).
 - [ ] Watch
@@ -64,8 +62,8 @@ Here are the patterns we'll be covering:
 ## System Requirements
 
 - [git][git] v2 or greater
-- [NodeJS][node] v8 or greater
-- [yarn][yarn] v1 or greater (or [npm][npm] v6 or greater)
+- [NodeJS][node] v10 or greater
+- [npm][npm] v5.2.0 or greater
 
 All of these must be available in your `PATH`. To verify things are set up
 properly, you can run this:
@@ -73,7 +71,7 @@ properly, you can run this:
 ```shell
 git --version
 node --version
-yarn --version # or npm --version
+npm --version
 ```
 
 If you have trouble with any of these, learn more about the PATH environment
@@ -82,9 +80,9 @@ variable and how to fix it here for [windows][win-path] or
 
 ## Setup
 
-You should be able to work through the entire workshop in the browser. This is
-actually the recommended approach as it requires absolutely no setup whatsoever.
-Go to
+You may be able to work through the entire workshop in the browser. It requires
+absolutely no setup whatsoever, though people do sometimes have trouble with it
+working perfectly. However, if you would like to try it, go to
 [this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
 and you should be good to go.
 
@@ -118,6 +116,8 @@ To get the app up and running (and really see if it worked), run:
 npm start
 ```
 
+Click around and become familiar with the app and the exercises.
+
 This should start up your browser. If you're familiar, this is a standard
 [react-scripts](https://github.com/facebook/create-react-app) application.
 
@@ -130,8 +130,8 @@ You can also open
 npm test
 ```
 
-This will start [Jest](http://facebook.github.io/jest) in watch mode. Read the
-output and play around with it.
+This will start [Jest](https://jestjs.io/) in watch mode. Read the output and
+play around with it.
 
 **Your goal will be to go into each test, swap the final version for the
 exercise version in the import, and make the tests pass**
@@ -152,6 +152,7 @@ emoji characters are here to help you.
 - **Dominic the Document** 📜 will give you links to useful documentation
 - **Berry the Bomb** 💣 will be hanging around anywhere you need to blow stuff
   up (delete code)
+- **Peter the Product Manager** 👨‍💼 helps us know what our users want
 - **Alfred the Alert** 🚨 will occasionally show up in the test failures with
   potential explanations for why the tests are failing.
 
@@ -161,25 +162,10 @@ emoji characters are here to help you.
 
 <summary>"npm run setup" command not working</summary>
 
-Here's what the setup script does. If it fails, try doing each of these things
-individually yourself:
-
-```
-# verify your environment will work with the project
-node ./scripts/verify
-
-# install dependencies
-npm install
-
-# verify the project is ready to run
-npm run build
-npm run test:coverage
-```
-
-If any of those scripts fail, please try to work out what went wrong by the
-error message you get. If you still can't work it out, feel free to [open an
-issue][issue] with _all_ the output from that script. I will try to help if I
-can.
+Please read through the error message and identify the step that is failing.
+There should be an error message that will hopefully help guide you to the
+solution. If it doesn't, please copy and past _all_ of the output into a new
+issue on the project repository.
 
 </details>
 
@@ -221,46 +207,28 @@ specification. Contributions of any kind welcome!
 This material is available for private, non-commercial use under the
 [GPL version 3](http://www.gnu.org/licenses/gpl-3.0-standalone.html). If you
 would like to use this material to conduct your own workshop, please contact me
-at kent@doddsfamily.us
+at kentcdodds@gmail.com
 
+<!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
-[yarn]: https://yarnpkg.com/
-[build-badge]:
-  https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
+[build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
 [build]: https://travis-ci.org/kentcdodds/advanced-react-patterns
-[license-badge]:
-  https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]:
-  https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
-[prs-badge]:
-  https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
+[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
+[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[coc-badge]:
-  https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]:
-  https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
-[github-watch-badge]:
-  https://img.shields.io/github/watchers/kentcdodds/advanced-react-patterns.svg?style=social
-[github-watch]: https://github.com/kentcdodds/advanced-react-patterns/watchers
-[github-star-badge]:
-  https://img.shields.io/github/stars/kentcdodds/advanced-react-patterns.svg?style=social
-[github-star]: https://github.com/kentcdodds/advanced-react-patterns/stargazers
-[twitter]:
-  https://twitter.com/intent/tweet?text=Check%20out%20advanced-react-patterns%20by%20@kentcdodds%20https://github.com/kentcdodds/advanced-react-patterns%20%F0%9F%91%8D
-[twitter-badge]:
-  https://img.shields.io/twitter/url/https/github.com/kentcdodds/advanced-react-patterns.svg?style=social
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
-[win-path]:
-  https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
+[win-path]: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
 [mac-path]: http://stackoverflow.com/a/24322978/971592
 [issue]: https://github.com/kentcdodds/advanced-react-patterns/issues/new
-[win-build-badge]:
-  https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
+[win-build-badge]: https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
 [win-build]: https://ci.appveyor.com/project/kentcdodds/advanced-react-patterns
-[coverage-badge]:
-  https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-patterns.svg?style=flat-square
+[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-patterns.svg?style=flat-square
 [coverage]: https://codecov.io/github/kentcdodds/advanced-react-patterns
 [watchman]: https://facebook.github.io/watchman/docs/install.html
+<!-- prettier-ignore-end -->

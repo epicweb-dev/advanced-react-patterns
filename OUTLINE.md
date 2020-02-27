@@ -37,7 +37,7 @@
 - 😴 10 Minutes
 - 🏋 Compound Components
 - 🏋 Flexible Compound Components
-- 😴 30 Minutes
+- 🌮 30 Minutes
 - 🏋 Prop Collections and Getters
 - 😴 10 Minutes
 - 🏋 State Reducers
@@ -75,6 +75,7 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 - **Olivia the Owl** 🦉 "Pro-tip"
 - **Dominic the Document** 📜 "Docs links"
 - **Berry the Bomb** 💣 "Remove this code"
+- **Peter the Product Manager** 👨‍💼 "Story time"
 - **Alfred the Alert** 🚨 "Extra helpful in test errors"
 
 ## Workshop Feedback
