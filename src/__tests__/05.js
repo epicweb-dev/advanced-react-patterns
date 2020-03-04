@@ -1,51 +1,44 @@
 import React from 'react'
-import {renderToggle, fireEvent} from '../../test/utils'
-import Usage from '../exercises-final/05'
-// import Usage from '../exercises/05'
+import {renderToggle, screen, fireEvent} from '../../test/utils'
+import Usage from '../final/05'
+// import Usage from '../exercise/05'
 
 test('renders a toggle component', () => {
   const {toggleButton, toggle} = renderToggle(<Usage />)
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
   toggle()
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
   toggle()
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
 })
 
 test('can click too much', () => {
-  const {
-    toggleButton,
-    toggle,
-    getByTestId,
-    queryByTestId,
-    getByText,
-    queryByText,
-  } = renderToggle(<Usage />)
-  expect(toggleButton).toBeOff()
+  const {toggleButton, toggle} = renderToggle(<Usage />)
+  expect(toggleButton).not.toBeChecked()
   toggle() // 1
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
   toggle() // 2
-  expect(toggleButton).toBeOff()
-  expect(getByTestId('click-count')).toHaveTextContent('2')
+  expect(toggleButton).not.toBeChecked()
+  expect(screen.getByTestId('click-count')).toHaveTextContent('2')
   toggle() // 3
-  expect(toggleButton).toBeOn()
-  expect(queryByText(/whoa/i)).not.toBeInTheDocument()
+  expect(toggleButton).toBeChecked()
+  expect(screen.queryByText(/whoa/i)).not.toBeInTheDocument()
   toggle() // 4
-  expect(toggleButton).toBeOn()
-  expect(getByText(/whoa/i)).toBeInTheDocument()
+  expect(toggleButton).toBeChecked()
+  expect(screen.getByText(/whoa/i)).toBeInTheDocument()
   toggle() // 5: Whoa, too many
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
   toggle() // 6
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
 
-  expect(getByTestId('notice')).not.toBeNull()
+  expect(screen.getByTestId('notice')).not.toBeNull()
 
-  fireEvent.click(getByText('Reset'))
-  expect(queryByTestId('notice')).toBeNull()
+  fireEvent.click(screen.getByText('Reset'))
+  expect(screen.queryByTestId('notice')).toBeNull()
 
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
   toggle()
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
 
-  expect(getByTestId('click-count')).toHaveTextContent('1')
+  expect(screen.getByTestId('click-count')).toHaveTextContent('1')
 })

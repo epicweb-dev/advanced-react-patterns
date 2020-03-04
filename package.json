@@ -12,13 +12,13 @@
     "npm": ">=6"
   },
   "dependencies": {
-    "@kentcdodds/react-workshop-app": "^1.0.1",
+    "@kentcdodds/react-workshop-app": "^2.1.0",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.4.1",
     "chalk": "^3.0.0",
+    "codegen.macro": "^3.0.0",
     "dequal": "^1.0.0",
     "lodash": "^4.17.15",
-    "preval.macro": "^4.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
@@ -45,7 +45,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/exercises-final/**/*.js"
+      "src/final/**/*.js"
     ]
   },
   "eslintConfig": {

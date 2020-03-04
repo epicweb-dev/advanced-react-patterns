@@ -1,19 +1,19 @@
 import React from 'react'
 import {renderToggle} from '../../test/utils'
-import Usage from '../exercises-final/03'
-// import Usage from '../exercises/03'
+import Usage from '../final/03'
+// import Usage from '../exercise/03'
 
 test('renders a toggle component', () => {
   const {toggleButton, toggle, container} = renderToggle(<Usage />)
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
   expect(container.textContent).toMatch('The button is off')
   expect(container.textContent).not.toMatch('The button is on')
   toggle()
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
   expect(container.textContent).toMatch('The button is on')
   expect(container.textContent).not.toMatch('The button is off')
   toggle()
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
   expect(container.textContent).toMatch('The button is off')
   expect(container.textContent).not.toMatch('The button is on')
 })

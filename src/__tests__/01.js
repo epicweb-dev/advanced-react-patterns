@@ -1,13 +1,14 @@
 import React from 'react'
 import {
   render,
+  screen,
   fireEvent,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
-import Usage from '../exercises-final/01'
-// import Usage from '../exercises/01'
+import Usage from '../final/01'
+// import Usage from '../exercise/01'
 // NOTE: if you do the extra credit, make sure to enable the last test.
 
 jest.mock('../user-client', () => {
@@ -26,12 +27,12 @@ function renderUsage() {
   const userDisplayPre = utils.container.querySelector('pre')
   return {
     ...utils,
-    submitButton: utils.getByText(/✔/),
-    resetButton: utils.getByText(/reset/i),
-    taglineInput: utils.getByLabelText(/tagline/i),
-    bioInput: utils.getByLabelText(/bio/i),
+    submitButton: screen.getByText(/✔/),
+    resetButton: screen.getByText(/reset/i),
+    taglineInput: screen.getByLabelText(/tagline/i),
+    bioInput: screen.getByLabelText(/bio/i),
     waitForLoading: () =>
-      waitForElementToBeRemoved(() => utils.getByText(/\.\.\./i)),
+      waitForElementToBeRemoved(() => screen.getByText(/\.\.\./i)),
     userDisplayPre,
     getDisplayData: () => JSON.parse(userDisplayPre.textContent),
   }
@@ -103,7 +104,6 @@ test('reset works', () => {
 
 test('failure works', async () => {
   const {
-    getByText,
     submitButton,
     resetButton,
     taglineInput,
@@ -126,7 +126,7 @@ test('failure works', async () => {
   await waitForLoading()
 
   expect(submitButton).toHaveTextContent(/try again/i)
-  getByText(testErrorMessage)
+  screen.getByText(testErrorMessage)
   expect(getDisplayData()).toEqual(mockUser)
 
   userClient.updateUser.mockClear()
@@ -152,7 +152,6 @@ test('failure works', async () => {
 // enable this test if you're doing the extra credit about optimistic updates
 test.skip('optimisitc updates works with failures', async () => {
   const {
-    getByText,
     submitButton,
     resetButton,
     taglineInput,
@@ -176,7 +175,7 @@ test.skip('optimisitc updates works with failures', async () => {
   await waitForLoading()
 
   expect(submitButton).toHaveTextContent(/try again/i)
-  getByText(testErrorMessage)
+  screen.getByText(testErrorMessage)
   expect(getDisplayData()).toEqual(mockUser)
 
   userClient.updateUser.mockClear()

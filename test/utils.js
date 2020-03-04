@@ -1,4 +1,4 @@
-import {render, fireEvent, wait} from '@testing-library/react'
+import {render, fireEvent} from '@testing-library/react'
 import React from 'react'
 import {
   findAllInRenderedTree,
@@ -50,4 +50,5 @@ function renderToggle(ui) {
   }
 }
 
-export {render, fireEvent, wait, renderToggle}
+export * from '@testing-library/react'
+export {render, renderToggle}

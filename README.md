@@ -18,10 +18,12 @@ simplicity.
 ## Pre-Workshop Instructions/Requirements
 
 In order for us to maximize our efforts during the workshop, please complete the
-following things to prepare (the TV emoji 📺 indicates steps that are only
-necessary if the workshop is remote via Zoom):
+following things to prepare.
 
-- [ ] Setup the project (follow the setup instructions below) (~5 minutes)
+- 📺 indicates steps that are only necessary if the workshop is remote via Zoom
+- 👋 indicates steps that are specific to the material for this workshop
+
+- [ ] 👋 Setup the project (follow the setup instructions below) (~5 minutes)
 - [ ] 📺 Install and setup [Zoom](https://zoom.us) on the computer you will be
       using (~5 minutes)
 - [ ] 📺 Watch
@@ -30,17 +32,17 @@ necessary if the workshop is remote via Zoom):
 - [ ] Watch
       [Setup and Logistics for KCD Workshops](https://egghead.io/lessons/egghead-setup-and-logistics-for-kcd-workshops)
       (~24 minutes). Please do NOT skip this step.
-- [ ] Watch [The Beginner's Guide to React](https://kcd.im/beginner-react)
+- [ ] 👋 Watch [The Beginner's Guide to React](https://kcd.im/beginner-react)
       (available free on Egghead.io), or have the equivalent experience (77
       minutes)
-- [ ] Watch my talk
+- [ ] 👋 Watch my talk
       [Why React Hooks](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
       (35 minutes)
-- [ ] Go through my
+- [ ] 👋 Go through my
       [Learn React Hooks Workshop](https://kentcdodds.com/workshops/hooks), or
       have the equivalent basic experience of using hooks. You should be
       experienced with `useState`, `useEffect`, and `useRef`.
-- [ ] Go through my
+- [ ] 👋 Go through my
       [Advanced React Hooks Workshop](https://kentcdodds.com/workshops/advanced-react-hooks),
       or have the equivalent experience. You should be experienced with
       `useContext` and `useReducer` (experience with `useMemo` and `useCallback`
@@ -62,8 +64,8 @@ Here are the patterns we'll be covering:
 ## System Requirements
 
 - [git][git] v2 or greater
-- [NodeJS][node] v10 or greater
-- [npm][npm] v5.2.0 or greater
+- [NodeJS][node] v8 or greater
+- [npm][npm] v6 or greater
 
 All of these must be available in your `PATH`. To verify things are set up
 properly, you can run this:
@@ -80,17 +82,6 @@ variable and how to fix it here for [windows][win-path] or
 
 ## Setup
 
-You may be able to work through the entire workshop in the browser. It requires
-absolutely no setup whatsoever, though people do sometimes have trouble with it
-working perfectly. However, if you would like to try it, go to
-[this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
-and you should be good to go.
-
-[![Edit advanced-react-patterns](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
-
-If you'd rather be able to work through the workshop on your own computer, then
-follow the following instructions.
-
 After you've made sure to have the correct things (and versions) installed, you
 should be able to just run a few commands to get set up:
 
@@ -103,10 +94,16 @@ npm run setup --silent
 This may take a few minutes. **It will ask you for your email.** This is
 optional and just automatically adds your email to the links in the project to
 make filling out some forms easier If you get any errors, please read through
-them and see if you can find out what the problem is. You may also want to look
-at [Troubleshooting](#troubleshooting). If you can't work it out on your own
-then please [file an issue][issue] and provide _all_ the output from the
-commands you ran (even if it's a lot).
+them and see if you can find out what the problem is. If you can't work it out
+on your own then please [file an issue][issue] and provide _all_ the output from
+the commands you ran (even if it's a lot).
+
+You may be able to work through the entire workshop in the browser. Go to
+[this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
+and you should be good to go. Note that sometimes people have trouble with
+codesandbox not working quite right with tests, but you should be able to work
+around that. If you're concerned, then it would probably be better to just set
+things up locally.
 
 ## Running the app
 
@@ -116,10 +113,8 @@ To get the app up and running (and really see if it worked), run:
 npm start
 ```
 
-Click around and become familiar with the app and the exercises.
-
 This should start up your browser. If you're familiar, this is a standard
-[react-scripts](https://github.com/facebook/create-react-app) application.
+[react-scripts](https://create-react-app.dev/) application.
 
 You can also open
 [the deployment of the app on Netlify](https://advanced-react-patterns.netlify.com/).
@@ -131,18 +126,21 @@ npm test
 ```
 
 This will start [Jest](https://jestjs.io/) in watch mode. Read the output and
-play around with it.
+play around with it. The tests are there to help you reach the final version,
+however _sometimes_ you can accomplish the task and the tests still fail if you
+implement things differently than I do in my solution, so don't look to them as
+a complete authority.
 
-**Your goal will be to go into each test, swap the final version for the
-exercise version in the import, and make the tests pass**
-
-## Helpful Emoji 🐨 💰 💯 🦉 📜 💣 🚨
+## Helpful Emoji 🐨 💪 🏁 💰 💯 🦉 📜 💣 👨‍💼 🚨
 
 Each exercise has comments in it to help you get through the exercise. These fun
 emoji characters are here to help you.
 
 - **Kody the Koala Bear** 🐨 will tell you when there's something specific you
   should do
+- **Matthew the Muscle** 💪 will indicate what you're working with an exercise
+- **Chuck the Checkered Flag** 🏁 will indicate that you're working with a final
+  version
 - **Marty the Money Bag** 💰 will give you specific tips (and sometimes code)
   along the way
 - **Hannah the Hundred** 💯 will give you extra challenges you can do if you
@@ -155,19 +153,6 @@ emoji characters are here to help you.
 - **Peter the Product Manager** 👨‍💼 helps us know what our users want
 - **Alfred the Alert** 🚨 will occasionally show up in the test failures with
   potential explanations for why the tests are failing.
-
-## Troubleshooting
-
-<details>
-
-<summary>"npm run setup" command not working</summary>
-
-Please read through the error message and identify the step that is failing.
-There should be an error message that will hopefully help guide you to the
-solution. If it doesn't, please copy and past _all_ of the output into a new
-issue on the project repository.
-
-</details>
 
 ## Contributors
 

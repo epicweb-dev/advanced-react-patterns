@@ -1,24 +1,24 @@
 import React from 'react'
-import {fireEvent, renderToggle} from '../../test/utils'
-import Usage, {Toggle} from '../exercises-final/06'
-// import Usage, {Toggle} from '../exercises/06'
+import {renderToggle, screen, fireEvent} from '../../test/utils'
+import Usage, {Toggle} from '../final/06'
+// import Usage, {Toggle} from '../exercise/06'
 
 test('toggling either toggle toggles both', () => {
-  const {getAllByTestId} = renderToggle(<Usage />)
-  const buttons = getAllByTestId('toggle-input')
+  renderToggle(<Usage />)
+  const buttons = screen.getAllByTestId('toggle-input')
   const [toggleButton1, toggleButton2] = buttons
   fireEvent.click(toggleButton1)
-  expect(toggleButton1).toBeOn()
-  expect(toggleButton2).toBeOn()
+  expect(toggleButton1).toBeChecked()
+  expect(toggleButton2).toBeChecked()
 
   fireEvent.click(toggleButton2)
-  expect(toggleButton1).toBeOff()
-  expect(toggleButton2).toBeOff()
+  expect(toggleButton1).not.toBeChecked()
+  expect(toggleButton2).not.toBeChecked()
 })
 
 test('toggle can still be uncontrolled', () => {
   const {toggleButton, toggle} = renderToggle(<Toggle />)
-  expect(toggleButton).toBeOff()
+  expect(toggleButton).not.toBeChecked()
   toggle()
-  expect(toggleButton).toBeOn()
+  expect(toggleButton).toBeChecked()
 })

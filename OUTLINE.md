@@ -33,16 +33,16 @@
 ## Schedule
 
 - 😴 Logistics
-- 🏋 Context
+- 💪 Context
 - 😴 10 Minutes
-- 🏋 Compound Components
-- 🏋 Flexible Compound Components
+- 💪 Compound Components
+- 💪 Flexible Compound Components
 - 🌮 30 Minutes
-- 🏋 Prop Collections and Getters
+- 💪 Prop Collections and Getters
 - 😴 10 Minutes
-- 🏋 State Reducers
+- 💪 State Reducers
 - 😴 10 Minutes
-- 🏋 Control Props
+- 💪 Control Props
 
 ## Scripts
 
@@ -62,14 +62,16 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 
 ## Exercises
 
-- `src/exercises/0x.md`: Background, Exercise Instructions, Extra Credit
-- `src/exercises/0x.js`: Exercise with Emoji helpers
+- `src/exercise/0x.md`: Background, Exercise Instructions, Extra Credit
+- `src/exercise/0x.js`: Exercise with Emoji helpers
 - `src/__tests__/0x.js`: Tests
-- `src/exercises-final/0x.js`: Final version
+- `src/final/0x.js`: Final version
 
 ## Emoji
 
 - **Kody the Koala Bear** 🐨 "Do this"
+- **Matthew the Muscle** 💪 "Exercise"
+- **Chuck the Checkered Flag** 🏁 "Final"
 - **Marty the Money Bag** 💰 "Here's a hint"
 - **Hannah the Hundred** 💯 "Extra Credit"
 - **Olivia the Owl** 🦉 "Pro-tip"
