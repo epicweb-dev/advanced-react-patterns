@@ -12,9 +12,9 @@
     "npm": ">=6"
   },
   "dependencies": {
-    "@kentcdodds/react-workshop-app": "^2.1.0",
+    "@kentcdodds/react-workshop-app": "^2.4.0",
     "@testing-library/jest-dom": "^5.1.1",
-    "@testing-library/react": "^9.4.1",
+    "@testing-library/react": "^9.5.0",
     "chalk": "^3.0.0",
     "codegen.macro": "^3.0.0",
     "dequal": "^1.0.0",
@@ -50,6 +50,11 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-react-app"
+    ]
   },
   "browserslist": {
     "development": [
