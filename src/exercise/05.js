@@ -103,6 +103,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'State Reducers'
 
 export default Usage

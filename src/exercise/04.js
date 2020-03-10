@@ -25,6 +25,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Prop Collections and Getters'
 
 export default Usage

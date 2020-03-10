@@ -135,7 +135,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Control Props'
 
 export default Usage
 export {Toggle}

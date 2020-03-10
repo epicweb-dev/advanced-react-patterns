@@ -122,7 +122,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Control Props'
 
 export default Usage
 // we're adding the Toggle export for tests

@@ -53,6 +53,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Flexible Compound Components'
 
 export default Usage

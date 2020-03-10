@@ -8,8 +8,7 @@ import dequal from 'dequal'
 import * as userClient from '../user-client'
 import {useAuth} from '../auth-context'
 
-const UserStateContext = React.createContext()
-const UserDispatchContext = React.createContext()
+const UserContext = React.createContext()
 
 function userReducer(state, action) {
   switch (action.type) {
@@ -25,47 +24,18 @@ function userReducer(state, action) {
 function UserProvider({children}) {
   const {user} = useAuth()
   const [state, dispatch] = React.useReducer(userReducer, {user})
-  return (
-    <UserStateContext.Provider value={state}>
-      <UserDispatchContext.Provider value={dispatch}>
-        {children}
-      </UserDispatchContext.Provider>
-    </UserStateContext.Provider>
-  )
+  const value = React.useMemo(() => [state, dispatch], [state, dispatch])
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
-function useUserState() {
-  const context = React.useContext(UserStateContext)
-  if (context === undefined) {
-    throw new Error(`useUserState must be used within a UserProvider`)
-  }
-  return context
-}
-
-function useUserDispatch() {
-  const context = React.useContext(UserDispatchContext)
-  if (context === undefined) {
-    throw new Error(`useUserDispatch must be used within a UserProvider`)
-  }
-  return context
-}
-
-// got this idea from Dan and I love it:
-// https://twitter.com/dan_abramov/status/1125773153584676864
-async function updateUser(dispatch, user, updates) {
-  const updatedUser = await userClient.updateUser(user, updates)
-  dispatch({type: 'update', updatedUser})
-}
-
-// export {UserProvider, useUserDispatch, useUserState, updateUser}
+// export {UserProvider, UserContext}
 
 // src/screens/user-profile.js
 
-// import {UserProvider, useUserState, updateUser} from './context/user-context'
+// import {UserProvider, UserContext} from './context/user-context'
 
 function UserSettings() {
-  const {user} = useUserState()
-  const userDispatch = useUserDispatch()
+  const [{user}, userDispatch] = React.useContext(UserContext)
 
   const [asyncState, asyncDispatch] = React.useReducer(
     (s, a) => ({...s, ...a}),
@@ -87,8 +57,9 @@ function UserSettings() {
     event.preventDefault()
 
     asyncDispatch({status: 'pending'})
-    updateUser(userDispatch, user, formState).then(
-      () => {
+    userClient.updateUser(user, formState).then(
+      updatedUser => {
+        userDispatch({type: 'update', updatedUser})
         asyncDispatch({status: 'resolved'})
       },
       error => {
@@ -159,21 +130,15 @@ function UserSettings() {
             ? 'Submit'
             : '✔'}
         </button>
-        {isRejected ? (
-          <div style={{color: 'red'}}>
-            <pre>{error.message}</pre>
-          </div>
-        ) : null}
+        {isRejected ? <pre style={{color: 'red'}}>{error.message}</pre> : null}
       </div>
     </form>
   )
 }
 
 function UserDataDisplay() {
-  const {user} = useUserState()
-  return (
-    <pre data-testid="user-data-display">{JSON.stringify(user, null, 2)}</pre>
-  )
+  const [{user}] = React.useContext(UserContext)
+  return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
 function Usage() {
@@ -185,6 +150,7 @@ function Usage() {
         backgroundColor: '#ddd',
         borderRadius: 4,
         padding: 10,
+        overflow: 'scroll',
       }}
     >
       <UserProvider>
@@ -194,6 +160,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Context'
 
 export default Usage

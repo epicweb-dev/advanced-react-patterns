@@ -3,55 +3,58 @@
 import React from 'react'
 import dequal from 'dequal'
 
+// 🦉 in a real app, the context provider will be in a separate file from
+// the consumers. But to keep things simple, we're putting this all in this
+// one file and labeling the sections of code as well as imports/exports
 // ./context/user-context.js
 
-// 🐨 you're gonna need these, so just uncomment it now :)
-// import * as userClient from '../user-client'
-// import {useAuth} from '../auth-context'
+import * as userClient from '../user-client'
+import {useAuth} from '../auth-context'
 
 // 🐨 create your context here
+
+// 💰 here's a reducer you can use
+function userReducer(state, action) {
+  switch (action.type) {
+    case 'update': {
+      return {user: action.updatedUser}
+    }
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`)
+    }
+  }
+}
 
 function UserProvider({children}) {
   // 🐨 get the user from the useAuth hook so you can use that as your initial
   // state for this context provider
   // 💰 const {user} = useAuth()
 
-  // 🐨 useReducer here with a reducer you write and initialize it with the user
-  // you got from useAuth
-  // 💰 the reducer should handle an action type called `update` which will be
-  // dispatched in the `updateUser` helper below
+  // 🐨 useReducer here with the userReducer and initialize the state it with
+  // the user you got from useAuth
 
-  // 🐨 render state and dispatch as values to a context provider here
+  // 🐨 render state and dispatch as the values to a context provider here
   // 💰 make sure you don't forget to render {children} as well!
   return children
 }
 
-// 🦉 You don't have to do this, but one good idea is to create a custom hook
-// which retrieves the context value via React.useContext, then people can use
-// your custom hook. If you want to try that, then go ahead and put it here.
-
-// This is a utility function which accepts the reducer's dispatch function
-// as well as the user and any updates. It's responsible for interacting with
-// the userClient and the dispatch.
-async function updateUser(dispatch, user, updates) {
-  // 🐨 use the userClient.updateUser function to send updates to the backend
-  // 🐨 then when that's completed, dispatch an 'update' action with the updated
-  // user information you get back
-  // 💰 userClient.updateUser(user, updates) returns a promise which resolves
-  // to the updatedUser.
-  // 💰 this is an async function so you can use `await` if you want :)
-}
+// ./context/user-context.js
 
 // 🦉 here's where you'd normally export all this stuff
+// export {UserProvider, UserContext}
 
 // src/screens/user-profile.js
 
 // 🦉 here's where you'd normally import all the stuff you need from the context
+// import {UserProvider, UserContext} from './context/user-context'
 
 function UserSettings() {
-  // 🐨 get the user object and userDispatch function from context
-  const user = {tagline: '', bio: ''}
-  const userDispatch = () => {}
+  // 💣 remove this stuff. It's just here to make it so the exercise page doesn't crash :)
+  const [{user}, userDispatch] = [
+    {user: {username: 'TODO', tagline: 'TODO', bio: 'TODO'}},
+    () => {},
+  ]
+  // 🐨 get the user object and userDispatch function from context with React.useContext
 
   const [asyncState, asyncDispatch] = React.useReducer(
     (s, a) => ({...s, ...a}),
@@ -73,8 +76,9 @@ function UserSettings() {
     event.preventDefault()
 
     asyncDispatch({status: 'pending'})
-    updateUser(userDispatch, user, formState).then(
-      () => {
+    userClient.updateUser(user, formState).then(
+      updatedUser => {
+        userDispatch({type: 'update', updatedUser})
         asyncDispatch({status: 'resolved'})
       },
       error => {
@@ -145,22 +149,20 @@ function UserSettings() {
             ? 'Submit'
             : '✔'}
         </button>
-        {isRejected ? (
-          <div style={{color: 'red'}}>
-            <pre>{error.message}</pre>
-          </div>
-        ) : null}
+        {isRejected ? <pre style={{color: 'red'}}>{error.message} </pre> : null}
       </div>
     </form>
   )
 }
 
 function UserDataDisplay() {
-  // 🐨 get the user from context
-  const user = {}
-  return (
-    <pre data-testid="user-data-display">{JSON.stringify(user, null, 2)}</pre>
-  )
+  // 💣 remove this stuff. It's just here to make it so the exercise page doesn't crash :)
+  const [{user}] = [
+    {user: {username: 'TODO', tagline: 'TODO', bio: 'TODO'}},
+    () => {},
+  ]
+  // 🐨 get the user object from context with React.useContext
+  return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
 function Usage() {
@@ -172,15 +174,14 @@ function Usage() {
         backgroundColor: '#ddd',
         borderRadius: 4,
         padding: 10,
+        overflow: 'scroll',
       }}
     >
-      <UserProvider>
-        <UserSettings />
-        <UserDataDisplay />
-      </UserProvider>
+      {/* 🐨 wrap these in the UserProvider */}
+      <UserSettings />
+      <UserDataDisplay />
     </div>
   )
 }
-Usage.title = 'Context'
 
 export default Usage

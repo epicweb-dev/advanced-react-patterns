@@ -38,6 +38,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Compound Components'
 
 export default Usage
