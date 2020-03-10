@@ -17,7 +17,7 @@ function useToggle() {
   }
 }
 
-function Usage() {
+function App() {
   const {on, togglerProps} = useToggle()
   return (
     <div>
@@ -30,4 +30,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

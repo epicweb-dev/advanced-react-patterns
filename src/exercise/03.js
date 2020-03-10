@@ -40,7 +40,7 @@ function ToggleButton({on, toggle, ...props}) {
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
-function Usage() {
+function App() {
   return (
     <div>
       <Toggle>
@@ -54,7 +54,7 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App
 
 /*
 eslint

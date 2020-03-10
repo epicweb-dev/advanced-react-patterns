@@ -27,7 +27,7 @@ const ToggleOff = () => null
 // Accepts `on` and `toggle` props and returns the <Switch /> with those props.
 const ToggleButton = () => null
 
-function Usage() {
+function App() {
   return (
     <div>
       <Toggle>
@@ -39,7 +39,7 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App
 
 /*
 eslint

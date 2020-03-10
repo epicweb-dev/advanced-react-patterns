@@ -1,10 +1,10 @@
 import React from 'react'
 import {renderToggle, screen, fireEvent} from '../../test/utils'
-import Usage, {Toggle} from '../final/06'
-// import Usage, {Toggle} from '../exercise/06'
+import App, {Toggle} from '../final/06'
+// import App, {Toggle} from '../exercise/06'
 
 test('toggling either toggle toggles both', () => {
-  renderToggle(<Usage />)
+  renderToggle(<App />)
   const buttons = screen.getAllByTestId('toggle-input')
   const [toggleButton1, toggleButton2] = buttons
   fireEvent.click(toggleButton1)

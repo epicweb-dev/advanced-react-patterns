@@ -1,5 +1,5 @@
 // Context
-// 💯 avoiding unmount issues
+// 💯 avoid unmount issues
 
 import React from 'react'
 import dequal from 'dequal'
@@ -184,7 +184,7 @@ function UserSettings() {
             setFormState(user)
             userDispatch({type: 'reset'})
           }}
-          disabled={!isChanged}
+          disabled={!isChanged || isPending}
         >
           Reset
         </button>
@@ -211,7 +211,7 @@ function UserDataDisplay() {
   return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
-function Usage() {
+function App() {
   const [showUserScreen, setShowUserScreen] = React.useState(true)
   return (
     <div
@@ -242,4 +242,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

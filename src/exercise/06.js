@@ -89,7 +89,7 @@ function Toggle({on: controlledOn, onChange}) {
   return <Switch {...props} />
 }
 
-function Usage() {
+function App() {
   const [bothOn, setBothOn] = React.useState(false)
   const [timesClicked, setTimesClicked] = React.useState(0)
 
@@ -134,7 +134,7 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App
 // we're adding the Toggle export for tests
 export {Toggle}
 

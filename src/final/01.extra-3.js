@@ -1,4 +1,4 @@
-// React Context
+// Context
 // 💯 moving async logic to the helper
 
 import React from 'react'
@@ -176,7 +176,10 @@ function UserSettings() {
         >
           Reset
         </button>
-        <button type="submit" disabled={!isChanged && !isRejected}>
+        <button
+          type="submit"
+          disabled={(!isChanged && !isRejected) || isPending}
+        >
           {isPending
             ? '...'
             : isRejected
@@ -196,7 +199,7 @@ function UserDataDisplay() {
   return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
-function Usage() {
+function App() {
   return (
     <div
       style={{
@@ -216,4 +219,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

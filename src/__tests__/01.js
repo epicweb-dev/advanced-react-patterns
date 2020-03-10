@@ -7,8 +7,8 @@ import {
 } from '@testing-library/react'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
-import Usage from '../final/01'
-// import Usage from '../exercise/01'
+import App from '../final/01'
+// import App from '../exercise/01'
 // NOTE: if you do the extra credit, make sure to enable the last test.
 
 jest.mock('../user-client', () => {
@@ -17,10 +17,10 @@ jest.mock('../user-client', () => {
 
 const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
 
-function renderUsage() {
+function renderApp() {
   const utils = render(
     <AuthProvider user={{user: mockUser}}>
-      <Usage />
+      <App />
     </AuthProvider>,
   )
 
@@ -47,7 +47,7 @@ test('happy path works', async () => {
     bioInput,
     waitForLoading,
     getDisplayData,
-  } = renderUsage()
+  } = renderApp()
 
   // unchanged form disables reset and submit buttons
   expect(submitButton).toHaveAttribute('disabled')
@@ -95,7 +95,7 @@ test('happy path works', async () => {
 })
 
 test('reset works', () => {
-  const {resetButton, taglineInput} = renderUsage()
+  const {resetButton, taglineInput} = renderApp()
 
   fireEvent.change(taglineInput, {target: {value: 'foo'}})
   fireEvent.click(resetButton)
@@ -110,7 +110,7 @@ test('failure works', async () => {
     bioInput,
     waitForLoading,
     getDisplayData,
-  } = renderUsage()
+  } = renderApp()
 
   const testData = {...mockUser, bio: 'test bio'}
   fireEvent.change(bioInput, {target: {value: testData.bio}})
@@ -158,7 +158,7 @@ test.skip('optimisitc updates works with failures', async () => {
     bioInput,
     waitForLoading,
     getDisplayData,
-  } = renderUsage()
+  } = renderApp()
 
   const testData = {...mockUser, bio: 'test bio'}
   fireEvent.change(bioInput, {target: {value: testData.bio}})

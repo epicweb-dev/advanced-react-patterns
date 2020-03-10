@@ -52,7 +52,7 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
 }
 useToggle.reducer = toggleReducer
 
-function Usage() {
+function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
   const clickedTooMuch = timesClicked >= 4
 
@@ -91,4 +91,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

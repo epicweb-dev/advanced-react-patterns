@@ -4,7 +4,7 @@
 const sleep = t => new Promise(resolve => setTimeout(resolve, t))
 
 async function updateUser(user, updates) {
-  await sleep(1000) // simulate a real-world wait period
+  await sleep(1500) // simulate a real-world wait period
   if (`${updates.tagline} ${updates.bio}`.includes('fail')) {
     return Promise.reject({message: 'Something went wrong'})
   }

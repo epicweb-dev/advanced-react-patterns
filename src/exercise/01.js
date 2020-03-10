@@ -165,7 +165,7 @@ function UserDataDisplay() {
   return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
-function Usage() {
+function App() {
   return (
     <div
       style={{
@@ -184,7 +184,7 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App
 
 /*
 eslint

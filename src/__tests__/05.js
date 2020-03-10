@@ -1,10 +1,10 @@
 import React from 'react'
 import {renderToggle, screen, fireEvent} from '../../test/utils'
-import Usage from '../final/05'
-// import Usage from '../exercise/05'
+import App from '../final/05'
+// import App from '../exercise/05'
 
 test('renders a toggle component', () => {
-  const {toggleButton, toggle} = renderToggle(<Usage />)
+  const {toggleButton, toggle} = renderToggle(<App />)
   expect(toggleButton).not.toBeChecked()
   toggle()
   expect(toggleButton).toBeChecked()
@@ -13,7 +13,7 @@ test('renders a toggle component', () => {
 })
 
 test('can click too much', () => {
-  const {toggleButton, toggle} = renderToggle(<Usage />)
+  const {toggleButton, toggle} = renderToggle(<App />)
   expect(toggleButton).not.toBeChecked()
   toggle() // 1
   expect(toggleButton).toBeChecked()
