@@ -1,7 +1,0 @@
-{
-  "rules": {
-    // this is disabled because some of the exercises define a function
-    // or variable and expect you to use it.
-    "no-unused-vars": "off"
-  }
-}
