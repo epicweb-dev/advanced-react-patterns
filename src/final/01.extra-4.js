@@ -10,7 +10,9 @@ import * as userClient from '../user-client'
 import {useAuth} from '../auth-context'
 
 const UserStateContext = React.createContext()
+UserStateContext.displayName = 'UserStateContext'
 const UserDispatchContext = React.createContext()
+UserDispatchContext.displayName = 'UserDispatchContext'
 
 function userReducer(state, action) {
   switch (action.type) {
