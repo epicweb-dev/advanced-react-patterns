@@ -132,8 +132,18 @@
       "contributions": [
         "fundingFinding"
       ]
+    },
+    {
+      "login": "AlexMunoz",
+      "name": "Alex Munoz",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3093946?v=4",
+      "profile": "http://alexmunoz.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
