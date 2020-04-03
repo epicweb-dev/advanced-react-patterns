@@ -39,7 +39,6 @@ function renderApp() {
 }
 
 test('happy path works', async () => {
-  // expect('fail', 'This should be pass').toBe('pass')
   const {
     submitButton,
     resetButton,
@@ -122,55 +121,6 @@ test('failure works', async () => {
   const updatedUser = {...mockUser, ...testData}
 
   fireEvent.click(submitButton)
-
-  await waitForLoading()
-
-  expect(submitButton).toHaveTextContent(/try again/i)
-  screen.getByText(testErrorMessage)
-  expect(getDisplayData()).toEqual(mockUser)
-
-  userClient.updateUser.mockClear()
-
-  userClient.updateUser.mockImplementationOnce(() =>
-    Promise.resolve(updatedUser),
-  )
-  fireEvent.click(submitButton)
-
-  await waitForLoading()
-
-  expect(submitButton).toHaveTextContent(/✔/)
-  expect(resetButton).toHaveAttribute('disabled')
-
-  // make sure the inputs have the right value
-  expect(taglineInput.value).toBe(updatedUser.tagline)
-  expect(bioInput.value).toBe(updatedUser.bio)
-
-  // make sure the display data is correct
-  expect(getDisplayData()).toEqual(updatedUser)
-})
-
-// enable this test if you're doing the extra credit about optimistic updates
-test.skip('optimisitc updates works with failures', async () => {
-  const {
-    submitButton,
-    resetButton,
-    taglineInput,
-    bioInput,
-    waitForLoading,
-    getDisplayData,
-  } = renderApp()
-
-  const testData = {...mockUser, bio: 'test bio'}
-  fireEvent.change(bioInput, {target: {value: testData.bio}})
-  const testErrorMessage = 'test error message'
-  userClient.updateUser.mockImplementationOnce(() =>
-    Promise.reject({message: testErrorMessage}),
-  )
-  fireEvent.click(submitButton)
-
-  const updatedUser = {...mockUser, ...testData}
-  // this is the only real addition to the previous test
-  expect(getDisplayData()).toEqual(updatedUser)
 
   await waitForLoading()
 
