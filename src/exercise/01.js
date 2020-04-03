@@ -1,23 +1,51 @@
-// React Context
+// Context Controller
+// http://localhost:3000/isolated/exercise/01.js
 
 import React from 'react'
 import dequal from 'dequal'
 
-// 🦉 in a real app, the context provider will be in a separate file from
-// the consumers. But to keep things simple, we're putting this all in this
-// one file and labeling the sections of code as well as imports/exports
 // ./context/user-context.js
 
 import * as userClient from '../user-client'
 import {useAuth} from '../auth-context'
 
-// 🐨 create your context here
+const UserContext = React.createContext()
+UserContext.displayName = 'UserContext'
 
-// 💰 here's a reducer you can use
 function userReducer(state, action) {
   switch (action.type) {
-    case 'update': {
-      return {user: action.updatedUser}
+    case 'start update': {
+      return {
+        ...state,
+        user: {...state.user, ...action.updates},
+        status: 'pending',
+        storedUser: state.user,
+      }
+    }
+    case 'finish update': {
+      return {
+        ...state,
+        user: action.updatedUser,
+        status: 'resolved',
+        storedUser: null,
+        error: null,
+      }
+    }
+    case 'fail update': {
+      return {
+        ...state,
+        status: 'rejected',
+        error: action.error,
+        user: state.storedUser,
+        storedUser: null,
+      }
+    }
+    case 'reset': {
+      return {
+        ...state,
+        status: null,
+        error: null,
+      }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -26,41 +54,36 @@ function userReducer(state, action) {
 }
 
 function UserProvider({children}) {
-  // 🐨 get the user from the useAuth hook so you can use that as your initial
-  // state for this context provider
-  // 💰 const {user} = useAuth()
-
-  // 🐨 useReducer here with the userReducer and initialize the state it with
-  // the user you got from useAuth
-
-  // 🐨 render state and dispatch as the values to a context provider here
-  // 💰 make sure you don't forget to render {children} as well!
-  return children
+  const {user} = useAuth()
+  const [state, dispatch] = React.useReducer(userReducer, {
+    status: null,
+    error: null,
+    storedUser: user,
+    user,
+  })
+  const value = [state, dispatch]
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
-// ./context/user-context.js
+function useUser() {
+  const context = React.useContext(UserContext)
+  if (context === undefined) {
+    throw new Error(`useUser must be used within a UserProvider`)
+  }
+  return context
+}
 
-// 🦉 here's where you'd normally export all this stuff
-// export {UserProvider, UserContext}
+// 🐨 add a function here called `updateUser`
+// Then go down to the `handleSubmit` from `UserSettings` and put it in
+// this function. It should accept: dispatch, user, and updates
+
+// export {UserProvider, useUserState}
 
 // src/screens/user-profile.js
-
-// 🦉 here's where you'd normally import all the stuff you need from the context
-// import {UserProvider, UserContext} from './context/user-context'
-
+// import {UserProvider, useUserState} from './context/user-context'
 function UserSettings() {
-  // 💣 remove this stuff. It's just here to make it so the exercise page doesn't crash :)
-  const [{user}, userDispatch] = [
-    {user: {username: 'TODO', tagline: 'TODO', bio: 'TODO'}},
-    () => {},
-  ]
-  // 🐨 get the user object and userDispatch function from context with React.useContext
+  const [{user, status, error}, userDispatch] = useUser()
 
-  const [asyncState, asyncDispatch] = React.useReducer(
-    (s, a) => ({...s, ...a}),
-    {status: null, error: null},
-  )
-  const {error, status} = asyncState
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
 
@@ -74,16 +97,11 @@ function UserSettings() {
 
   function handleSubmit(event) {
     event.preventDefault()
-
-    asyncDispatch({status: 'pending'})
+    // 🐨 move the following logic to the `updateUser` function you create above
+    userDispatch({type: 'start update', updates: formState})
     userClient.updateUser(user, formState).then(
-      updatedUser => {
-        userDispatch({type: 'update', updatedUser})
-        asyncDispatch({status: 'resolved'})
-      },
-      error => {
-        asyncDispatch({status: 'rejected', error})
-      },
+      updatedUser => userDispatch({type: 'finish update', updatedUser}),
+      error => userDispatch({type: 'fail update', error}),
     )
   }
 
@@ -131,7 +149,7 @@ function UserSettings() {
           type="button"
           onClick={() => {
             setFormState(user)
-            asyncDispatch({status: null, error: null})
+            userDispatch({type: 'reset'})
           }}
           disabled={!isChanged || isPending}
         >
@@ -149,19 +167,14 @@ function UserSettings() {
             ? 'Submit'
             : '✔'}
         </button>
-        {isRejected ? <pre style={{color: 'red'}}>{error.message} </pre> : null}
+        {isRejected ? <pre style={{color: 'red'}}>{error.message}</pre> : null}
       </div>
     </form>
   )
 }
 
 function UserDataDisplay() {
-  // 💣 remove this stuff. It's just here to make it so the exercise page doesn't crash :)
-  const [{user}] = [
-    {user: {username: 'TODO', tagline: 'TODO', bio: 'TODO'}},
-    () => {},
-  ]
-  // 🐨 get the user object from context with React.useContext
+  const [{user}] = useUser()
   return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 
@@ -177,16 +190,12 @@ function App() {
         overflow: 'scroll',
       }}
     >
-      {/* 🐨 wrap these in the UserProvider */}
-      <UserSettings />
-      <UserDataDisplay />
+      <UserProvider>
+        <UserSettings />
+        <UserDataDisplay />
+      </UserProvider>
     </div>
   )
 }
 
 export default App
-
-/*
-eslint
-  no-unused-vars: "off",
-*/

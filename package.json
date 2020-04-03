@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Advanced React Component Patterns Course by Kent C. Dodds",
   "keywords": [],
-  "homepage": "http://advanced-react-patterns.netlify.com/",
+  "homepage": "http://advanced-react-patterns.netlify.app/",
   "license": "GPL-3.0-only",
   "main": "src/index.js",
   "engines": {

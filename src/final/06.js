@@ -1,4 +1,5 @@
 // control props
+// http://localhost:3000/isolated/final/06.js
 
 import React from 'react'
 import {Switch} from '../switch'

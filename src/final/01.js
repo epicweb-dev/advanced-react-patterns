@@ -1,4 +1,5 @@
-// React Context
+// Context Controller
+// http://localhost:3000/isolated/final/01.js
 
 import React from 'react'
 import dequal from 'dequal'
@@ -13,8 +14,38 @@ UserContext.displayName = 'UserContext'
 
 function userReducer(state, action) {
   switch (action.type) {
-    case 'update': {
-      return {user: action.updatedUser}
+    case 'start update': {
+      return {
+        ...state,
+        user: {...state.user, ...action.updates},
+        status: 'pending',
+        storedUser: state.user,
+      }
+    }
+    case 'finish update': {
+      return {
+        ...state,
+        user: action.updatedUser,
+        status: 'resolved',
+        storedUser: null,
+        error: null,
+      }
+    }
+    case 'fail update': {
+      return {
+        ...state,
+        status: 'rejected',
+        error: action.error,
+        user: state.storedUser,
+        storedUser: null,
+      }
+    }
+    case 'reset': {
+      return {
+        ...state,
+        status: null,
+        error: null,
+      }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -24,25 +55,45 @@ function userReducer(state, action) {
 
 function UserProvider({children}) {
   const {user} = useAuth()
-  const [state, dispatch] = React.useReducer(userReducer, {user})
-  const value = React.useMemo(() => [state, dispatch], [state, dispatch])
+  const [state, dispatch] = React.useReducer(userReducer, {
+    status: null,
+    error: null,
+    storedUser: user,
+    user,
+  })
+  const value = [state, dispatch]
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
-// export {UserProvider, UserContext}
+function useUser() {
+  const context = React.useContext(UserContext)
+  if (context === undefined) {
+    throw new Error(`useUser must be used within a UserProvider`)
+  }
+  return context
+}
+
+// got this idea from Dan and I love it:
+// https://twitter.com/dan_abramov/status/1125773153584676864
+async function updateUser(dispatch, user, updates) {
+  dispatch({type: 'start update', updates})
+  try {
+    const updatedUser = await userClient.updateUser(user, updates)
+    dispatch({type: 'finish update', updatedUser})
+    return updatedUser
+  } catch (error) {
+    dispatch({type: 'fail update', error})
+    return Promise.reject(error)
+  }
+}
+
+// export {UserProvider, useUserState, updateUser}
 
 // src/screens/user-profile.js
-
-// import {UserProvider, UserContext} from './context/user-context'
-
+// import {UserProvider, useUserState, updateUser} from './context/user-context'
 function UserSettings() {
-  const [{user}, userDispatch] = React.useContext(UserContext)
+  const [{user, status, error}, userDispatch] = useUser()
 
-  const [asyncState, asyncDispatch] = React.useReducer(
-    (s, a) => ({...s, ...a}),
-    {status: null, error: null},
-  )
-  const {error, status} = asyncState
   const isPending = status === 'pending'
   const isRejected = status === 'rejected'
 
@@ -56,17 +107,9 @@ function UserSettings() {
 
   function handleSubmit(event) {
     event.preventDefault()
-
-    asyncDispatch({status: 'pending'})
-    userClient.updateUser(user, formState).then(
-      updatedUser => {
-        userDispatch({type: 'update', updatedUser})
-        asyncDispatch({status: 'resolved'})
-      },
-      error => {
-        asyncDispatch({status: 'rejected', error})
-      },
-    )
+    updateUser(userDispatch, user, formState).catch(() => {
+      /* ignore the error */
+    })
   }
 
   return (
@@ -113,7 +156,7 @@ function UserSettings() {
           type="button"
           onClick={() => {
             setFormState(user)
-            asyncDispatch({status: null, error: null})
+            userDispatch({type: 'reset'})
           }}
           disabled={!isChanged || isPending}
         >
@@ -138,7 +181,7 @@ function UserSettings() {
 }
 
 function UserDataDisplay() {
-  const [{user}] = React.useContext(UserContext)
+  const [{user}] = useUser()
   return <pre>{JSON.stringify(user, null, 2)}</pre>
 }
 

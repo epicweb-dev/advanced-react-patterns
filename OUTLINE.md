@@ -33,16 +33,17 @@
 ## Schedule
 
 - 😴 Logistics
-- 💪 Context
-- 😴 10 Minutes
 - 💪 Compound Components
 - 💪 Flexible Compound Components
-- 🌮 30 Minutes
-- 💪 Prop Collections and Getters
 - 😴 10 Minutes
+- 💪 Prop Collections and Getters
+- 🌮 30 Minutes
 - 💪 State Reducers
 - 😴 10 Minutes
 - 💪 Control Props
+- 😴 10 Minutes
+- 💪❓ Higher Order Components (If time permits)
+- 💪❓ Render Props (If time permits)
 
 ## Scripts
 
