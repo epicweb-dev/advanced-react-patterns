@@ -9,19 +9,6 @@ import {Switch} from '../switch'
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const noop = () => {}
 
-function toggleReducer(state, {type, initialState}) {
-  switch (type) {
-    case useToggle.types.toggle: {
-      return {on: !state.on}
-    }
-    case useToggle.types.reset: {
-      return initialState
-    }
-    default:
-      throw new Error(`Unsupported type: ${type}`)
-  }
-}
-
 function useControlledReducer(reducer, initialState, lazyInitializer, options) {
   if (typeof lazyInitializer === 'object') {
     options = lazyInitializer
@@ -47,6 +34,19 @@ function useControlledReducer(reducer, initialState, lazyInitializer, options) {
       )
     },
   ]
+}
+
+function toggleReducer(state, {type, initialState}) {
+  switch (type) {
+    case useToggle.types.toggle: {
+      return {on: !state.on}
+    }
+    case useToggle.types.reset: {
+      return initialState
+    }
+    default:
+      throw new Error(`Unsupported type: ${type}`)
+  }
 }
 
 function useToggle({

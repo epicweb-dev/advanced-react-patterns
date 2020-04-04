@@ -17,7 +17,7 @@ function Toggle() {
   return <Switch on={on} onClick={toggle} />
 }
 
-// 🐨 Flush out each of these components
+// 🐨 Flesh out each of these components
 
 // Accepts `on` and `children` props and returns `children` if `on` is true
 const ToggleOn = () => null
