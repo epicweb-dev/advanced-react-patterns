@@ -25,23 +25,14 @@ function useSafeDispatch(dispatch) {
 }
 
 function useAbortController() {
-  const abortControllerRef = React.useRef()
-  const getAbortController = React.useCallback(() => {
-    if (!abortControllerRef.current) {
-      abortControllerRef.current = new AbortController()
-    }
-    return abortControllerRef.current
+  const ref = React.useRef()
+
+  React.useEffect(() => () => ref.current.abort(), [])
+
+  return React.useCallback(() => {
+    ref.current = new AbortController()
+    return ref.current.signal
   }, [])
-
-  React.useEffect(() => {
-    return () => getAbortController().abort()
-  }, [getAbortController])
-
-  const getSignal = React.useCallback(() => getAbortController().signal, [
-    getAbortController,
-  ])
-
-  return getSignal
 }
 
 const UserContext = React.createContext()
