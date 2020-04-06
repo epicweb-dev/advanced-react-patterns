@@ -51,7 +51,7 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
     getResetterProps,
   }
 }
-useToggle.reducer = toggleReducer
+// export {useToggle, toggleReducer}
 
 function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
@@ -61,7 +61,7 @@ function App() {
     if (action.type === 'toggle' && timesClicked >= 4) {
       return {on: state.on}
     }
-    return useToggle.reducer(state, action)
+    return toggleReducer(state, action)
   }
 
   const {on, getTogglerProps, getResetterProps} = useToggle({

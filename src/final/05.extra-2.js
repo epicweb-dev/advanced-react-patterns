@@ -7,12 +7,17 @@ import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 
+const actionTypes = {
+  toggle: 'toggle',
+  reset: 'reset',
+}
+
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
-    case useToggle.types.toggle: {
+    case actionTypes.toggle: {
       return {on: !state.on}
     }
-    case useToggle.types.reset: {
+    case actionTypes.reset: {
       return initialState
     }
     default: {
@@ -26,8 +31,8 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
   const [state, dispatch] = React.useReducer(reducer, initialState)
   const {on} = state
 
-  const toggle = () => dispatch({type: useToggle.types.toggle})
-  const reset = () => dispatch({type: useToggle.types.reset, initialState})
+  const toggle = () => dispatch({type: actionTypes.toggle})
+  const reset = () => dispatch({type: actionTypes.reset, initialState})
   function getTogglerProps({onClick, ...props} = {}) {
     return {
       'aria-pressed': on,
@@ -51,18 +56,14 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
     getResetterProps,
   }
 }
-useToggle.reducer = toggleReducer
-useToggle.types = {
-  toggle: 'toggle',
-  reset: 'reset',
-}
+// export {useToggle, toggleReducer, actionTypes}
 
 function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
   const clickedTooMuch = timesClicked >= 4
 
   function toggleStateReducer(state, action) {
-    if (action.type === useToggle.types.toggle && timesClicked >= 4) {
+    if (action.type === actionTypes.toggle && timesClicked >= 4) {
       return {on: state.on}
     }
     return useToggle.reducer(state, action)
