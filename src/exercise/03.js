@@ -14,7 +14,7 @@ function Toggle({onToggle, children}) {
   // 🐨 remove all this 💣 and instead return <ToggleContext.Provider> where
   // the value is an object that has `on` and `toggle` on it.
   return React.Children.map(children, child => {
-    return typeof child === 'string'
+    return typeof child.type === 'string'
       ? child
       : React.cloneElement(child, {on, toggle})
   })
