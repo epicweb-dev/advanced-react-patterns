@@ -27,9 +27,10 @@ function useSafeDispatch(dispatch) {
 function useAbortController() {
   const ref = React.useRef()
 
-  React.useEffect(() => () => ref.current.abort(), [])
+  React.useEffect(() => () => ref.current?.abort(), [])
 
   return React.useCallback(() => {
+    ref.current?.abort()
     ref.current = new AbortController()
     return ref.current.signal
   }, [])
@@ -244,3 +245,8 @@ function App() {
 }
 
 export default App
+
+/*
+eslint
+  no-unused-expressions: "off",
+*/

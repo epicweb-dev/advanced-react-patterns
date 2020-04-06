@@ -155,17 +155,16 @@ a complete authority.
 ### Schedule
 
 - 😴 Logistics
-- 💪 Code splitting
+- 💪 Context
 - 😴 10 Minutes
-- 💪 useMemo for expensive calculations
-- 💪 React.memo for reducing unnecessary re-renders
+- 💪 Compound Components
+- 💪 Flexible Compound Components
 - 🌮 30 Minutes
-- 💪 Window large lists with react-window
+- 💪 Prop Collections and Getters
 - 😴 10 Minutes
-- 💪 Fix "perf death by a thousand cuts"
-- 💪 Optimize context value
+- 💪 State Reducers
 - 😴 10 Minutes
-- 💪 Production performance monitoring
+- 💪 Control Props
 - ❓ Q&A
 
 ### Questions
