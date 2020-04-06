@@ -160,7 +160,7 @@ a complete authority.
 ### Schedule
 
 - 😴 Logistics
-- 💪 Context
+- 💪 Context Controllers
 - 😴 10 Minutes
 - 💪 Compound Components
 - 💪 Flexible Compound Components

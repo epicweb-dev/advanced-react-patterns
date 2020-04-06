@@ -74,7 +74,7 @@ function useUser() {
 }
 
 // 🐨 add a function here called `updateUser`
-// Then go down to the `handleSubmit` from `UserSettings` and put it in
+// Then go down to the `handleSubmit` from `UserSettings` and put that logic in
 // this function. It should accept: dispatch, user, and updates
 
 // export {UserProvider, useUserState}
