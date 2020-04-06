@@ -7,12 +7,17 @@ import {Switch} from '../switch'
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn && fn(...args))
 const noop = () => {}
 
+const actionTypes = {
+  toggle: 'toggle',
+  reset: 'reset',
+}
+
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
-    case useToggle.types.toggle: {
+    case actionTypes.toggle: {
       return {on: !state.on}
     }
-    case useToggle.types.reset: {
+    case actionTypes.reset: {
       return initialState
     }
     default: {
@@ -40,9 +45,9 @@ function useToggle({
     }
   }
 
-  const toggle = () => dispatchWithOnChange({type: useToggle.types.toggle})
+  const toggle = () => dispatchWithOnChange({type: actionTypes.toggle})
   const reset = () =>
-    dispatchWithOnChange({type: useToggle.types.reset, initialState})
+    dispatchWithOnChange({type: actionTypes.reset, initialState})
 
   function getTogglerProps({onClick, ...props} = {}) {
     return {
@@ -67,11 +72,6 @@ function useToggle({
     getResetterProps,
   }
 }
-useToggle.reducer = toggleReducer
-useToggle.types = {
-  toggle: 'toggle',
-  reset: 'reset',
-}
 
 function Toggle({on: controlledOn, onChange}) {
   const {on, getTogglerProps} = useToggle({on: controlledOn, onChange})
@@ -84,7 +84,7 @@ function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
 
   function handleToggleChange(state, action) {
-    if (action.type === useToggle.types.toggle && timesClicked > 4) {
+    if (action.type === actionTypes.toggle && timesClicked > 4) {
       return
     }
     setBothOn(state.on)
