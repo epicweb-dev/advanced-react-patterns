@@ -47,8 +47,13 @@ following things to prepare.
       (available free on Egghead.io), or have the equivalent experience (77
       minutes)
 - [ ] 👋 Watch my talk
-      [Why React Hooks](https://www.youtube.com/watch?v=zWsZcBiwgVE&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
-      (35 minutes)
+      [Simply React](https://www.youtube.com/watch?v=AiJ8tRRH0f8&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
+      (25 minutes)
+- [ ] 👋 Read my blog post
+      [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control)
+      (~15 minutes). Or watch
+      [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad))
+      (7 minutes)
 - [ ] 👋 Go through my
       [Learn React Hooks Workshop](https://kentcdodds.com/workshops/hooks), or
       have the equivalent basic experience of using hooks. You should be
