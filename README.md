@@ -19,7 +19,7 @@ simplicity.
 
 Here are the tools and techniques we'll be covering:
 
-- Context Controllers
+- Context Module Functions
 - Compound Components
 - Prop Collections
 - Prop Getters
@@ -160,7 +160,7 @@ a complete authority.
 ### Schedule
 
 - 😴 Logistics
-- 💪 Context Controllers
+- 💪 Context Module Functions
 - 😴 10 Minutes
 - 💪 Compound Components
 - 💪 Flexible Compound Components
