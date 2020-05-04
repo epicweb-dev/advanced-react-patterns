@@ -29,14 +29,13 @@ function useToggle({
   initialOn = false,
   reducer = toggleReducer,
   // 🐨 add an `onChange` prop.
-  // 💰 you can default onChange to `() => {}` (this is a noop function).
   // 🐨 add an `on` option here
   // 💰 you can alias it to `controlledOn` to avoid "variable shadowing."
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
   const [state, dispatch] = React.useReducer(reducer, initialState)
   // 🐨 determined whether on is controlled and assign that to `onIsControlled`
-  // 💰 `controlledOn !== undefined`
+  // 💰 `controlledOn != null`
 
   // 🐨 Replace the next line with assigning `on` to `controlledOn` if
   // `onIsControlled`, otherwise, it should be `state.on`.
@@ -48,8 +47,8 @@ function useToggle({
   // 🐨 To simplify things a bit, let's make a `dispatchWithOnChange` function
   // right here. This will:
   // 1. accept an action
-  // 2. if onIsControlled, then call `onChange` with our "suggested changes" and the action.
-  // 3. otherwise call dispatch with that action
+  // 2. if onIsControlled is false, call dispatch with that action
+  // 3. Then call `onChange` with our "suggested changes" and the action.
 
   // 🦉 "Suggested changes" refers to: the changes we would make if we were
   // managing the state ourselves. This is similar to how a controlled <input />
@@ -63,6 +62,8 @@ function useToggle({
   //
   // 💰 Sorry if Olivia the Owl is cryptic. Here's what you need to do for that onChange call:
   // `onChange(reducer({...state, on}, action), action)`
+  // 💰 Also note that user's don't *have* to pass an `onChange` prop (it's not required)
+  // so keep that in mind when you call it! How could you avoid calling it if it's not passed?
 
   // make these call `dispatchWithOnChange` instead
   const toggle = () => dispatch({type: actionTypes.toggle})

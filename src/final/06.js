@@ -34,15 +34,14 @@ function useToggle({
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const onIsControlled = controlledOn !== undefined
+  const onIsControlled = controlledOn != null
   const on = onIsControlled ? controlledOn : state.on
 
   function dispatchWithOnChange(action) {
-    if (onIsControlled) {
-      onChange(reducer({...state, on}, action), action)
-    } else {
+    if (!onIsControlled) {
       dispatch(action)
     }
+    onChange(reducer({...state, on}, action), action)
   }
 
   const toggle = () => dispatchWithOnChange({type: actionTypes.toggle})

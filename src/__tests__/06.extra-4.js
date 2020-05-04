@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, screen, fireEvent} from '@testing-library/react'
-import {Toggle} from '../final/06.extra-1'
+import {Toggle} from '../final/06.extra-4'
 // import {Toggle} from '../exercise/06'
 
 beforeEach(() => {
@@ -44,7 +44,7 @@ test('no warning for controlled component with readOnly prop', () => {
 test('warning for changing from controlled to uncontrolled', () => {
   function Example() {
     const [state, setState] = React.useState(true)
-    return <Toggle on={state} onChange={() => setState(null)} />
+    return <Toggle on={state} onChange={() => setState(undefined)} />
   }
   render(<Example />)
   fireEvent.click(screen.getByLabelText(/toggle/i))
@@ -58,7 +58,7 @@ test('warning for changing from controlled to uncontrolled', () => {
 
 test('warning for changing from uncontrolled to controlled', () => {
   function Example() {
-    const [state, setState] = React.useState(null)
+    const [state, setState] = React.useState(undefined)
     return <Toggle on={state} onChange={() => setState(true)} />
   }
   render(<Example />)

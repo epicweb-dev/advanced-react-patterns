@@ -1,3 +1,5 @@
+// http://localhost:3000/isolated/examples/warnings.js
+
 import React from 'react'
 
 function App() {
