@@ -33,6 +33,7 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
 
   const toggle = () => dispatch({type: actionTypes.toggle})
   const reset = () => dispatch({type: actionTypes.reset, initialState})
+
   function getTogglerProps({onClick, ...props} = {}) {
     return {
       'aria-pressed': on,
@@ -58,15 +59,17 @@ function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
 }
 // export {useToggle, toggleReducer, actionTypes}
 
+// import {useToggle, toggleReducer, actionTypes} from './use-toggle'
+
 function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
   const clickedTooMuch = timesClicked >= 4
 
   function toggleStateReducer(state, action) {
-    if (action.type === actionTypes.toggle && timesClicked >= 4) {
+    if (action.type === actionTypes.toggle && clickedTooMuch) {
       return {on: state.on}
     }
-    return useToggle.reducer(state, action)
+    return toggleReducer(state, action)
   }
 
   const {on, getTogglerProps, getResetterProps} = useToggle({
