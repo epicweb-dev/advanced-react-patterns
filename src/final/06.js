@@ -5,7 +5,6 @@ import React from 'react'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn?.(...args))
-const noop = () => {}
 
 const actionTypes = {
   toggle: 'toggle',
@@ -29,7 +28,7 @@ function toggleReducer(state, {type, initialState}) {
 function useToggle({
   initialOn = false,
   reducer = toggleReducer,
-  onChange = noop,
+  onChange,
   on: controlledOn,
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
@@ -41,7 +40,7 @@ function useToggle({
     if (!onIsControlled) {
       dispatch(action)
     }
-    onChange(reducer({...state, on}, action), action)
+    onChange?.(reducer({...state, on}, action), action)
   }
 
   const toggle = () => dispatchWithOnChange({type: actionTypes.toggle})
@@ -126,3 +125,8 @@ function App() {
 export default App
 // we're adding the Toggle export for tests
 export {Toggle}
+
+/*
+eslint
+  no-unused-expressions: "off",
+*/
