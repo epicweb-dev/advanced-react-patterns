@@ -16,9 +16,7 @@ function color(modifier, string) {
 
 console.log(color('info', '▶️  Starting workshop setup...'))
 
-var error = spawnSync('npx --version', {shell: true})
-  .stderr.toString()
-  .trim()
+var error = spawnSync('npx --version', {shell: true}).stderr.toString().trim()
 if (error) {
   console.error(
     color(
