@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  render,
-  screen,
-  fireEvent,
-  waitForElementToBeRemoved,
-} from '@testing-library/react'
+import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
 import App from '../final/01'
@@ -53,8 +49,8 @@ test('happy path works', async () => {
   expect(resetButton).toHaveAttribute('disabled')
 
   const testData = {...mockUser, tagline: 'test tagline', bio: 'test bio'}
-  fireEvent.change(taglineInput, {target: {value: testData.tagline}})
-  fireEvent.change(bioInput, {target: {value: testData.bio}})
+  userEvent.type(taglineInput, testData.tagline)
+  userEvent.type(bioInput, testData.bio)
 
   // changed form enables submit and reset
   expect(submitButton).toHaveTextContent(/submit/i)
@@ -66,7 +62,7 @@ test('happy path works', async () => {
     Promise.resolve(updatedUser),
   )
 
-  fireEvent.click(submitButton)
+  userEvent.click(submitButton)
 
   // pending form sets the submit button to ... and disables the submit and reset buttons
   expect(submitButton).toHaveTextContent(/\.\.\./i)
@@ -96,8 +92,8 @@ test('happy path works', async () => {
 test('reset works', () => {
   const {resetButton, taglineInput} = renderApp()
 
-  fireEvent.change(taglineInput, {target: {value: 'foo'}})
-  fireEvent.click(resetButton)
+  userEvent.type(taglineInput, 'foo')
+  userEvent.click(resetButton)
   expect(taglineInput.value).toBe(mockUser.tagline)
 })
 
@@ -112,7 +108,7 @@ test('failure works', async () => {
   } = renderApp()
 
   const testData = {...mockUser, bio: 'test bio'}
-  fireEvent.change(bioInput, {target: {value: testData.bio}})
+  userEvent.type(bioInput, testData.bio)
   const testErrorMessage = 'test error message'
   userClient.updateUser.mockImplementationOnce(() =>
     Promise.reject({message: testErrorMessage}),
@@ -120,7 +116,7 @@ test('failure works', async () => {
 
   const updatedUser = {...mockUser, ...testData}
 
-  fireEvent.click(submitButton)
+  userEvent.click(submitButton)
 
   await waitForLoading()
 
@@ -133,7 +129,7 @@ test('failure works', async () => {
   userClient.updateUser.mockImplementationOnce(() =>
     Promise.resolve(updatedUser),
   )
-  fireEvent.click(submitButton)
+  userEvent.click(submitButton)
 
   await waitForLoading()
 

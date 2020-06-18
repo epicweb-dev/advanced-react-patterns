@@ -1,5 +1,5 @@
 import React from 'react'
-import {renderToggle, screen, fireEvent} from '../../test/utils'
+import {renderToggle, screen, userEvent} from '../../test/utils'
 import App from '../final/04'
 // import App from '../exercise/04'
 
@@ -15,7 +15,7 @@ test('renders a toggle component', () => {
 test('can also toggle with the custom button', () => {
   const {toggleButton} = renderToggle(<App />)
   expect(toggleButton).not.toBeChecked()
-  fireEvent.click(screen.getByLabelText('custom-button'))
+  userEvent.click(screen.getByLabelText('custom-button'))
   expect(toggleButton).toBeChecked()
 })
 
@@ -25,7 +25,7 @@ test.skip('passes custom props to the custom-button', () => {
   const customButton = screen.getByLabelText('custom-button')
   expect(customButton.getAttribute('id')).toBe('custom-button-id')
 
-  fireEvent.click(customButton)
+  userEvent.click(customButton)
 
   expect(toggleButton).toBeChecked()
 })

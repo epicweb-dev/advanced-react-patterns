@@ -1,5 +1,5 @@
 import React from 'react'
-import {renderToggle, screen, fireEvent} from '../../test/utils'
+import {renderToggle, screen, userEvent} from '../../test/utils'
 import App, {Toggle} from '../final/06'
 // import App, {Toggle} from '../exercise/06'
 
@@ -7,11 +7,11 @@ test('toggling either toggle toggles both', () => {
   renderToggle(<App />)
   const buttons = screen.getAllByTestId('toggle-input')
   const [toggleButton1, toggleButton2] = buttons
-  fireEvent.click(toggleButton1)
+  userEvent.click(toggleButton1)
   expect(toggleButton1).toBeChecked()
   expect(toggleButton2).toBeChecked()
 
-  fireEvent.click(toggleButton2)
+  userEvent.click(toggleButton2)
   expect(toggleButton1).not.toBeChecked()
   expect(toggleButton2).not.toBeChecked()
 })

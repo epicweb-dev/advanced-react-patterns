@@ -1,5 +1,5 @@
 import React from 'react'
-import {renderToggle, screen, fireEvent} from '../../test/utils'
+import {renderToggle, screen, userEvent} from '../../test/utils'
 import App from '../final/05'
 // import App from '../exercise/05'
 
@@ -33,7 +33,7 @@ test('can click too much', () => {
 
   expect(screen.getByTestId('notice')).not.toBeNull()
 
-  fireEvent.click(screen.getByText('Reset'))
+  userEvent.click(screen.getByText('Reset'))
   expect(screen.queryByTestId('notice')).toBeNull()
 
   expect(toggleButton).not.toBeChecked()

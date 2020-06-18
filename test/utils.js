@@ -1,4 +1,5 @@
-import {render, fireEvent} from '@testing-library/react'
+import {render} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import React from 'react'
 import {
   findAllInRenderedTree,
@@ -43,7 +44,7 @@ function renderToggle(ui) {
   const toggleButton = utils.getAllByTestId('toggle-input')[0]
 
   return {
-    toggle: () => fireEvent.click(utils.getAllByTestId('toggle-input')[0]),
+    toggle: () => userEvent.click(utils.getAllByTestId('toggle-input')[0]),
     toggleButton,
     rootInstance,
     ...utils,
@@ -51,4 +52,4 @@ function renderToggle(ui) {
 }
 
 export * from '@testing-library/react'
-export {render, renderToggle}
+export {render, renderToggle, userEvent}

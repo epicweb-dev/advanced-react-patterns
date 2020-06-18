@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, screen, fireEvent} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import {Toggle} from '../final/06.extra-4'
 // import {Toggle} from '../exercise/06'
 
@@ -47,7 +48,7 @@ test('warning for changing from controlled to uncontrolled', () => {
     return <Toggle on={state} onChange={() => setState(undefined)} />
   }
   render(<Example />)
-  fireEvent.click(screen.getByLabelText(/toggle/i))
+  userEvent.click(screen.getByLabelText(/toggle/i))
   expect(
     console.error,
     `Make sure to explain that it's changing "from controlled to uncontrolled"`,
@@ -62,7 +63,7 @@ test('warning for changing from uncontrolled to controlled', () => {
     return <Toggle on={state} onChange={() => setState(true)} />
   }
   render(<Example />)
-  fireEvent.click(screen.getByLabelText(/toggle/i))
+  userEvent.click(screen.getByLabelText(/toggle/i))
   expect(
     console.error,
     `Make sure to explain that it's changing "from uncontrolled to controlled"`,
