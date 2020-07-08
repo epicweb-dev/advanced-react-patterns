@@ -8,8 +8,8 @@ react components and hooks more useful and reusable without sacrificing
 simplicity.
 
 <div align="center">
+  <h2><a href="https://epicreact.dev">EpicReact.Dev</a></h2>
   <a href="https://epicreact.dev">
-    <h2>EpicReact.Dev</h2>
     <img
       width="500"
       alt="Learn React from Start to Finish"
