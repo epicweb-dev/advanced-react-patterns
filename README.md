@@ -1,14 +1,15 @@
-# Advanced React Patterns
+<div>
+  <h1 align="center"><a href="https://epicreact.dev">🤯 Advanced React Patterns 🚀 EpicReact.Dev</a></h1>
+  <strong>
+    Learn how to build simple and flexible React Components and Hooks using
+    modern patterns
+  </strong>
+  <p>
+    Not only learn great patterns you can use but also the strengths and
+    weaknesses of each, so you know which to reach for to provide your custom
+    hooks and components the flexibility and power you need.
+  </p>
 
-> Some sweeeeeeeet patterns 🍭
-
-👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com)! This is a
-workshop repo to teach you about using React Component Patterns to make your
-react components and hooks more useful and reusable without sacrificing
-simplicity.
-
-<div align="center">
-  <h2><a href="https://epicreact.dev">EpicReact.Dev</a></h2>
   <a href="https://epicreact.dev">
     <img
       alt="Learn React from Start to Finish"
@@ -23,60 +24,18 @@ simplicity.
 [![Build Status][build-badge]][build]
 [![AppVeyor Build Status][win-build-badge]][win-build]
 [![GPL 3.0 License][license-badge]][license]
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [![Code of Conduct][coc-badge]][coc]
 <!-- prettier-ignore-end -->
 
-## Workshop Topics
+## Prerequisites
 
-Here are the tools and techniques we'll be covering:
-
-- Context Module Functions
-- Compound Components
-- Prop Collections
-- Prop Getters
-- State Reducers
-- Controlled Props
-
-## Pre-Workshop Instructions/Requirements
-
-In order for us to maximize our efforts during the workshop, please complete the
-following things to prepare.
-
-- 📺 only necessary if the workshop is remote via Zoom
-- 👋 specific to the material for this workshop
-
-- [ ] 👋 Setup the project (follow the setup instructions below) (~5 minutes)
-- [ ] 📺 Install and setup [Zoom](https://zoom.us) on the computer you will be
-      using (~5 minutes)
-- [ ] 📺 Watch
-      [Use Zoom for KCD Workshops](https://egghead.io/lessons/egghead-use-zoom-for-kcd-workshops)
-      (~8 minutes).
-- [ ] Watch
-      [Setup and Logistics for KCD Workshops](https://egghead.io/lessons/egghead-setup-and-logistics-for-kcd-workshops)
-      (~24 minutes). Please do NOT skip this step.
-- [ ] 👋 Watch [The Beginner's Guide to React](https://kcd.im/beginner-react)
-      (available free on Egghead.io), or have the equivalent experience (77
-      minutes)
-- [ ] 👋 Watch my talk
-      [Simply React](https://www.youtube.com/watch?v=AiJ8tRRH0f8&list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)
-      (25 minutes)
-- [ ] 👋 Read my blog post
-      [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control)
-      (~15 minutes). Or watch
-      [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad))
-      (7 minutes)
-- [ ] 👋 Go through my
-      [Learn React Hooks Workshop](https://kentcdodds.com/workshops/hooks), or
-      have the equivalent basic experience of using hooks. You should be
-      experienced with `useState`, `useEffect`, and `useRef`.
-- [ ] 👋 Go through my
-      [Advanced React Hooks Workshop](https://kentcdodds.com/workshops/advanced-react-hooks),
-      or have the equivalent experience. You should be experienced with
-      `useContext` and `useReducer` (experience with `useMemo` and `useCallback`
-      is a bonus).
-
-The more prepared you are for the workshop, the better it will go for you.
+- Read my blog post
+  [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control) (~15
+  minutes). Or watch
+  [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad))
+  (7 minutes)
+- The more experience you have with building React abstractions, the more
+  helpful this workshop will be for you.
 
 ## System Requirements
 
@@ -110,17 +69,12 @@ npm run setup --silent
 
 This may take a few minutes. **It will ask you for your email.** This is
 optional and just automatically adds your email to the links in the project to
-make filling out some forms easier. If you get any errors, please read through
-them and see if you can find out what the problem is. If you can't work it out
-on your own then please [file an issue][issue] and provide _all_ the output from
-the commands you ran (even if it's a lot).
+make filling out some forms easier.
 
-You may be able to work through the entire workshop in the browser. Go to
-[this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns)
-and you should be good to go. Note that sometimes people have trouble with
-codesandbox not working quite right with tests, but you should be able to work
-around that. If you're concerned, then it would probably be better to just set
-things up locally.
+If you get any errors, please read through them and see if you can find out what
+the problem is. If you can't work it out on your own then please [file an
+issue][issue] and provide _all_ the output from the commands you ran (even if
+it's a lot).
 
 ## Running the app
 
@@ -147,53 +101,6 @@ play around with it. The tests are there to help you reach the final version,
 however _sometimes_ you can accomplish the task and the tests still fail if you
 implement things differently than I do in my solution, so don't look to them as
 a complete authority.
-
-## Workshop Outline
-
-👋 I'm Kent C. Dodds
-
-- 🏡 Utah
-- 👩 👧 👦 👦 👦 🐕
-- 🏢 https://kentcdodds.com
-- 🐦/🐙 @kentcdodds
-- 🏆 https://TestingJavaScript.com
-- 👩‍🚀 https://EpicReact.Dev
-- 💻 https://kcd.im/workshops
-- 🎙 https://kcd.im/podcast
-- 🥚 https://kcd.im/egghead
-- 🥋 https://kcd.im/fem
-- 💌 https://kcd.im/news
-- 📝 https://kcd.im/blog
-- 📺 https://kcd.im/devtips
-- 👨‍💻 https://kcd.im/coding
-- 📽 https://kcd.im/youtube
-- ❓ https://kcd.im/ama
-
-### Schedule
-
-- 😴 Logistics
-- 💪 Context Module Functions
-- 😴 10 Minutes
-- 💪 Compound Components
-- 💪 Flexible Compound Components
-- 🌮 30 Minutes
-- 💪 Prop Collections and Getters
-- 😴 10 Minutes
-- 💪 State Reducers
-- 😴 10 Minutes
-- 💪 Control Props
-- ❓ Q&A
-
-### Questions
-
-Please do ask! Interrupt me. If you have an unrelated question, please ask on
-[my AMA](https://kcd.im/ama).
-
-### Zoom (for remote workshops)
-
-- Help us make this more human by keeping your video on if possible
-- Keep microphone muted unless speaking
-- Breakout rooms
 
 ### Exercises
 
@@ -240,27 +147,27 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/FWeinb"><img src="https://avatars0.githubusercontent.com/u/1250430?v=4" width="100px;" alt=""/><br /><sub><b>FWeinb</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/issues?q=author%3AFWeinb" title="Bug reports">🐛</a> <a href="#ideas-FWeinb" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://github.com/dlannoye"><img src="https://avatars2.githubusercontent.com/u/1383720?v=4" width="100px;" alt=""/><br /><sub><b>David Lannoye</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/issues?q=author%3Adlannoye" title="Bug reports">🐛</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=dlannoye" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/colinrcummings"><img src="https://avatars2.githubusercontent.com/u/9815009?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Colin Cummings</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=colinrcummings" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=colinrcummings" title="Tests">⚠️</a></td>
-    <td align="center"><a href="https://github.com/bkoltai"><img src="https://avatars2.githubusercontent.com/u/464764?v=4" width="100px;" alt=""/><br /><sub><b>Benji Koltai</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=bkoltai" title="Documentation">📖</a></td>
-    <td align="center"><a href="http://baggasumit.github.io"><img src="https://avatars1.githubusercontent.com/u/1779959?v=4" width="100px;" alt=""/><br /><sub><b>Sumit Bagga</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=baggasumit" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/Tarabyte"><img src="https://avatars0.githubusercontent.com/u/2027010?v=4" width="100px;" alt=""/><br /><sub><b>Yury Tarabanko</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Tarabyte" title="Code">💻</a></td>
+    <td align="center"><a href="https://kentcdodds.com"><img src="https://avatars.githubusercontent.com/u/1500684?v=3?s=100" width="100px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#infra-kentcdodds" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kentcdodds" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/FWeinb"><img src="https://avatars0.githubusercontent.com/u/1250430?v=4?s=100" width="100px;" alt=""/><br /><sub><b>FWeinb</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/issues?q=author%3AFWeinb" title="Bug reports">🐛</a> <a href="#ideas-FWeinb" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/dlannoye"><img src="https://avatars2.githubusercontent.com/u/1383720?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Lannoye</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/issues?q=author%3Adlannoye" title="Bug reports">🐛</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=dlannoye" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/colinrcummings"><img src="https://avatars2.githubusercontent.com/u/9815009?s=460&v=4?s=100" width="100px;" alt=""/><br /><sub><b>Colin Cummings</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=colinrcummings" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=colinrcummings" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/bkoltai"><img src="https://avatars2.githubusercontent.com/u/464764?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Benji Koltai</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=bkoltai" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://baggasumit.github.io"><img src="https://avatars1.githubusercontent.com/u/1779959?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sumit Bagga</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=baggasumit" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Tarabyte"><img src="https://avatars0.githubusercontent.com/u/2027010?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yury Tarabanko</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Tarabyte" title="Code">💻</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="http://www.wendtedesigns.com/"><img src="https://avatars2.githubusercontent.com/u/5779538?v=4" width="100px;" alt=""/><br /><sub><b>Alex Wendte</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=themostcolm" title="Code">💻</a></td>
-    <td align="center"><a href="https://twitter.com/CompuIves"><img src="https://avatars3.githubusercontent.com/u/587016?v=4" width="100px;" alt=""/><br /><sub><b>Ives van Hoorne</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=CompuIves" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=CompuIves" title="Tests">⚠️</a></td>
-    <td align="center"><a href="http://team.thebrain.pro"><img src="https://avatars1.githubusercontent.com/u/4002543?v=4" width="100px;" alt=""/><br /><sub><b>Łukasz Gandecki</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=lgandecki" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/deniztetik"><img src="https://avatars0.githubusercontent.com/u/14167019?v=4" width="100px;" alt=""/><br /><sub><b>Deniz Tetik</b></sub></a><br /><a href="#content-deniztetik" title="Content">🖋</a></td>
-    <td align="center"><a href="https://github.com/Ruffeng"><img src="https://avatars1.githubusercontent.com/u/18511772?v=4" width="100px;" alt=""/><br /><sub><b>Ruffeng</b></sub></a><br /><a href="#content-Ruffeng" title="Content">🖋</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Ruffeng" title="Code">💻</a></td>
-    <td align="center"><a href="https://stackshare.io/jdorfman/decisions"><img src="https://avatars1.githubusercontent.com/u/398230?v=4" width="100px;" alt=""/><br /><sub><b>Justin Dorfman</b></sub></a><br /><a href="#fundingFinding-jdorfman" title="Funding Finding">🔍</a></td>
-    <td align="center"><a href="http://alexmunoz.github.io"><img src="https://avatars3.githubusercontent.com/u/3093946?v=4" width="100px;" alt=""/><br /><sub><b>Alex Munoz</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=AlexMunoz" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.wendtedesigns.com/"><img src="https://avatars2.githubusercontent.com/u/5779538?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Wendte</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=themostcolm" title="Code">💻</a></td>
+    <td align="center"><a href="https://twitter.com/CompuIves"><img src="https://avatars3.githubusercontent.com/u/587016?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ives van Hoorne</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=CompuIves" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=CompuIves" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://team.thebrain.pro"><img src="https://avatars1.githubusercontent.com/u/4002543?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Łukasz Gandecki</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=lgandecki" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/deniztetik"><img src="https://avatars0.githubusercontent.com/u/14167019?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Deniz Tetik</b></sub></a><br /><a href="#content-deniztetik" title="Content">🖋</a></td>
+    <td align="center"><a href="https://github.com/Ruffeng"><img src="https://avatars1.githubusercontent.com/u/18511772?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ruffeng</b></sub></a><br /><a href="#content-Ruffeng" title="Content">🖋</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Ruffeng" title="Code">💻</a></td>
+    <td align="center"><a href="https://stackshare.io/jdorfman/decisions"><img src="https://avatars1.githubusercontent.com/u/398230?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Justin Dorfman</b></sub></a><br /><a href="#fundingFinding-jdorfman" title="Funding Finding">🔍</a></td>
+    <td align="center"><a href="http://alexmunoz.github.io"><img src="https://avatars3.githubusercontent.com/u/3093946?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alex Munoz</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=AlexMunoz" title="Documentation">📖</a></td>
   </tr>
 </table>
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
 
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
@@ -279,10 +186,10 @@ Thank you! https://kcd.im/arp-ws-feedback
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
-[build-badge]: https://img.shields.io/travis/com/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
-[build]: https://travis-ci.com/kentcdodds/advanced-react-patterns
+[build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
+[build]: https://travis-ci.org/kentcdodds/advanced-react-patterns
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]: https://github.com/kentcdodds/react-fundamentals/blob/master/LICENSE
+[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/LICENSE
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key

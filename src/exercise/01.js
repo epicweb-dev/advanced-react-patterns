@@ -2,7 +2,7 @@
 // http://localhost:3000/isolated/exercise/01.js
 
 import React from 'react'
-import dequal from 'dequal'
+import {dequal} from 'dequal'
 
 // ./context/user-context.js
 
