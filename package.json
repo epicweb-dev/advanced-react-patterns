@@ -19,7 +19,6 @@
     "chalk": "^4.1.0",
     "codegen.macro": "^4.0.0",
     "dequal": "^2.0.2",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -33,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test",
     "test:coverage": "npm run test -- --watchAll=false",
     "test:exercises": "npm run test -- testing.*exercises\\/ --onlyChanged",
     "setup": "node ./scripts/setup",
