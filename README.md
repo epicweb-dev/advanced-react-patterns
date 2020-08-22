@@ -30,10 +30,9 @@
 ## Prerequisites
 
 - Read my blog post
-  [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control) (~15
-  minutes). Or watch
+  [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control). Or
+  watch
   [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad))
-  (7 minutes)
 - The more experience you have with building React abstractions, the more
   helpful this workshop will be for you.
 
@@ -168,6 +167,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
