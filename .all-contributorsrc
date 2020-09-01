@@ -150,6 +150,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "emipc",
+      "name": "Emili",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/26004903?v=4",
+      "profile": "https://github.com/emipc",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
