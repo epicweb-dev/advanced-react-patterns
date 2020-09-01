@@ -165,6 +165,7 @@ Thanks goes to these wonderful people
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/marcosvega91"><img src="https://avatars2.githubusercontent.com/u/5365582?v=4" width="100px;" alt=""/><br /><sub><b>Marco Moretti</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=marcosvega91" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/emipc"><img src="https://avatars1.githubusercontent.com/u/26004903?v=4" width="100px;" alt=""/><br /><sub><b>Emili</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=emipc" title="Documentation">📖</a></td>
   </tr>
 </table>
 
