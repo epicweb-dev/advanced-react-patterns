@@ -70,7 +70,7 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 
 ## Emoji
 
-- **Kody the Koala Bear** 🐨 "Do this"
+- **Kody the Koala** 🐨 "Do this"
 - **Matthew the Muscle** 💪 "Exercise"
 - **Chuck the Checkered Flag** 🏁 "Final"
 - **Marty the Money Bag** 💰 "Here's a hint"
