@@ -4,7 +4,7 @@ environment:
 
 branches:
   only:
-    - master
+    - main
 
 install:
   - ps: Install-Product node $env:node_version
