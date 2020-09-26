@@ -166,12 +166,12 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://github.com/marcosvega91"><img src="https://avatars2.githubusercontent.com/u/5365582?v=4" width="100px;" alt=""/><br /><sub><b>Marco Moretti</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=marcosvega91" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/emipc"><img src="https://avatars1.githubusercontent.com/u/26004903?v=4" width="100px;" alt=""/><br /><sub><b>Emili</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=emipc" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/balavishnuvj"><img src="https://avatars3.githubusercontent.com/u/13718688?v=4" width="100px;" alt=""/><br /><sub><b>balavishnuvj</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=balavishnuvj" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
