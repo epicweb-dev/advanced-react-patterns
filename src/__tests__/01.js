@@ -5,7 +5,6 @@ import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
 import App from '../final/01'
 // import App from '../exercise/01'
-// NOTE: if you do the extra credit, make sure to enable the last test.
 
 jest.mock('../user-client', () => {
   return {updateUser: jest.fn(() => Promise.resolve())}
