@@ -168,6 +168,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/emipc"><img src="https://avatars1.githubusercontent.com/u/26004903?v=4" width="100px;" alt=""/><br /><sub><b>Emili</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=emipc" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/balavishnuvj"><img src="https://avatars3.githubusercontent.com/u/13718688?v=4" width="100px;" alt=""/><br /><sub><b>balavishnuvj</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=balavishnuvj" title="Code">💻</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/pritamsangani/"><img src="https://avatars3.githubusercontent.com/u/22857896?v=4" width="100px;" alt=""/><br /><sub><b>Pritam Sangani</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=PritamSangani" title="Code">💻</a></td>
+    <td align="center"><a href="http://linkedin.com/in/katarzynakosturek/"><img src="https://avatars3.githubusercontent.com/u/36547835?v=4" width="100px;" alt=""/><br /><sub><b>Kasia Kosturek</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=kocvrek" title="Documentation">📖</a></td>
   </tr>
 </table>
 
