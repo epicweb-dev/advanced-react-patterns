@@ -1,3 +1,4 @@
+//importing modules
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
@@ -11,7 +12,7 @@ const findSwitchInstances = rootInstance =>
   findAllInRenderedTree(rootInstance, c =>
     isCompositeComponentWithType(c, Switch),
   )
-
+//Functions
 function validateSwitchInstance(switchInstance) {
   expect(
     switchInstance,
@@ -42,7 +43,7 @@ function renderToggle(ui) {
   const switchInstance = findSwitchInstances(rootInstance)[0]
   validateSwitchInstance(switchInstance)
   const toggleButton = utils.getAllByTestId('toggle-input')[0]
-
+//Returning.....
   return {
     toggle: () => userEvent.click(utils.getAllByTestId('toggle-input')[0]),
     toggleButton,
