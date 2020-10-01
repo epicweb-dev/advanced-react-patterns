@@ -104,7 +104,7 @@ a complete authority.
 ### Exercises
 
 - `src/exercise/00.md`: Background, Exercise Instructions, Extra Credit
-- `src/exercise/00.js`: Exercise with Emoji helpers
+- `src/exercise/00.js`: Exercise with Emoji helper's
 - `src/__tests__/00.js`: Tests
 - `src/final/00.js`: Final version
 - `src/final/00.extra-0.js`: Final version of extra credit
@@ -123,7 +123,7 @@ emoji characters are here to help you.
 - **Matthew the Muscle** 💪 will indicate what you're working with an exercise
 - **Chuck the Checkered Flag** 🏁 will indicate that you're working with a final
   version
-- **Marty the Money Bag** 💰 will give you specific tips (and sometimes code)
+- **Marty the Money Bag** 💰 will give you a specific tips (and sometimes code)
   along the way
 - **Hannah the Hundred** 💯 will give you extra challenges you can do if you
   finish the exercises early.
