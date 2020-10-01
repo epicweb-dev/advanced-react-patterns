@@ -129,7 +129,7 @@ emoji characters are here to help you.
   finish the exercises early.
 - **Olivia the Owl** 🦉 will give you useful tidbits/best practice notes and a
   link for elaboration and feedback.
-- **Dominic the Document** 📜 will give you links to useful documentation
+- **Dominic the Document** 📜 will give you links to useful documentation.
 - **Berry the Bomb** 💣 will be hanging around anywhere you need to blow stuff
   up (delete code).
 - **Peter the Product Manager** 👨‍💼 helps us know what our users want.
