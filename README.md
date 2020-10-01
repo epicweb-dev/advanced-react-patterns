@@ -32,7 +32,7 @@
 - Read my blog post
   [Inversion of Control](https://kentcdodds.com/blog/inversion-of-control). Or
   watch
-  [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad))
+  [Implement Inversion of Control](https://egghead.io/lessons/egghead-implement-inversion-of-control?pl=kent-s-blog-posts-as-screencasts-eefa540c&af=5236ad)
 - The more experience you have with building React abstractions, the more
   helpful this workshop will be for you.
 
@@ -126,15 +126,15 @@ emoji characters are here to help you.
 - **Marty the Money Bag** 💰 will give you specific tips (and sometimes code)
   along the way
 - **Hannah the Hundred** 💯 will give you extra challenges you can do if you
-  finish the exercises early.
+  finish the exercises early
 - **Olivia the Owl** 🦉 will give you useful tidbits/best practice notes and a
-  link for elaboration and feedback.
+  link for elaboration and feedback
 - **Dominic the Document** 📜 will give you links to useful documentation
 - **Berry the Bomb** 💣 will be hanging around anywhere you need to blow stuff
   up (delete code)
 - **Peter the Product Manager** 👨‍💼 helps us know what our users want
 - **Alfred the Alert** 🚨 will occasionally show up in the test failures with
-  potential explanations for why the tests are failing.
+  potential explanations for why the tests are failing
 
 ## Contributors
 
