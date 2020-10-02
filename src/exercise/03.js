@@ -21,7 +21,7 @@ function Toggle({onToggle, children}) {
 }
 
 // 🐨 we'll still get the children from props (as it's passed to us by the
-// developers using our component), but we'll get `on` implicitely from
+// developers using our component), but we'll get `on` implicitly from
 // ToggleContext now
 // 🦉 You can create a helper method to retrieve the context here. Thanks to that,
 // your context won't be exposed to the user
