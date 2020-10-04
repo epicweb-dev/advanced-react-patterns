@@ -77,10 +77,10 @@ function useUser() {
 // Then go down to the `handleSubmit` from `UserSettings` and put that logic in
 // this function. It should accept: dispatch, user, and updates
 
-// export {UserProvider, useUserState}
+// export {UserProvider, useUser}
 
 // src/screens/user-profile.js
-// import {UserProvider, useUserState} from './context/user-context'
+// import {UserProvider, useUser} from './context/user-context'
 function UserSettings() {
   const [{user, status, error}, userDispatch] = useUser()
 
