@@ -195,6 +195,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Aprillion",
+      "name": "Peter Hozák",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1087670?v=4",
+      "profile": "http://peter.hozak.info/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoHost": "https://github.com",
