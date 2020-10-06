@@ -25,6 +25,7 @@
 [![AppVeyor Build Status][win-build-badge]][win-build]
 [![GPL 3.0 License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
+[![Gitpod Ready-to-Code][gitpod-badge]][gitpod]
 <!-- prettier-ignore-end -->
 
 ## Prerequisites
@@ -56,6 +57,12 @@ variable and how to fix it here for [windows][win-path] or
 [mac/linux][mac-path].
 
 ## Setup
+
+### Online one-click setup
+
+You can either follow the below instructions for the local setup or use Gitpod(An Online Open Source VS Code like IDE) for playing around with the code or for working on issues and making PRs to this repo. With a single click it will automatically clone the repo, install all the dependencies and run `npm start` and `npm test`(in watch mode) in isolated Linux terminals so that you can start hacking around without any friction. 
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 After you've made sure to have the correct things (and versions) installed, you
 should be able to just run a few commands to get set up:
@@ -210,4 +217,6 @@ Thank you! https://kcd.im/arp-ws-feedback
 [issue]: https://github.com/kentcdodds/advanced-react-patterns/issues/new
 [win-build-badge]: https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
 [win-build]: https://ci.appveyor.com/project/kentcdodds/advanced-react-patterns
+[gitpod-badge]: https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod
+[gitpod]: https://gitpod.io/from-referrer/
 <!-- prettier-ignore-end -->
