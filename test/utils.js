@@ -1,3 +1,4 @@
+import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
@@ -13,18 +14,19 @@ const findSwitchInstances = rootInstance =>
   )
 
 function validateSwitchInstance(switchInstance) {
-  expect(
-    switchInstance,
+  alfredTip(
+    () => expect(switchInstance).toBeDefined(),
     `Unable to find the Switch component. Make sure you're rendering that!`,
-  ).toBeDefined()
-  expect(
-    switchInstance.props,
+  )
+  alfredTip(
+    () =>
+      expect(switchInstance.props).toMatchObject({
+        on: expect.any(Boolean),
+        onClick: expect.any(Function),
+        // it can also have aria-pressed...
+      }),
     'The Switch component is not being passed the right props.',
-  ).toMatchObject({
-    on: expect.any(Boolean),
-    onClick: expect.any(Function),
-    // it can also have aria-pressed...
-  })
+  )
 }
 
 // this only exists so we can search for an instance of the Switch
