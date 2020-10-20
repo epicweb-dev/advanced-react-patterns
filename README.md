@@ -219,7 +219,7 @@ Thank you! https://kcd.im/arp-ws-feedback
 [build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
 [build]: https://travis-ci.com/kentcdodds/advanced-react-patterns
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/main/LICENSE
+[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/main/LICENSE.md
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/main/CODE_OF_CONDUCT.md
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
