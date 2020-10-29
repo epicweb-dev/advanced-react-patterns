@@ -1,5 +1,5 @@
 import './switch.styles.css'
-import React from 'react'
+import * as React from 'react'
 
 // STOP! You should not have to change anything in this file to
 // make it through the workshop. If tests are failing because of

@@ -2,7 +2,7 @@
 // 💯 add a controlled state warning
 // http://localhost:3000/isolated/final/06.extra-2.js
 
-import React from 'react'
+import * as React from 'react'
 import warning from 'warning'
 import {Switch} from '../switch'
 

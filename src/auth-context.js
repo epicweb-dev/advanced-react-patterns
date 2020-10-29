@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 // normally this is going to implement a similar pattern
 // learn more here: https://kcd.im/auth

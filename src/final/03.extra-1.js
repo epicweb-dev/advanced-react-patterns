@@ -2,7 +2,7 @@
 // 💯 custom hook validation
 // http://localhost:3000/isolated/final/03.extra-1.js
 
-import React from 'react'
+import * as React from 'react'
 import {Switch} from '../switch'
 
 const ToggleContext = React.createContext()

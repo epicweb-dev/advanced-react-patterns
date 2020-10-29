@@ -2,7 +2,7 @@
 // 💯 prop getters
 // http://localhost:3000/isolated/final/04.extra-1.js
 
-import React from 'react'
+import * as React from 'react'
 import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn?.(...args))

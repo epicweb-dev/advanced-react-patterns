@@ -1,6 +1,6 @@
 // http://localhost:3000/isolated/examples/warnings.js
 
-import React from 'react'
+import * as React from 'react'
 
 function App() {
   const [name, setName] = React.useState()

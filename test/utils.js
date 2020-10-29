@@ -1,7 +1,7 @@
 import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import React from 'react'
+import * as React from 'react'
 import {
   findAllInRenderedTree,
   isCompositeComponentWithType,
