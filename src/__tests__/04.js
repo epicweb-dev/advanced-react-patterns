@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {renderToggle, screen, userEvent} from '../../test/utils'
 import App from '../final/04'
 // import App from '../exercise/04'

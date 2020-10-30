@@ -1,7 +1,7 @@
 // Flexible Compound Components
 // http://localhost:3000/isolated/exercise/03.js
 
-import React from 'react'
+import * as React from 'react'
 import {Switch} from '../switch'
 
 // 🐨 create your ToggleContext context here

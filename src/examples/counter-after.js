@@ -1,6 +1,6 @@
 // http://localhost:3000/isolated/examples/counter-after.js
 
-import React from 'react'
+import * as React from 'react'
 
 // src/context/counter.js
 const CounterContext = React.createContext()

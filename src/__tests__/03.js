@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {renderToggle} from '../../test/utils'
 import App from '../final/03'
 // import App from '../exercise/03'
