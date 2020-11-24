@@ -81,6 +81,7 @@ function useToggle({
   onChange,
   on: controlledOn,
   readOnly = false,
+  componentName = 'Toggle',
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
   const [state, dispatch] = React.useReducer(reducer, initialState)
@@ -88,11 +89,11 @@ function useToggle({
   const onIsControlled = controlledOn != null
   const on = onIsControlled ? controlledOn : state.on
 
-  useControlledSwitchWarning(controlledOn, 'on', 'useToggle')
+  useControlledSwitchWarning(controlledOn, 'on', componentName)
   useOnChangeReadOnlyWarning(
     controlledOn,
     'on',
-    'useToggle',
+    componentName,
     Boolean(onChange),
     readOnly,
     'readOnly',
@@ -140,6 +141,7 @@ function Toggle({on: controlledOn, onChange, readOnly}) {
     on: controlledOn,
     onChange,
     readOnly,
+    componentName: 'Toggle',
   })
   const props = getTogglerProps({on})
   return <Switch {...props} />

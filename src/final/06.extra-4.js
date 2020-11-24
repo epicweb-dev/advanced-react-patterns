@@ -81,18 +81,19 @@ function useToggle({
   onChange,
   on: controlledOn,
   readOnly = false,
+  componentName = 'Toggle',
 } = {}) {
   const {current: initialState} = React.useRef({on: initialOn})
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useControlledSwitchWarning(controlledOn, 'on', 'useToggle')
+    useControlledSwitchWarning(controlledOn, 'on', componentName)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useOnChangeReadOnlyWarning(
       controlledOn,
       'on',
-      'useToggle',
+      componentName,
       Boolean(onChange),
       readOnly,
       'readOnly',
@@ -144,6 +145,7 @@ function Toggle({on: controlledOn, onChange, readOnly}) {
     on: controlledOn,
     onChange,
     readOnly,
+    componentName: 'Toggle',
   })
   const props = getTogglerProps({on})
   return <Switch {...props} />
