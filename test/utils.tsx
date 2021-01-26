@@ -8,19 +8,24 @@ import {
 } from 'react-dom/test-utils'
 import {Switch} from '../src/switch'
 
-const findSwitchInstances = rootInstance =>
+const findSwitchInstances = (
+  rootInstance: React.Component<any, {}, any>,
+): React.ReactInstance[] =>
   findAllInRenderedTree(rootInstance, c =>
     isCompositeComponentWithType(c, Switch),
   )
 
-function validateSwitchInstance(switchInstance) {
+function validateSwitchInstance(switchInstance: React.ReactInstance): void {
   alfredTip(
     () => expect(switchInstance).toBeDefined(),
     `Unable to find the Switch component. Make sure you're rendering that!`,
   )
   alfredTip(
     () =>
-      expect(switchInstance.props).toMatchObject({
+    expect(
+        // @ts-expect-error Property 'props' does not exist on type 'ReactInstance'.
+        switchInstance.props
+        ).toMatchObject({
         on: expect.any(Boolean),
         onClick: expect.any(Function),
         // it can also have aria-pressed...
@@ -37,18 +42,19 @@ class Root extends React.Component {
   }
 }
 
-function renderToggle(ui) {
-  let rootInstance
-  let rootRef = instance => (rootInstance = instance)
+function renderToggle(ui: React.ReactNode) {
+  let rootInstance: Root
+  let rootRef = (instance: Root): void => ((rootInstance = instance), void 0)
+
   const utils = render(<Root ref={rootRef}>{ui}</Root>)
-  const switchInstance = findSwitchInstances(rootInstance)[0]
+  const switchInstance = findSwitchInstances(rootInstance!)[0]
   validateSwitchInstance(switchInstance)
   const toggleButton = utils.getAllByTestId('toggle-input')[0]
 
   return {
     toggle: () => userEvent.click(utils.getAllByTestId('toggle-input')[0]),
     toggleButton,
-    rootInstance,
+    rootInstance: rootInstance!,
     ...utils,
   }
 }

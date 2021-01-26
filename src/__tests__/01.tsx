@@ -4,13 +4,16 @@ import userEvent from '@testing-library/user-event'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
 import App from '../final/01'
+import type {User} from '../types'
 // import App from '../exercise/01'
 
 jest.mock('../user-client', () => {
   return {updateUser: jest.fn(() => Promise.resolve())}
 })
 
-const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
+const mockUserClient = userClient as jest.Mocked<typeof userClient>;
+
+const mockUser: User = {username: 'jakiechan', tagline: '', bio: ''}
 
 function renderApp() {
   const utils = render(
@@ -24,14 +27,20 @@ function renderApp() {
     ...utils,
     submitButton: screen.getByText(/✔/),
     resetButton: screen.getByText(/reset/i),
-    taglineInput: screen.getByLabelText(/tagline/i),
-    bioInput: screen.getByLabelText(/bio/i),
+    taglineInput: screen.getByLabelText(/tagline/i) as HTMLInputElement,
+    bioInput: screen.getByLabelText(/bio/i) as HTMLInputElement,
     waitForLoading: () =>
       waitForElementToBeRemoved(() => screen.getByText(/\.\.\./i)),
     userDisplayPre,
-    getDisplayData: () => JSON.parse(userDisplayPre.textContent),
+    getDisplayData: () => {
+      if (userDisplayPre && userDisplayPre.textContent) {
+        return JSON.parse(userDisplayPre.textContent)
+      }
+      throw new Error('userDisplayPre node is null')
+    },
   }
 }
+// type T0 = HTMLElement
 
 test('happy path works', async () => {
   const {
@@ -57,7 +66,7 @@ test('happy path works', async () => {
   expect(resetButton).not.toHaveAttribute('disabled')
 
   const updatedUser = {...mockUser, ...testData}
-  userClient.updateUser.mockImplementationOnce(() =>
+  mockUserClient.updateUser.mockImplementationOnce(() =>
     Promise.resolve(updatedUser),
   )
 
@@ -70,7 +79,7 @@ test('happy path works', async () => {
   // submitting the form invokes userClient.updateUser
   expect(userClient.updateUser).toHaveBeenCalledTimes(1)
   expect(userClient.updateUser).toHaveBeenCalledWith(mockUser, testData)
-  userClient.updateUser.mockClear()
+  mockUserClient.updateUser.mockClear()
 
   // once the submit button changes from ... then we know the request is over
   await waitForLoading()
@@ -109,7 +118,7 @@ test('failure works', async () => {
   const testData = {...mockUser, bio: 'test bio'}
   userEvent.type(bioInput, testData.bio)
   const testErrorMessage = 'test error message'
-  userClient.updateUser.mockImplementationOnce(() =>
+  mockUserClient.updateUser.mockImplementationOnce(() =>
     Promise.reject({message: testErrorMessage}),
   )
 
@@ -123,9 +132,9 @@ test('failure works', async () => {
   screen.getByText(testErrorMessage)
   expect(getDisplayData()).toEqual(mockUser)
 
-  userClient.updateUser.mockClear()
+  mockUserClient.updateUser.mockClear()
 
-  userClient.updateUser.mockImplementationOnce(() =>
+  mockUserClient.updateUser.mockImplementationOnce(() =>
     Promise.resolve(updatedUser),
   )
   userEvent.click(submitButton)

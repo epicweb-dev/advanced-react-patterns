@@ -13,8 +13,15 @@ import * as React from 'react'
 // differently in codesandbox and locally :shrug:
 const noop = () => {}
 
-class Switch extends React.Component {
-  render() {
+interface Props extends React.HTMLAttributes<HTMLSpanElement> {
+  on: boolean
+  className?: string
+  'aria-label'?: string
+  onClick: (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => void
+}
+
+class Switch extends React.Component<Props> {
+  public render(): JSX.Element {
     const {
       on,
       className = '',
@@ -22,13 +29,15 @@ class Switch extends React.Component {
       onClick,
       ...props
     } = this.props
-    const btnClassName = [
+
+    const btnClassName: string = [
       className,
       'toggle-btn',
       on ? 'toggle-btn-on' : 'toggle-btn-off',
     ]
       .filter(Boolean)
       .join(' ')
+
     return (
       <label aria-label={ariaLabel || 'Toggle'} style={{display: 'block'}}>
         <input
