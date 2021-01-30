@@ -182,12 +182,11 @@ function App() {
   return (
     <div
       style={{
-        height: 350,
+        minHeight: 350,
         width: 300,
         backgroundColor: '#ddd',
         borderRadius: 4,
         padding: 10,
-        overflow: 'scroll',
       }}
     >
       <UserProvider>
