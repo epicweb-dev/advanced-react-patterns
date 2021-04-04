@@ -38,7 +38,7 @@ function useCounter() {
 // export {CounterProvider, useCounter}
 
 // src/screens/counter.js
-// import {useCounter, increment, decrement} from 'context/counter'
+// import {useCounter} from 'context/counter'
 
 function Counter() {
   const [state, dispatch] = useCounter()
