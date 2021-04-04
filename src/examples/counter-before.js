@@ -35,7 +35,7 @@ function useCounter() {
   return context
 }
 
-// export {CounterProvider, useCounter, increment, decrement}
+// export {CounterProvider, useCounter}
 
 // src/screens/counter.js
 // import {useCounter, increment, decrement} from 'context/counter'
