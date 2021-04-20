@@ -17,7 +17,7 @@
     "@kentcdodds/react-workshop-app": "^4.1.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^13.1.2",
+    "@testing-library/user-event": "^13.1.5",
     "chalk": "^4.1.0",
     "codegen.macro": "^4.1.0",
     "dequal": "^2.0.2",
