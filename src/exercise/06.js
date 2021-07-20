@@ -48,7 +48,7 @@ function useToggle({
   // right here. This will:
   // 1. accept an action
   // 2. if onIsControlled is false, call dispatch with that action
-  // 3. Then call `onChange` with our "suggested changes" and the action.
+  // 3. else call `onChange` with our "suggested changes" and the action.
 
   // 🦉 "Suggested changes" refers to: the changes we would make if we were
   // managing the state ourselves. This is similar to how a controlled <input />
