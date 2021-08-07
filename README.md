@@ -212,6 +212,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/ph08n1x"><img src="https://avatars.githubusercontent.com/u/4249732?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ph08n1x</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=ph08n1x" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.suhas010.com"><img src="https://avatars.githubusercontent.com/u/8597576?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Suhas R More</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Suhas010" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/0xnoob"><img src="https://avatars.githubusercontent.com/u/49793844?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0xnoob</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=0xnoob" title="Code">💻</a></td>
+    <td align="center"><a href="http://pavlos.dev"><img src="https://avatars.githubusercontent.com/u/100233?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pavlos Vinieratos</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=pvinis" title="Documentation">📖</a></td>
   </tr>
 </table>
 
