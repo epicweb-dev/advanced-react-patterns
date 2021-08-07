@@ -303,6 +303,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "pvinis",
+      "name": "Pavlos Vinieratos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100233?v=4",
+      "profile": "http://pavlos.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
