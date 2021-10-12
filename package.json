@@ -6,34 +6,35 @@
   "version": "1.0.0",
   "private": true,
   "keywords": [],
-  "homepage": "http://advanced-react-patterns.netlify.app/",
+  "homepage": "http://advanced-react-patterns-next.netlify.app/",
   "license": "GPL-3.0-only",
   "main": "src/index.js",
   "engines": {
     "node": "12 || 14 || 15 || 16",
-    "npm": ">=6"
+    "npm": ">=7"
   },
   "dependencies": {
     "@kentcdodds/react-workshop-app": "^4.3.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.3.0",
-    "chalk": "^4.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "codegen.macro": "^4.1.0",
-    "dequal": "^2.0.2",
-    "lodash": "^4.17.21",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@types/react": "^17.0.27",
+    "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.9",
     "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
+    "patch-package": "^6.4.7",
     "prettier": "^2.4.1",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.4.4"
   },
   "scripts": {
+    "postinstall": "patch-package --patch-dir config/patches",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,7 +43,8 @@
     "setup": "node setup",
     "lint": "eslint .",
     "format": "prettier --write \"./src\"",
-    "validate": "npm-run-all --parallel build test:coverage lint"
+    "typecheck": "tsc",
+    "validate": "npm-run-all --parallel build test:coverage lint typecheck"
   },
   "husky": {
     "hooks": {
