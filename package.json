@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@kentcdodds/react-workshop-app": "^4.3.0",
-    "@testing-library/jest-dom": "^5.13.0",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^13.1.9",
-    "chalk": "^4.1.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.3.0",
+    "chalk": "^4.1.2",
     "codegen.macro": "^4.1.0",
     "dequal": "^2.0.2",
     "lodash": "^4.17.21",
@@ -26,11 +26,11 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.7",
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
     "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.1",
+    "prettier": "^2.4.1",
     "react-scripts": "^4.0.3"
   },
   "scripts": {
