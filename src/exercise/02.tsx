@@ -150,7 +150,7 @@ function Details({selectedPokemon}: {selectedPokemon: PokemonData | null}) {
 function Footer({user}: {user: User}) {
   return (
     <footer>
-      <p>{`Don't have a good day–have a great day, ${user.name}`}</p>
+      <p>{`Don't have a good day have a great day, ${user.name}`}</p>
     </footer>
   )
 }

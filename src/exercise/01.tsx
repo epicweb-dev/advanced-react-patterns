@@ -24,7 +24,7 @@ function useDebounce<Callback extends (...args: Array<unknown>) => unknown>(
 
   // use the latest version of the callback here:
   // 💰 you'll need to pass an annonymous function to debounce. Do *not*
-  // simply change this to `debounc(latestCallbackRef.current, delay)`
+  // simply change this to `debounce(latestCallbackRef.current, delay)`
   // as that won't work. Can you think of why?
   return React.useMemo(() => debounce(callback, delay), [callback, delay])
 }
