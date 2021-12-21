@@ -216,6 +216,9 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/infoxicator"><img src="https://avatars.githubusercontent.com/u/17012976?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ruben Casas</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=infoxicator" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=infoxicator" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/marioleed"><img src="https://avatars.githubusercontent.com/u/1763448?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mario Sannum</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=marioleed" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://wrongabhishek.com"><img src="https://avatars.githubusercontent.com/u/47311875?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Rawat</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=AbePlays" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
