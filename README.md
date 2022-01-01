@@ -218,6 +218,7 @@ Thanks goes to these wonderful people
   </tr>
   <tr>
     <td align="center"><a href="https://wrongabhishek.com"><img src="https://avatars.githubusercontent.com/u/47311875?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Rawat</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=AbePlays" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://fullchee.com"><img src="https://avatars.githubusercontent.com/u/11246258?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fullchee Zhang</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Fullchee" title="Documentation">📖</a></td>
   </tr>
 </table>
 
