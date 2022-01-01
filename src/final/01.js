@@ -87,10 +87,10 @@ async function updateUser(dispatch, user, updates) {
   }
 }
 
-// export {UserProvider, useUserState, updateUser}
+// export {UserProvider, useUser, updateUser}
 
 // src/screens/user-profile.js
-// import {UserProvider, useUserState, updateUser} from './context/user-context'
+// import {UserProvider, useUser, updateUser} from './context/user-context'
 function UserSettings() {
   const [{user, status, error}, userDispatch] = useUser()
 
