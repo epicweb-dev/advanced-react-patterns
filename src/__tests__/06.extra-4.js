@@ -13,7 +13,7 @@ afterEach(() => {
   console.error.mockRestore()
 })
 
-test('warning for controlled component without onChange', () => {
+test('warning for controlled component without onChange', async () => {
   render(<Toggle on={false} />)
   alfredTip(
     () =>
@@ -39,12 +39,12 @@ test('warning for controlled component without onChange', () => {
   expect(console.error).toHaveBeenCalledTimes(1)
 })
 
-test('no warning for controlled component with onChange prop', () => {
+test('no warning for controlled component with onChange prop', async () => {
   render(<Toggle on={false} onChange={() => {}} />)
   expect(console.error).toHaveBeenCalledTimes(0)
 })
 
-test('no warning for controlled component with readOnly prop', () => {
+test('no warning for controlled component with readOnly prop', async () => {
   render(<Toggle on={false} readOnly={true} />)
   alfredTip(
     () => expect(console.error).toHaveBeenCalledTimes(0),
@@ -52,13 +52,13 @@ test('no warning for controlled component with readOnly prop', () => {
   )
 })
 
-test('warning for changing from controlled to uncontrolled', () => {
+test('warning for changing from controlled to uncontrolled', async () => {
   function Example() {
     const [state, setState] = React.useState(true)
     return <Toggle on={state} onChange={() => setState(undefined)} />
   }
   render(<Example />)
-  userEvent.click(screen.getByLabelText(/toggle/i))
+  await userEvent.click(screen.getByLabelText(/toggle/i))
   alfredTip(
     () =>
       expect(console.error).toHaveBeenCalledWith(
@@ -68,13 +68,13 @@ test('warning for changing from controlled to uncontrolled', () => {
   )
 })
 
-test('warning for changing from uncontrolled to controlled', () => {
+test('warning for changing from uncontrolled to controlled', async () => {
   function Example() {
     const [state, setState] = React.useState(undefined)
     return <Toggle on={state} onChange={() => setState(true)} />
   }
   render(<Example />)
-  userEvent.click(screen.getByLabelText(/toggle/i))
+  await userEvent.click(screen.getByLabelText(/toggle/i))
   alfredTip(
     () =>
       expect(console.error).toHaveBeenCalledWith(

@@ -48,8 +48,8 @@ test('happy path works', async () => {
   expect(resetButton).toHaveAttribute('disabled')
 
   const testData = {...mockUser, tagline: 'test tagline', bio: 'test bio'}
-  userEvent.type(taglineInput, testData.tagline)
-  userEvent.type(bioInput, testData.bio)
+  await userEvent.type(taglineInput, testData.tagline)
+  await userEvent.type(bioInput, testData.bio)
 
   // changed form enables submit and reset
   expect(submitButton).toHaveTextContent(/submit/i)
@@ -61,7 +61,7 @@ test('happy path works', async () => {
     Promise.resolve(updatedUser),
   )
 
-  userEvent.click(submitButton)
+  await userEvent.click(submitButton)
 
   // pending form sets the submit button to ... and disables the submit and reset buttons
   expect(submitButton).toHaveTextContent(/\.\.\./i)
@@ -88,11 +88,11 @@ test('happy path works', async () => {
   expect(getDisplayData()).toEqual(updatedUser)
 })
 
-test('reset works', () => {
+test('reset works', async () => {
   const {resetButton, taglineInput} = renderApp()
 
-  userEvent.type(taglineInput, 'foo')
-  userEvent.click(resetButton)
+  await userEvent.type(taglineInput, 'foo')
+  await userEvent.click(resetButton)
   expect(taglineInput.value).toBe(mockUser.tagline)
 })
 
@@ -107,7 +107,7 @@ test('failure works', async () => {
   } = renderApp()
 
   const testData = {...mockUser, bio: 'test bio'}
-  userEvent.type(bioInput, testData.bio)
+  await userEvent.type(bioInput, testData.bio)
   const testErrorMessage = 'test error message'
   userClient.updateUser.mockImplementationOnce(() =>
     Promise.reject({message: testErrorMessage}),
@@ -115,7 +115,7 @@ test('failure works', async () => {
 
   const updatedUser = {...mockUser, ...testData}
 
-  userEvent.click(submitButton)
+  await userEvent.click(submitButton)
 
   await waitForLoading()
 
@@ -128,7 +128,7 @@ test('failure works', async () => {
   userClient.updateUser.mockImplementationOnce(() =>
     Promise.resolve(updatedUser),
   )
-  userEvent.click(submitButton)
+  await userEvent.click(submitButton)
 
   await waitForLoading()
 
