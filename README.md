@@ -36,6 +36,10 @@
 - The more experience you have with building React abstractions, the more
   helpful this workshop will be for you.
 
+> NOTE: The EpicReact.dev videos were recorded with React version ^16.13 and all
+> material in this repo has been updated to React version ^18. Differences are
+> minor and any relevant differences are noted in the instructions.
+
 ## System Requirements
 
 - [git][git] v2.13 or greater
