@@ -111,12 +111,6 @@ setup the project with the following command:
 docker-compose up
 ```
 
-It's recommended you run everything locally in the same environment you work in
-every day, but if you're having issues getting things set up, you can also set
-this up using [GitHub Codespaces](https://github.com/features/codespaces)
-([video demo](https://www.youtube.com/watch?v=gCoVJm3hGk4)) or
-[Codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-patterns).
-
 ## Running the app
 
 To get the app up and running (and really see if it worked), run:
