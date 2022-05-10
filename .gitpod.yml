@@ -1,0 +1,104 @@
+## Learn more about this file at 'https://www.gitpod.io/docs/references/gitpod-yml'
+##
+## This '.gitpod.yml' file when placed at the root of a project instructs
+## Gitpod how to prepare & build the project, start development environments
+## and configure continuous prebuilds. Prebuilds when enabled builds a project
+## like a CI server so you can start coding right away - no more waiting for
+## dependencies to download and builds to finish when reviewing pull-requests
+## or hacking on something new.
+##
+## With Gitpod you can develop software from any device (even iPads) via 
+## desktop or browser based versions of VS Code or any JetBrains IDE and
+## customise it to your individual needs - from themes to extensions, you
+## have full control.
+##
+## The easiest way to try out Gitpod is install the browser extenion:
+## 'https://www.gitpod.io/docs/browser-extension' or by prefixing
+## 'https://gitpod.io#' to the source control URL of any project.
+##
+## For example: 'https://gitpod.io#https://github.com/gitpod-io/gitpod'
+
+
+## The 'tasks' section defines how Gitpod prepares & builds this project
+## and how it can start development servers. With Gitpod, there are three
+## types of tasks:
+##
+## - before: Use this for tasks that need to run before init and before command. 
+## - init: Use this to configure prebuilds of heavy-lifting tasks such as
+##         downloading dependencies or compiling source code.
+## - command: Use this to start your database or application when the workspace starts.
+##
+## Learn more about these tasks at 'https://www.gitpod.io/docs/config-start-tasks'
+
+tasks:
+  - name: App
+    init: npm install
+    command: npm run start
+    openMode: split-left
+
+  - name: Test
+    command: npm run test
+    openMode: split-right
+
+  - name: Set up email
+    command: |
+      clear
+      printf "\n\n\n"
+      printf "\u001b[36;1mAutofilling Email\u001b[0m\n"
+      printf "\u001b[2;1mEach exercise comes with a elaboration form to help your retention. Providing your email now will mean you don't have to provide it each time you fill out the form.\u001b[0m\n"
+      npx "https://gist.github.com/kentcdodds/2d44448a8997b9964b1be44cd294d1f5" \
+        && exit 0
+## The 'ports' section defines various ports your may listen on are 
+## configured in Gitpod on an authenticated URL. By default, all ports
+## are in private visibility state.
+##
+## Learn more about ports at 'https://www.gitpod.io/docs/config-ports'
+
+ports:
+ - port: 3000 # alternatively configure entire ranges via '8080-8090'
+   visibility: private # either 'public' or 'private' (default)
+   onOpen: open-browser # either 'open-browser', 'open-preview' or 'ignore'
+
+## The 'vscode' section defines a list of Visual Studio Code extensions from
+## the OpenVSX.org registry to be installed upon workspace startup. OpenVSX
+## is an open alternative to the proprietary Visual Studio Code Marketplace
+## and extensions can be added by sending a pull-request with the extension
+## identifier to https://github.com/open-vsx/publish-extensions
+##
+## The identifier of an extension is always ${publisher}.${name}.
+##
+## For example: 'vscodevim.vim'
+##
+## Learn more at 'https://www.gitpod.io/docs/ides-and-editors/vscode'
+
+vscode:
+  extensions:
+    - VisualStudioExptTeam.vscodeintellicode
+    - dbaeumer.vscode-eslint
+    - formulahendry.auto-rename-tag
+    - esbenp.prettier-vscode
+    - ms-azuretools.vscode-docker
+
+## The 'github' section defines configuration of continuous prebuilds
+## for GitHub repositories when the GitHub application
+## 'https://github.com/apps/gitpod-io' is installed in GitHub and granted
+## permissions to access the repository.
+##
+## Learn more at 'https://www.gitpod.io/docs/prebuilds'
+
+github: 
+  prebuilds:
+    # enable for the default branch
+    master: true
+    # enable for all branches in this repo
+    branches: false
+    # enable for pull requests coming from this repo
+    pullRequests: false
+    # enable for pull requests coming from forks
+    pullRequestsFromForks: false
+    # add a check to pull requests
+    addCheck: false
+    # add a "Review in Gitpod" button as a comment to pull requests
+    addComment: false
+    # add a "Review in Gitpod" button to the pull request's description
+    addBadge: false
