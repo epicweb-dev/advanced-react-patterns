@@ -1,5 +1,10 @@
 import * as React from 'react'
-import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  act,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as userClient from '../user-client'
 import {AuthProvider} from '../auth-context'
@@ -33,6 +38,15 @@ function renderApp() {
   }
 }
 
+function deferred() {
+  let resolve, reject
+  const promise = new Promise((res, rej) => {
+    resolve = res
+    reject = rej
+  })
+  return {promise, resolve, reject}
+}
+
 test('happy path works', async () => {
   const {
     submitButton,
@@ -57,9 +71,8 @@ test('happy path works', async () => {
   expect(resetButton).not.toHaveAttribute('disabled')
 
   const updatedUser = {...mockUser, ...testData}
-  userClient.updateUser.mockImplementationOnce(() =>
-    Promise.resolve(updatedUser),
-  )
+  const defer = deferred()
+  userClient.updateUser.mockImplementationOnce(() => defer.promise)
 
   await userEvent.click(submitButton)
 
@@ -73,6 +86,7 @@ test('happy path works', async () => {
   userClient.updateUser.mockClear()
 
   // once the submit button changes from ... then we know the request is over
+  defer.resolve(updatedUser)
   await waitForLoading()
 
   // make sure all the text that should appear is there and the button state is correct
@@ -108,16 +122,19 @@ test('failure works', async () => {
 
   const testData = {...mockUser, bio: 'test bio'}
   await userEvent.type(bioInput, testData.bio)
+  const defer1 = deferred()
   const testErrorMessage = 'test error message'
-  userClient.updateUser.mockImplementationOnce(() =>
-    Promise.reject({message: testErrorMessage}),
-  )
+  userClient.updateUser.mockImplementationOnce(() => defer1.promise)
 
   const updatedUser = {...mockUser, ...testData}
 
   await userEvent.click(submitButton)
 
-  await waitForLoading()
+  await act(async () => {
+    defer1.reject({message: testErrorMessage})
+    await defer1.promise.catch(() => {})
+  })
+  // await waitForLoading()
 
   expect(submitButton).toHaveTextContent(/try again/i)
   screen.getByText(testErrorMessage)
@@ -125,14 +142,13 @@ test('failure works', async () => {
 
   userClient.updateUser.mockClear()
 
-  userClient.updateUser.mockImplementationOnce(() =>
-    Promise.resolve(updatedUser),
-  )
+  const defer2 = deferred()
+  userClient.updateUser.mockImplementationOnce(() => defer2.promise)
   await userEvent.click(submitButton)
 
-  await waitForLoading()
+  defer2.resolve(updatedUser)
+  await screen.findByRole('button', {name: /✔/})
 
-  expect(submitButton).toHaveTextContent(/✔/)
   expect(resetButton).toHaveAttribute('disabled')
 
   // make sure the inputs have the right value
