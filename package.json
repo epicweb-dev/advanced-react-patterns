@@ -58,11 +58,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "babel": {
-    "presets": [
-      "babel-preset-react-app"
-    ]
-  },
   "browserslist": {
     "development": [
       "last 2 chrome versions",
