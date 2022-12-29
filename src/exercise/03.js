@@ -6,6 +6,7 @@ import {Switch} from '../switch'
 
 // 🐨 create your ToggleContext context here
 const ToggleContext = React.createContext()
+ToggleContext.displayName = 'ToggleContext'
 // 📜 https://reactjs.org/docs/context.html#reactcreatecontext
 
 function Toggle({children}) {
@@ -22,7 +23,10 @@ function Toggle({children}) {
 }
 
 function useToggle() {
-  return React.useContext(ToggleContext)
+  const context = React.useContext(ToggleContext)
+  if (!context) {
+    throw new Error('useToggle must be used within a <Toggle />')
+  }
 }
 
 // 🐨 we'll still get the children from props (as it's passed to us by the
@@ -45,7 +49,7 @@ function ToggleOff({children}) {
 
 // 🐨 get `on` and `toggle` from the ToggleContext with `useContext`
 function ToggleButton({...props}) {
-  const {on, toggle} = React.useContext(ToggleContext)
+  const {on, toggle} = useToggle()
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
