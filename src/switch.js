@@ -17,6 +17,7 @@ class Switch extends React.Component {
   render() {
     const {
       on,
+      disabled,
       className = '',
       'aria-label': ariaLabel,
       onClick,
@@ -35,6 +36,7 @@ class Switch extends React.Component {
           className="toggle-input"
           type="checkbox"
           checked={on}
+          disabled={disabled}
           onChange={noop}
           onClick={onClick}
           data-testid="toggle-input"
