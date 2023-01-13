@@ -358,9 +358,19 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "jpotts18",
+      "name": "Jeff Potter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2466729?v=4",
+      "profile": "http://mangovoice.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
