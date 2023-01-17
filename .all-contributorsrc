@@ -367,6 +367,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kenneth-gray",
+      "name": "Kenny Gray",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10341832?v=4",
+      "profile": "https://github.com/kenneth-gray",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "repoHost": "https://github.com",

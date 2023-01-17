@@ -234,6 +234,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="http://fullchee.com"><img src="https://avatars.githubusercontent.com/u/11246258?v=4?s=100" width="100px;" alt="Fullchee Zhang"/><br /><sub><b>Fullchee Zhang</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=Fullchee" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/YaseenAlGailani"><img src="https://avatars.githubusercontent.com/u/23329119?v=4?s=100" width="100px;" alt="Yaseen"/><br /><sub><b>Yaseen</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=YaseenAlGailani" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://mangovoice.com"><img src="https://avatars.githubusercontent.com/u/2466729?v=4?s=100" width="100px;" alt="Jeff Potter"/><br /><sub><b>Jeff Potter</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=jpotts18" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kenneth-gray"><img src="https://avatars.githubusercontent.com/u/10341832?v=4?s=100" width="100px;" alt="Kenny Gray"/><br /><sub><b>Kenny Gray</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/issues?q=author%3Akenneth-gray" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
