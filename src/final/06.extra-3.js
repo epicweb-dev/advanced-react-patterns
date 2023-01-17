@@ -6,7 +6,10 @@ import * as React from 'react'
 import warning from 'warning'
 import {Switch} from '../switch'
 
-const callAll = (...fns) => (...args) => fns.forEach(fn => fn?.(...args))
+const callAll =
+  (...fns) =>
+  (...args) =>
+    fns.forEach(fn => fn?.(...args))
 
 const actionTypes = {
   toggle: 'toggle',
@@ -135,11 +138,13 @@ function useToggle({
   }
 }
 
-function Toggle({on: controlledOn, onChange, readOnly}) {
+function Toggle({on: controlledOn, onChange, readOnly, initialOn, reducer}) {
   const {on, getTogglerProps} = useToggle({
     on: controlledOn,
     onChange,
     readOnly,
+    initialOn,
+    reducer,
   })
   const props = getTogglerProps({on})
   return <Switch {...props} />
