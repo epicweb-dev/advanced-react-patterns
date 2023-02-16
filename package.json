@@ -37,6 +37,7 @@
     "start": "kcdshop start",
     "dev": "kcdshop start",
     "test": "cross-env NODE_ENV=development playwright test",
+    "postinstall": "npx playwright install chromium --with-deps",
     "setup": "node setup",
     "lint": "cross-env NODE_ENV=development eslint .",
     "format": "prettier --write \"./src\"",
