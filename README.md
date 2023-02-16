@@ -39,8 +39,8 @@
 ## System Requirements
 
 - [git][git] v2.13 or greater
-- [NodeJS][node] `12 || 14 || 15 || 16`
-- [npm][npm] v8 or greater
+- [NodeJS][node] `14 || 16 || 18 || 19`
+- [npm][npm] v8.16.0 or greater
 
 All of these must be available in your `PATH`. To verify things are set up
 properly, you can run this:

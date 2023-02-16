@@ -11,13 +11,11 @@
   "keywords": [],
   "license": "GPL-3.0-only",
   "engines": {
-    "node": "12 || 14 || 16 || 18 || 19",
-    "npm": ">=8"
+    "node": "14 || 16 || 18 || 19",
+    "npm": ">=8.16.0"
   },
   "dependencies": {
-    "@kentcdodds/workshop-app": "^1.12.3",
-    "chai": "^4.3.7",
-    "chai-dom": "^1.11.0",
+    "@kentcdodds/workshop-app": "^1.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -26,8 +24,6 @@
     "@testing-library/dom": "^8.20.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/chai": "^4.3.4",
-    "@types/chai-dom": "^1.11.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "cross-env": "^7.0.3",
@@ -40,7 +36,7 @@
   "scripts": {
     "start": "kcdshop start",
     "dev": "kcdshop start",
-    "test": "playwright test",
+    "test": "cross-env NODE_ENV=development playwright test",
     "setup": "node setup",
     "lint": "cross-env NODE_ENV=development eslint .",
     "format": "prettier --write \"./src\"",
