@@ -15,13 +15,13 @@
     "npm": ">=8.16.0"
   },
   "dependencies": {
-    "@kentcdodds/workshop-app": "^1.12.4",
+    "@kentcdodds/workshop-app": "^1.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.30.0",
-    "@testing-library/dom": "^8.20.0",
+    "@testing-library/dom": "^9.0.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.28",
