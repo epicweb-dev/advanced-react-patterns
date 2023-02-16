@@ -1,8 +1,8 @@
 {
-  "template": "node",
-  "container": {
-    "startScript": "start",
-    "port": 3000,
-    "node": "14"
-  }
+	"template": "node",
+	"container": {
+		"startScript": "start",
+		"port": 3000,
+		"node": "18"
+	}
 }
