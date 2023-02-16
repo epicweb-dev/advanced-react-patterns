@@ -1,7 +1,8 @@
 # Latest Ref
 
-**One liner:** The Latest Ref Pattern allows you to access the latest value of a
-prop, state, or callback without needing to list it in a dependency array.
+**One liner:** The Latest Ref Pattern allows you to have a reference to the
+latest value of a prop, state, or callback without needing to list it in a
+dependency array when accessing it in a `useEffect`.
 
 When React introduced hooks it did more than give us an excellent primitive with
 super abstract-ability powers. It also changed an important default that results
@@ -174,6 +175,9 @@ unexpected behavior's you'll get when you switch the default like this.
 
 📜 For more on this subject, read
 [How React Uses Closures to Avoid Bugs](https://epicreact.dev/how-react-uses-closures-to-avoid-bugs).
+
+📜 For more on the latest ref pattern, read
+[The Latest Ref Pattern in React](https://epicreact.dev/the-latest-ref-pattern-in-react).
 
 **Real World Projects that use this pattern:**
 
