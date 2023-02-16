@@ -14,15 +14,25 @@ responsibility."
 Your job is to enable people to provide a custom `reducer` so they can have
 complete control over how state updates happen in our `<Toggle />` component.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/index.tsx">
-      `index.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
 
-<ul>- No files changed</ul>
+      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/app.tsx">
+        <code>app.tsx</code>
+      </LaunchEditor>
+    </li>
+
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

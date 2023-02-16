@@ -11,13 +11,17 @@ before, but you'll get a sense for how to use this pattern. The tests will be
 there just for you to verify you haven't broken anything that should be working
 if you want to use them.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/02.composition/01.problem/index.tsx">
-      `index.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/02.composition/01.problem/index.tsx">
+        <code>index.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

@@ -5,13 +5,17 @@ called `on` and another called `onChange`. These work similar to the `value` and
 `onChange` props of `<input />`. Your job is to make those props actually
 control the state of `on` and call the `onChange` with the suggested changes.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/index.tsx">
-      `index.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>
