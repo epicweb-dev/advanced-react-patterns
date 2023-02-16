@@ -84,13 +84,12 @@ should be able to just run a few commands to get set up:
 
 ```shell
 git clone https://github.com/kentcdodds/advanced-react-patterns.git
+git checkout next2
 cd advanced-react-patterns
 node setup
 ```
 
-This may take a few minutes. **It will ask you for your email.** This is
-optional and just automatically adds your email to the links in the project to
-make filling out some forms easier.
+This may take a few minutes.
 
 If you get any errors, please read through them and see if you can find out what
 the problem is. If you can't work it out on your own then please [file an
@@ -120,46 +119,29 @@ To get the app up and running (and really see if it worked), run:
 npm start
 ```
 
-This should start up your browser. If you're familiar, this is a standard
-[react-scripts](https://create-react-app.dev/) application.
-
-You can also open
-[the deployment of the app on Netlify](https://advanced-react-patterns.netlify.app/).
+Now open your browser to the address that's logged out for you and you're good
+to get started!
 
 ## Running the tests
 
-```shell
-npm test
-```
-
-This will start [Jest](https://jestjs.io/) in watch mode. Read the output and
-play around with it. The tests are there to help you reach the final version,
-however _sometimes_ you can accomplish the task and the tests still fail if you
-implement things differently than I do in my solution, so don't look to them as
-a complete authority.
+The test script in the `package.json` runs the tests on the solutions (these
+should all pass). To run the tests against your own work, you simply open the
+problem page and click the "Test" tab.
 
 ## TypeScript
 
 You can go through this workshop with TypeScript or JavaScript. All the files
 are TypeScript files, but if you run the script in `./scripts/remove-ts` then
 all the files will be renamed and all the TypeScript typing code will be
-removed.
-
-If you have experience with TypeScript then I suggest you go through the
-workshop material with TypeScript. However, if you don't have experience with
-TypeScript, I strongly advise you remove the TypeScript. It's very difficult to
-learn two things at once and you'll likely find yourself frustrated.
-
-If you _do_ want to turn on "strict mode" with TypeScript, you can go to
-`config/tsconfig.exercise.json` and configure it there.
+removed. I do not recommend doing this, but if you want to, you can.
 
 ### Exercises
 
-- `exercises/*.*/README.md`: Background information
+- `exercises/*.*/README.md`: Exercise background information
 - `exercises/*.*/*.problem.*/README.*.md`: Problem Instructions
-- `exercises/*.*/*.problem.*/index.tsx`: Exercise with Emoji helpers 👈 You
-  spend most of your time here.
-- `exercises/*.*/*.solution.*/index.tsx`: Solved version
+- `exercises/*.*/*.problem.*/*.tsx`: Exercise with Emoji helpers 👈 You spend
+  most of your time here.
+- `exercises/*.*/*.solution.*/*.tsx`: Solved version
 
 The purpose of the exercise is **not** for you to work through all the material.
 It's intended to get your brain thinking about the right questions to ask me as
