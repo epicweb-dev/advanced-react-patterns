@@ -181,4 +181,4 @@ unexpected behavior's you'll get when you switch the default like this.
 
 **Real World Projects that use this pattern:**
 
-- [react-query](https://react-query.tanstack.com)
+- [react-query](https://tanstack.com/query)
