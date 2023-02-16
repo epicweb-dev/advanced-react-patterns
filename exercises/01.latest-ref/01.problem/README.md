@@ -1,28 +1,33 @@
 # Latest Ref
 
-In our exercise, we are going to build a `useDebounce` function that isn't
-working the way we want without the old default in place. `debounce` is a
-pattern that's often used in user-input fields. For example, if you've got a
-signup form where the user can select their username, you probably want to
-validate for the user that the username is not taken. You want to do it when the
-user's done typing but without requiring them to do anything to trigger the
-validation. With a debounced function, you could say when the user stops typing
-for 400ms you can trigger the validation. If they start typing again after only
-350ms then you want to start over and wait again until the user pauses for
-400ms.
+In our exercise, we have a `useDebounce` function that isn't working the way we
+want with hooks. We're going to need to "change the default" using the latest
+ref pattern.
+
+`debounce` is a pattern that's often used in user-input fields. For example, if
+you've got a signup form where the user can select their username, you probably
+want to validate for the user that the username is not taken. You want to do it
+when the user's done typing but without requiring them to do anything to trigger
+the validation. With a debounced function, you could say when the user stops
+typing for 400ms you can trigger the validation. If they start typing again
+after only 350ms then you want to start over and wait again until the user
+pauses for 400ms.
 
 In this exercise, the `debounce` function is already written. Even the
 `useDebounce` hook is implemented for you. Your job is to implement the latest
-ref pattern for it.
+ref pattern to fix its behavior.
 
 Our example here is a counter button that has a debounced increment function. We
 want to make it so this works:
 
+- The step is `1`
 - The user clicks the button
-- The user updates the step value
-- The user clicks the button again
-- The debounce timer completes
-- The count value is incremented by the latest step value
+- The user updates the step value to `2`
+- The user clicks the button again (before the debounce timer completes)
+- The debounce timer completes for both clicks
+- The count value should be `2` (instead of `1`)
+
+(Keep in mind, the tests are there to help you know you got it right).
 
 Before continuing here, please familiarize yourself with the exercise and how
 it's implemented... Got it? Great, let's continue.
