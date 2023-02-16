@@ -8,16 +8,15 @@
 - 👩 👧 👦 👦 👦 🐕
 - 🏢 kentcdodds.com
 - 🐦/🐙 @kentcdodds
+- 🌌 EpicWeb.dev
+- 🚀 EpicReact.dev
 - 🏆 testingjavascript.com
 - 🥚 kcd.im/egghead
 - 🥋 kcd.im/fem
 - 💌 kcd.im/news
 - 📝 kcd.im/blog
-- 📺 kcd.im/devtips
-- 💻 kcd.im/coding
 - 📽 kcd.im/youtube
-- 🎙 kcd.im/3-mins
-- ❓ kcd.im/ama
+- 🎙 kcd.im/calls
 
 # What this workshop is
 
@@ -33,17 +32,17 @@
 ## Schedule
 
 - 😴 Logistics
-- 💪 Compound Components
-- 💪 Flexible Compound Components
+- 💪 Latest Ref
+- 💪 Composition
 - 😴 10 Minutes
+- 💪 Compound Components
 - 💪 Prop Collections and Getters
-- 🌮 30 Minutes
-- 💪 State Reducers
+- 🌮 60 Minutes
+- 💪 State Initializer
+- 💪 State Reducer
 - 😴 10 Minutes
 - 💪 Control Props
 - 😴 10 Minutes
-- 💪❓ Higher Order Components (If time permits)
-- 💪❓ Render Props (If time permits)
 
 ## Scripts
 
@@ -63,10 +62,11 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 
 ## Exercises
 
-- `src/exercise/0x.md`: Background, Exercise Instructions, Extra Credit
-- `src/exercise/0x.js`: Exercise with Emoji helpers
-- `src/__tests__/0x.js`: Tests
-- `src/final/0x.js`: Final version
+- `exercises/*.*/README.md`: Background information
+- `exercises/*.*/*.problem.*/README.*.md`: Problem Instructions
+- `exercises/*.*/*.problem.*/index.tsx`: Exercise with Emoji helpers 👈 You
+  spend most of your time here.
+- `exercises/*.*/*.solution.*/index.tsx`: Solved version
 
 ## Emoji
 
@@ -74,7 +74,6 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 - **Matthew the Muscle** 💪 "Exercise"
 - **Chuck the Checkered Flag** 🏁 "Final"
 - **Marty the Money Bag** 💰 "Here's a hint"
-- **Hannah the Hundred** 💯 "Extra Credit"
 - **Olivia the Owl** 🦉 "Pro-tip"
 - **Dominic the Document** 📜 "Docs links"
 - **Berry the Bomb** 💣 "Remove this code"
@@ -86,5 +85,4 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 Each exercise has an Elaboration and Feedback link. Please fill that out after
 the exercise and instruction.
 
-At the end of the workshop, please go to this URL to give overall feedback.
-Thank you! https://kcd.im/arp-ws-feedback
+At the end of the workshop, there's a survey. Please fill that out as well.

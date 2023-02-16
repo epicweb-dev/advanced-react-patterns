@@ -1,0 +1,115 @@
+# Composition and Layout Components
+
+**One liner:** The Compositional and Layout Components Pattern helps to avoid
+the prop drilling problem and enhances the reusability of your components.
+
+🦉 If you're unfamiliar with the concept of "Prop Drilling" then please read
+[this blog post](https://kentcdodds.com/blog/prop-drilling) before going
+forward.
+
+Let's skip to the end here. It's surprising what you can accomplish by passing
+react elements rather than treating components as uncrossable boundaries. We'll
+have a practical example in our exercise, so let me show you a quick and easy
+contrived example to explain what we'll be doing here:
+
+```tsx
+function App() {
+	const [count, setCount] = React.useState(0)
+	const increment = () => setCount(c => c + 1)
+	return <Child count={count} increment={increment} />
+}
+
+function Child({ count, increment }: { count: number; increment: () => void }) {
+	return (
+		<div>
+			<strong>
+				I am a child and I don't actually use count or increment. My child does
+				though so I have to accept those as props and forward them along.
+			</strong>
+			<GrandChild count={count} onIncrementClick={increment} />
+		</div>
+	)
+}
+
+function GrandChild({
+	count,
+	onIncrementClick,
+}: {
+	count: number
+	onIncrementClick: () => void
+}) {
+	return (
+		<div>
+			<small>I am a grand child and I just pass things off to a button</small>
+			<button onClick={onIncrementClick}>{count}</button>
+		</div>
+	)
+}
+```
+
+This prop drilling stuff is one of the reasons so many people have jumped onto
+state manager solutions, whether it be libraries or React context. However, if
+we restructure things a bit, we'll notice that things get quite a bit easier
+without losing the flexibility we're hoping for.
+
+```tsx
+function App() {
+	const [count, setCount] = React.useState(0)
+	const increment = () => setCount(c => c + 1)
+	return (
+		<Child
+			grandChild={
+				<GrandChild
+					button={<button onClick={onIncrementClick}>{count}</button>}
+				/>
+			}
+		/>
+	)
+}
+
+function Child({ grandChild }: { grandChild: React.ReactElement }) {
+	return (
+		<div>
+			<strong>
+				I am a child and I don't actually use count or increment. My child does
+				though so I have to accept those as props and forward them along.
+			</strong>
+			{grandChild}
+		</div>
+	)
+}
+
+function GrandChild({ button }: { button: React.ReactElement }) {
+	return (
+		<div>
+			<small>I am a grand child and I just pass things off to a button</small>
+			{button}
+		</div>
+	)
+}
+```
+
+Now, clearly you can take this too far (our contrived example above probably
+does), but the point is that by structuring things a little differently, you can
+keep the components that don't care about state free of the plumbing needed to
+make it work. If we decided we needed to manage some more state in the App and
+that was needed in the button then we could update only the app for that.
+
+This style of composition has helped me reduce the amount of components and
+files I touch (break?) when I need to make a change and it's also made my
+abstractions much easier (imagine if we wanted to reuse the `Child` from above
+but needed to customize the `grandChild`. Much easier when we're just accepting
+a prop for it).
+
+When we structure our components to only really deal with props it actually
+cares about, then it becomes more of a "layout" component. A component
+responsible for laying out the react elements it accepts as props. If you're
+familiar with Vue, this concept is similar to the concept of scoped slots.
+
+📜 Read more about this in my blog post:
+[One React mistake that's slowing you down](https://epicreact.dev/one-react-mistake-thats-slowing-you-down)
+
+**Real World Projects that use this pattern:**
+
+- [kentcdodds.com](https://kentcdodds.com) (for the hero component you see at
+  the top of most pages)

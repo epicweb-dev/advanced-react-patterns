@@ -1,0 +1,85 @@
+# Latest Ref
+
+In our exercise, we are going to build a `useDebounce` function that isn't
+working the way we want without the old default in place. `debounce` is a
+pattern that's often used in user-input fields. For example, if you've got a
+signup form where the user can select their username, you probably want to
+validate for the user that the username is not taken. You want to do it when the
+user's done typing but without requiring them to do anything to trigger the
+validation. With a debounced function, you could say when the user stops typing
+for 400ms you can trigger the validation. If they start typing again after only
+350ms then you want to start over and wait again until the user pauses for
+400ms.
+
+In this exercise, the `debounce` function is already written. Even the
+`useDebounce` hook is implemented for you. Your job is to implement the latest
+ref pattern for it.
+
+Our example here is a counter button that has a debounced increment function. We
+want to make it so this works:
+
+- The user clicks the button
+- The user updates the step value
+- The user clicks the button again
+- The debounce timer completes
+- The count value is incremented by the latest step value
+
+Before continuing here, please familiarize yourself with the exercise and how
+it's implemented... Got it? Great, let's continue.
+
+Right now, you can play around with two different problems with the way our
+exercise is implemented:
+
+```ts
+// option 1:
+// ...
+const increment = () => setCount((c) => c + step);
+const debouncedIncrement = useDebounce(increment, 3000);
+// ...
+```
+
+The problem here is `useDebounce` list `increment` in the dependency list for
+`useMemo`. For this reason, any time there's a state update, we create a _new_
+debounced version of that function so the `timer` in that debounce function's
+closure is different from the previous which means we don't cancel that timeout.
+Ultimate this is the bug our users experience:
+
+- The user clicks the button
+- The user updates the step value
+- The user clicks the button again
+- The first debounce timer completes
+- The count value is incremented by the step value at the time the first click
+  happened
+- The second debounce timer completes
+- The count value is incremented by the step value at the time the second click
+  happened
+
+This is not what we want at all! And the reason it's a problem is because we're
+not memoizing the callback that's going into our `useMemo` dependency list.
+
+So the alternative solution is we could change our `useDebounce` API to require
+you pass a memoized callback:
+
+```ts
+// option 2:
+// ...
+const increment = React.useCallback(() => setCount((c) => c + step), [step]);
+const debouncedIncrement = useDebounce(increment, 3000);
+// ...
+```
+
+But again, this callback function will be updated when the `step` value changes
+which means we'll get another instance of the `debouncedIncrement`. Dah! So the
+user experience doesn't actually change with this adjustment _and_ we have a
+less fun API. The latest ref pattern will give us a nice API and we'll avoid
+this problem.
+
+I've made the debounce value last `3000ms` to make it easier for you to observe
+and test the behavior, but you can feel free to adjust that as you like. The
+tests can also help you make sure you've got things working well.
+
+## Files 🗃
+
+<ul>
+  <li>No files changed</li>
+</ul>

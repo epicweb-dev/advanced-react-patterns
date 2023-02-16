@@ -1,0 +1,28 @@
+# State Reducer
+
+In this exercise, we want to prevent the toggle from updating the toggle state
+after it's been clicked 4 times in a row before resetting. We could easily add
+that logic to our reducer, but instead we're going to apply a computer science
+pattern called "Inversion of Control" where we effectively say: "Here you go!
+You have complete control over how this thing works. It's now your
+responsibility."
+
+> As an aside, before React Hooks were a thing, this was pretty tricky to
+> implement and resulted in pretty weird code, but with useReducer, this is WAY
+> better. I ❤️ hooks. 😍
+
+Your job is to enable people to provide a custom `reducer` so they can have
+complete control over how state updates happen in our `<Toggle />` component.
+
+## Files 🗃
+
+<ul>
+  <li className="flex gap-2">
+    <span>modified:</span>
+    <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/index.tsx">
+      `index.tsx`
+    </LaunchEditor>
+  </li>
+</ul>
+
+<ul>- No files changed</ul>
