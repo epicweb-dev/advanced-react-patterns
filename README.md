@@ -84,8 +84,8 @@ should be able to just run a few commands to get set up:
 
 ```shell
 git clone https://github.com/kentcdodds/advanced-react-patterns.git
-git checkout next2
 cd advanced-react-patterns
+git checkout next2
 node setup
 ```
 
