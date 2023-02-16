@@ -15,7 +15,7 @@
     "npm": ">=8"
   },
   "dependencies": {
-    "@kentcdodds/workshop-app": "^1.12.1",
+    "@kentcdodds/workshop-app": "^1.12.3",
     "chai": "^4.3.7",
     "chai-dom": "^1.11.0",
     "react": "^18.2.0",
