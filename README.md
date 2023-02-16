@@ -155,17 +155,17 @@ If you _do_ want to turn on "strict mode" with TypeScript, you can go to
 
 ### Exercises
 
-- `src/exercise/00.md`: Background, Exercise Instructions, Extra Credit
-- `src/exercise/00.tsx`: Exercise with Emoji helpers
-- `src/__tests__/00.tsx`: Tests
-- `src/final/00.tsx`: Final version
-- `src/final/00.extra-0.tsx`: Final version of extra credit
+- `exercises/*.*/README.md`: Background information
+- `exercises/*.*/*.problem.*/README.*.md`: Problem Instructions
+- `exercises/*.*/*.problem.*/index.tsx`: Exercise with Emoji helpers 👈 You
+  spend most of your time here.
+- `exercises/*.*/*.solution.*/index.tsx`: Solved version
 
 The purpose of the exercise is **not** for you to work through all the material.
 It's intended to get your brain thinking about the right questions to ask me as
 _I_ walk through the material.
 
-### Helpful Emoji 🐨 🦺 💰 💯 📝 🦉 📜 💣 💪 🏁 👨‍💼 🚨
+### Helpful Emoji 🐨 🦺 💰 📝 🦉 📜 💣 💪 🏁 👨‍💼 🚨
 
 Each exercise has comments in it to help you get through the exercise. These fun
 emoji characters are here to help you.
@@ -176,12 +176,9 @@ emoji characters are here to help you.
   of the exercises
 - **Marty the Money Bag** 💰 will give you specific tips (and sometimes code)
   along the way
-- **Hannah the Hundred** 💯 will give you extra challenges you can do if you
-  finish the exercises early
 - **Nancy the Notepad** 📝 will encourage you to take notes on what you're
   learning
-- **Olivia the Owl** 🦉 will give you useful tidbits/best practice notes and a
-  link for elaboration and feedback
+- **Olivia the Owl** 🦉 will give you useful tidbits/best practice notes
 - **Dominic the Document** 📜 will give you links to useful documentation
 - **Berry the Bomb** 💣 will be hanging around anywhere you need to blow stuff
   up (delete code)
@@ -269,14 +266,6 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification. Contributions of any kind welcome!
-
-## Workshop Feedback
-
-Each exercise has an Elaboration and Feedback link. Please fill that out after
-the exercise and instruction.
-
-At the end of the workshop, please go to this URL to give overall feedback.
-Thank you! https://kcd.im/arp-ws-feedback
 
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com/

@@ -1,4 +1,7 @@
-npx npm-check-updates --upgrade --reject husky,react-scripts,typescript
+npx npm-check-updates --upgrade
+
 rm -rf node_modules package-lock.json
+
 npx npm@8 install
+
 npm run validate

@@ -1,0 +1,55 @@
+# Compound Components
+
+What we want to do in this exercise is allow users to render something when the
+toggle button is on and to render something else when that toggle button is off
+without them being able to see the state that's controlling whether it's shown
+or not.
+
+Every reusable component starts out as a simple implementation for a specific
+use case. It's advisable to not overcomplicate your components and try to solve
+every conceivable problem that you don't yet have (and likely will never have).
+But as changes come (and they almost always do), then you'll want the
+implementation of your component to be flexible and changeable. Learning how to
+do that is the point of much of this workshop.
+
+This is why we're starting with a super simple `<Toggle />` component.
+
+In this exercise we're going to make `<Toggle />` the parent of a few compound
+components:
+
+- `<ToggleOn />` renders children when the `on` state is `true`
+- `<ToggleOff />` renders children when the `on` state is `false`
+- `<ToggleButton />` renders the `<Switch />` with the `on` prop set to the `on`
+  state and the `onClick` prop set to `toggle`.
+
+We have a Toggle component that manages the state, and we want to render
+different parts of the UI however we want. We want control over the presentation
+of the UI.
+
+🦉 The fundamental challenge you face with an API like this is the state shared
+between the components is implicit, meaning that the developer using your
+component cannot actually see or interact with the state (`on`) or the
+mechanisms for updating that state (`toggle`) that are being shared between the
+components.
+
+So in this exercise, we'll solve that problem by using the 📜
+[React Context API](https://reactjs.org/docs/hooks-reference.html#usecontext)!
+
+Your job will be to make a `ToggleContext` which will be used to implicitly
+share the state between these components. The `Toggle` component will render the
+`ToggleContext.Provider` and the other compound components will access that
+implicit state via `useContext(ToggleContext)`.
+
+🦺 TypeScript might not like your `useContext` call depending on how you set up
+your context. We'll deal with this in another step
+
+## Files 🗃
+
+<ul>
+  <li className="flex gap-2">
+    <span>modified:</span>
+    <LaunchEditor workshopFile="exercises/03.compound-components/01-02.problem/toggle.tsx">
+      `toggle.tsx`
+    </LaunchEditor>
+  </li>
+</ul>

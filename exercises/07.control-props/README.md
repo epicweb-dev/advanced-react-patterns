@@ -1,0 +1,65 @@
+# Control Props
+
+**One liner:** The Control Props pattern allows users to completely control
+state values within your component. This differs from the state reducer pattern
+in the fact that you can not only change the state changes based on actions
+dispatched but you _also_ can trigger state changes from outside the component
+or hook as well.
+
+Sometimes, people want to be able to manage the internal state of our component
+from the outside. The state reducer allows them to manage what state changes are
+made when a state change happens, but sometimes people may want to make state
+changes themselves. We can allow them to do this with a feature called "Control
+Props."
+
+This concept is basically the same as controlled form elements in React that
+you've probably used many times: 📜
+https://reactjs.org/docs/forms.html#controlled-components
+
+```javascript
+function MyCapitalizedInput() {
+	const [capitalizedValue, setCapitalizedValue] = React.useState('')
+
+	return (
+		<input
+			value={capitalizedValue}
+			onChange={e => setCapitalizedValue(e.target.value.toUpperCase())}
+		/>
+	)
+}
+```
+
+In this case, the "component" that's implemented the "control props" pattern is
+the `<input />`. Normally it controls state itself (like if you render
+`<input />` by itself with no `value` prop). But once you add the `value` prop,
+suddenly the `<input />` takes the back seat and instead makes "suggestions" to
+you via the `onChange` prop on the state updates that it would normally make
+itself.
+
+This flexibility allows us to change how the state is managed (by capitalizing
+the value), and it also allows us to programmatically change the state whenever
+we want to, which enables this kind of synchronized input situation:
+
+```javascript
+function MyTwoInputs() {
+	const [capitalizedValue, setCapitalizedValue] = React.useState('')
+	const [lowerCasedValue, setLowerCasedValue] = React.useState('')
+
+	function handleInputChange(e) {
+		setCapitalizedValue(e.target.value.toUpperCase())
+		setLowerCasedValue(e.target.value.toLowerCase())
+	}
+
+	return (
+		<>
+			<input value={capitalizedValue} onChange={handleInputChange} />
+			<input value={lowerCasedValue} onChange={handleInputChange} />
+		</>
+	)
+}
+```
+
+**Real World Projects that use this pattern:**
+
+- [downshift](https://github.com/downshift-js/downshift)
+- [`@reach/listbox`](https://reacttraining.com/reach-ui/listbox)

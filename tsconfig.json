@@ -1,7 +1,26 @@
 {
-  "files": [],
-  "references": [
-    {"path": "config/tsconfig.exercise.json"},
-    {"path": "config/tsconfig.final.json"}
-  ]
+	"include": ["**/*.ts", "**/*.tsx"],
+	"compilerOptions": {
+		"lib": ["DOM", "DOM.Iterable", "ES2020"],
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"jsx": "react-jsx",
+		"module": "ES2022",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"target": "ES2022",
+		"strict": true,
+		"noImplicitAny": true,
+		"noUncheckedIndexedAccess": true,
+		"allowJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["./*"]
+		},
+		"skipLibCheck": true,
+
+		// Remix takes care of building everything in `remix build`.
+		"noEmit": true
+	}
 }

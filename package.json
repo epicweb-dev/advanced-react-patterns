@@ -1,81 +1,57 @@
 {
   "name": "advanced-react-patterns",
-  "title": "Advanced React Patterns 🤯",
   "description": "Advanced React Component Patterns Course by Kent C. Dodds",
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
   "version": "1.0.0",
   "private": true,
+  "kcd-workshop": {
+    "title": "Advanced React Patterns 🤯",
+    "root": true
+  },
   "keywords": [],
-  "homepage": "http://advanced-react-patterns-next.netlify.app/",
   "license": "GPL-3.0-only",
-  "main": "src/index.js",
   "engines": {
-    "node": "12 || 14 || 15 || 16",
+    "node": "12 || 14 || 16 || 18 || 19",
     "npm": ">=8"
   },
   "dependencies": {
-    "@kentcdodds/react-workshop-app": "^6.0.1",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.1",
-    "codegen.macro": "^4.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "warning": "^4.0.3"
+    "@kentcdodds/workshop-app": "^1.11.2",
+    "chai": "^4.3.7",
+    "chai-dom": "^1.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@testing-library/react-hooks": "^7.0.2",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
+    "@playwright/test": "^1.30.0",
+    "@testing-library/dom": "^8.20.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/chai": "^4.3.4",
+    "@types/chai-dom": "^1.11.0",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "cross-env": "^7.0.3",
-    "husky": "^4.3.8",
+    "eslint": "^8.34.0",
+    "eslint-config-react-app": "^7.0.1",
     "npm-run-all": "^4.1.5",
-    "patch-package": "^6.4.7",
-    "prettier": "^2.5.1",
-    "react-scripts": "^4.0.3",
-    "typescript": "4.4.4"
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
   },
   "scripts": {
-    "postinstall": "patch-package --patch-dir config/patches",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:coverage": "npm run test -- --watchAll=false",
-    "test:exercises": "npm run test -- testing.*exercises\\/ --onlyChanged",
+    "start": "kcdshop start",
+    "dev": "kcdshop start",
+    "test": "playwright test",
     "setup": "node setup",
     "lint": "cross-env NODE_ENV=development eslint .",
     "format": "prettier --write \"./src\"",
     "typecheck": "tsc",
-    "validate": "npm-run-all --parallel build test:coverage lint typecheck"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node ./scripts/pre-commit",
-      "pre-push": "node ./scripts/pre-push"
-    }
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/final/**/*.js"
-    ]
+    "validate": "npm-run-all --parallel --print-label --print-name --continue-on-error test lint typecheck"
   },
   "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "development": [
-      "last 2 chrome versions",
-      "last 2 firefox versions",
-      "last 2 edge versions"
-    ],
-    "production": [
-      ">1%",
-      "last 4 versions",
-      "Firefox ESR",
-      "not ie < 11"
-    ]
-  },
-  "directories": {
-    "test": "test"
+    "extends": "react-app",
+    "rules": {
+      "@typescript-eslint/no-unused-expressions": "off"
+    }
   },
   "repository": {
     "type": "git",
@@ -83,8 +59,5 @@
   },
   "bugs": {
     "url": "https://github.com/kentcdodds/advanced-react-patterns/issues"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
