@@ -6,20 +6,20 @@ this:
 
 ```javascript
 function App() {
-  const { on, togglerProps } = useToggle();
-  return (
-    <div>
-      <Switch on={on} {...togglerProps} />
-      <hr />
-      <button
-        aria-label="custom-button"
-        {...togglerProps}
-        onClick={() => console.info("onButtonClick")}
-      >
-        {on ? "on" : "off"}
-      </button>
-    </div>
-  );
+	const { on, togglerProps } = useToggle()
+	return (
+		<div>
+			<Switch on={on} {...togglerProps} />
+			<hr />
+			<button
+				aria-label="custom-button"
+				{...togglerProps}
+				onClick={() => console.info('onButtonClick')}
+			>
+				{on ? 'on' : 'off'}
+			</button>
+		</div>
+	)
 }
 ```
 
@@ -35,22 +35,22 @@ Let's try that. Update the `App` component to this:
 
 ```javascript
 function App() {
-  const { on, getTogglerProps } = useToggle();
-  return (
-    <div>
-      <Switch {...getTogglerProps({ on })} />
-      <hr />
-      <button
-        {...getTogglerProps({
-          "aria-label": "custom-button",
-          onClick: () => console.info("onButtonClick"),
-          id: "custom-button-id",
-        })}
-      >
-        {on ? "on" : "off"}
-      </button>
-    </div>
-  );
+	const { on, getTogglerProps } = useToggle()
+	return (
+		<div>
+			<Switch {...getTogglerProps({ on })} />
+			<hr />
+			<button
+				{...getTogglerProps({
+					'aria-label': 'custom-button',
+					onClick: () => console.info('onButtonClick'),
+					id: 'custom-button-id',
+				})}
+			>
+				{on ? 'on' : 'off'}
+			</button>
+		</div>
+	)
 }
 ```
 
@@ -60,19 +60,25 @@ See if you can make that API work.
 tricky, so here's a little tip, you can get the `onClick` prop from:
 `React.DOMAttributes<HTMLButtonElement>['onClick']`.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/app.tsx">
-      `app.tsx`
-    </LaunchEditor>
-  </li>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/toggle.tsx">
-      `toggle.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/app.tsx">
+        <code>app.tsx</code>
+      </LaunchEditor>
+    </li>
+
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

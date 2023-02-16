@@ -20,13 +20,25 @@ Go ahead and do this by changing the `toggleStateReducer` function inside the
 `<App />` example to use the default reducer instead of having to re-implement
 what to do when the action type is `'reset'`.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/index.tsx">
-      `index.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/app.tsx">
+        <code>app.tsx</code>
+      </LaunchEditor>
+    </li>
+
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

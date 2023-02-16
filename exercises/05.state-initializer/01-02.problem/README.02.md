@@ -9,19 +9,25 @@ prop?
 💰 Hint, it's not so complicated that you need `useEffect`. You can do this with
 `useRef` or `useState`.
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/app.tsx">
-      `app.tsx`
-    </LaunchEditor>
-  </li>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/toggle.tsx">
-      `toggle.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/app.tsx">
+        <code>app.tsx</code>
+      </LaunchEditor>
+    </li>
+
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

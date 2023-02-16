@@ -25,23 +25,25 @@ We should issue the same warnings for people who misuse our controlled props:
 
 1.  Passing `on` without `onChange`: This would result in a value that's
     read-only. There are times where that's desired, so we can add a `readOnly`
-    prop to the `Toggle` component and if that's set to `true` then we don't need
-    to warn the dev about this one. You can reproduce this one by removing the
-    `onChange` handler from one of the two controlled `<Toggle />` components.
+    prop to the `Toggle` component and if that's set to `true` then we don't
+    need to warn the dev about this one. You can reproduce this one by removing
+    the `onChange` handler from one of the two controlled `<Toggle />`
+    components.
 2.  Passing a value for `on` and later passing `undefined` or `null`: I honestly
     can't think of a situation where anyone would do this intentionally so it's
     probably a mistake. You can reproduce this in our example by changing
     `setBothOn(false)` to `setBothOn(null)` in the `handleResetClick` callback.
 3.  Passing `undefined` or `null` for `on` and later passing a value: Similar to
     the second situation, this is most likely a mistake. You can reproduce this
-    one in our example by changing `React.useState(false)` to `React.useState()`.
+    one in our example by changing `React.useState(false)` to
+    `React.useState()`.
 
 Because the specifics of logging the warning is complicated and not entirely
 necessary for your learning (and it really should just be a library you install
 anyway) I've given you a hook you can use called `useControlPropWarnings`:
 
 ```tsx
-import { useControlPropWarnings } from "~/shared/utils";
+import { useControlPropWarnings } from '~/shared/utils'
 ```
 
 You can pop open the `src/utils.tsx` file if you want to get an idea of how it
@@ -59,13 +61,17 @@ Then make sure you can reproduce all three warnings in the right scenarios.
 A real-world component that does this is
 [`@reach/listbox`](https://reacttraining.com/reach-ui/listbox/)
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/index.tsx">
-      `index.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>

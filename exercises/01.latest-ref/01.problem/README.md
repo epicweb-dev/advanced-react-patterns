@@ -33,8 +33,8 @@ exercise is implemented:
 ```ts
 // option 1:
 // ...
-const increment = () => setCount((c) => c + step);
-const debouncedIncrement = useDebounce(increment, 3000);
+const increment = () => setCount(c => c + step)
+const debouncedIncrement = useDebounce(increment, 3000)
 // ...
 ```
 
@@ -63,8 +63,8 @@ you pass a memoized callback:
 ```ts
 // option 2:
 // ...
-const increment = React.useCallback(() => setCount((c) => c + step), [step]);
-const debouncedIncrement = useDebounce(increment, 3000);
+const increment = React.useCallback(() => setCount(c => c + step), [step])
+const debouncedIncrement = useDebounce(increment, 3000)
 // ...
 ```
 
@@ -78,8 +78,7 @@ I've made the debounce value last `3000ms` to make it easier for you to observe
 and test the behavior, but you can feel free to adjust that as you like. The
 tests can also help you make sure you've got things working well.
 
-## Files 🗃
-
-<ul>
-  <li>No files changed</li>
-</ul>
+<section id="files" className="not-prose">
+  <h2>Files</h2>
+  <p>No files changed</p>
+</section>

@@ -1,3 +1,3 @@
-import { setupInBrowserTests } from '@kentcdodds/workshop-app/utils'
+import { setupInBrowserTests } from '@kentcdodds/workshop-app/playwright'
 
 setupInBrowserTests()

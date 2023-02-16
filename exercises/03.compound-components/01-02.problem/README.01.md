@@ -43,13 +43,17 @@ implicit state via `useContext(ToggleContext)`.
 🦺 TypeScript might not like your `useContext` call depending on how you set up
 your context. We'll deal with this in another step
 
-## Files 🗃
+<section id="files" className="not-prose">
+  <h2>Files</h2>
 
-<ul>
-  <li className="flex gap-2">
-    <span>modified:</span>
-    <LaunchEditor workshopFile="exercises/03.compound-components/01-02.problem/toggle.tsx">
-      `toggle.tsx`
-    </LaunchEditor>
-  </li>
-</ul>
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/03.compound-components/01-02.problem/toggle.tsx">
+        <code>toggle.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
+</section>
