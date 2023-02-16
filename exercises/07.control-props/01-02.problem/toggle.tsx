@@ -39,7 +39,7 @@ export function useToggle({
 	// 🐨 determine whether on is controlled and assign that to `onIsControlled`
 	// 💰 `controlledOn != null` // <-- note, using "!=" here instead of "!==" to count both `null` and `undefined` as uncontrolled.
 
-	// 🐨 Replace the next line with assigning `on` to `controlledOn` if
+	// 🐨 Replace the next line with `const on = ...` which should be `controlledOn` if
 	// `onIsControlled`, otherwise, it should be `state.on`.
 	const { on } = state
 
