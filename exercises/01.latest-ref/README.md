@@ -182,3 +182,7 @@ unexpected behavior's you'll get when you switch the default like this.
 **Real World Projects that use this pattern:**
 
 - [react-query](https://tanstack.com/query)
+
+🚨 NOTE: For some reason the tests for this one need to be expanded to pass. I'm
+not sure why, but I'll figure it out eventually. Sorry for the trouble in the
+mean time. PRs are welcome!
