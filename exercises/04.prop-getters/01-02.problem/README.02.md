@@ -6,20 +6,20 @@ this:
 
 ```javascript
 function App() {
-	const { on, togglerProps } = useToggle()
-	return (
-		<div>
-			<Switch on={on} {...togglerProps} />
-			<hr />
-			<button
-				aria-label="custom-button"
-				{...togglerProps}
-				onClick={() => console.info('onButtonClick')}
-			>
-				{on ? 'on' : 'off'}
-			</button>
-		</div>
-	)
+  const { on, togglerProps } = useToggle();
+  return (
+    <div>
+      <Switch on={on} {...togglerProps} />
+      <hr />
+      <button
+        aria-label="custom-button"
+        {...togglerProps}
+        onClick={() => console.info("onButtonClick")}
+      >
+        {on ? "on" : "off"}
+      </button>
+    </div>
+  );
 }
 ```
 
@@ -35,22 +35,22 @@ Let's try that. Update the `App` component to this:
 
 ```javascript
 function App() {
-	const { on, getTogglerProps } = useToggle()
-	return (
-		<div>
-			<Switch {...getTogglerProps({ on })} />
-			<hr />
-			<button
-				{...getTogglerProps({
-					'aria-label': 'custom-button',
-					onClick: () => console.info('onButtonClick'),
-					id: 'custom-button-id',
-				})}
-			>
-				{on ? 'on' : 'off'}
-			</button>
-		</div>
-	)
+  const { on, getTogglerProps } = useToggle();
+  return (
+    <div>
+      <Switch {...getTogglerProps({ on })} />
+      <hr />
+      <button
+        {...getTogglerProps({
+          "aria-label": "custom-button",
+          onClick: () => console.info("onButtonClick"),
+          id: "custom-button-id",
+        })}
+      >
+        {on ? "on" : "off"}
+      </button>
+    </div>
+  );
 }
 ```
 

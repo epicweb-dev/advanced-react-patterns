@@ -43,7 +43,7 @@ necessary for your learning (and it really should just be a library you install
 anyway) I've given you a hook you can use called `useControlPropWarnings`:
 
 ```tsx
-import { useControlPropWarnings } from '~/shared/utils'
+import { useControlPropWarnings } from "~/shared/utils";
 ```
 
 You can pop open the `src/utils.tsx` file if you want to get an idea of how it
