@@ -38,8 +38,8 @@ exercise is implemented:
 ```ts
 // option 1:
 // ...
-const increment = () => setCount(c => c + step)
-const debouncedIncrement = useDebounce(increment, 3000)
+const increment = () => setCount((c) => c + step);
+const debouncedIncrement = useDebounce(increment, 3000);
 // ...
 ```
 
@@ -68,8 +68,8 @@ you pass a memoized callback:
 ```ts
 // option 2:
 // ...
-const increment = React.useCallback(() => setCount(c => c + step), [step])
-const debouncedIncrement = useDebounce(increment, 3000)
+const increment = React.useCallback(() => setCount((c) => c + step), [step]);
+const debouncedIncrement = useDebounce(increment, 3000);
 // ...
 ```
 
@@ -85,5 +85,15 @@ tests can also help you make sure you've got things working well.
 
 <section id="files" className="not-prose">
   <h2>Files</h2>
-  <p>No files changed</p>
+
+  <ul>
+    <li data-state="modified">
+      <span>modified</span>
+
+      <LaunchEditor workshopFile="exercises/01.latest-ref/01.problem/index.tsx">
+        <code>index.tsx</code>
+      </LaunchEditor>
+    </li>
+
+  </ul>
 </section>
