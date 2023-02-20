@@ -20,7 +20,7 @@ function App() {
 				🐨 make Nav accept a ReactElement prop called "avatar"
 				instead of a User prop called "user"
 			*/}
-			<Nav avatar={<img src={user.image} alt={`${user.name} profile`} />} />
+			<Nav user={user} />
 			<div className="spacer" data-size="lg" />
 			{/* 
 				🐨 make Main accept ReactElement props called "sidebar" and "content"
@@ -41,7 +41,8 @@ function App() {
 	)
 }
 
-function Nav({ avatar }: { avatar: React.ReactElement }) {
+// 🐨 this should accept an avatar prop that's a ReactElement
+function Nav({ user }: { user: User }) {
 	return (
 		<nav>
 			<ul>
@@ -56,7 +57,8 @@ function Nav({ avatar }: { avatar: React.ReactElement }) {
 				</li>
 			</ul>
 			<a href="/me" title="User Settings">
-				{avatar}
+				{/* 🐨 render the avatar prop here instead of the img */}
+				<img src={user.image} alt={`${user.name} profile`} />
 			</a>
 		</nav>
 	)
