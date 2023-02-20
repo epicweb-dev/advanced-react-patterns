@@ -16,9 +16,7 @@ props people would typically need applied to a toggle button.
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

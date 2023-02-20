@@ -16,17 +16,13 @@ prop?
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/app.tsx">
-        <code>app.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="app.tsx" />
     </li>
 
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/05.state-initializer/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

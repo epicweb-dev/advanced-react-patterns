@@ -4,7 +4,7 @@
 support common use cases for UI elements people build with your hook.
 
 In typical UI components, you need to take accessibility into account. For a
-button functioning as a toggle, it should have the `aria-pressed` attribute set
+button functioning as a toggle, it should have the `aria-checked` attribute set
 to `true` or `false` if it's toggled on or off. In addition to remembering that,
 people need to remember to also add the `onClick` handler to call `toggle`.
 

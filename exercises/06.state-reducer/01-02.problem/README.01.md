@@ -21,17 +21,13 @@ complete control over how state updates happen in our `<Toggle />` component.
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/app.tsx">
-        <code>app.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="app.tsx" />
     </li>
 
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/06.state-reducer/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

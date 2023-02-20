@@ -5,6 +5,6 @@ export function useToggle() {
 	const toggle = () => setOn(!on)
 
 	// 🐨 Add a property called `togglerProps`. It should be an object that has
-	// `aria-pressed` and `onClick` properties.
+	// `aria-checked` and `onClick` properties.
 	return { on, toggle, togglerProps: {} }
 }
