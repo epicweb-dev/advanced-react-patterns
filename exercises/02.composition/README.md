@@ -48,8 +48,8 @@ function GrandChild({
 ```
 
 This prop drilling stuff is one of the reasons so many people have jumped onto
-state manager solutions, whether it be libraries or React context. However, if
-we restructure things a bit, we'll notice that things get quite a bit easier
+state management solutions, whether it be libraries or React context. However,
+if we restructure things a bit, we'll notice that things get quite a bit easier
 without losing the flexibility we're hoping for.
 
 ```tsx

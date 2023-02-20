@@ -17,15 +17,15 @@ function App() {
 			style={{ ['--accent-color' as any]: selectedPokemon?.color ?? 'black' }}
 		>
 			{/*
-        🐨 make Nav accept a ReactElement prop called "avatar"
-        instead of a User prop called "user"
-      */}
+				🐨 make Nav accept a ReactElement prop called "avatar"
+				instead of a User prop called "user"
+			*/}
 			<Nav avatar={<img src={user.image} alt={`${user.name} profile`} />} />
 			<div className="spacer" data-size="lg" />
 			{/* 
-        🐨 make Main accept ReactElement props called "sidebar" and "content"
-        instead of the props it accepts right now.
-      */}
+				🐨 make Main accept ReactElement props called "sidebar" and "content"
+				instead of the props it accepts right now.
+			*/}
 			<Main
 				pokemonList={pokemonList}
 				selectedPokemon={selectedPokemon}
@@ -33,9 +33,9 @@ function App() {
 			/>
 			<div className="spacer" data-size="lg" />
 			{/*
-        🐨 make Footer accept a String prop called "footerMessage"
-        instead of the User prop called "user"
-      */}
+				🐨 make Footer accept a String prop called "footerMessage"
+				instead of the User prop called "user"
+			*/}
 			<Footer user={user} />
 		</div>
 	)
