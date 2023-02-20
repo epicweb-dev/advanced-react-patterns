@@ -40,7 +40,7 @@
     "postinstall": "npx playwright install chromium --with-deps",
     "setup": "node setup",
     "lint": "cross-env NODE_ENV=development eslint .",
-    "format": "prettier --write \"./src\"",
+    "format": "prettier --write .",
     "typecheck": "tsc",
     "validate": "npm-run-all --parallel --print-label --print-name --continue-on-error test lint typecheck"
   },

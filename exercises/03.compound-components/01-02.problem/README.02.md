@@ -3,7 +3,7 @@
 Change the `App` function to this:
 
 ```javascript
-const App = () => <ToggleButton />;
+const App = () => <ToggleButton />
 ```
 
 Why doesn't that work? Can you figure out a way to give the developer a better
