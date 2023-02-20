@@ -38,8 +38,8 @@ exercise is implemented:
 ```ts
 // option 1:
 // ...
-const increment = () => setCount((c) => c + step);
-const debouncedIncrement = useDebounce(increment, 3000);
+const increment = () => setCount(c => c + step)
+const debouncedIncrement = useDebounce(increment, 3000)
 // ...
 ```
 
@@ -68,8 +68,8 @@ you pass a memoized callback:
 ```ts
 // option 2:
 // ...
-const increment = React.useCallback(() => setCount((c) => c + step), [step]);
-const debouncedIncrement = useDebounce(increment, 3000);
+const increment = React.useCallback(() => setCount(c => c + step), [step])
+const debouncedIncrement = useDebounce(increment, 3000)
 // ...
 ```
 
