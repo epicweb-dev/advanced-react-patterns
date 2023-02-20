@@ -1,19 +1,5 @@
 # Compound Components
 
-What we want to do in this exercise is allow users to render something when the
-toggle button is on and to render something else when that toggle button is off
-without them being able to see the state that's controlling whether it's shown
-or not.
-
-Every reusable component starts out as a simple implementation for a specific
-use case. It's advisable to not overcomplicate your components and try to solve
-every conceivable problem that you don't yet have (and likely will never have).
-But as changes come (and they almost always do), then you'll want the
-implementation of your component to be flexible and changeable. Learning how to
-do that is the point of much of this workshop.
-
-This is why we're starting with a super simple `<Toggle />` component.
-
 In this exercise we're going to make `<Toggle />` the parent of a few compound
 components:
 
@@ -35,13 +21,18 @@ components.
 So in this exercise, we'll solve that problem by using the 📜
 [React Context API](https://reactjs.org/docs/hooks-reference.html#usecontext)!
 
+What we want to do in this exercise is allow users of our component to render
+something when the toggle button is on and to render something else when that
+toggle button is off without troubling them with managing the state that's
+controlling whether it's shown or not.
+
 Your job will be to make a `ToggleContext` which will be used to implicitly
 share the state between these components. The `Toggle` component will render the
 `ToggleContext.Provider` and the other compound components will access that
 implicit state via `useContext(ToggleContext)`.
 
 🦺 TypeScript might not like your `useContext` call depending on how you set up
-your context. We'll deal with this in another step
+your context. We'll deal with this in another step.
 
 <section id="files" className="not-prose">
   <h2>Files</h2>
@@ -50,9 +41,7 @@ your context. We'll deal with this in another step
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/03.compound-components/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

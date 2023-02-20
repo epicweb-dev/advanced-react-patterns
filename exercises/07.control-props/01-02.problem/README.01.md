@@ -12,9 +12,7 @@ control the state of `on` and call the `onChange` with the suggested changes.
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

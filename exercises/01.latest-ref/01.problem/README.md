@@ -90,9 +90,7 @@ tests can also help you make sure you've got things working well.
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/01.latest-ref/01.problem/index.tsx">
-        <code>index.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="index.tsx" />
     </li>
 
   </ul>

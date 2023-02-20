@@ -18,9 +18,7 @@ if you want to use them.
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/02.composition/01.problem/index.tsx">
-        <code>index.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="index.tsx" />
     </li>
 
   </ul>

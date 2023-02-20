@@ -31,7 +31,7 @@ we call a function to get the props. Then we can pass that function the props we
 want applied and that function will be responsible for composing the props
 together.
 
-Let's try that. Update the `App` component to this:
+Let's try that. Our <InlineFile file="app.tsx" /> file has been updated
 
 ```javascript
 function App() {
@@ -67,17 +67,13 @@ tricky, so here's a little tip, you can get the `onClick` prop from:
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/app.tsx">
-        <code>app.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="app.tsx" />
     </li>
 
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/04.prop-getters/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>

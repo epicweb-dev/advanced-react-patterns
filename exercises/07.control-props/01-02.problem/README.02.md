@@ -68,9 +68,7 @@ A real-world component that does this is
     <li data-state="modified">
       <span>modified</span>
 
-      <LaunchEditor workshopFile="exercises/07.control-props/01-02.problem/toggle.tsx">
-        <code>toggle.tsx</code>
-      </LaunchEditor>
+      <InlineFile file="toggle.tsx" />
     </li>
 
   </ul>
