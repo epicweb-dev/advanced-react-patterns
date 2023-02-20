@@ -1,4 +1,4 @@
-import { waitFor, within } from '@testing-library/dom'
+import { waitFor, within, fireEvent } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import '.'
@@ -19,7 +19,7 @@ const step = await testStep(
 )
 
 await userEvent.click(button)
-await userEvent.type(step, '2{arrowleft}{backspace}')
+fireEvent.change(step, { target: { value: '2' } })
 await userEvent.click(button)
 
 await testStep(
