@@ -5,8 +5,8 @@ implement their own. However, in a more realistic scenario, people may struggle
 with having to basically re-implement our entire reducer which could be pretty
 complex.
 
-So for the extra credit, we're going to "export" the default reducer so people
-can use that inside their own reducers as needed. In a real-world scenario, your
+So for the this step, we're going to "export" the default reducer so people can
+use that inside their own reducers as needed. In a real-world scenario, your
 reusable hook will be in a separate file and you'll need to export the reducer.
 Feel free to add a comment for that if you like (for example):
 

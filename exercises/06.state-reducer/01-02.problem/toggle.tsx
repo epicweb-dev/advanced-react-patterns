@@ -27,7 +27,7 @@ export function useToggle({ initialOn = false } = {}) {
 	const { current: initialState } = React.useRef<ToggleState>({ on: initialOn })
 	// 🐨 instead of passing `toggleReducer` here, pass the `reducer` that's
 	// provided as an option
-	// ... and that's it! Don't forget to check the 💯 extra credit!
+	// ... and that's it! Don't forget to check the next step!
 	const [state, dispatch] = React.useReducer(toggleReducer, initialState)
 	const { on } = state
 

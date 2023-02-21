@@ -32,6 +32,14 @@ function App() {
 }
 ```
 
+🦉 Note that we're moving from a collection of related components (compound
+components) to a hook for the upcoming patterns. We'll bring back a `Toggle`
+component that uses the hook later, but often it's useful to drop down to a
+lower level of abstraction to give consumers more power and then build on top of
+that. And you can definitely combine the patterns (read my old post on the
+subject demonstrating how to do this with class components:
+[Mixing Component Patterns](https://kentcdodds.com/blog/mixing-component-patterns)).
+
 **Real World Projects that use this pattern:**
 
 - [downshift](https://github.com/downshift-js/downshift) (uses prop getters)
