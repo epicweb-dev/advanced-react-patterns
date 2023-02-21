@@ -10,7 +10,7 @@ pattern allows you to do that.
 
 Take this for example:
 
-```tsx
+```tsx lines=2,4
 function Counter() {
 	const [count, setCount] = React.useState(0)
 	const increment = () => setCount(c => c + 1)
@@ -53,7 +53,7 @@ function Counter({ initialCount = 0 }: { initialCount?: number }) {
 ```
 
 And that's basically it for the pattern. It's not _quite_ perfect, but we'll
-perfect it in our extra credit.
+perfect it in the next step.
 
 One other thing I want to call out is you can actually reset a component pretty
 easily without any API at all. It's a built-in React API for all components: the
