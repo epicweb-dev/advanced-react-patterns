@@ -22,10 +22,7 @@ function toggleReducer(state: ToggleState, action: ToggleAction) {
 	}
 }
 
-export function useToggle({
-	initialOn = false,
-	reducer = toggleReducer,
-}: { initialOn?: boolean; reducer?: typeof toggleReducer } = {}) {
+export function useToggle({ initialOn = false, reducer = toggleReducer } = {}) {
 	const { current: initialState } = React.useRef<ToggleState>({ on: initialOn })
 	const [state, dispatch] = React.useReducer(reducer, initialState)
 	const { on } = state
