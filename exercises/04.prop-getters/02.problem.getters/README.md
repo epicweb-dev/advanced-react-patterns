@@ -31,33 +31,11 @@ we call a function to get the props. Then we can pass that function the props we
 want applied and that function will be responsible for composing the props
 together.
 
-Let's try that. Our <InlineFile file="app.tsx" /> file has been updated
-
-```javascript
-function App() {
-	const { on, getTogglerProps } = useToggle()
-	return (
-		<div>
-			<Switch {...getTogglerProps({ on })} />
-			<hr />
-			<button
-				{...getTogglerProps({
-					'aria-label': 'custom-button',
-					onClick: () => console.info('onButtonClick'),
-					id: 'custom-button-id',
-				})}
-			>
-				{on ? 'on' : 'off'}
-			</button>
-		</div>
-	)
-}
-```
-
-See if you can make that API work.
+Let's try that. Our <InlineFile file="app.tsx" /> file has been updated to use a
+new API we're responsible for creating. See if you can make that API work.
 
 🦺 The types for the argument to the `getTogglerProps` component might be a bit
-tricky, so here's a little tip, you can get the `onClick` prop from:
+tricky, so here's a little tip: you can get the `onClick` prop from:
 `React.DOMAttributes<HTMLButtonElement>['onClick']`.
 
 <section id="files" className="not-prose">
