@@ -15,7 +15,7 @@
     "npm": ">=8.16.0"
   },
   "dependencies": {
-    "@kentcdodds/workshop-app": "^1.15.1",
+    "@kentcdodds/workshop-app": "^1.15.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
