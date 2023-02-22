@@ -2,6 +2,17 @@ import { render } from '@testing-library/react'
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { ToggleButton, ToggleOff, ToggleOn } from './toggle'
 
+const expectedErrorMessage =
+	'Cannot find ToggleContext. All Toggle components must be rendered within <Toggle />'
+
+window.addEventListener('error', event => {
+	if (event.error.message.includes(expectedErrorMessage)) {
+		event.preventDefault()
+	}
+})
+// silence React error logging for tests that expect errors
+console.error = () => {}
+
 await testStep(
 	'ToggleButton should throw an error when rendered outside a Toggle component',
 	() => {
@@ -26,10 +37,7 @@ await testStep(
 	},
 )
 
-await testStep(
-	'The error thrown should say something about rendering the ToggleButton within the Toggle component',
-	() => {
-		const renderToggleButton = () => render(<ToggleButton />)
-		expect(renderToggleButton).to.throw(/Toggle/i)
-	},
-)
+await testStep(`The error thrown should say "${expectedErrorMessage}"`, () => {
+	const renderToggleButton = () => render(<ToggleButton />)
+	expect(renderToggleButton).to.throw(expectedErrorMessage)
+})

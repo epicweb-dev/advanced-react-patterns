@@ -1,8 +1,6 @@
 # Compound Components Validation
 
-Change <div
-style={{display:'inline-block'}}><LaunchEditor workshopFile="exercises/03.compound-components/01-02.problem/app.tsx"><code>app.tsx</code></LaunchEditor></div>
-to this (temporarily):
+Change <InlineFile file="app.tsx" /> to this (temporarily):
 
 ```javascript
 import { ToggleButton } from './toggle'
@@ -14,16 +12,16 @@ Why doesn't that work (it's not supposed to, but can you explain why)? Can you
 figure out a way to give the developer a better error message that explains what
 they're doing wrong and how to fix it?
 
+🚨 The tests will tell you the message for the error you must throw when the
+context is undefined.
+
 🦺 Additionally, this is where we can make TypeScript happier (TypeScript knew
 about the problem we'd run into in this step of the exercise!). Remember,
 TypeScript isn't making your life terrible. It's just showing you how terrible
 your life already is 😂 In this exercise, we're going to make our lives better.
 
-🚨 NOTE: In this exercise, because we're testing what happens when things go
-wrong, you'll see errors in the console when you've solved it correctly.
-
-(You can go ahead and undo the change to `app.tsx` if you'd like. The tests will
-let you know that you've gotten it right).
+(You can go ahead and undo the change to <InlineFile file="app.tsx" /> if you'd
+like. The tests will let you know that you've gotten it right).
 
 <section id="files" className="not-prose">
   <h2>Files</h2>
