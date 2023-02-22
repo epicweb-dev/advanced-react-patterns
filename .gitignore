@@ -6,3 +6,4 @@ build
 .vscode/
 .eslintcache
 /playwright-report
+/test-results
