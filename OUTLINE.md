@@ -8,15 +8,15 @@
 - 👩 👧 👦 👦 👦 🐕
 - 🏢 kentcdodds.com
 - 🐦/🐙 @kentcdodds
-- 🌌 EpicWeb.dev
-- 🚀 EpicReact.dev
-- 🏆 testingjavascript.com
-- 🥚 kcd.im/egghead
-- 🥋 kcd.im/fem
-- 💌 kcd.im/news
-- 📝 kcd.im/blog
-- 📽 kcd.im/youtube
-- 🎙 kcd.im/calls
+- 🌌 https://EpicWeb.dev
+- 🚀 https://EpicReact.dev
+- 🏆 https://testingjavascript.com
+- 🥚 https://kcd.im/egghead
+- 🥋 https://kcd.im/fem
+- 💌 https://kcd.im/news
+- 📝 https://kcd.im/blog
+- 📽 https://kcd.im/youtube
+- 🎙 https://kcd.im/calls
 
 # What this workshop is
 
@@ -47,12 +47,12 @@
 ## Scripts
 
 - `npm run start`
-- `npm run test`
 
 ## Asking Questions
 
 Please do ask! Interrupt me. If you have an unrelated question, please ask on
-[my AMA](https://kcd.im/ama).
+[office hours](https://kcd.im/office-hours) or
+[the call Kent podcast](https://kcd.im/calls).
 
 ## Zoom
 
