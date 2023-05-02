@@ -9,34 +9,29 @@ import * as React from 'react'
 
 // this is only a class component so we can do some implementation-detail
 // tests to make sure you're doing things as instructed :)
-export class Switch extends React.Component<
-	{ on: boolean } & Omit<JSX.IntrinsicElements['button'], 'ref'>,
-	{}
-> {
-	render() {
-		const {
-			on,
-			className = '',
-			'aria-label': ariaLabel,
-			onClick,
-			...props
-		} = this.props
-		const btnClassName = [
-			className,
-			'toggle-btn',
-			on ? 'toggle-btn-on' : 'toggle-btn-off',
-		]
-			.filter(Boolean)
-			.join(' ')
-		return (
-			<button
-				role="switch"
-				aria-label={ariaLabel ?? 'Toggle'}
-				aria-checked={on}
-				onClick={onClick}
-				className={btnClassName}
-				{...props}
-			/>
-		)
-	}
+export function Switch({
+	on,
+	className = '',
+	'aria-label': ariaLabel,
+	onClick,
+	...props
+}: { on: boolean } & Omit<JSX.IntrinsicElements['button'], 'ref'>) {
+	const btnClassName = [
+		className,
+		'toggle-btn',
+		on ? 'toggle-btn-on' : 'toggle-btn-off',
+	]
+		.filter(Boolean)
+		.join(' ')
+
+	return (
+		<button
+			role="switch"
+			aria-label={ariaLabel ?? 'Toggle'}
+			aria-checked={on}
+			onClick={onClick}
+			className={btnClassName}
+			{...props}
+		/>
+	)
 }
