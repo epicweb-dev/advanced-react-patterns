@@ -376,6 +376,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "jorgeruvalcaba",
+      "name": "Jorge Ruvalcaba",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7416811?v=4",
+      "profile": "http://jorgearuv.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoHost": "https://github.com",
