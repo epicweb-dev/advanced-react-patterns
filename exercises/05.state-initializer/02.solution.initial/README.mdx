@@ -1,1 +1,8 @@
 # Handle changing the `initialOn`
+
+This is a pretty subtle behavior and it may feel unnecessary to handle this, but
+it's important that the prefix of `initial` be honored in the way we treat it
+and so the `ref` is absolutely necessary.
+
+If someone really did want to reset our component to a brand new initial state,
+they could use the `key` prop to force a remount of the component.
