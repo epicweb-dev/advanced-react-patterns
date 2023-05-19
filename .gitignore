@@ -7,3 +7,4 @@ build
 .eslintcache
 /playwright-report
 /test-results
+/playground
