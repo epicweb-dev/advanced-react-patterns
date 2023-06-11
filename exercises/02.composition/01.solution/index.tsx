@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { allPokemon, PokemonDataView } from '~/shared/pokemon'
-import type { PokemonData, User } from '~/shared/types'
+import { allPokemon, PokemonDataView } from '~/shared/pokemon.tsx'
+import type { PokemonData, User } from '~/shared/types.tsx'
 
 function App() {
 	const [user] = React.useState<User>({ name: 'Kody', image: '/img/kody.png' })

@@ -1,4 +1,4 @@
-import type { PokemonData } from './types'
+import type { PokemonData } from './types.ts'
 
 function PokemonDataView({ pokemon }: { pokemon: PokemonData }) {
 	return (

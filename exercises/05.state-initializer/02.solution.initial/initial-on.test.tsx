@@ -1,6 +1,6 @@
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { renderHook, act } from '@testing-library/react'
-import { useToggle } from './toggle'
+import { useToggle } from './toggle.tsx'
 
 await testStep('useToggle still maintains the old API and works', () => {
 	const { result } = renderHook(() => useToggle())

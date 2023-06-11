@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
-import { ToggleButton, ToggleOff, ToggleOn } from './toggle'
+import { ToggleButton, ToggleOff, ToggleOn } from './toggle.tsx'
 
 const expectedErrorMessage =
 	'Cannot find ToggleContext. All Toggle components must be rendered within <Toggle />'

@@ -1,1 +1,1 @@
-require('./scripts/setup')
+import './scripts/setup.js'

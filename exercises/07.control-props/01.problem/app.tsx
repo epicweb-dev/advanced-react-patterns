@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Toggle, type ToggleAction, type ToggleState } from './toggle'
+import { Toggle, type ToggleAction, type ToggleState } from './toggle.tsx'
 
 export function App() {
 	const [bothOn, setBothOn] = React.useState(false)

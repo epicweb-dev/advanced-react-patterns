@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Switch } from '~/shared/switch'
+import { Switch } from '~/shared/switch.tsx'
 
 type ToggleValue = { on: boolean; toggle: () => void }
 const ToggleContext = React.createContext<ToggleValue | undefined>(undefined)

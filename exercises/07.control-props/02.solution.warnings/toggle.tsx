@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Switch } from '~/shared/switch'
-import { useControlPropWarnings } from '~/shared/utils'
+import { Switch } from '~/shared/switch.tsx'
+import { useControlPropWarnings } from '~/shared/utils.tsx'
 
 function callAll<Args extends Array<unknown>>(
 	...fns: Array<((...args: Args) => unknown) | undefined>

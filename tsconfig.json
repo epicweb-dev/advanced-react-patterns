@@ -1,12 +1,12 @@
 {
-	"include": ["**/*.ts", "**/*.tsx"],
+	"include": ["**/*.ts", "**/*.tsx", "**/*.cjs"],
 	"compilerOptions": {
-		"lib": ["DOM", "DOM.Iterable", "ES2020"],
+		"lib": ["DOM", "DOM.Iterable", "ES2022"],
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"jsx": "react-jsx",
-		"module": "ES2022",
-		"moduleResolution": "node",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"resolveJsonModule": true,
 		"target": "ES2022",
 		"strict": true,
@@ -19,6 +19,12 @@
 			"~/*": ["./*"]
 		},
 		"skipLibCheck": true,
+		"allowImportingTsExtensions": true,
+		"typeRoots": [
+			"./types",
+			"./node_modules/@types",
+			"./node_modules/@kentcdodds/workshop-app/utils"
+		],
 
 		// Remix takes care of building everything in `remix build`.
 		"noEmit": true

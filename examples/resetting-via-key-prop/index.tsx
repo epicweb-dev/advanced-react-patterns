@@ -4,7 +4,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { Switch } from '~/shared/switch'
+import { Switch } from '~/shared/switch.tsx'
 
 function callAll<Args extends Array<unknown>>(
 	...fns: Array<((...args: Args) => unknown) | undefined>

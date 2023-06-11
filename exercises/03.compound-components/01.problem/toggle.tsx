@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Switch } from '~/shared/switch'
+import { Switch } from '~/shared/switch.tsx'
 
 // 🐨 create your ToggleContext context here
 // 📜 https://reactjs.org/docs/context.html#reactcreatecontext
