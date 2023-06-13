@@ -1,7 +1,7 @@
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { render, screen } from '@testing-library/react'
 import { userEvent } from '~/shared/user-event.cjs'
-import { App } from './app.jsx'
+import { App } from './app.tsx'
 
 await testStep('can render the app', () => {
 	render(<App />)
