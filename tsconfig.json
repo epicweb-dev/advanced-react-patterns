@@ -1,26 +1,32 @@
 {
-	"include": ["**/*.ts", "**/*.tsx"],
-	"compilerOptions": {
-		"lib": ["DOM", "DOM.Iterable", "ES2020"],
-		"isolatedModules": true,
-		"esModuleInterop": true,
-		"jsx": "react-jsx",
-		"module": "ES2022",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"target": "ES2022",
-		"strict": true,
-		"noImplicitAny": true,
-		"noUncheckedIndexedAccess": true,
-		"allowJs": true,
-		"forceConsistentCasingInFileNames": true,
-		"baseUrl": ".",
-		"paths": {
-			"~/*": ["./*"]
-		},
-		"skipLibCheck": true,
+  "include": ["**/*.ts", "**/*.tsx", "**/*.cjs"],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "target": "ES2022",
+    "strict": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types",
+      "./node_modules/@kentcdodds/workshop-app/utils"
+    ],
 
-		// Remix takes care of building everything in `remix build`.
-		"noEmit": true
-	}
+    // Remix takes care of building everything in `remix build`.
+    "noEmit": true
+  }
 }

@@ -1,8 +1,8 @@
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { render, screen, cleanup } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/shared/user-event.cjs'
 import React from 'react'
-import { Toggle } from './toggle'
+import { Toggle } from './toggle.tsx'
 
 const originalConsoleError = console.error
 let errors: Array<string> = []

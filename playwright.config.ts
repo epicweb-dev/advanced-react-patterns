@@ -1,11 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+import 'dotenv/config'
 
 const PORT = process.env.PORT || 3000
 
@@ -62,6 +57,8 @@ const config: PlaywrightTestConfig = {
 		command: `cross-env PORT=${PORT} npm run start`,
 		port: Number(PORT),
 		reuseExistingServer: true,
+		stdout: 'pipe',
+		stderr: 'pipe',
 	},
 }
 

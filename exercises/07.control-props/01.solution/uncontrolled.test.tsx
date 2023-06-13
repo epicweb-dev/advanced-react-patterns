@@ -1,7 +1,7 @@
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { Toggle } from './toggle'
+import { userEvent } from '~/shared/user-event.cjs'
+import { Toggle } from './toggle.tsx'
 
 await testStep('can render Toggle with no props', () => {
 	render(<Toggle />)

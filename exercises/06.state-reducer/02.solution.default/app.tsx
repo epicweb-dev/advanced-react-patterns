@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Switch } from '~/shared/switch'
-import { toggleReducer, useToggle } from './toggle'
+import { Switch } from '~/shared/switch.tsx'
+import { toggleReducer, useToggle } from './toggle.tsx'
 
 export function App() {
 	const [timesClicked, setTimesClicked] = React.useState(0)

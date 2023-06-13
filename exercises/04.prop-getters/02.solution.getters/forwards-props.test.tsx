@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/dom'
 import { expect, testStep } from '@kentcdodds/workshop-app/test'
-import userEvent from '@testing-library/user-event'
+import { userEvent } from '~/shared/user-event.cjs'
 import '.'
 
 const customButton = await testStep('Custom button is rendred', () =>

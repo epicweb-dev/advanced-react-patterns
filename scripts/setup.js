@@ -1,4 +1,4 @@
-var spawnSync = require('child_process').spawnSync
+import { spawnSync } from 'child_process'
 
 var styles = {
 	// got these from playing around with what I found from:

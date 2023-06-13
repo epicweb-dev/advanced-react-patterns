@@ -16,5 +16,15 @@
 	"singleQuote": true,
 	"tabWidth": 2,
 	"trailingComma": "all",
-	"useTabs": true
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": [
+				"**/*.json"
+			],
+			"options": {
+				"useTabs": false
+			}
+		}
+	]
 }

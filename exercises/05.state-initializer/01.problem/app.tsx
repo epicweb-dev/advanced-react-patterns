@@ -1,5 +1,5 @@
-import { Switch } from '~/shared/switch'
-import { useToggle } from './toggle'
+import { Switch } from '~/shared/switch.tsx'
+import { useToggle } from './toggle.tsx'
 
 export function App() {
 	// 🐨 pass an object with the initialOn property set to true
