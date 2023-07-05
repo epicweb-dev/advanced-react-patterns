@@ -5,7 +5,7 @@ import * as React from 'react'
 import {Switch} from '../switch'
 
 // 🐨 create your ToggleContext context here
-// 📜 https://reactjs.org/docs/context.html#reactcreatecontext
+// 📜 https://react.dev/reference/react/createContext
 
 function Toggle({children}) {
   const [on, setOn] = React.useState(false)
@@ -26,7 +26,7 @@ function Toggle({children}) {
 // 🦉 You can create a helper method to retrieve the context here. Thanks to that,
 // your context won't be exposed to the user
 // 💰 `const context = React.useContext(ToggleContext)`
-// 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
+// 📜 https://react.dev/reference/react/useContext
 function ToggleOn({on, children}) {
   return on ? children : null
 }
