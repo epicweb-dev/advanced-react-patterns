@@ -238,6 +238,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="http://jorgearuv.dev"><img src="https://avatars.githubusercontent.com/u/7416811?v=4?s=100" width="100px;" alt="Jorge Ruvalcaba"/><br /><sub><b>Jorge Ruvalcaba</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=jorgeruvalcaba" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://creador.dev"><img src="https://avatars.githubusercontent.com/u/40248406?v=4?s=100" width="100px;" alt="Pawan Kumar"/><br /><sub><b>Pawan Kumar</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=creador-dev" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://junagao.com"><img src="https://avatars.githubusercontent.com/u/615616?v=4?s=100" width="100px;" alt="juliane nagao"/><br /><sub><b>juliane nagao</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-patterns/commits?author=junagao" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 
