@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { Switch } from '~/shared/switch.tsx'
+import { useState } from 'react'
+import { Switch } from '#shared/switch.tsx'
 
 // 🐨 create your ToggleContext context here
 // 📜 https://reactjs.org/docs/context.html#reactcreatecontext
@@ -8,7 +8,7 @@ import { Switch } from '~/shared/switch.tsx'
 // but because we must initialize it to `undefined`, you need to union that with `undefined`
 
 export function Toggle({ children }: { children: React.ReactNode }) {
-	const [on, setOn] = React.useState(false)
+	const [on, setOn] = useState(false)
 	const toggle = () => setOn(!on)
 
 	// 💣 remove this and instead return <ToggleContext.Provider> where
@@ -19,8 +19,8 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 
 export function ToggleOn({ children }: { children: React.ReactNode }) {
 	// 🐨 instead of this constant value, we'll need to get that from
-	// React.useContext(ToggleContext)
-	// 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
+	// use(ToggleContext)
+	// 📜 https://reactjs.org/docs/hooks-reference.html#use
 	const on = false
 	return <>{on ? children : null}</>
 }
@@ -34,7 +34,7 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 export function ToggleButton(
 	props: Omit<React.ComponentProps<typeof Switch>, 'on' | 'onClick'>,
 ) {
-	// 🐨 get `on` and `toggle` from the ToggleContext with `useContext`
+	// 🐨 get `on` and `toggle` from the ToggleContext with `use`
 	const on = false
 	const toggle = () => {}
 	return <Switch on={on} onClick={toggle} {...props} />

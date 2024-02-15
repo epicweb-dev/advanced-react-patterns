@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 
 function callAll<Args extends Array<unknown>>(
 	...fns: Array<((...args: Args) => unknown) | undefined>
@@ -23,8 +23,8 @@ function toggleReducer(state: ToggleState, action: ToggleAction) {
 }
 
 export function useToggle({ initialOn = false, reducer = toggleReducer } = {}) {
-	const { current: initialState } = React.useRef<ToggleState>({ on: initialOn })
-	const [state, dispatch] = React.useReducer(reducer, initialState)
+	const { current: initialState } = useRef<ToggleState>({ on: initialOn })
+	const [state, dispatch] = useReducer(reducer, initialState)
 	const { on } = state
 
 	const toggle = () => dispatch({ type: 'toggle' })

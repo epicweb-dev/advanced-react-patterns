@@ -1,5 +1,5 @@
+import { expect, testStep } from '@kentcdodds/workshop-utils/test'
 import { render } from '@testing-library/react'
-import { expect, testStep } from '@kentcdodds/workshop-app/test'
 import { ToggleButton, ToggleOff, ToggleOn } from './toggle.tsx'
 
 const expectedErrorMessage =

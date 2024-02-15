@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { Switch } from '~/shared/switch.tsx'
+import { useState } from 'react'
+import { Switch } from '#shared/switch.tsx'
 import { useToggle } from './toggle.tsx'
 
 export function App() {
-	const [timesClicked, setTimesClicked] = React.useState(0)
+	const [timesClicked, setTimesClicked] = useState(0)
 	const clickedTooMuch = timesClicked >= 4
 
 	const { on, getTogglerProps, getResetterProps } = useToggle({

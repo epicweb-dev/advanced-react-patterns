@@ -18,7 +18,7 @@ https://reactjs.org/docs/forms.html#controlled-components
 
 ```javascript
 function MyCapitalizedInput() {
-	const [capitalizedValue, setCapitalizedValue] = React.useState('')
+	const [capitalizedValue, setCapitalizedValue] = useState('')
 
 	return (
 		<input
@@ -42,8 +42,8 @@ we want to, which enables this kind of synchronized input situation:
 
 ```javascript
 function MyTwoInputs() {
-	const [capitalizedValue, setCapitalizedValue] = React.useState('')
-	const [lowerCasedValue, setLowerCasedValue] = React.useState('')
+	const [capitalizedValue, setCapitalizedValue] = useState('')
+	const [lowerCasedValue, setLowerCasedValue] = useState('')
 
 	function handleInputChange(e) {
 		setCapitalizedValue(e.target.value.toUpperCase())

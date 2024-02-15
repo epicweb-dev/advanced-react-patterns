@@ -1,4 +1,4 @@
-import { Toggle, ToggleOn, ToggleOff, ToggleButton } from './toggle.tsx'
+import { Toggle, ToggleButton, ToggleOff, ToggleOn } from './toggle.tsx'
 
 export function App() {
 	return (
@@ -6,9 +6,7 @@ export function App() {
 			<Toggle>
 				<ToggleOn>The button is on</ToggleOn>
 				<ToggleOff>The button is off</ToggleOff>
-				<div>
-					<ToggleButton />
-				</div>
+				<ToggleButton />
 			</Toggle>
 		</div>
 	)

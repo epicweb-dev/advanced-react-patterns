@@ -84,7 +84,7 @@ So let's rewrite the example above with hooks:
 
 ```tsx
 function PokemonFeeder({ pokemon }) {
-	const [selectedPokemonFood, setSelectedPokemonFood] = React.useState(null)
+	const [selectedPokemonFood, setSelectedPokemonFood] = useState(null)
 	const feedPokemon = async () => {
 		const canEat = await pokemon.canEat(selectedPokemonFood)
 		if (canEat) {
@@ -107,14 +107,14 @@ to **ref**erence the latest version of a value. `useRef` to the rescue!
 
 ```tsx
 function PokemonFeeder({ pokemon }) {
-	const [selectedPokemonFood, setSelectedPokemonFood] = React.useState(null)
-	const latestPokemonRef = React.useRef(pokemon)
-	const latestSelectedPokemonFoodRef = React.useRef(selectedPokemonFood)
+	const [selectedPokemonFood, setSelectedPokemonFood] = useState(null)
+	const latestPokemonRef = useRef(pokemon)
+	const latestSelectedPokemonFoodRef = useRef(selectedPokemonFood)
 
 	// why is the useEffect necessary? Because side-effects run in the function
 	// body of your component can lead to some pretty confusing bugs. Just keep
 	// your function body free of side-effects and you'll be better off.
-	React.useEffect(() => {
+	useEffect(() => {
 		latestPokemonRef.current = pokemon
 		latestSelectedPokemonFoodRef.current = selectedPokemonFood
 		// Wondering why we have no dependency list? Do we really need it?
@@ -152,18 +152,18 @@ referencing it in the dependency list. For example:
 
 ```tsx
 function useExampleOne(callback) {
-	React.useEffect(() => {
+	useEffect(() => {
 		callback()
 	}, [callback]) // <-- have to include the callback in the dep array
 }
 
 function useExampleTwo(callback) {
-	const latestCallbackRef = React.useRef(callback)
-	React.useEffect(() => {
+	const latestCallbackRef = useRef(callback)
+	useEffect(() => {
 		latestCallbackRef.current = callback
 	})
 
-	React.useEffect(() => {
+	useEffect(() => {
 		latestCallbackRef.current()
 	}, []) // <-- don't have to include the callback in the dep array
 }

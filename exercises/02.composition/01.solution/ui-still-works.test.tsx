@@ -1,6 +1,6 @@
+import { expect, testStep } from '@kentcdodds/workshop-utils/test'
 import { within } from '@testing-library/dom'
-import { userEvent } from '~/shared/user-event.cjs'
-import { expect, testStep } from '@kentcdodds/workshop-app/test'
+import { userEvent } from '#shared/user-event.cjs'
 import '.'
 
 const screen = within(document.body)

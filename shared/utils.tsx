@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useRef } from 'react'
 
 // this needs to be put into an open source project on npm at some point...
 
@@ -15,7 +15,7 @@ const useControlPropWarnings = isProd
 			readOnlyProp,
 			initialValueProp,
 			onChangeProp,
-	  }: {
+		}: {
 			controlPropValue: unknown
 			controlPropName: string
 			componentName: string
@@ -24,13 +24,13 @@ const useControlPropWarnings = isProd
 			readOnlyProp: string
 			initialValueProp: string
 			onChangeProp: string
-	  }) {
-			const hasWarnedReadOnlyRef = React.useRef(false)
-			const hasWarnedSwitchRef = React.useRef(false)
+		}) {
+			const hasWarnedReadOnlyRef = useRef(false)
+			const hasWarnedSwitchRef = useRef(false)
 			const isControlled = controlPropValue != null
-			const { current: wasControlled } = React.useRef(isControlled)
+			const { current: wasControlled } = useRef(isControlled)
 
-			React.useEffect(() => {
+			useEffect(() => {
 				if (
 					!hasWarnedReadOnlyRef.current &&
 					!hasOnChange &&
@@ -53,7 +53,7 @@ const useControlPropWarnings = isProd
 				readOnlyProp,
 			])
 
-			React.useEffect(() => {
+			useEffect(() => {
 				if (hasWarnedSwitchRef.current) return
 				if (isControlled && !wasControlled) {
 					hasWarnedSwitchRef.current = true
@@ -68,6 +68,6 @@ const useControlPropWarnings = isProd
 					)
 				}
 			}, [componentName, controlPropName, isControlled, wasControlled])
-	  }
+		}
 
 export { useControlPropWarnings }

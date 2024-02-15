@@ -1,8 +1,7 @@
-.DS_Store
 node_modules
-coverage
 build
-.idea/
-.vscode/
-.eslintcache
-/playwright-report
+public/build
+playwright-report
+test-results
+server-build
+scripts

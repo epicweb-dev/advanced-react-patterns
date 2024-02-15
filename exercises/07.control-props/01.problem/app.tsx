@@ -1,9 +1,9 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { Toggle, type ToggleAction, type ToggleState } from './toggle.tsx'
 
 export function App() {
-	const [bothOn, setBothOn] = React.useState(false)
-	const [timesClicked, setTimesClicked] = React.useState(0)
+	const [bothOn, setBothOn] = useState(false)
+	const [timesClicked, setTimesClicked] = useState(0)
 
 	function handleToggleChange(state: ToggleState, action: ToggleAction) {
 		if (action.type === 'toggle' && timesClicked > 4) {

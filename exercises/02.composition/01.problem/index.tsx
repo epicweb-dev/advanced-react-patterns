@@ -1,15 +1,16 @@
-import * as React from 'react'
+import { useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { allPokemon, PokemonDataView } from '~/shared/pokemon.tsx'
-import type { PokemonData, User } from '~/shared/types.tsx'
+import { PokemonDataView, allPokemon } from '#shared/pokemon.tsx'
+import { type PokemonData, type User } from '#shared/types.tsx'
 
 function App() {
-	const [user] = React.useState<User>({ name: 'Kody', image: '/img/kody.png' })
-	const [pokemonList] = React.useState<Array<PokemonData>>(() =>
+	const [user] = useState<User>({ name: 'Kody', image: '/img/kody.png' })
+	const [pokemonList] = useState<Array<PokemonData>>(() =>
 		Object.values(allPokemon),
 	)
-	const [selectedPokemon, setSelectedPokemon] =
-		React.useState<PokemonData | null>(null)
+	const [selectedPokemon, setSelectedPokemon] = useState<PokemonData | null>(
+		null,
+	)
 
 	return (
 		<div

@@ -1,6 +1,6 @@
+import { expect, testStep } from '@kentcdodds/workshop-utils/test'
 import { screen } from '@testing-library/dom'
-import { userEvent } from '~/shared/user-event.cjs'
-import { expect, testStep } from '@kentcdodds/workshop-app/test'
+import { userEvent } from '#shared/user-event.cjs'
 
 export async function verifySimpleToggleWithText() {
 	const toggle = await testStep('Switch is rendered', () =>

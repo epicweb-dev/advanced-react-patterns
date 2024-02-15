@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 function debounce<Callback extends (...args: Array<unknown>) => void>(
@@ -18,19 +18,19 @@ function useDebounce<Callback extends (...args: Array<unknown>) => unknown>(
 	callback: Callback,
 	delay: number,
 ) {
-	const callbackRef = React.useRef(callback)
-	React.useEffect(() => {
+	const callbackRef = useRef(callback)
+	useEffect(() => {
 		callbackRef.current = callback
 	})
-	return React.useMemo(
+	return useMemo(
 		() => debounce((...args) => callbackRef.current(...args), delay),
 		[delay],
 	)
 }
 
 function App() {
-	const [step, setStep] = React.useState(1)
-	const [count, setCount] = React.useState(0)
+	const [step, setStep] = useState(1)
+	const [count, setCount] = useState(0)
 	const increment = () => setCount(c => c + step)
 	const debouncedIncrement = useDebounce(increment, 3000)
 	return (

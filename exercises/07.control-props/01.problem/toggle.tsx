@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { Switch } from '~/shared/switch.tsx'
+import { useReducer, useRef } from 'react'
+import { Switch } from '#shared/switch.tsx'
 
 function callAll<Args extends Array<unknown>>(
 	...fns: Array<((...args: Args) => unknown) | undefined>
@@ -34,8 +34,8 @@ export function useToggle({
 	initialOn?: boolean
 	reducer?: typeof toggleReducer
 } = {}) {
-	const { current: initialState } = React.useRef<ToggleState>({ on: initialOn })
-	const [state, dispatch] = React.useReducer(reducer, initialState)
+	const { current: initialState } = useRef<ToggleState>({ on: initialOn })
+	const [state, dispatch] = useReducer(reducer, initialState)
 	// 🐨 determine whether on is controlled and assign that to `onIsControlled`
 	// 💰 `controlledOn != null` // <-- note, using "!=" here instead of "!==" to count both `null` and `undefined` as uncontrolled.
 

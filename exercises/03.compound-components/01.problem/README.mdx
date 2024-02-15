@@ -19,7 +19,7 @@ mechanisms for updating that state (`toggle`) that are being shared between the
 components.
 
 So in this exercise, we'll solve that problem by using the 📜
-[React Context API](https://reactjs.org/docs/hooks-reference.html#usecontext)!
+[React Context API](https://reactjs.org/docs/hooks-reference.html#use)!
 
 What we want to do in this exercise is allow users of our component to render
 something when the toggle button is on and to render something else when that
@@ -29,7 +29,7 @@ controlling whether it's shown or not.
 Your job will be to make a `ToggleContext` which will be used to implicitly
 share the state between these components. The `Toggle` component will render the
 `ToggleContext.Provider` and the other compound components will access that
-implicit state via `useContext(ToggleContext)`.
+implicit state via `use(ToggleContext)`.
 
-🦺 TypeScript might not like your `useContext` call depending on how you set up
-your context. We'll deal with this in another step.
+🦺 TypeScript might not like your `use` call depending on how you set up your
+context. We'll deal with this in another step.

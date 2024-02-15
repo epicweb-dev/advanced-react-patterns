@@ -1,6 +1,6 @@
-import { waitFor, within, fireEvent } from '@testing-library/dom'
-import { userEvent } from '~/shared/user-event.cjs'
-import { expect, testStep } from '@kentcdodds/workshop-app/test'
+import { expect, testStep } from '@kentcdodds/workshop-utils/test'
+import { fireEvent, waitFor, within } from '@testing-library/dom'
+import { userEvent } from '#shared/user-event.cjs'
 import '.'
 
 const screen = within(document.body)

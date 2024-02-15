@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useMemo, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 function debounce<Callback extends (...args: Array<unknown>) => void>(
@@ -24,16 +24,16 @@ function useDebounce<Callback extends (...args: Array<unknown>) => unknown>(
 	// 💰 you'll need to pass an annonymous function to debounce. Do *not*
 	// simply change this to `debounce(latestCallbackRef.current, delay)`
 	// as that won't work. Can you think of why?
-	return React.useMemo(() => debounce(callback, delay), [callback, delay])
+	return useMemo(() => debounce(callback, delay), [callback, delay])
 }
 
 function App() {
-	const [step, setStep] = React.useState(1)
-	const [count, setCount] = React.useState(0)
+	const [step, setStep] = useState(1)
+	const [count, setCount] = useState(0)
 
 	// 🦉 feel free to swap these two implementations and see they don't make
 	// any difference to the user experience
-	// const increment = React.useCallback(() => setCount(c => c + step), [step])
+	// const increment = useMemoCallback(() => setCount(c => c + step), [step])
 	const increment = () => setCount(c => c + step)
 	const debouncedIncrement = useDebounce(increment, 3000)
 	return (
