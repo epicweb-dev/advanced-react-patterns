@@ -31,9 +31,7 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 	return <>{on ? null : children}</>
 }
 
-export function ToggleButton(
-	props: Omit<React.ComponentProps<typeof Switch>, 'on' | 'onClick'>,
-) {
+export function ToggleButton(props: React.ComponentProps<typeof Switch>) {
 	// 🐨 get `on` and `toggle` from the ToggleContext with `use`
 	const on = false
 	const toggle = () => {}

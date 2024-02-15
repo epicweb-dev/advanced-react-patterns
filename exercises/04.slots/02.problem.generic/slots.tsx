@@ -1,19 +1,10 @@
 import { createContext, use } from 'react'
 
 type Slots = Record<string, Record<string, unknown>>
-const SlotContext = createContext<Slots | null>(null)
-export function SlotProvider({
-	slots,
-	children,
-}: {
-	slots: Slots
-	children: React.ReactNode
-}) {
-	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
-}
+export const SlotContext = createContext<Slots>({})
 
-export function useSlotProps<Props>(props: Props, slot: string): Props {
-	const slots = use(SlotContext) ?? ({} as Slots)
+function useSlotProps<Props>(props: Props, slot: string): Props {
+	const slots = use(SlotContext)
 
 	// a more proper "mergeProps" function is in order here
 	// to handle things like merging event handlers better.

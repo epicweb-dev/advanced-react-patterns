@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import { useReducer, useRef } from 'react'
 
 function callAll<Args extends Array<unknown>>(
 	...fns: Array<((...args: Args) => unknown) | undefined>

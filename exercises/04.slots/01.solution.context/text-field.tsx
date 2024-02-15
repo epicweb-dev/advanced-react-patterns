@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { SlotProvider } from './slots'
+import { SlotContext } from './slots'
 
 export function TextField({
 	id,
@@ -15,8 +15,8 @@ export function TextField({
 	const inputProps = { id }
 
 	return (
-		<SlotProvider slots={{ label: labelProps, input: inputProps }}>
+		<SlotContext.Provider value={{ label: labelProps, input: inputProps }}>
 			{children}
-		</SlotProvider>
+		</SlotContext.Provider>
 	)
 }

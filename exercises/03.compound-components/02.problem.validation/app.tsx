@@ -1,4 +1,4 @@
-import { Toggle, ToggleOn, ToggleOff, ToggleButton } from './toggle.tsx'
+import { Toggle, ToggleButton, ToggleOff, ToggleOn } from './toggle.tsx'
 
 export function App() {
 	return (

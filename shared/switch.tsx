@@ -13,7 +13,7 @@ export function Switch({
 	'aria-label': ariaLabel,
 	onClick,
 	...props
-}: { on: boolean } & Omit<JSX.IntrinsicElements['button'], 'ref'>) {
+}: { on: boolean } & React.ComponentProps<'button'>) {
 	const btnClassName = [
 		className,
 		'toggle-btn',

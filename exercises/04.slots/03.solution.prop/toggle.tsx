@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { SlotProvider } from './slots'
+import { SlotContext } from './slots'
 
 export function Toggle({
 	id,
@@ -20,8 +20,8 @@ export function Toggle({
 	const switchProps = { id, on, onClick: toggle }
 
 	return (
-		<SlotProvider
-			slots={{
+		<SlotContext.Provider
+			value={{
 				label: labelProps,
 				onText: onTextProps,
 				offText: offTextProps,
@@ -29,6 +29,6 @@ export function Toggle({
 			}}
 		>
 			{children}
-		</SlotProvider>
+		</SlotContext.Provider>
 	)
 }

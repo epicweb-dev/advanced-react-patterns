@@ -2,25 +2,16 @@ import { createContext, use } from 'react'
 import { Switch as BaseSwitch } from '#shared/switch'
 
 type Slots = Record<string, Record<string, unknown>>
-const SlotContext = createContext<Slots | null>(null)
-export function SlotProvider({
-	slots,
-	children,
-}: {
-	slots: Slots
-	children: React.ReactNode
-}) {
-	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
-}
+export const SlotContext = createContext<Slots>({})
 
-export function useSlotProps<Props>(
+function useSlotProps<Props>(
 	props: Props & { slot?: string },
 	defaultSlot?: string,
 ): Props {
 	const slot = props.slot ?? defaultSlot
 	if (!slot) return props
 
-	const slots = use(SlotContext) ?? ({} as Slots)
+	const slots = use(SlotContext)
 
 	// a more proper "mergeProps" function is in order here
 	// to handle things like merging event handlers better.
@@ -47,11 +38,11 @@ export function Text(props: React.ComponentProps<'span'> & { slot?: string }) {
 	return <span {...props} />
 }
 
-export function Switch({
-	...props
-}: Omit<React.ComponentProps<typeof BaseSwitch>, 'on' | 'onClick'> & {
-	slot?: string
-}) {
+export function Switch(
+	props: Omit<React.ComponentProps<typeof BaseSwitch>, 'on'> & {
+		slot?: string
+	},
+) {
 	return (
 		<BaseSwitch
 			{...(useSlotProps(props, 'switch') as React.ComponentProps<

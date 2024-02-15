@@ -1,8 +1,8 @@
-import { use, useState } from 'react'
+import { createContext, use, useState } from 'react'
 import { Switch } from '#shared/switch.tsx'
 
 type ToggleValue = { on: boolean; toggle: () => void }
-const ToggleContext = React.createContext<ToggleValue | undefined>(undefined)
+const ToggleContext = createContext<ToggleValue | undefined>(undefined)
 ToggleContext.displayName = 'ToggleContext'
 
 export function Toggle({ children }: { children: React.ReactNode }) {
@@ -28,7 +28,7 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 
 export function ToggleButton({
 	...props
-}: Omit<React.ComponentProps<typeof Switch>, 'on' | 'onClick'>) {
+}: Omit<React.ComponentProps<typeof Switch>, 'on'>) {
 	const { on, toggle } = use(ToggleContext)!
 	return <Switch {...props} on={on} onClick={toggle} />
 }
