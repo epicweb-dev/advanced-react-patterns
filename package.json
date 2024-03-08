@@ -25,7 +25,7 @@
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@kentcdodds/workshop-utils": "^3.6.10",
+    "@kentcdodds/workshop-utils": "^3.7.0",
     "@remix-run/eslint-config": "^2.4.1",
     "@testing-library/user-event": "^14.5.2",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
