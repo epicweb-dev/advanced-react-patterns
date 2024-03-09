@@ -1,8 +1,10 @@
 # Compound Components
 
-**One liner:** The Compound Components Pattern enables you to provide a set of
-components that implicitly share state for a simple yet powerful declarative API
-for reusable components.
+<callout-success>
+	**One liner:** The Compound Components Pattern enables you to provide a set of
+	components that implicitly share state for a simple yet powerful declarative
+	API for reusable components.
+</callout-success>
 
 Compound components are components that work together to form a complete UI. The
 classic example of this is `<select>` and `<option>` in HTML:
@@ -37,7 +39,7 @@ it's selected? We can easily add API surface area to support these use cases,
 but that's just more for us to code and more for users to learn. That's where
 compound components come in really handy!
 
-import { Toggle } from '../07.control-props/02.solution.warnings/toggle'
+import { Toggle } from '../07.control-props/01.solution/toggle'
 
 For the rest of the exercises in this workshop, we'll be working with a Toggle
 component. Specifically, this one:
@@ -67,7 +69,7 @@ pattern.
 
 **Real World Projects that use this pattern:**
 
-- [`@reach/tabs`](https://reacttraining.com/reach-ui/tabs)
-- [`@reach/accordion`](https://reacttraining.com/reach-ui/accordion)
-- Actually most of [Reach UI](https://reacttraining.com/reach-ui) implements
+- [`@radix-ui/react-tabs`](https://www.radix-ui.com/primitives/docs/components/tabs)
+- [`@radix-ui/react-accordion`](https://www.radix-ui.com/primitives/docs/components/accordion)
+- Actually most of [Radix UI](https://www.radix-ui.com/primitives) implements
   this pattern
