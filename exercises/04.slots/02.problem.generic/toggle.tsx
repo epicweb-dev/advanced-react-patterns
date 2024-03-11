@@ -3,8 +3,7 @@ import { Switch } from '#shared/switch.tsx'
 
 // 🐨 add an id string to the ToggleValue type
 type ToggleValue = { on: boolean; toggle: () => void }
-const ToggleContext = createContext<ToggleValue | undefined>(undefined)
-ToggleContext.displayName = 'ToggleContext'
+const ToggleContext = createContext<ToggleValue | null>(null)
 
 // 🐨 update this to accept an optional id
 export function Toggle({ children }: { children: React.ReactNode }) {
@@ -44,9 +43,10 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 	return <>{on ? null : children}</>
 }
 
-export function ToggleButton({
-	...props
-}: Omit<React.ComponentProps<typeof Switch>, 'on'>) {
+type ToggleButtonProps = Omit<React.ComponentProps<typeof Switch>, 'on'> & {
+	on?: boolean
+}
+export function ToggleButton({ ...props }: ToggleButtonProps) {
 	// 🐨 get the id out of useToggle
 	const { on, toggle } = useToggle()
 	// 🐨 pass the id for the ToggleButton here

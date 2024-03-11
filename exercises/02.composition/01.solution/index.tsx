@@ -1,38 +1,34 @@
 import { useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { PokemonDataView, allPokemon } from '#shared/pokemon.tsx'
-import { type PokemonData, type User } from '#shared/types.tsx'
+import { SportDataView, allSports } from '#shared/sports.tsx'
+import { type SportData, type User } from '#shared/types.tsx'
 
 function App() {
 	const [user] = useState<User>({ name: 'Kody', image: '/img/kody.png' })
-	const [pokemonList] = useState<Array<PokemonData>>(() =>
-		Object.values(allPokemon),
-	)
-	const [selectedPokemon, setSelectedPokemon] = useState<PokemonData | null>(
-		null,
-	)
+	const [sportList] = useState<Array<SportData>>(() => Object.values(allSports))
+	const [selectedSport, setSelectedSport] = useState<SportData | null>(null)
 
 	return (
 		<div
 			id="app-root"
-			style={{ ['--accent-color' as any]: selectedPokemon?.color ?? 'black' }}
+			style={{ ['--accent-color' as any]: selectedSport?.color ?? 'black' }}
 		>
 			<Nav avatar={<img src={user.image} alt={`${user.name} profile`} />} />
 			<div className="spacer" data-size="lg" />
 			<Main
 				sidebar={
 					<List
-						listItems={pokemonList.map(p => (
+						listItems={sportList.map(p => (
 							<li key={p.id}>
-								<PokemonListItemButton
-									pokemon={p}
-									onClick={() => setSelectedPokemon(p)}
+								<SportListItemButton
+									sport={p}
+									onClick={() => setSelectedSport(p)}
 								/>
 							</li>
 						))}
 					/>
 				}
-				content={<Details selectedPokemon={selectedPokemon} />}
+				content={<Details selectedSport={selectedSport} />}
 			/>
 			<div className="spacer" data-size="lg" />
 			<Footer
@@ -80,42 +76,41 @@ function Main({
 
 function List({ listItems }: { listItems: Array<React.ReactElement> }) {
 	return (
-		<div className="pokemon-list">
+		<div className="sport-list">
 			<ul>{listItems}</ul>
 		</div>
 	)
 }
 
-function PokemonListItemButton({
-	pokemon,
+function SportListItemButton({
+	sport,
 	onClick,
 }: {
-	pokemon: PokemonData
+	sport: SportData
 	onClick: () => void
 }) {
 	return (
 		<button
-			className="pokemon-item"
+			className="sport-item"
 			onClick={onClick}
-			style={{ ['--accent-color' as any]: pokemon.color }}
-			aria-label={pokemon.name}
+			style={{ ['--accent-color' as any]: sport.color }}
+			aria-label={sport.name}
 		>
-			<img src={pokemon.image} alt={pokemon.name} />
-			<div className="pokemon-list-info">
-				<strong>{pokemon.name}</strong>
-				<small>{`(${pokemon.number})`}</small>
+			<img src={sport.image} alt={sport.name} />
+			<div className="sport-list-info">
+				<strong>{sport.name}</strong>
 			</div>
 		</button>
 	)
 }
 
-function Details({ selectedPokemon }: { selectedPokemon: PokemonData | null }) {
+function Details({ selectedSport }: { selectedSport: SportData | null }) {
 	return (
-		<div className="pokemon-details">
-			{selectedPokemon ? (
-				<PokemonDataView pokemon={selectedPokemon} />
+		<div className="sport-details">
+			{selectedSport ? (
+				<SportDataView sport={selectedSport} />
 			) : (
-				<div>Select a Pokemon</div>
+				<div>Select a Sport</div>
 			)}
 		</div>
 	)

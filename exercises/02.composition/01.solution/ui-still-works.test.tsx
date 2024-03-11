@@ -29,9 +29,9 @@ await testStep(
 		),
 )
 
-// verify selecting a pokemon updates the detail info
-await testStep('Clicking a pokemon should update the detail info', async () => {
-	const pikachuButton = await screen.findByRole('button', { name: /pikachu/i })
-	await userEvent.click(pikachuButton)
-	await screen.findByText(/thunderbolt/i)
+// verify selecting a sport updates the detail info
+await testStep('Clicking a sport should update the detail info', async () => {
+	const floaterButton = await screen.findByRole('button', { name: /floater/i })
+	await userEvent.click(floaterButton)
+	await screen.findByText(/space tornado/i)
 })

@@ -16,53 +16,47 @@ that you'd always get the latest value of state or props in your functions.
 Let's explore an example:
 
 ```tsx
-class PokemonFeeder extends React.Component {
-	state = { selectedPokemonFood: null }
-	feedPokemon = async () => {
-		const canEat = await this.props.pokemon.canEat(
-			this.state.selectedPokemonFood,
-		)
+class PetFeeder extends React.Component {
+	state = { selectedPetFood: null }
+	feedPet = async () => {
+		const canEat = await this.props.pet.canEat(this.state.selectedPetFood)
 		if (canEat) {
-			this.props.pokemon.eat(this.state.selectedPokemonFood)
+			this.props.pet.eat(this.state.selectedPetFood)
 		}
 	}
 	render() {
 		return (
 			<div>
-				<PokemonFoodChooser
-					onSelection={selectedPokemonFood =>
-						this.setState({ selectedPokemonFood })
-					}
+				<PetFoodChooser
+					onSelection={selectedPetFood => this.setState({ selectedPetFood })}
 				/>
-				<button onClick={this.feedPokemon}>
-					Feed {this.props.pokemon.name}
-				</button>
+				<button onClick={this.feedPet}>Feed {this.props.pet.name}</button>
 			</div>
 		)
 	}
 }
 ```
 
-Think about that `feedPokemon` function for a moment... What kinds of bugs can
-you spot with this implementation? Let me ask you a question. What would happen
-if the `pokemon.canEat` function took a couple seconds to resolve? What could
-the user do to cause a problem? If the user changed the `selectedPokemonFood`
-what could happen? Yeah! You could check whether your pidgey can eat worms but
-then actually feed it grass! Or what if while we're checking whether charizard
-can eat some candy the props changed now we're withholding the candy from a
-hungry pikachu! 😢
+Think about that `feedPet` function for a moment... What kinds of bugs can you
+spot with this implementation? Let me ask you a question. What would happen if
+the `pet.canEat` function took a couple seconds to resolve? What could the user
+do to cause a problem? If the user changed the `selectedPetFood` what could
+happen? Yeah! You could check whether your bird can eat worms but then actually
+feed it grass! Or what if while we're checking whether your dog can eat some
+candy the props changed now we're withholding the candy from a hungry crab! 😢
+(I mean, like crab-candy... I don't know if that's a thing... 😅)
 
 Can you imagine how we could side-step these issues? It's simple actually:
 
 ```ts
-class PokemonFeeder extends React.Component {
+class PetFeeder extends React.Component {
 	// ...
-	feedPokemon = async () => {
-		const { pokemon } = this.props
-		const { selectedPokemonFood } = this.state
-		const canEat = await pokemon.canEat(selectedPokemonFood)
+	feedPet = async () => {
+		const { pet } = this.props
+		const { selectedPetFood } = this.state
+		const canEat = await pet.canEat(selectedPetFood)
 		if (canEat) {
-			pokemon.eat(selectedPokemonFood)
+			pet.eat(selectedPetFood)
 		}
 	}
 	// ...
@@ -85,18 +79,18 @@ avoid them, so you'll ship fewer (at least, that's been my experience).
 So let's rewrite the example above with hooks:
 
 ```tsx
-function PokemonFeeder({ pokemon }) {
-	const [selectedPokemonFood, setSelectedPokemonFood] = useState(null)
-	const feedPokemon = async () => {
-		const canEat = await pokemon.canEat(selectedPokemonFood)
+function PetFeeder({ pet }) {
+	const [selectedPetFood, setSelectedPetFood] = useState(null)
+	const feedPet = async () => {
+		const canEat = await pet.canEat(selectedPetFood)
 		if (canEat) {
-			pokemon.eat(selectedPokemonFood)
+			pet.eat(selectedPetFood)
 		}
 	}
 	return (
 		<div>
-			<PokemonFoodChooser onSelection={food => setSelectedPokemonFood(food)} />
-			<button onClick={feedPokemon}>Feed {pokemon.name}</button>
+			<PetFoodChooser onSelection={food => setSelectedPetFood(food)} />
+			<button onClick={feedPet}>Feed {pet.name}</button>
 		</div>
 	)
 }
@@ -108,33 +102,33 @@ behavior before? Could we make that work with hooks? Sure! We just need some way
 to **ref**erence the latest version of a value. `useRef` to the rescue!
 
 ```tsx
-function PokemonFeeder({ pokemon }) {
-	const [selectedPokemonFood, setSelectedPokemonFood] = useState(null)
-	const latestPokemonRef = useRef(pokemon)
-	const latestSelectedPokemonFoodRef = useRef(selectedPokemonFood)
+function PetFeeder({ pet }) {
+	const [selectedPetFood, setSelectedPetFood] = useState(null)
+	const latestPetRef = useRef(pet)
+	const latestSelectedPetFoodRef = useRef(selectedPetFood)
 
 	// why is the useEffect necessary? Because side-effects run in the function
 	// body of your component can lead to some pretty confusing bugs. Just keep
 	// your function body free of side-effects and you'll be better off.
 	useEffect(() => {
-		latestPokemonRef.current = pokemon
-		latestSelectedPokemonFoodRef.current = selectedPokemonFood
+		latestPetRef.current = pet
+		latestSelectedPetFoodRef.current = selectedPetFood
 		// Wondering why we have no dependency list? Do we really need it?
 		// Not really... So we don't bother.
 	})
 
-	const feedPokemon = async () => {
-		const canEat = await latestPokemonRef.current.canEat(
-			latestSelectedPokemonFoodRef.current,
+	const feedPet = async () => {
+		const canEat = await latestPetRef.current.canEat(
+			latestSelectedPetFoodRef.current,
 		)
 		if (canEat) {
-			latestPokemonRef.current.eat(latestSelectedPokemonFoodRef.current)
+			latestPetRef.current.eat(latestSelectedPetFoodRef.current)
 		}
 	}
 	return (
 		<div>
-			<PokemonFoodChooser onSelection={food => setSelectedPokemonFood(food)} />
-			<button onClick={feedPokemon}>Feed {pokemon.name}</button>
+			<PetFoodChooser onSelection={food => setSelectedPetFood(food)} />
+			<button onClick={feedPet}>Feed {pet.name}</button>
 		</div>
 	)
 }

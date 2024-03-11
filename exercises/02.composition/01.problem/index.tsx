@@ -1,21 +1,17 @@
 import { useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { PokemonDataView, allPokemon } from '#shared/pokemon.tsx'
-import { type PokemonData, type User } from '#shared/types.tsx'
+import { SportDataView, allSports } from '#shared/sports.tsx'
+import { type SportData, type User } from '#shared/types.tsx'
 
 function App() {
 	const [user] = useState<User>({ name: 'Kody', image: '/img/kody.png' })
-	const [pokemonList] = useState<Array<PokemonData>>(() =>
-		Object.values(allPokemon),
-	)
-	const [selectedPokemon, setSelectedPokemon] = useState<PokemonData | null>(
-		null,
-	)
+	const [sportList] = useState<Array<SportData>>(() => Object.values(allSports))
+	const [selectedSport, setSelectedSport] = useState<SportData | null>(null)
 
 	return (
 		<div
 			id="app-root"
-			style={{ ['--accent-color' as any]: selectedPokemon?.color ?? 'black' }}
+			style={{ ['--accent-color' as any]: selectedSport?.color ?? 'black' }}
 		>
 			{/*
 				🐨 make Nav accept a ReactElement prop called "avatar"
@@ -28,9 +24,9 @@ function App() {
 				instead of the props it accepts right now.
 			*/}
 			<Main
-				pokemonList={pokemonList}
-				selectedPokemon={selectedPokemon}
-				setSelectedPokemon={setSelectedPokemon}
+				sportList={sportList}
+				selectedSport={selectedSport}
+				setSelectedSport={setSelectedSport}
 			/>
 			<div className="spacer" data-size="lg" />
 			{/*
@@ -67,19 +63,19 @@ function Nav({ user }: { user: User }) {
 
 function Main({
 	// 🐨 all these props should be removed in favor of the sidebar and content props
-	pokemonList,
-	selectedPokemon,
-	setSelectedPokemon,
+	sportList,
+	selectedSport,
+	setSelectedSport,
 }: {
-	pokemonList: Array<PokemonData>
-	selectedPokemon: PokemonData | null
-	setSelectedPokemon: (pokemon: PokemonData) => void
+	sportList: Array<SportData>
+	selectedSport: SportData | null
+	setSelectedSport: (sport: SportData) => void
 }) {
 	return (
 		<main>
 			{/* 🐨 put the sidebar and content props here */}
-			<List pokemonList={pokemonList} setSelectedPokemon={setSelectedPokemon} />
-			<Details selectedPokemon={selectedPokemon} />
+			<List sportList={sportList} setSelectedSport={setSelectedSport} />
+			<Details selectedSport={selectedSport} />
 		</main>
 	)
 }
@@ -87,21 +83,21 @@ function Main({
 function List({
 	// 🐨 make this accept an array of ReactElements called "listItems"
 	// and remove the existing props
-	pokemonList,
-	setSelectedPokemon,
+	sportList,
+	setSelectedSport,
 }: {
-	pokemonList: Array<PokemonData>
-	setSelectedPokemon: (pokemon: PokemonData) => void
+	sportList: Array<SportData>
+	setSelectedSport: (sport: SportData) => void
 }) {
 	return (
-		<div className="pokemon-list">
+		<div className="sport-list">
 			<ul>
 				{/* 🐨 render the listItems here */}
-				{pokemonList.map(p => (
+				{sportList.map(p => (
 					<li key={p.id}>
-						<PokemonListItemButton
-							pokemon={p}
-							onClick={() => setSelectedPokemon(p)}
+						<SportListItemButton
+							sport={p}
+							onClick={() => setSelectedSport(p)}
 						/>
 					</li>
 				))}
@@ -110,36 +106,35 @@ function List({
 	)
 }
 
-function PokemonListItemButton({
-	pokemon,
+function SportListItemButton({
+	sport,
 	onClick,
 }: {
-	pokemon: PokemonData
+	sport: SportData
 	onClick: () => void
 }) {
 	return (
 		<button
-			className="pokemon-item"
+			className="sport-item"
 			onClick={onClick}
-			style={{ ['--accent-color' as any]: pokemon.color }}
-			aria-label={pokemon.name}
+			style={{ ['--accent-color' as any]: sport.color }}
+			aria-label={sport.name}
 		>
-			<img src={pokemon.image} alt={pokemon.name} />
-			<div className="pokemon-list-info">
-				<strong>{pokemon.name}</strong>
-				<small>{`(${pokemon.number})`}</small>
+			<img src={sport.image} alt={sport.name} />
+			<div className="sport-list-info">
+				<strong>{sport.name}</strong>
 			</div>
 		</button>
 	)
 }
 
-function Details({ selectedPokemon }: { selectedPokemon: PokemonData | null }) {
+function Details({ selectedSport }: { selectedSport: SportData | null }) {
 	return (
-		<div className="pokemon-details">
-			{selectedPokemon ? (
-				<PokemonDataView pokemon={selectedPokemon} />
+		<div className="sport-details">
+			{selectedSport ? (
+				<SportDataView sport={selectedSport} />
 			) : (
-				<div>Select a Pokemon</div>
+				<div>Select a Sport</div>
 			)}
 		</div>
 	)

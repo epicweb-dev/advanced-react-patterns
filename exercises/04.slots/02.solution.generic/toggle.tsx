@@ -3,8 +3,7 @@ import { Switch } from '#shared/switch.tsx'
 import { SlotContext } from './slots'
 
 type ToggleValue = { on: boolean; toggle: () => void; id: string }
-const ToggleContext = createContext<ToggleValue | undefined>(undefined)
-ToggleContext.displayName = 'ToggleContext'
+const ToggleContext = createContext<ToggleValue | null>(null)
 
 export function Toggle({
 	id,
@@ -50,9 +49,10 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 	return <>{on ? null : children}</>
 }
 
-export function ToggleButton({
-	...props
-}: Omit<React.ComponentProps<typeof Switch>, 'on'>) {
+type ToggleButtonProps = Omit<React.ComponentProps<typeof Switch>, 'on'> & {
+	on?: boolean
+}
+export function ToggleButton({ ...props }: ToggleButtonProps) {
 	const { on, toggle, id } = useToggle()
 	return <Switch {...props} id={id} on={on} onClick={toggle} />
 }

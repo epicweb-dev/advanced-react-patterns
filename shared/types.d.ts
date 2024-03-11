@@ -1,18 +1,15 @@
-type PokemonData = {
+type SportData = {
 	id: string
-	number: string
 	name: string
 	image: string
 	color: string
-	attacks: {
-		special: Array<{
-			name: string
-			type: string
-			damage: number
-		}>
-	}
+	tricks: Array<{
+		name: string
+		type: string
+		points: number
+	}>
 }
 
 type User = { name: string; image: string }
 
-export { PokemonData, User }
+export { SportData, User }

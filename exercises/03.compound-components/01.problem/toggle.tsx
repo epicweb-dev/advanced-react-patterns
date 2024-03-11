@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { Switch } from '#shared/switch.tsx'
 
 // 🐨 create your ToggleContext context here
-// 📜 https://reactjs.org/docs/context.html#reactcreatecontext
-// 💰 the default value should be `undefined`
+// 📜 https://react.dev/reference/react/createContext
+// 💰 the default value should be `null`
 // 🦺 the typing for the context value should be `{on: boolean; toggle: () => void}`
-// but because we must initialize it to `undefined`, you need to union that with `undefined`
+// but because we must initialize it to `null`, you need to union that with `null`
 
 export function Toggle({ children }: { children: React.ReactNode }) {
 	const [on, setOn] = useState(false)
@@ -20,7 +20,7 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 export function ToggleOn({ children }: { children: React.ReactNode }) {
 	// 🐨 instead of this constant value, we'll need to get that from
 	// use(ToggleContext)
-	// 📜 https://reactjs.org/docs/hooks-reference.html#use
+	// 📜 https://react.dev/reference/react/use#reading-context-with-use
 	const on = false
 	return <>{on ? children : null}</>
 }
@@ -31,7 +31,10 @@ export function ToggleOff({ children }: { children: React.ReactNode }) {
 	return <>{on ? null : children}</>
 }
 
-export function ToggleButton(props: React.ComponentProps<typeof Switch>) {
+type ToggleButtonProps = Omit<React.ComponentProps<typeof Switch>, 'on'> & {
+	on?: boolean
+}
+export function ToggleButton(props: ToggleButtonProps) {
 	// 🐨 get `on` and `toggle` from the ToggleContext with `use`
 	const on = false
 	const toggle = () => {}

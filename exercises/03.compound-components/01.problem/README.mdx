@@ -1,7 +1,7 @@
 # Compound Components
 
-In this exercise we're going to make `<Toggle />` the parent of a few compound
-components:
+👨‍💼 In this exercise we're going to make `<Toggle />` the parent of a few
+compound components:
 
 - `<ToggleOn />` renders children when the `on` state is `true`
 - `<ToggleOff />` renders children when the `on` state is `false`
@@ -19,7 +19,14 @@ mechanisms for updating that state (`toggle`) that are being shared between the
 components.
 
 So in this exercise, we'll solve that problem by using the 📜
-[React Context API](https://reactjs.org/docs/hooks-reference.html#use)!
+[React Context API](https://react.dev/reference/react/use#reading-context-with-use)!
+
+<callout-info>
+	Technically, the [`use`](https://react.dev/reference/react/use) hook is in the
+	canary release of React which is not yet released, but [will be
+	soon](https://react.dev/blog/2024/02/15/react-labs-what-we-have-been-working-on-february-2024).
+	We'll be using it in this workshop series to keep you ahead of the curve.
+</callout-info>
 
 What we want to do in this exercise is allow users of our component to render
 something when the toggle button is on and to render something else when that

@@ -38,8 +38,8 @@ nav ul {
 	padding-left: 0px;
 }
 nav img {
-	max-width: 64px;
-	max-height: 64px;
+	width: 64px;
+	height: 64px;
 	border-radius: 4px;
 }
 nav a,
@@ -71,14 +71,14 @@ main {
 	gap: 4rem;
 }
 
-.pokemon-list {
+.sport-list {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	max-width: 30vw;
 	min-width: 200px;
 }
 
-.pokemon-list ul {
+.sport-list ul {
 	list-style: none;
 	padding: 0px;
 	display: flex;
@@ -86,7 +86,7 @@ main {
 	gap: 1.5rem;
 }
 
-.pokemon-list ul li button {
+.sport-list ul li button {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
@@ -98,25 +98,29 @@ main {
 	border-radius: 2px;
 	width: 100%;
 }
-.pokemon-list ul li button small {
+.sport-list ul li button small {
 	position: relative;
 }
 
-.pokemon-list .pokemon-list-info {
+.sport-list .sport-list-info {
 	display: flex;
 	flex-direction: column;
 	text-align: left;
 }
 
-.pokemon-list ul li img {
-	max-width: 64px;
-	max-height: 64px;
+.sport-list ul li img {
+	width: 64px;
+	height: 64px;
 	border-radius: 4px;
+	aspect-ratio: 1;
+	object-fit: contain;
 }
 
-.pokemon-details {
-	min-width: 360px;
-	min-height: 620px;
+.sport-details img {
+	width: 256px;
+	height: 256px;
+	aspect-ratio: 1;
+	object-fit: contain;
 }
 
 footer {
