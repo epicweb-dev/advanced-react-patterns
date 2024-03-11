@@ -1,10 +1,10 @@
 # Prop Getters
 
-Uh oh! Someone wants to use our `togglerProps` object, but they need to apply
+👨‍💼 Uh oh! Someone wants to use our `togglerProps` object, but they need to apply
 their own `onClick` handler! Try doing that by updating the `App` component to
 this:
 
-```javascript
+```tsx
 function App() {
 	const { on, togglerProps } = useToggle()
 	return (
@@ -36,4 +36,4 @@ new API we're responsible for creating. See if you can make that API work.
 
 🦺 The types for the argument to the `getTogglerProps` component might be a bit
 tricky, so here's a little tip: you can get the `onClick` prop from:
-`React.DOMAttributes<HTMLButtonElement>['onClick']`.
+`React.ComponentProps<'button'>['onClick']`.

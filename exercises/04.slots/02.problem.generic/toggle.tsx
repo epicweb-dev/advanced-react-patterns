@@ -25,7 +25,7 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 
 function useToggle() {
 	const context = use(ToggleContext)
-	if (context === undefined) {
+	if (!context) {
 		throw new Error(
 			'Cannot find ToggleContext. All Toggle components must be rendered within <Toggle />',
 		)

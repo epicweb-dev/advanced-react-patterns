@@ -1,1 +1,27 @@
 # Slot Context
+
+👨‍💼 It's a tale as old as time. Our `label` and `input` are not properly
+associated in this form and so clicking the `label` will not focus the `input`
+as expected (in addition to other accessibility issues).
+
+But we don't want developers to be able to make this mistake. So we've made a
+`TextField` component which will generate the `id` for the relationship (if one
+is not provided). The tricky bit is we want people to be able to structure their
+label and input however they want, so we can't render the `input` and `label`
+for them. Instead, we want to be able to provide the `id` and `htmlFor` props to
+the `label` and `input`.
+
+So what we want you to do is first create a `SlotContext` and `useSlotProps`
+hook in <InlineFile file="slots.tsx" />, then use those in the `Label` and
+`Input` components to retrieve the necessary props.
+
+The `useSlotProps` hook should accept a props object and a slot name and return
+the props to be applied to the element for that slot. It should merge the props
+it's been given with the props from the `SlotContext` for that slot.
+
+Once you've finished that, then render the `SlotContext` provider in the
+`TextField` component in <InlineFile file="text-field.tsx" /> to provide slot
+props for the `label` and `input`.
+
+When you're finished, the label and input should be properly associated and
+clicking the label should focus the input.

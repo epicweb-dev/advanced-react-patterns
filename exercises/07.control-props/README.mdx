@@ -14,11 +14,11 @@ made when a state change happens, but sometimes people may want to make state
 changes themselves. We can allow them to do this with a feature called "Control
 Props."
 
-This concept is basically the same as controlled form elements in React that
-you've probably used many times: 📜
-https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
+This concept is basically the same as
+[controlled form elements 📜](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable)
+in React that you've probably used many times.
 
-```javascript
+```tsx
 function MyCapitalizedInput() {
 	const [capitalizedValue, setCapitalizedValue] = useState('')
 
@@ -42,7 +42,7 @@ This flexibility allows us to change how the state is managed (by capitalizing
 the value), and it also allows us to programmatically change the state whenever
 we want to, which enables this kind of synchronized input situation:
 
-```javascript
+```tsx
 function MyTwoInputs() {
 	const [capitalizedValue, setCapitalizedValue] = useState('')
 	const [lowerCasedValue, setLowerCasedValue] = useState('')

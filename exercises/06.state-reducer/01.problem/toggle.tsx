@@ -37,7 +37,7 @@ export function useToggle({ initialOn = false } = {}) {
 	function getTogglerProps<Props>({
 		onClick,
 		...props
-	}: { onClick?: React.DOMAttributes<HTMLButtonElement>['onClick'] } & Props) {
+	}: { onClick?: React.ComponentProps<'button'>['onClick'] } & Props) {
 		return {
 			'aria-checked': on,
 			onClick: callAll(onClick, toggle),
@@ -48,7 +48,7 @@ export function useToggle({ initialOn = false } = {}) {
 	function getResetterProps<Props>({
 		onClick,
 		...props
-	}: { onClick?: React.DOMAttributes<HTMLButtonElement>['onClick'] } & Props) {
+	}: { onClick?: React.ComponentProps<'button'>['onClick'] } & Props) {
 		return {
 			onClick: callAll(onClick, reset),
 			...props,

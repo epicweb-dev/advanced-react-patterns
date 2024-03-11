@@ -14,7 +14,7 @@ export function useToggle() {
 		onClick,
 		...props
 	}: {
-		onClick?: React.DOMAttributes<HTMLButtonElement>['onClick']
+		onClick?: React.ComponentProps<'button'>['onClick']
 	} & Props) {
 		return {
 			'aria-checked': on,

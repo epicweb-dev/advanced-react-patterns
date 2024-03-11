@@ -40,7 +40,7 @@ export function Toggle({
 // 🐨 delete everything below here!
 function useToggle() {
 	const context = use(ToggleContext)
-	if (context === undefined) {
+	if (!context) {
 		throw new Error(
 			'Cannot find ToggleContext. All Toggle components must be rendered within <Toggle />',
 		)

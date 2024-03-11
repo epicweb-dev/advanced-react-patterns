@@ -1,1 +1,15 @@
 # Generic Slot Components
+
+👨‍💼 You'll notice our party mode toggle button is using `useId` to properly
+associate the toggle button with its label. We'd like to make that implicit and
+reuse the `Label` component for the `Toggle` as well.
+
+Please update the `Toggle` component in <InlineFile file="toggle.tsx" /> to
+render a `SlotContext` provider (in addition to the `ToggleContext` provider
+it's already rendering) so it can provide props for a `label` slot (the slot
+name for a `Label`). You'll also want to put the `id` in the `ToggleContext` so
+the `ToggleButton` can grab it.
+
+Once you're finished with that, you can remove the manual `id`/`htmlFor` props
+in the <InlineFile file="app.tsx" /> file and the `id` should be provided
+automatically.

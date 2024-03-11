@@ -4,3 +4,70 @@
 	**One liner:** Slots allow you to specify an element which takes on a
 	particular role in the overall collection of components.
 </callout-success>
+
+If you're building a component library, you have to deal with two competing
+interests:
+
+1. Correctness
+2. Flexibility
+
+You want to make sure people don't mess up things like accessibility, but you
+also want to give them the flexibility to build things the way their diverse
+needs require. Slots can help with this.
+
+Here's a quick example of a component that uses slots (from the
+[`react-aria`](https://react-spectrum.adobe.com/react-aria/index.html) docs):
+
+```tsx
+<CheckboxGroup>
+	<Label>Pets</Label>
+	<MyCheckbox value="dogs">Dogs</MyCheckbox>
+	<MyCheckbox value="cats">Cats</MyCheckbox>
+	<MyCheckbox value="dragons">Dragons</MyCheckbox>
+	<Text slot="description">Select your pets.</Text>
+</CheckboxGroup>
+```
+
+The `slot="description"` prop is letting the `Text` component know that it needs
+to look for special props that are meant to be used as a description. Those
+special props will be provided by the `CheckboxGroup` component.
+
+Essentially, the `CheckboxGroup` component will say: "here's a bucket of props
+for any component that takes on the role of a description." The `Text` component
+will then say: "Oh look, I've got a `slot` prop that matches the `description`
+slot, so I'll use these props to render myself."
+
+All of this is built using context.
+
+What this enables is a powerfully flexible capability to have components which
+are highly reusable. The `Text` component can be used in many different
+contexts, and it can adapt to the needs of the parent component. For example,
+it's also used in react-aria's `ComboBox` components. Here's the anatomy of a
+react-aria `ComboBox` component:
+
+```tsx lines=5,10,11
+<ComboBox>
+	<Label />
+	<Input />
+	<Button />
+	<Text slot="description" />
+	<FieldError />
+	<Popover>
+		<ListBox>
+			<ListBoxItem>
+				<Text slot="label" />
+				<Text slot="description" />
+			</ListBoxItem>
+			<Section>
+				<Header />
+				<ListBoxItem />
+			</Section>
+		</ListBox>
+	</Popover>
+</ComboBox>
+```
+
+This can be used to apply appropriate `aria-` attributes as well as `id`s and
+event handlers. You might think about it as a way to implement compound
+components in a way that doesn't require an individual component for every
+single use case.

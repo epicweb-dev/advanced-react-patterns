@@ -15,6 +15,26 @@ how to handle these different cases, but there's a never ending list of logical
 customizations that people could want out of our custom hook and we don't want
 to have to code for every one of those cases.
 
+For example, imagine you've got a combobox component and by default when the
+user clicks out of the combobox, the menu closes. But then someone wants to
+prevent the menu from closing when the user clicks out of the combobox.
+
+You can use the state reducer pattern to allow the user of your hook to control
+the state changes that happen when events are dispatched. Here's an example of
+what that may look like on the `ComboBox` component:
+
+```tsx
+<ComboBox
+	stateReducer={(state, action) => {
+		if (action.type === 'clickOutside' && state.isOpen) {
+			return { ...state, isOpen: false }
+		}
+		return state
+	}}
+	// ...other props
+/>
+```
+
 📜 Read more about this pattern in:
 [The State Reducer Pattern with React Hooks](https://kentcdodds.com/blog/the-state-reducer-pattern-with-react-hooks)
 

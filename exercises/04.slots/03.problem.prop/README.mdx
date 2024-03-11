@@ -1,1 +1,43 @@
 # Slot Prop
+
+👨‍💼 We have `ToggleOn` and `ToggleOff` components, but really we could make those
+components a simple `Text` component that accepts a `slot` prop. Then the
+`Toggle` component could define the props that the individual `Text` components
+should have based on which slot they're taking.
+
+In fact, we could do this with the `Switch` as well!
+
+🧝‍♂️ I've added `Text` and `Switch` components to the
+<InlineFile file="slots.tsx" /> file for you to use. These are both already
+wired up to consume a `slot` named `text` and `switch`. You can
+<DiffLink app1={-1}>check the diff</DiffLink> for details.
+
+What we want to do in this exercise is add a `slot` prop to each of our slot
+components so the slot they're taking can be defined by the parent component.
+
+Then you'll need to update `Toggle` to get rid of the `ToggleContext` provider
+and instead use the `SlotProvider` for all the components it wants to send props
+to:
+
+- `label` - `htmlFor`
+- `onText` - `hidden` (`undefined` if `isOn` is true, and `true` if `isOn` is
+  `false`)
+- `offText` - `hidden` (`undefined` if `isOn` is false, and `true` if `isOn` is
+  `true`)
+- `switch` - `id`, `on`, and `onClick`
+
+So by the end of all of this, here's what I want the API to be like:
+
+```tsx
+<Toggle>
+	<Label>Party mode</Label>
+	<Switch />
+	<Text slot="onText">Let's party 🥳</Text>
+	<Text slot="offText">Sad town 😭</Text>
+</Toggle>
+```
+
+Once that's been updated, you can delete the `useToggle` hook and the
+`ToggleOn`, `ToggleOff`, and `ToggleButton` components.
+
+Reusability FTW!

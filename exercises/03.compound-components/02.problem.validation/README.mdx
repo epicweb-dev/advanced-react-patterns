@@ -1,8 +1,8 @@
 # Compound Components Validation
 
-Change <InlineFile file="app.tsx" /> to this (temporarily):
+👨‍💼 Change <InlineFile file="app.tsx" /> to this (temporarily):
 
-```javascript
+```tsx
 import { ToggleButton } from './toggle'
 
 export const App = () => <ToggleButton />
@@ -12,7 +12,7 @@ Why doesn't that work (it's not supposed to, but can you explain why)? Can you
 figure out a way to give the developer a better error message that explains what
 they're doing wrong and how to fix it?
 
-🚨 The tests will tell you the message for the error you must throw when the
+🚨 The tests will tell you in the message for the error you must throw when the
 context is undefined.
 
 🦺 Additionally, this is where we can make TypeScript happier (TypeScript knew
