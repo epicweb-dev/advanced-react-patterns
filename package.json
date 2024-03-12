@@ -10,7 +10,7 @@
     "#*": "./*"
   },
   "scripts": {
-    "postinstall": "npm --prefix ./kcdshop install",
+    "postinstall": "cd ./kcdshop && npm install",
     "start": "npx --prefix ./kcdshop kcdshop start",
     "dev": "npx --prefix ./kcdshop kcdshop start",
     "setup": "node ./setup.js",
