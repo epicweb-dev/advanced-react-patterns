@@ -46,6 +46,7 @@
   "devDependencies": {
     "@testing-library/react": "^14.1.2",
     "@total-typescript/ts-reset": "^0.5.1",
+    "@types/node": "^20.11.27",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "eslint": "^8.56.0",
