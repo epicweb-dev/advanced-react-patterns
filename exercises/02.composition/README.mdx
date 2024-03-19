@@ -69,7 +69,7 @@ function App() {
 	)
 }
 
-function Child({ grandChild }: { grandChild: React.ReactElement }) {
+function Child({ grandChild }: { grandChild: React.ReactNode }) {
 	return (
 		<div>
 			<strong>
@@ -81,7 +81,7 @@ function Child({ grandChild }: { grandChild: React.ReactElement }) {
 	)
 }
 
-function GrandChild({ button }: { button: React.ReactElement }) {
+function GrandChild({ button }: { button: React.ReactNode }) {
 	return (
 		<div>
 			<small>I am a grand child and I just pass things off to a button</small>

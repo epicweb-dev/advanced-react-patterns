@@ -38,7 +38,7 @@ function App() {
 	)
 }
 
-function Nav({ avatar }: { avatar: React.ReactElement }) {
+function Nav({ avatar }: { avatar: React.ReactNode }) {
 	return (
 		<nav>
 			<ul>
@@ -63,8 +63,8 @@ function Main({
 	sidebar,
 	content,
 }: {
-	sidebar: React.ReactElement
-	content: React.ReactElement
+	sidebar: React.ReactNode
+	content: React.ReactNode
 }) {
 	return (
 		<main>
@@ -74,7 +74,7 @@ function Main({
 	)
 }
 
-function List({ listItems }: { listItems: Array<React.ReactElement> }) {
+function List({ listItems }: { listItems: Array<React.ReactNode> }) {
 	return (
 		<div className="sport-list">
 			<ul>{listItems}</ul>

@@ -14,13 +14,13 @@ function App() {
 			style={{ ['--accent-color' as any]: selectedSport?.color ?? 'black' }}
 		>
 			{/*
-				🐨 make Nav accept a ReactElement prop called "avatar"
+				🐨 make Nav accept a ReactNode prop called "avatar"
 				instead of a User prop called "user"
 			*/}
 			<Nav user={user} />
 			<div className="spacer" data-size="lg" />
 			{/*
-				🐨 make Main accept ReactElement props called "sidebar" and "content"
+				🐨 make Main accept ReactNode props called "sidebar" and "content"
 				instead of the props it accepts right now.
 			*/}
 			<Main
@@ -38,7 +38,7 @@ function App() {
 	)
 }
 
-// 🐨 this should accept an avatar prop that's a ReactElement
+// 🐨 this should accept an avatar prop that's a ReactNode
 function Nav({ user }: { user: User }) {
 	return (
 		<nav>
@@ -81,7 +81,7 @@ function Main({
 }
 
 function List({
-	// 🐨 make this accept an array of ReactElements called "listItems"
+	// 🐨 make this accept an array of ReactNodes called "listItems"
 	// and remove the existing props
 	sportList,
 	setSelectedSport,
