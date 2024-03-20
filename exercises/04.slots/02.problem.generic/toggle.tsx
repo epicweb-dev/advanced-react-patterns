@@ -12,7 +12,8 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 
 	const toggle = () => setOn(!on)
 
-	// 🐨 create labelProps that sets htmlFor to the id
+	// 🐨 create a slots object that has props for a slot called
+	// "label" with an htmlFor prop
 
 	// 🐨 wrap this in SlotContext.Provider and pass the labelProps in the label slot
 	// 🐨 add the id to the value in the ToggleContext.Provider

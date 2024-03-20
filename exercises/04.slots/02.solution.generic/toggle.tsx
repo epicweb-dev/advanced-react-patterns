@@ -14,14 +14,14 @@ export function Toggle({
 }) {
 	const [on, setOn] = useState(false)
 	const generatedId = useId()
-	id = id ?? generatedId
+	id ??= generatedId
 
 	const toggle = () => setOn(!on)
 
-	const labelProps = { htmlFor: id }
+	const slots = { label: { htmlFor: id } }
 
 	return (
-		<SlotContext.Provider value={{ label: labelProps }}>
+		<SlotContext.Provider value={slots}>
 			<ToggleContext.Provider value={{ on, toggle, id }}>
 				{children}
 			</ToggleContext.Provider>

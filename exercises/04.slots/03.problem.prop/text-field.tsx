@@ -9,14 +9,12 @@ export function TextField({
 	children: React.ReactNode
 }) {
 	const generatedId = useId()
-	id = id ?? generatedId
+	id ??= generatedId
 
-	const labelProps = { htmlFor: id }
-	const inputProps = { id }
+	const slots = {
+		label: { htmlFor: id },
+		input: { id },
+	}
 
-	return (
-		<SlotContext.Provider value={{ label: labelProps, input: inputProps }}>
-			{children}
-		</SlotContext.Provider>
-	)
+	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
 }

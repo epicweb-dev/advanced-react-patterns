@@ -38,9 +38,8 @@ export function Text(props: React.ComponentProps<'span'>) {
 }
 
 // 🐨 add an optional slot to the props type here
-export function Switch(
-	props: Omit<React.ComponentProps<typeof BaseSwitch>, 'on'>,
-) {
+type SwitchProps = Omit<React.ComponentProps<typeof BaseSwitch>, 'on'>
+export function Switch(props: SwitchProps) {
 	return (
 		<BaseSwitch
 			{...(useSlotProps(props, 'switch') as React.ComponentProps<

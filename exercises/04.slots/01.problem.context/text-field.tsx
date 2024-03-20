@@ -8,14 +8,11 @@ export function TextField({
 	children: React.ReactNode
 }) {
 	const generatedId = useId()
-	id = id ?? generatedId
+	id ??= generatedId
 
-	// 🐨 use these for the slot you render
-	// const labelProps = { htmlFor: id }
-	// const inputProps = { id }
+	// 🐨 create a slots object that has props for both label and input slots
+	// 💰 the label should provide an htmlFor prop and the input should provide an id
 
-	// 🐨 wrap this in a SlotContext.Provider with the value set to an object
-	// that has a label and input property with the values of labelProps and
-	// inputProps respectively.
+	// 🐨 wrap this in a SlotContext.Provider with the value set to the slots object
 	return children
 }

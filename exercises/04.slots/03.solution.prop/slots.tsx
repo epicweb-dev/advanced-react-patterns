@@ -38,11 +38,10 @@ export function Text(props: React.ComponentProps<'span'> & { slot?: string }) {
 	return <span {...props} />
 }
 
-export function Switch(
-	props: Omit<React.ComponentProps<typeof BaseSwitch>, 'on'> & {
-		slot?: string
-	},
-) {
+type SwitchProps = Omit<React.ComponentProps<typeof BaseSwitch>, 'on'> & {
+	slot?: string
+}
+export function Switch(props: SwitchProps) {
 	return (
 		<BaseSwitch
 			{...(useSlotProps(props, 'switch') as React.ComponentProps<

@@ -15,20 +15,18 @@ export function Toggle({
 }) {
 	const [on, setOn] = useState(false)
 	const generatedId = useId()
-	id = id ?? generatedId
+	id ??= generatedId
 
 	const toggle = () => setOn(!on)
 
-	const labelProps = { htmlFor: id }
-	// 🐨 add props objects for onText, offText, and switch
+	const slots = {
+		label: { htmlFor: id },
+		// 🐨 add slots for onText (hidden prop), offText (hidden prop),
+		// and switch (id, on, onClick props)
+	}
 
 	return (
-		<SlotContext.Provider
-			value={{
-				label: labelProps,
-				// 🐨 add slots for onText, offText, and switch
-			}}
-		>
+		<SlotContext.Provider value={slots}>
 			{/* 🐨 get rid of the ToggleContext here */}
 			<ToggleContext.Provider value={{ on, toggle, id }}>
 				{children}

@@ -10,7 +10,7 @@ export function Toggle({
 }) {
 	const [on, setOn] = useState(false)
 	const generatedId = useId()
-	id = id ?? generatedId
+	id ??= generatedId
 
 	const toggle = () => setOn(!on)
 

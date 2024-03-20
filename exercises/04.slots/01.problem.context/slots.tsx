@@ -1,4 +1,5 @@
 // 🦺 create a Slots type that's just an object of objects
+// 💰 type Slots = Record<string, Record<string, unknown>>
 // 🐨 create and export a SlotContext with that type and default it to an empty object
 
 // 🐨 create a useSlotProps hook which:

@@ -5,6 +5,11 @@
 	particular role in the overall collection of components.
 </callout-success>
 
+This pattern is particularly useful for situations where you're building a UI
+library with a lot of components that need to work together. It's a way to
+provide a flexible API for your components that allows them to be used in a
+variety of contexts.
+
 If you're building a component library, you have to deal with two competing
 interests:
 
@@ -71,3 +76,39 @@ This can be used to apply appropriate `aria-` attributes as well as `id`s and
 event handlers. You might think about it as a way to implement compound
 components in a way that doesn't require an individual component for every
 single use case.
+
+## Implementation
+
+Folks tend to struggle with this one a bit more than the rest, but it's simpler
+than it seems.
+
+The basic concept is your root component creates collections of props like so:
+
+```tsx
+function NumberField({ children }: { children: React.ReactNode }) {
+	// setup state/events/etc
+
+	const slots = {
+		label: { htmlFor: inputId },
+		decrement: { onClick: decrement },
+		increment: { onClick: increment },
+		description: { id: descriptionId },
+		input: { id: inputId, 'aria-describedby': descriptionId },
+	}
+	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
+}
+```
+
+Then the consuming components use the `use(SlotContext)` to get access to the
+`slots` object and pluck off the props they need to do their job:
+
+```tsx
+function Input(props) {
+	props = useSlotProps(props, 'input')
+
+	return <input {...props}>
+}
+```
+
+The `useSlotProps` hook is responsible for taking the props that have been
+specified and combining it with those from the `SlotContext` for the named slot.
