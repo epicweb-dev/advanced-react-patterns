@@ -1,0 +1,57 @@
+# State Initializer
+
+<callout-success>
+	**One liner:** The state initializer pattern is a way to initialize (and
+	reset) the state of a component in a predictable way.
+</callout-success>
+
+This one is simple in concept:
+
+```tsx
+function useCounter() {
+	const [count, setCount] = useState(0)
+	const increment = () => setCount(c => c + 1)
+	return { count, increment }
+}
+```
+
+If I wanted to initialize the state of the count to a different value, I could
+do so by passing an argument to the `useCounter` function:
+
+```tsx
+function useCounter({ initialCount = 0 } = {}) {
+	const [count, setCount] = useState(initialCount)
+	const increment = () => setCount(c => c + 1)
+	return { count, increment }
+}
+```
+
+And often when you have a state initializer, you also have a state resetter:
+
+```tsx
+function useCounter({ initialCount = 0 } = {}) {
+	const [count, setCount] = useState(initialCount)
+	const increment = () => setCount(c => c + 1)
+	const reset = () => setCount(initialCount)
+	return { count, increment, reset }
+}
+```
+
+But there's a catch. If you truly want to reset the component to its _initial_
+state, then you need to make certain that any changes to the `initialCount` are
+ignored!
+
+You can do this, by using a `ref` which will keep the initial value constant
+across renders:
+
+```tsx
+function useCounter({ initialCount = 0 } = {}) {
+	const initialCountRef = useRef(initialCount)
+	const [count, setCount] = useState(initialCountRef.current)
+	const increment = () => setCount(c => c + 1)
+	const reset = () => setCount(initialCountRef.current)
+	return { count, increment, reset }
+}
+```
+
+And that's the crux of the state initializer pattern.

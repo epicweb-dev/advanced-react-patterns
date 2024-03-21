@@ -1,0 +1,16 @@
+# Stability
+
+👨‍💼 We've noticed that if someone passes an `initialOn` that's based on state,
+then calling `reset` will sometimes change the state to the wrong value based on
+what the `initialOn` was set to at the time the component was initialized.
+
+This is confusing and we want to make certain to avoid it.
+
+🧝‍♂️ I've put together a simple example of this for you to experiment with. You'll
+notice we now have a button for toggling the `initialOn` state which we pass as
+an option to `useToggle`. So if you toggle the `initialOn` state and then click
+the reset button, you'll notice it resets to the current `initialOn` state, not
+the original one.
+
+👨‍💼 This is a little confusing for users of the `useToggle` hook, so please fix
+this issue! Thanks!
