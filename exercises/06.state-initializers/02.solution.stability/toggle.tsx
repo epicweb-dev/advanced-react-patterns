@@ -23,7 +23,7 @@ function toggleReducer(state: ToggleState, action: ToggleAction) {
 }
 
 export function useToggle({ initialOn = false } = {}) {
-	const initialState = useRef({ on: initialOn }).current
+	const { current: initialState } = useRef<ToggleState>({ on: initialOn })
 	const [state, dispatch] = useReducer(toggleReducer, initialState)
 	const { on } = state
 
@@ -45,8 +45,8 @@ export function useToggle({ initialOn = false } = {}) {
 
 	return {
 		on,
-		toggle,
 		reset,
+		toggle,
 		getTogglerProps,
 	}
 }

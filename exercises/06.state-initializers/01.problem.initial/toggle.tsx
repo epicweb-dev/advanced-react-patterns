@@ -48,8 +48,8 @@ export function useToggle() {
 
 	return {
 		on,
-		toggle,
 		// 🐨 add your reset function here.
+		toggle,
 		getTogglerProps,
 	}
 }

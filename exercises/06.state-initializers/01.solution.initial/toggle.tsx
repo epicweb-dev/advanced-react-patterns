@@ -45,8 +45,8 @@ export function useToggle({ initialOn = false } = {}) {
 
 	return {
 		on,
-		toggle,
 		reset,
+		toggle,
 		getTogglerProps,
 	}
 }
