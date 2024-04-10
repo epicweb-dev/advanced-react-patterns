@@ -14,6 +14,6 @@ export function Label(props: React.ComponentProps<'label'>) {
 }
 
 export function Input(props: React.ComponentProps<'input'>) {
-	// 🐨 get the props from useSlotProps for a slot called "label" and apply those to the input
+	// 🐨 get the props from useSlotProps for a slot called "input" and apply those to the input
 	return <input {...props} />
 }
