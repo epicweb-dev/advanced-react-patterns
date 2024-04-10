@@ -24,7 +24,7 @@ export function toggleReducer(state: ToggleState, action: ToggleAction) {
 }
 
 export function useToggle({
-	// 🐨 add a the `on` and `onChange` options here.
+	// 🐨 add the `on` and `onChange` options here.
 	// 💰 you can alias it to `controlledOn` as we do in the Toggle component
 	// below to avoid "variable shadowing."
 	initialOn = false,
