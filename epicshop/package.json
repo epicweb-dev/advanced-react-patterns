@@ -1,11 +1,11 @@
 {
   "type": "module",
   "scripts": {
-    "start": "cd .. && npm start",
+    "start": "cd .. && npm run start",
     "test": "playwright test"
   },
   "dependencies": {
-    "@kentcdodds/workshop-app": "^3.14.1",
+    "@epic-web/workshop-app": "^4.1.0",
     "@playwright/test": "^1.41.2",
     "cross-env": "^7.0.3"
   }

@@ -1,10 +1,9 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2023"],
+    "lib": ["ES2023"],
     "isolatedModules": true,
     "esModuleInterop": true,
-    "jsx": "react-jsx",
     "module": "ES2022",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
@@ -15,9 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "paths": {
-      "#*": ["./*"],
-    },
+    "noEmit": true
   }
 }

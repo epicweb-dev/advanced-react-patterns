@@ -1,4 +1,4 @@
-import { expect, testStep } from '@kentcdodds/workshop-utils/test'
+import { expect, testStep } from '@epic-web/workshop-utils/test'
 import { waitFor, within } from '@testing-library/dom'
 import { userEvent } from '#shared/user-event.cjs'
 import '.'

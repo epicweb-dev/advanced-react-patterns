@@ -3,8 +3,8 @@ import {
 	getApps,
 	isProblemApp,
 	setPlayground,
-} from '@kentcdodds/workshop-utils/apps.server'
-import { getWatcher } from '@kentcdodds/workshop-utils/change-tracker.server'
+} from '@epic-web/workshop-utils/apps.server'
+import { getWatcher } from '@epic-web/workshop-utils/change-tracker.server'
 import fsExtra from 'fs-extra'
 
 // getApps expects this env var
