@@ -37,7 +37,7 @@
     "git": ">=2.18.0"
   },
   "devDependencies": {
-    "@epic-web/workshop-utils": "^4.1.0",
+    "@epic-web/workshop-utils": "^4.2.2",
     "@testing-library/react": "^15.0.4",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/node": "^20.12.7",
