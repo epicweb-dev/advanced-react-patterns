@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useToggle } from './toggle.tsx'
 import { Switch } from '#shared/switch.tsx'
 // 🐨 import the toggleReducer
-import { useToggle } from './toggle.tsx'
 
 export function App() {
 	const [timesClicked, setTimesClicked] = useState(0)

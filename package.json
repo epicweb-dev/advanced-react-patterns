@@ -25,29 +25,34 @@
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com/)",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@testing-library/user-event": "^14.5.2",
-    "@typescript-eslint/eslint-plugin": "^7.7.1",
-    "@typescript-eslint/parser": "^7.7.1",
-    "react": "18.3.0-canary-03d6f7cf0-20240209",
-    "react-dom": "18.3.0-canary-03d6f7cf0-20240209"
-  },
-  "engines": {
-    "node": ">=18",
-    "npm": ">=8.16.0",
-    "git": ">=2.18.0"
+    "react": "19.0.0-beta-94eed63c49-20240425",
+    "react-dom": "19.0.0-beta-94eed63c49-20240425"
   },
   "devDependencies": {
     "@epic-web/workshop-utils": "^4.2.2",
+    "@testing-library/user-event": "^14.5.2",
     "@testing-library/react": "^15.0.4",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/node": "^20.12.7",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
+    "@types/react": "npm:types-react@19.0.0-alpha.5",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-alpha.5",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^9.1.1",
     "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react-hooks": "5.1.0-beta-94eed63c49-20240425",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
+  },
+  "overrides": {
+    "@types/react": "$@types/react",
+    "@types/react-dom": "$@types/react-dom"
+  },
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9.3.0",
+    "git": ">=2.18.0"
   },
   "prettier": {
     "arrowParens": "avoid",

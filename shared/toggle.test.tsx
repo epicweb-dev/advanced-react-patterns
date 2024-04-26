@@ -1,6 +1,6 @@
 import { expect, testStep } from '@epic-web/workshop-utils/test'
 import { screen } from '@testing-library/dom'
-import { userEvent } from '#shared/user-event.cjs'
+import { userEvent } from '@testing-library/user-event'
 
 export async function verifySimpleToggleWithText() {
 	const toggle = await testStep('Switch is rendered', () =>

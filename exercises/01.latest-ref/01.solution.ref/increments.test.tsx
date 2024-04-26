@@ -1,6 +1,6 @@
 import { expect, testStep } from '@epic-web/workshop-utils/test'
 import { waitFor, within } from '@testing-library/dom'
-import { userEvent } from '#shared/user-event.cjs'
+import { userEvent } from '@testing-library/user-event'
 import '.'
 
 const screen = within(document.body)

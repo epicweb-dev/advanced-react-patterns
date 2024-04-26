@@ -1,5 +1,5 @@
-import { Switch } from '#shared/switch.tsx'
 import { useToggle } from './toggle.tsx'
+import { Switch } from '#shared/switch.tsx'
 
 export function App() {
 	// 🐨 add an initialOn option (set it to true) and get the reset callback from useToggle

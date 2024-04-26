@@ -1,6 +1,6 @@
 import { expect, testStep } from '@epic-web/workshop-utils/test'
 import { render, screen } from '@testing-library/react'
-import { userEvent } from '#shared/user-event.cjs'
+import { userEvent } from '@testing-library/user-event'
 import { Toggle } from './toggle.tsx'
 
 await testStep('can render Toggle with no props', () => {

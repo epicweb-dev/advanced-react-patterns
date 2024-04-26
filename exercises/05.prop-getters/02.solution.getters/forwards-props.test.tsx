@@ -1,6 +1,6 @@
 import { expect, testStep } from '@epic-web/workshop-utils/test'
 import { screen, waitFor } from '@testing-library/dom'
-import { userEvent } from '#shared/user-event.cjs'
+import { userEvent } from '@testing-library/user-event'
 import '.'
 
 const customButton = await testStep('Custom button is rendred', () =>

@@ -1,5 +1,4 @@
-import { type PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
+import { type PlaywrightTestConfig , devices } from '@playwright/test'
 import 'dotenv/config'
 
 const PORT = process.env.PORT || 3000
