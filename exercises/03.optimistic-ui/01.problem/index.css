@@ -1,0 +1,138 @@
+#app-root {
+	max-width: 800px;
+	min-width: 480px;
+	margin: auto;
+}
+
+.spacer[data-size='base'] {
+	height: 2rem;
+}
+
+.spacer[data-size='sm'] {
+	height: 1rem;
+}
+
+.spacer[data-size='xs'] {
+	height: 0.5rem;
+}
+
+.spacer[data-size='lg'] {
+	height: 3rem;
+}
+
+.spacer[data-size='xl'] {
+	height: 5rem;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 3rem;
+	align-items: center;
+}
+nav ul {
+	flex: auto;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	padding-left: 0px;
+}
+nav img {
+	width: 64px;
+	height: 64px;
+	border-radius: 4px;
+}
+nav a,
+nav a:visited {
+	color: hsl(302deg 76% 34%);
+	text-decoration: none;
+}
+nav a:hover,
+nav a:active,
+nav a:focus {
+	text-decoration: underline;
+}
+nav {
+	position: relative;
+	padding-bottom: 1rem;
+}
+nav::after {
+	content: '';
+	border-bottom: 0.3rem solid var(--accent-color);
+	filter: drop-shadow(0rem 0rem 0.06rem var(--accent-color));
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+main {
+	display: flex;
+	gap: 4rem;
+}
+
+.sport-list {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	max-width: 30vw;
+	min-width: 200px;
+}
+
+.sport-list ul {
+	list-style: none;
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.sport-list ul li button {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	background-color: var(--accent-color);
+	padding: 0.5rem 1rem;
+	border-radius: 2px;
+	width: 100%;
+}
+.sport-list ul li button small {
+	position: relative;
+}
+
+.sport-list .sport-list-info {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+
+.sport-list ul li img {
+	width: 64px;
+	height: 64px;
+	border-radius: 4px;
+	aspect-ratio: 1;
+	object-fit: contain;
+}
+
+.sport-details img {
+	width: 256px;
+	height: 256px;
+	aspect-ratio: 1;
+	object-fit: contain;
+}
+
+footer {
+	position: relative;
+	padding-top: 1rem;
+}
+footer::before {
+	content: '';
+	border-top: 0.3rem solid var(--accent-color);
+	filter: drop-shadow(0rem 0rem 0.06rem var(--accent-color));
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
