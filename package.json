@@ -30,7 +30,7 @@
     "react-error-boundary": "^4.0.13"
   },
   "devDependencies": {
-    "@epic-web/workshop-utils": "^4.2.3",
+    "@epic-web/workshop-utils": "^4.2.6",
     "@testing-library/react": "^15.0.4",
     "@testing-library/user-event": "^14.5.2",
     "@total-typescript/ts-reset": "^0.5.1",
