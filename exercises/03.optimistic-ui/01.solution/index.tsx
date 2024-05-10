@@ -1,4 +1,4 @@
-import { Suspense, use, useState } from 'react'
+import { Suspense, use, useOptimistic, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import { type CartItem, type Product } from './api.server.ts'
@@ -14,7 +14,28 @@ const initialCartPromise = fetch('api/cart').then(r => r.json() as CartResponse)
 function ProductsListing() {
 	const { products } = use(initialProductsPromise)
 	const [cartPromise, setCartPromise] = useState(initialCartPromise)
-	const { cart } = use(cartPromise)
+	const { cart: actualCart } = use(cartPromise)
+	const [cart, addOptimisticCartItem] = useOptimistic<
+		Array<CartItem>,
+		CartItem
+	>(actualCart, (items, newItem) => {
+		const optimisticCartItems: Array<CartItem> = []
+		for (const actualItem of items) {
+			const optimisticCartItem = optimisticCartItems.find(
+				item => item.productId === actualItem.productId,
+			)
+			optimisticCartItems.push({})
+		}
+		const existingItem = items.find(
+			item => item.productId === newItem.productId,
+		)
+		if (existingItem) {
+			existingItem.quantity = existingItem.quantity + newItem.quantity
+		} else {
+			items.push(newItem)
+		}
+		return items
+	})
 	let cartTotal = 0
 	for (const item of cart) {
 		cartTotal += item.quantity * item.unitPrice
@@ -47,7 +68,7 @@ function ProductsListing() {
 										name="productId"
 										value={cartItem.productId}
 									/>
-									<button>Remove from cart</button>
+									<button type="submit">Remove from cart</button>
 								</form>
 							</li>
 						)

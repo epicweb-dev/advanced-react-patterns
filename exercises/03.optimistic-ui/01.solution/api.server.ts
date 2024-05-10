@@ -42,7 +42,16 @@ export type CartItem = {
 
 const cart: Array<CartItem> = []
 
+const MIN_DELAY = 1200
+const MAX_DELAY = MIN_DELAY + 500
+
+async function sleep(time: number) {
+	await new Promise(resolve => setTimeout(resolve, time - Date.now()))
+}
+
 export async function loader({ request }: { request: Request }) {
+	await sleep(Math.random() * (MAX_DELAY - MIN_DELAY) + MIN_DELAY)
+
 	const url = new URL(request.url)
 	const subpath = url.pathname.split('/api/')[1] ?? ''
 	switch (subpath) {
@@ -59,6 +68,8 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export async function action({ request }: { request: Request }) {
+	await sleep(Math.random() * (MAX_DELAY - MIN_DELAY) + MIN_DELAY)
+
 	const url = new URL(request.url)
 	const subpath = url.pathname.split('/api/')[1] ?? ''
 	switch (subpath) {
@@ -81,7 +92,7 @@ export async function action({ request }: { request: Request }) {
 					quantity,
 					unitPrice: product.unitPrice,
 					name: product.name,
-					image: product.image + '?size=sm',
+					image: product.image,
 				})
 			}
 			return { cart }
