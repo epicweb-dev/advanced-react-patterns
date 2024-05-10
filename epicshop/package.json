@@ -5,7 +5,7 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@epic-web/workshop-app": "^4.2.6",
+    "@epic-web/workshop-app": "^4.2.9",
     "@playwright/test": "^1.41.2",
     "cross-env": "^7.0.3"
   }
