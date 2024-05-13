@@ -68,7 +68,7 @@ you pass a memoized callback:
 ```ts
 // option 2:
 // ...
-const increment = useMemoCallback(() => setCount(c => c + step), [step])
+const increment = useCallback(() => setCount(c => c + step), [step])
 const debouncedIncrement = useDebounce(increment, 3000)
 // ...
 ```

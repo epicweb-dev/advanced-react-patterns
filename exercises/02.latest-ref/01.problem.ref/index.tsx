@@ -33,7 +33,7 @@ function App() {
 
 	// 🦉 feel free to swap these two implementations and see they don't make
 	// any difference to the user experience
-	// const increment = useMemoCallback(() => setCount(c => c + step), [step])
+	// const increment = useCallback(() => setCount(c => c + step), [step])
 	const increment = () => setCount(c => c + step)
 	const debouncedIncrement = useDebounce(increment, 3000)
 	return (
