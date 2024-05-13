@@ -13,6 +13,6 @@ export function TextField({
 	// 🐨 create a slots object that has props for both label and input slots
 	// 💰 the label should provide an htmlFor prop and the input should provide an id
 
-	// 🐨 wrap this in a SlotContext.Provider with the value set to the slots object
+	// 🐨 wrap this in a SlotContext with the value set to the slots object
 	return children
 }

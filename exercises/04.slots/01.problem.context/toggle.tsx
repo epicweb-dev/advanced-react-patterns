@@ -8,11 +8,7 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 	const [on, setOn] = useState(false)
 	const toggle = () => setOn(!on)
 
-	return (
-		<ToggleContext.Provider value={{ on, toggle }}>
-			{children}
-		</ToggleContext.Provider>
-	)
+	return <ToggleContext value={{ on, toggle }}>{children}</ToggleContext>
 }
 
 function useToggle() {

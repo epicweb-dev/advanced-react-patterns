@@ -21,11 +21,9 @@ export function Toggle({
 	const slots = { label: { htmlFor: id } }
 
 	return (
-		<SlotContext.Provider value={slots}>
-			<ToggleContext.Provider value={{ on, toggle, id }}>
-				{children}
-			</ToggleContext.Provider>
-		</SlotContext.Provider>
+		<SlotContext value={slots}>
+			<ToggleContext value={{ on, toggle, id }}>{children}</ToggleContext>
+		</SlotContext>
 	)
 }
 

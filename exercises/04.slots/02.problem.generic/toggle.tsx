@@ -15,13 +15,9 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 	// 🐨 create a slots object that has props for a slot called
 	// "label" with an htmlFor prop
 
-	// 🐨 wrap this in SlotContext.Provider and pass the labelProps in the label slot
-	// 🐨 add the id to the value in the ToggleContext.Provider
-	return (
-		<ToggleContext.Provider value={{ on, toggle }}>
-			{children}
-		</ToggleContext.Provider>
-	)
+	// 🐨 wrap this in SlotContext and pass the labelProps in the label slot
+	// 🐨 add the id to the value in the ToggleContext
+	return <ToggleContext value={{ on, toggle }}>{children}</ToggleContext>
 }
 
 function useToggle() {

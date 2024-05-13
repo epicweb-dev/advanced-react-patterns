@@ -20,7 +20,7 @@ export function Toggle({
 	const switchProps = { id, on, onClick: toggle }
 
 	return (
-		<SlotContext.Provider
+		<SlotContext
 			value={{
 				label: labelProps,
 				onText: onTextProps,
@@ -29,6 +29,6 @@ export function Toggle({
 			}}
 		>
 			{children}
-		</SlotContext.Provider>
+		</SlotContext>
 	)
 }

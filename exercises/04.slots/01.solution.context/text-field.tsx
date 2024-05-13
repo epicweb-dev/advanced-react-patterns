@@ -16,5 +16,5 @@ export function TextField({
 		input: { id },
 	}
 
-	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
+	return <SlotContext value={slots}>{children}</SlotContext>
 }

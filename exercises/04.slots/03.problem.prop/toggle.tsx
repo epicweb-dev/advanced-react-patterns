@@ -26,12 +26,10 @@ export function Toggle({
 	}
 
 	return (
-		<SlotContext.Provider value={slots}>
+		<SlotContext value={slots}>
 			{/* 🐨 get rid of the ToggleContext here */}
-			<ToggleContext.Provider value={{ on, toggle, id }}>
-				{children}
-			</ToggleContext.Provider>
-		</SlotContext.Provider>
+			<ToggleContext value={{ on, toggle, id }}>{children}</ToggleContext>
+		</SlotContext>
 	)
 }
 

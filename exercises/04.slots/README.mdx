@@ -95,7 +95,7 @@ function NumberField({ children }: { children: React.ReactNode }) {
 		description: { id: descriptionId },
 		input: { id: inputId, 'aria-describedby': descriptionId },
 	}
-	return <SlotContext.Provider value={slots}>{children}</SlotContext.Provider>
+	return <SlotContext value={slots}>{children}</SlotContext>
 }
 ```
 

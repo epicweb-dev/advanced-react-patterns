@@ -11,7 +11,7 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 	const [on, setOn] = useState(false)
 	const toggle = () => setOn(!on)
 
-	// 💣 remove this and instead return <ToggleContext.Provider> where
+	// 💣 remove this and instead return <ToggleContext> where
 	// the value is an object that has `on` and `toggle` on it. Render children
 	// within the provider.
 	return <>TODO...</>
