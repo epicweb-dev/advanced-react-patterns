@@ -29,7 +29,7 @@
     "react-dom": "19.0.0-beta-94eed63c49-20240425"
   },
   "devDependencies": {
-    "@epic-web/workshop-utils": "^4.2.3",
+    "@epic-web/workshop-utils": "^4.3.0",
     "@testing-library/user-event": "^14.5.2",
     "@testing-library/react": "^15.0.4",
     "@total-typescript/ts-reset": "^0.5.1",
