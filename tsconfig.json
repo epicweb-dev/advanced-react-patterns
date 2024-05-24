@@ -17,7 +17,7 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "paths": {
-      "#*": ["./*"]
+      "#shared/*": ["./shared/*"]
     }
   }
 }

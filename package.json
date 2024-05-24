@@ -7,7 +7,7 @@
   },
   "type": "module",
   "imports": {
-    "#*": "./*"
+    "#shared/*": "./shared/*"
   },
   "scripts": {
     "postinstall": "cd ./epicshop && npm install",
