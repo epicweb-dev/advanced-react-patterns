@@ -1,6 +1,6 @@
 import { createContext, use, useId, useState } from 'react'
-import { SlotContext } from './slots'
 import { Switch } from '#shared/switch.tsx'
+import { SlotContext } from './slots'
 
 // 🐨 delete all this context stuff
 type ToggleValue = { on: boolean; toggle: () => void; id: string }

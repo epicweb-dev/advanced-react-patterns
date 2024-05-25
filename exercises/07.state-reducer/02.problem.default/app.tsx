@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useToggle } from './toggle.tsx'
 import { Switch } from '#shared/switch.tsx'
+import { useToggle } from './toggle.tsx'
 // 🐨 import the toggleReducer
 
 export function App() {

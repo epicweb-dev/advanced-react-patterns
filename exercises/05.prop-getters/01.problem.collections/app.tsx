@@ -1,5 +1,5 @@
-import { useToggle } from './toggle.tsx'
 import { Switch } from '#shared/switch.tsx'
+import { useToggle } from './toggle.tsx'
 
 export function App() {
 	const { on, togglerProps } = useToggle()
