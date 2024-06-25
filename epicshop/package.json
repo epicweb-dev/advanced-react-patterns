@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@epic-web/config": "^1.5.4",
-    "@epic-web/workshop-app": "^4.5.1",
+    "@epic-web/workshop-app": "^4.6.0",
     "@playwright/test": "^1.41.2",
     "cross-env": "^7.0.3"
   }
