@@ -3,7 +3,13 @@
   "private": true,
   "epicshop": {
     "title": "Advanced React Patterns 🤯",
-    "githubRoot": "https://github.com/epicweb-dev/advanced-react-patterns/blob/main"
+    "subtitle": "Learn how to build simple and flexible React Components and Hooks using modern patterns",
+    "githubRoot": "https://github.com/epicweb-dev/advanced-react-patterns/blob/main",
+    "instructor": {
+      "name": "Kent C. Dodds",
+      "avatar": "/images/instructor.png",
+      "𝕏": "kentcdodds"
+    }
   },
   "type": "module",
   "imports": {
