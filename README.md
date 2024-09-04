@@ -16,7 +16,7 @@
 <div align="center">
   <a
     alt="Epic Web logo with the words Deployed Version"
-    href="https://advanced-react-patterns.epicweb.dev"
+    href="https://advanced-patterns.epicreact.dev"
   >
     <img
       width="300px"
