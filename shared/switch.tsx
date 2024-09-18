@@ -5,8 +5,6 @@
 // your `render` method or the `getTogglerProps` method
 // (if we've gotten to that part)
 
-// this is only a class component so we can do some implementation-detail
-// tests to make sure you're doing things as instructed :)
 export function Switch({
 	on,
 	className = '',
@@ -25,7 +23,9 @@ export function Switch({
 	return (
 		<button
 			role="switch"
-			aria-label={ariaLabel ?? 'Toggle'}
+			// if it has an id then it's probably going to be labeled, otherwise we'll use a generic label
+			// note, this is mostly for testing purposes
+			aria-label={ariaLabel ?? ('id' in props ? undefined : 'Toggle')}
 			aria-checked={on}
 			onClick={onClick}
 			className={btnClassName}
