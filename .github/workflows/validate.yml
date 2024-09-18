@@ -35,6 +35,13 @@ jobs:
       - name: ⬣ ESLint
         run: npm run lint
 
+      # TODO: get this working again
+      # - name: ⬇️ Install Playwright
+      #   run: npm --prefix epicshop run test:setup
+
+      # - name: 🧪 In-browser tests
+      #   run: npm --prefix epicshop test
+
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
