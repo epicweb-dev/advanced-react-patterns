@@ -5,6 +5,9 @@
     "title": "Advanced React Patterns 🤯",
     "subtitle": "Learn how to build simple and flexible React Components and Hooks using modern patterns",
     "githubRepo": "https://github.com/epicweb-dev/advanced-react-patterns",
+    "stackBlitzConfig": {
+      "view": "editor"
+    },
     "product": {
       "host": "www.epicreact.dev",
       "slug": "advanced-react-patterns",
