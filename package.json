@@ -37,6 +37,7 @@
     "dev": "npx --prefix ./epicshop epicshop start",
     "setup": "node ./epicshop/setup.js",
     "setup:custom": "node ./epicshop/setup-custom.js",
+    "save-playground": "node ./epicshop/save-playground.js",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc -b",
