@@ -13,7 +13,7 @@ export function Toggle({ children }: { children: React.ReactNode }) {
 
 // 🐨 create a custom useToggle() hook here
 // create a new context variable and read ToggleContext with use
-// when no context is found, throw an error with usefull debugging information
+// when no context is found, throw an error with a useful message
 // otherwise return the context
 
 export function ToggleOn({ children }: { children: React.ReactNode }) {
