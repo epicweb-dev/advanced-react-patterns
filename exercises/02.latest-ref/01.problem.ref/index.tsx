@@ -21,7 +21,7 @@ function useDebounce<Callback extends (...args: Array<unknown>) => unknown>(
 	// 🐨 create a latest ref (via useRef and useEffect) here
 
 	// use the latest version of the callback here:
-	// 💰 you'll need to pass an annonymous function to debounce. Do *not*
+	// 💰 you'll need to pass an anonymous function to debounce. Do *not*
 	// simply change this to `debounce(latestCallbackRef.current, delay)`
 	// as that won't work. Can you think of why?
 	return useMemo(() => debounce(callback, delay), [callback, delay])
