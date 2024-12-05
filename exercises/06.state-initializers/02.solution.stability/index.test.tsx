@@ -9,13 +9,13 @@ await testStep('can render the app', () => {
 
 await testStep('Toggle is rendered and initially on', async () => {
 	const toggleElement = await screen.findByRole('switch')
-	expect(toggleElement).toHaveAttribute('aria-checked', 'true')
+	expect(toggleElement).toBeChecked()
 })
 
 await testStep('Toggle can be turned off', async () => {
 	const toggleElement = await screen.findByRole('switch')
 	await userEvent.click(toggleElement)
-	expect(toggleElement).toHaveAttribute('aria-checked', 'false')
+	expect(toggleElement).not.toBeChecked()
 })
 
 await testStep('Changing initialOn updates the initialOn option', async () => {
@@ -34,6 +34,6 @@ await testStep(
 		expect(
 			toggleElement,
 			'🚨 Did you forget to stablize the initalOn value?',
-		).toHaveAttribute('aria-checked', 'true')
+		).toBeChecked()
 	},
 )
