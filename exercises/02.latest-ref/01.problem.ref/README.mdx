@@ -49,7 +49,7 @@ The problem here is `useDebounce` list `increment` in the dependency list for
 `useMemo`. For this reason, any time there's a state update, we create a _new_
 debounced version of that function so the `timer` in that debounce function's
 closure is different from the previous which means we don't cancel that timeout.
-Ultimate this is the bug our users experience:
+Ultimately this is the bug our users experience:
 
 - The user clicks the button
 - The user updates the step value
