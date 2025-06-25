@@ -52,7 +52,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@epic-web/workshop-utils": "^5.23.0",
+    "@epic-web/workshop-utils": "^5.27.0",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/node": "^22.10.1",
