@@ -67,16 +67,10 @@ variable and how to fix it here for [windows][win-path] or
 
 ## Setup
 
-This is a pretty large project (it's actually many apps in one) so it can take
-several minutes to get everything set up the first time. Please have a strong
-network connection before running the setup and grab a snack.
-
-Follow these steps to get this set up:
+Use the Epic Workshop CLI to get this setup:
 
 ```sh nonumber
-git clone --depth 1 https://github.com/epicweb-dev/advanced-react-patterns.git
-cd advanced-react-patterns
-npm run setup
+npx epicshop@latest add advanced-react-patterns
 ```
 
 If you experience errors here, please open [an issue][issue] with as many
