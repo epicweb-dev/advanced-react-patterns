@@ -70,7 +70,7 @@ variable and how to fix it here for [windows][win-path] or
 Use the Epic Workshop CLI to get this setup:
 
 ```sh nonumber
-npx epicshop@latest add advanced-react-patterns
+npx --yes epicshop@latest add advanced-react-patterns
 ```
 
 If you experience errors here, please open [an issue][issue] with as many
