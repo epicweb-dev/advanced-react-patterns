@@ -6,10 +6,10 @@
   },
   "dependencies": {
     "@epic-web/config": "^1.16.3",
-    "@epic-web/workshop-app": "^6.47.11",
-    "@epic-web/workshop-utils": "^6.47.11",
+    "@epic-web/workshop-app": "^6.47.12",
+    "@epic-web/workshop-utils": "^6.47.12",
     "@playwright/test": "^1.49.0",
     "cross-env": "^7.0.3",
-    "epicshop": "^6.47.11"
+    "epicshop": "^6.47.12"
   }
 }
